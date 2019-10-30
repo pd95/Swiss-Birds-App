@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
+		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
+		17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */; };
+		17B960F523699370003AA802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F423699370003AA802 /* ContentView.swift */; };
+		17B960F723699375003AA802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F623699375003AA802 /* Assets.xcassets */; };
+		17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F923699375003AA802 /* Preview Assets.xcassets */; };
+		17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B960FB23699375003AA802 /* LaunchScreen.storyboard */; };
+		17B9610823699375003AA802 /* schweizer_voegelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9610723699375003AA802 /* schweizer_voegelTests.swift */; };
+		17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* schweizer_voegelUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17B9610423699375003AA802 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17B960E923699370003AA802;
+			remoteInfo = "schweizer-voegel";
+		};
+		17B9610F23699375003AA802 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17B960E923699370003AA802;
+			remoteInfo = "schweizer-voegel";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schweizer_voegel.xcdatamodel; sourceTree = "<group>"; };
+		17B960F423699370003AA802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		17B960F623699375003AA802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		17B960F923699375003AA802 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		17B960FC23699375003AA802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		17B960FE23699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17B9610323699375003AA802 /* schweizer-voegelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B9610723699375003AA802 /* schweizer_voegelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelTests.swift; sourceTree = "<group>"; };
+		17B9610923699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B9611223699375003AA802 /* schweizer_voegelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelUITests.swift; sourceTree = "<group>"; };
+		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17B960E723699370003AA802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B9610023699375003AA802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B9610B23699375003AA802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17B960E123699370003AA802 = {
+			isa = PBXGroup;
+			children = (
+				17B960EC23699370003AA802 /* schweizer-voegel */,
+				17B9610623699375003AA802 /* schweizer-voegelTests */,
+				17B9611123699375003AA802 /* schweizer-voegelUITests */,
+				17B960EB23699370003AA802 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		17B960EB23699370003AA802 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17B960EA23699370003AA802 /* schweizer-voegel.app */,
+				17B9610323699375003AA802 /* schweizer-voegelTests.xctest */,
+				17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17B960EC23699370003AA802 /* schweizer-voegel */ = {
+			isa = PBXGroup;
+			children = (
+				17B960ED23699370003AA802 /* AppDelegate.swift */,
+				17B960EF23699370003AA802 /* SceneDelegate.swift */,
+				17B960F423699370003AA802 /* ContentView.swift */,
+				17B960F623699375003AA802 /* Assets.xcassets */,
+				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
+				17B960FE23699375003AA802 /* Info.plist */,
+				17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */,
+				17B960F823699375003AA802 /* Preview Content */,
+			);
+			path = "schweizer-voegel";
+			sourceTree = "<group>";
+		};
+		17B960F823699375003AA802 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				17B960F923699375003AA802 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		17B9610623699375003AA802 /* schweizer-voegelTests */ = {
+			isa = PBXGroup;
+			children = (
+				17B9610723699375003AA802 /* schweizer_voegelTests.swift */,
+				17B9610923699375003AA802 /* Info.plist */,
+			);
+			path = "schweizer-voegelTests";
+			sourceTree = "<group>";
+		};
+		17B9611123699375003AA802 /* schweizer-voegelUITests */ = {
+			isa = PBXGroup;
+			children = (
+				17B9611223699375003AA802 /* schweizer_voegelUITests.swift */,
+				17B9611423699375003AA802 /* Info.plist */,
+			);
+			path = "schweizer-voegelUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17B960E923699370003AA802 /* schweizer-voegel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegel" */;
+			buildPhases = (
+				17B960E623699370003AA802 /* Sources */,
+				17B960E723699370003AA802 /* Frameworks */,
+				17B960E823699370003AA802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "schweizer-voegel";
+			productName = "schweizer-voegel";
+			productReference = 17B960EA23699370003AA802 /* schweizer-voegel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17B9610223699375003AA802 /* schweizer-voegelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelTests" */;
+			buildPhases = (
+				17B960FF23699375003AA802 /* Sources */,
+				17B9610023699375003AA802 /* Frameworks */,
+				17B9610123699375003AA802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17B9610523699375003AA802 /* PBXTargetDependency */,
+			);
+			name = "schweizer-voegelTests";
+			productName = "schweizer-voegelTests";
+			productReference = 17B9610323699375003AA802 /* schweizer-voegelTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		17B9610D23699375003AA802 /* schweizer-voegelUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelUITests" */;
+			buildPhases = (
+				17B9610A23699375003AA802 /* Sources */,
+				17B9610B23699375003AA802 /* Frameworks */,
+				17B9610C23699375003AA802 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17B9611023699375003AA802 /* PBXTargetDependency */,
+			);
+			name = "schweizer-voegelUITests";
+			productName = "schweizer-voegelUITests";
+			productReference = 17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17B960E223699370003AA802 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = Philipp;
+				TargetAttributes = {
+					17B960E923699370003AA802 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+					17B9610223699375003AA802 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 17B960E923699370003AA802;
+					};
+					17B9610D23699375003AA802 = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 17B960E923699370003AA802;
+					};
+				};
+			};
+			buildConfigurationList = 17B960E523699370003AA802 /* Build configuration list for PBXProject "schweizer-voegel" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 17B960E123699370003AA802;
+			productRefGroup = 17B960EB23699370003AA802 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17B960E923699370003AA802 /* schweizer-voegel */,
+				17B9610223699375003AA802 /* schweizer-voegelTests */,
+				17B9610D23699375003AA802 /* schweizer-voegelUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17B960E823699370003AA802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
+				17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */,
+				17B960F723699375003AA802 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B9610123699375003AA802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B9610C23699375003AA802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17B960E623699370003AA802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
+				17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */,
+				17B960F523699370003AA802 /* ContentView.swift in Sources */,
+				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B960FF23699375003AA802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B9610823699375003AA802 /* schweizer_voegelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17B9610A23699375003AA802 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17B9610523699375003AA802 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17B960E923699370003AA802 /* schweizer-voegel */;
+			targetProxy = 17B9610423699375003AA802 /* PBXContainerItemProxy */;
+		};
+		17B9611023699375003AA802 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17B960E923699370003AA802 /* schweizer-voegel */;
+			targetProxy = 17B9610F23699375003AA802 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17B960FB23699375003AA802 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17B960FC23699375003AA802 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		17B9611523699375003AA802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		17B9611623699375003AA802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		17B9611823699375003AA802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"schweizer-voegel/Preview Content\"";
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "schweizer-voegel/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		17B9611923699375003AA802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"schweizer-voegel/Preview Content\"";
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "schweizer-voegel/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		17B9611B23699375003AA802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				INFOPLIST_FILE = "schweizer-voegelTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schweizer-voegel.app/schweizer-voegel";
+			};
+			name = Debug;
+		};
+		17B9611C23699375003AA802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				INFOPLIST_FILE = "schweizer-voegelTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schweizer-voegel.app/schweizer-voegel";
+			};
+			name = Release;
+		};
+		17B9611E23699375003AA802 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				INFOPLIST_FILE = "schweizer-voegelUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "schweizer-voegel";
+			};
+			name = Debug;
+		};
+		17B9611F23699375003AA802 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P8CC95REUG;
+				INFOPLIST_FILE = "schweizer-voegelUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "schweizer-voegel";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17B960E523699370003AA802 /* Build configuration list for PBXProject "schweizer-voegel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17B9611523699375003AA802 /* Debug */,
+				17B9611623699375003AA802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17B9611823699375003AA802 /* Debug */,
+				17B9611923699375003AA802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17B9611B23699375003AA802 /* Debug */,
+				17B9611C23699375003AA802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17B9611E23699375003AA802 /* Debug */,
+				17B9611F23699375003AA802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */,
+			);
+			currentVersion = 17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */;
+			path = schweizer_voegel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 17B960E223699370003AA802 /* Project object */;
+}
