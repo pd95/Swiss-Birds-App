@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
+		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
+		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
 		17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */; };
@@ -16,6 +19,13 @@
 		17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B960FB23699375003AA802 /* LaunchScreen.storyboard */; };
 		17B9610823699375003AA802 /* schweizer_voegelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9610723699375003AA802 /* schweizer_voegelTests.swift */; };
 		17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* schweizer_voegelUITests.swift */; };
+		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
+		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		17D1A507236CDB2400E8588C /* vds-filternames-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 17D1A506236CDB2400E8588C /* vds-filternames-de.json */; };
+		17F76B67236BA305004B279A /* vds-list-de.json in Resources */ = {isa = PBXBuildFile; fileRef = 17F76B66236BA305004B279A /* vds-list-de.json */; };
+		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
+		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
+		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
+		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +64,13 @@
 		17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9611223699375003AA802 /* schweizer_voegelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelUITests.swift; sourceTree = "<group>"; };
 		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
+		17D1A504236CDA8500E8588C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		17D1A506236CDB2400E8588C /* vds-filternames-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "vds-filternames-de.json"; sourceTree = "<group>"; };
+		17F76B66236BA305004B279A /* vds-list-de.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "vds-list-de.json"; sourceTree = "<group>"; };
+		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
+		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
+		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +121,11 @@
 		17B960EC23699370003AA802 /* schweizer-voegel */ = {
 			isa = PBXGroup;
 			children = (
+				17D1A502236CD96900E8588C /* Models */,
+				17D1A501236CD95900E8588C /* Resources */,
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
-				17B960F423699370003AA802 /* ContentView.swift */,
+				17D1A503236CD97800E8588C /* Views */,
 				17B960F623699375003AA802 /* Assets.xcassets */,
 				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
 				17B960FE23699375003AA802 /* Info.plist */,
@@ -137,6 +159,38 @@
 				17B9611423699375003AA802 /* Info.plist */,
 			);
 			path = "schweizer-voegelUITests";
+			sourceTree = "<group>";
+		};
+		17D1A501236CD95900E8588C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				17F76B66236BA305004B279A /* vds-list-de.json */,
+				17D1A506236CDB2400E8588C /* vds-filternames-de.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		17D1A502236CD96900E8588C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				17206830236B5A920008905F /* Filter.swift */,
+				17FB3B88236B93650059D268 /* Species.swift */,
+				17D1A504236CDA8500E8588C /* Data.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		17D1A503236CD97800E8588C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17B960F423699370003AA802 /* ContentView.swift */,
+				17FB3B8A236B96A20059D268 /* FilterCriteria.swift */,
+				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
+				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
+				1720682E236AD0F40008905F /* SymbolView.swift */,
+				17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +297,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17F76B67236BA305004B279A /* vds-list-de.json in Resources */,
+				17D1A507236CDB2400E8588C /* vds-filternames-de.json in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
 				17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */,
 				17B960F723699375003AA802 /* Assets.xcassets in Resources */,
@@ -271,9 +327,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
+				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
+				17206831236B5A920008905F /* Filter.swift in Sources */,
+				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
+				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
+				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
 				17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */,
+				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
+				17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
+				17FB3B89236B93650059D268 /* Species.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
