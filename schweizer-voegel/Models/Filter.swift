@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum FilterType: String, Decodable, CaseIterable, CustomStringConvertible {
+enum FilterType: String, CaseIterable, CustomStringConvertible {
     
+    case haeufigeart = "filterhaeufigeart"
     case lebensraum = "filterlebensraum"
     case nahrung = "filternahrung"
-    case haeufigeart = "filterhaeufigeart"
-    case roteListe = "filterrotelistech"
     case vogelgruppe = "filtervogelguppe"
+    case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
     
     var description: String {
@@ -29,14 +29,16 @@ enum FilterType: String, Decodable, CaseIterable, CustomStringConvertible {
     }
 }
 
-struct Filter: Decodable {
-    let id : Int
+struct Filter: Identifiable, Equatable {
+    let id = UUID()
+
+    let filterId: Int
     let name : String
     let type : FilterType
-    
-    var uniqueID : String {
+
+    var uniqueFilterId : String {
         get {
-            return "\(type.rawValue)-\(id)"
+            return "\(type.rawValue)-\(filterId)"
         }
     }
 }

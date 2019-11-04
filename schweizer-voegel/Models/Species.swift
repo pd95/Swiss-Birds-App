@@ -8,8 +8,10 @@
 
 import Foundation
 
-struct Species: Decodable, Identifiable, Hashable {
-    let id : Int
+struct Species: Identifiable, Hashable {
+    let id = UUID()
+
+    let speciesId : Int
     let name : String
     let alternateName : String
     
@@ -26,15 +28,19 @@ struct Species: Decodable, Identifiable, Hashable {
     var groupImageName : String {
         return "\(FilterType.vogelgruppe.rawValue)-\(group)"
     }
-
-    func breadcrumbPictureURL() -> URL {
-        return URL(string: "https://www.vogelwarte.ch/assets/images/voegel/vds/headshots/80x80/\(id)@1x.jpg")!
-    }
-
-    func bigPictureURL() -> URL {
-        return URL(string: "https://www.vogelwarte.ch/assets/images/voegel/vds/artbilder/700px/\(id)_0.jpg")!
-    }
     
+    var breadCrumbImageName : String {
+        return "\(speciesId)"
+    }
+
+    var primaryPictureName : String {
+        return "\(speciesId)_0"
+    }
+
+    var secondaryPictureName : String {
+        return "\(speciesId)_1"
+    }
+
     func matchesSearch(for text: String) -> Bool {
         if text.count == 0 {
             return true

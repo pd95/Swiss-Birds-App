@@ -13,32 +13,34 @@ struct BirdDetail: View {
 
     var body: some View {
         VStack {
-            HStack {
-                Image("\(bird.id)")
+            HStack(alignment: .center) {
+                Image(bird.breadCrumbImageName)
                     .resizable()
                     .frame(width: 100, height: 100)
                     .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                    .shadow(radius: 3)
                 Text(bird.name)
                     .font(.title)
                     .fontWeight(.bold)
-                Spacer()
             }
-            Image("\(bird.id)_0")
+            Image(bird.primaryPictureName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            Image("\(bird.id)_1")
+            Image(bird.secondaryPictureName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Spacer()
         }
-        //.navigationBarTitle(bird.name)
+//        .navigationBarTitle(bird.name, displayMode: .inline)
     }
 }
 
 struct BirdDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BirdDetail(bird: species[0])
+            BirdDetail(bird: allSpecies[3])
         }
     }
 }
