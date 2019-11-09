@@ -1560,19 +1560,6 @@
         "filterentwicklungatlas": ""
     },
     {
-        "ArtId": "4010",
-        "Sys_Nr": "91780",
-        "Artname": "Sprosser",
-        "Alternativ_Name": "",
-        "alias": "sprosser",
-        "filterlebensraum": "5, 7, 2",
-        "filtervogelgruppe": "8",
-        "filternahrung": "5, 7",
-        "filterhaeufigeart": "0",
-        "filterrotelistech": "",
-        "filterentwicklungatlas": ""
-    },
-    {
         "ArtId": "3970",
         "Sys_Nr": "86430",
         "Artname": "Wasseramsel",
@@ -2065,19 +2052,6 @@
         "filterhaeufigeart": "1",
         "filterrotelistech": "1",
         "filterentwicklungatlas": "1"
-    },
-    {
-        "ArtId": "3610",
-        "Sys_Nr": "76830",
-        "Artname": "Rauchschwalbe",
-        "Alternativ_Name": "",
-        "alias": "rauchschwalbe",
-        "filterlebensraum": "10, 7, 9, 2",
-        "filtervogelgruppe": "45",
-        "filternahrung": "5",
-        "filterhaeufigeart": "1",
-        "filterrotelistech": "1",
-        "filterentwicklungatlas": "3"
     },
     {
         "ArtId": "3610",
