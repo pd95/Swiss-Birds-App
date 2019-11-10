@@ -9,44 +9,80 @@
 import SwiftUI
 
 struct FilterCriteria: View {
-    @State public var filters = [Filter]()
+    @Binding public var filters : [FilterType:[Int]]
+    
+    func addFilter(_ filter: Filter) {
+        if self.filters[filter.type] == nil {
+            self.filters[filter.type] = [filter.filterId]
+        }
+        else {
+            self.filters[filter.type]!.append(filter.filterId)
+        }
+    }
+
+    func removeFilter(_ filter: Filter) {
+        if let index = self.filters[filter.type]?.firstIndex(of: filter.filterId)
+            ,index >= 0 {
+            self.filters[filter.type]!.remove(at:index)
+            if self.filters[filter.type]!.count == 0 {
+                self.filters.removeValue(forKey: filter.type)
+            }
+        }
+        else {
+            print("removeFilter called without filter beeing selected!")
+        }
+    }
+
+    func hasFilter(_ filter: Filter) -> Bool {
+        return filters[filter.type]?.contains(filter.filterId) ?? false
+    }
+    
+    func countMatches() -> Int {
+        return allSpecies.filter {$0.matchesFilter(filters)}.count
+    }
 
     var body: some View {
-            List {
-                ForEach(FilterType.allCases, id: \.self) { filterType in
-                    Section(header: Text(filterType.description)) {
-                        ForEach(allFilters.keys.filter({ (key) -> Bool in
-                            key.hasPrefix(filterType.rawValue)
-                        }).sorted(), id: \.self) { key in
-                            Button(action: {
-                                if let index = self.filters.firstIndex(of: allFilters[key]!)
-                                    ,index >= 0 {
-                                    print("Deselected \(key)")
-                                    self.filters.remove(at:index)
-                                }
-                                else {
-                                    print("Selected \(key)")
-                                    self.filters.append(allFilters[key]!)
-                                }
-                            }) {
-                                HStack {
-                                    Image(systemName: self.filters.contains(allFilters[key]!) ? "checkmark.circle" : "circle")
-                                    SymbolView(symbolName: key, pointSize: 24)
-                                    Text(allFilters[key]?.name ?? "no name")
-                                }
+        List {
+            Button(action: {
+                print("Clearing filter")
+                self.filters.removeAll()
+            }) {
+                HStack {
+                    Image(systemName: filters.count == 0 ? "checkmark.circle" : "circle")
+                    Text("Alle Vögel")
+                }
+            }
+            
+            ForEach(FilterType.allCases, id: \.self) { filterType in
+                Section(header: Text(filterType.description)) {
+                    ForEach(allFilters[filterType]!, id: \.self) { filter in
+                        Button(action: {
+                            print("Button \(filter.uniqueFilterId)")
+                            if self.hasFilter(filter) {
+                                self.removeFilter(filter)
+                            }
+                            else {
+                                self.addFilter(filter)
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: self.hasFilter(filter) ? "checkmark.circle" : "circle")
+                                SymbolView(symbolName: filter.symbolName)
+                                Text(filter.name)
                             }
                         }
                     }
                 }
             }
-            .navigationBarTitle(Text("Filterkriterien"))
+        }
+        .navigationBarTitle(Text("Filterkriterien (\(countMatches()))"))
     }
 }
 
 struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FilterCriteria()
+            FilterCriteria(filters: .constant([:]))
         }
     }
 }

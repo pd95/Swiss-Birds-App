@@ -25,10 +25,6 @@ struct Species: Identifiable, Hashable {
         return filterMap[.vogelgruppe]![0]
     }
     
-    var groupImageName : String {
-        return "\(FilterType.vogelgruppe.rawValue)-\(group)"
-    }
-    
     var breadCrumbImageName : String {
         return "\(speciesId)"
     }
@@ -41,10 +37,30 @@ struct Species: Identifiable, Hashable {
         return "\(speciesId)_1"
     }
 
+    func filterSymbolName(_ filterType : FilterType) -> String {
+        if let array = filterMap[filterType], array.count > 0 {
+            return "\(filterType.rawValue)-\(array[0])"
+        }
+        return ""
+    }
+    
     func matchesSearch(for text: String) -> Bool {
         if text.count == 0 {
             return true
         }
         return name.lowercased().contains(text.lowercased())
+    }
+    
+    func matchesFilter(_ matchingFilters: [FilterType: [Int]]) -> Bool {
+        if matchingFilters.count == 0 {
+            return true
+        }
+        
+        var matchesAll = true
+        for (type, relevantIds) in matchingFilters {
+            matchesAll = matchesAll && (filterMap[type] ?? []).reduce(false, { $0 || relevantIds.contains($1)})
+        }
+        
+        return matchesAll
     }
 }

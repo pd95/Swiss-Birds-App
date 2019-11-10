@@ -11,6 +11,10 @@ import SwiftUI
 struct BirdRow: View {
     var bird: Species
     
+    func hasEntwicklungsAtlasSymbol() -> Bool {
+        return bird.filterSymbolName(.entwicklungatlas).count > 0
+    }
+    
     var body: some View {
         HStack {
             Image(String(bird.speciesId))
@@ -22,7 +26,10 @@ struct BirdRow: View {
                 .shadow(radius: 3)
             Text(bird.name)
             Spacer()
-            SymbolView(symbolName: bird.groupImageName, pointSize: 24)
+            if hasEntwicklungsAtlasSymbol() {
+                SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
+            }
+            SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24)
         }
     }
 }
@@ -61,30 +68,45 @@ struct BirdList: View {
     @State private var searchText = ""
     @State private var onlyCommon = false
     @State private var showFilters = false
-    @State private var filters = [Filter]()
+    @State private var filters = [FilterType:[Int]]()
     
     var body: some View {
         
-        List {
-            Section {
-                SearchField(searchText: $searchText)
-            }
+        VStack {
+            List {
+                Section {
+                    SearchField(searchText: $searchText)
+                }
 
-            Section {
-                ForEach(species.filter{$0.matchesSearch(for: searchText) && !(onlyCommon && !$0.isCommon)}) { bird in
-                    NavigationLink(destination: BirdDetail(bird: bird)) {
-                        BirdRow(bird: bird)
+                Section {
+                    ForEach(species.filter{$0.matchesSearch(for: searchText) && $0.matchesFilter(self.filters)}) { bird in
+                        NavigationLink(destination: BirdDetail(bird: bird)) {
+                            BirdRow(bird: bird)
+                        }
                     }
                 }
             }
+            .navigationBarTitle(Text("Vögel der Schweiz"))
+            .navigationBarItems(
+                trailing:
+/// 8< ----- Workaround broken SwiftUI: NavigationLink cannot be child of .navigationBarItems()
+//                NavigationLink(destination: FilterCriteria(filters: self.$filters)) {
+//                                Text("Filter")
+//                }
+
+                Button(action: { self.showFilters = true },
+                       label: { Image(systemName: self.filters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle") })
+            )
+
+            NavigationLink(destination: FilterCriteria(filters: self.$filters),
+                           isActive: $showFilters) {
+                            Text("*** never shown ***")
+            }
+            .frame(width: 0, height: 0)
+            .hidden()
+/// 8< ----- Workaround broken SwiftUI end
+
         }
-        .navigationBarTitle(Text("Vögel der Schweiz"))
-        .sheet(isPresented: $showFilters,
-               onDismiss: { print(self.showFilters) },
-               content: { FilterCriteria(filters: self.filters)})
-        .navigationBarItems(
-            trailing: Button(action: { self.showFilters = true },
-                             label: { Image(systemName: onlyCommon ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle") }))
     }
 }
 

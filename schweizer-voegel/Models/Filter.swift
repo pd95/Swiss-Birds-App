@@ -13,10 +13,10 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     case haeufigeart = "filterhaeufigeart"
     case lebensraum = "filterlebensraum"
     case nahrung = "filternahrung"
-    case vogelgruppe = "filtervogelguppe"
     case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
-    
+    case vogelgruppe = "filtervogelguppe"
+
     var description: String {
         switch (self) {
         case .lebensraum: return "Lebensraum"
@@ -29,7 +29,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     }
 }
 
-struct Filter: Identifiable, Equatable {
+struct Filter: Identifiable, Equatable, Hashable {
     let id = UUID()
 
     let filterId: Int
@@ -39,6 +39,11 @@ struct Filter: Identifiable, Equatable {
     var uniqueFilterId : String {
         get {
             return "\(type.rawValue)-\(filterId)"
+        }
+    }
+    var symbolName : String {
+        get {
+            return uniqueFilterId
         }
     }
 }
