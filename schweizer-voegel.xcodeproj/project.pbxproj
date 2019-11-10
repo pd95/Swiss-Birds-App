@@ -10,6 +10,7 @@
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
+		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
 		17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */; };
@@ -49,7 +50,8 @@
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
-		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
+		17B960EA23699370003AA802 /* Vögel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vögel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schweizer_voegel.xcdatamodel; sourceTree = "<group>"; };
@@ -111,7 +113,7 @@
 		17B960EB23699370003AA802 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17B960EA23699370003AA802 /* schweizer-voegel.app */,
+				17B960EA23699370003AA802 /* Vögel.app */,
 				17B9610323699375003AA802 /* schweizer-voegelTests.xctest */,
 				17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */,
 			);
@@ -127,6 +129,7 @@
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				17D1A503236CD97800E8588C /* Views */,
 				17B960F623699375003AA802 /* Assets.xcassets */,
+				174E04C42377903F00079901 /* Birds.xcassets */,
 				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
 				17B960FE23699375003AA802 /* Info.plist */,
 				17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */,
@@ -210,7 +213,7 @@
 			);
 			name = "schweizer-voegel";
 			productName = "schweizer-voegel";
-			productReference = 17B960EA23699370003AA802 /* schweizer-voegel.app */;
+			productReference = 17B960EA23699370003AA802 /* Vögel.app */;
 			productType = "com.apple.product-type.application";
 		};
 		17B9610223699375003AA802 /* schweizer-voegelTests */ = {
@@ -297,6 +300,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				174E04C52377903F00079901 /* Birds.xcassets in Resources */,
 				17F76B67236BA305004B279A /* vds-list-de.json in Resources */,
 				17D1A507236CDB2400E8588C /* vds-filternames-de.json in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
@@ -512,7 +516,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Vögel";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -532,7 +536,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Vögel";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
