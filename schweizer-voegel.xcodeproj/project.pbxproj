@@ -51,7 +51,7 @@
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
-		17B960EA23699370003AA802 /* Vögel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vögel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schweizer_voegel.xcdatamodel; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		17B960EB23699370003AA802 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17B960EA23699370003AA802 /* Vögel.app */,
+				17B960EA23699370003AA802 /* schweizer-voegel.app */,
 				17B9610323699375003AA802 /* schweizer-voegelTests.xctest */,
 				17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */,
 			);
@@ -213,7 +213,7 @@
 			);
 			name = "schweizer-voegel";
 			productName = "schweizer-voegel";
-			productReference = 17B960EA23699370003AA802 /* Vögel.app */;
+			productReference = 17B960EA23699370003AA802 /* schweizer-voegel.app */;
 			productType = "com.apple.product-type.application";
 		};
 		17B9610223699375003AA802 /* schweizer-voegelTests */ = {
@@ -516,7 +516,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
-				PRODUCT_NAME = "Vögel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -536,7 +536,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegel";
-				PRODUCT_NAME = "Vögel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
