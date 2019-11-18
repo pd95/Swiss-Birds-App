@@ -11,21 +11,24 @@ import SwiftUI
 struct FilterCriteria: View {
     @Binding public var filters : [FilterType:[Int]]
     
+    private let commonBirds = allFilters[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
+    
+
     func addFilter(_ filter: Filter) {
-        if self.filters[filter.type] == nil {
-            self.filters[filter.type] = [filter.filterId]
+        if filters[filter.type] == nil {
+            filters[filter.type] = [filter.filterId]
         }
         else {
-            self.filters[filter.type]!.append(filter.filterId)
+            filters[filter.type]!.append(filter.filterId)
         }
     }
 
     func removeFilter(_ filter: Filter) {
-        if let index = self.filters[filter.type]?.firstIndex(of: filter.filterId)
+        if let index = filters[filter.type]?.firstIndex(of: filter.filterId)
             ,index >= 0 {
-            self.filters[filter.type]!.remove(at:index)
-            if self.filters[filter.type]!.count == 0 {
-                self.filters.removeValue(forKey: filter.type)
+            filters[filter.type]!.remove(at:index)
+            if filters[filter.type]!.count == 0 {
+                filters.removeValue(forKey: filter.type)
             }
         }
         else {
@@ -37,34 +40,43 @@ struct FilterCriteria: View {
         return filters[filter.type]?.contains(filter.filterId) ?? false
     }
     
+    func toggleFilter(_ filter: Filter) {
+        if hasFilter(filter) {
+            removeFilter(filter)
+        }
+        else {
+            addFilter(filter)
+        }
+    }
+
+    func clearFilters() {
+        filters.removeAll()
+    }
+    
     func countMatches() -> Int {
         return allSpecies.filter {$0.matchesFilter(filters)}.count
     }
 
     var body: some View {
         List {
-            Button(action: {
-                print("Clearing filter")
-                self.filters.removeAll()
-            }) {
+            Button(action: { self.clearFilters() }) {
                 HStack {
                     Image(systemName: filters.count == 0 ? "checkmark.circle" : "circle")
                     Text("Alle Vögel")
                 }
             }
             
-            ForEach(FilterType.allCases, id: \.self) { filterType in
+            Button(action: { self.toggleFilter(self.commonBirds) }) {
+                HStack {
+                    Image(systemName: self.hasFilter(commonBirds) ? "checkmark.circle" : "circle")
+                    Text("Nur häufige Vögel")
+                }
+            }
+
+            ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header: Text(filterType.description)) {
                     ForEach(allFilters[filterType]!, id: \.self) { filter in
-                        Button(action: {
-                            print("Button \(filter.uniqueFilterId)")
-                            if self.hasFilter(filter) {
-                                self.removeFilter(filter)
-                            }
-                            else {
-                                self.addFilter(filter)
-                            }
-                        }) {
+                        Button(action: { self.toggleFilter(filter)}) {
                             HStack {
                                 Image(systemName: self.hasFilter(filter) ? "checkmark.circle" : "circle")
                                 SymbolView(symbolName: filter.symbolName)
