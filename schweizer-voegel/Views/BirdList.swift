@@ -41,12 +41,11 @@ struct SearchField: View {
         HStack {
             Image(systemName: "magnifyingglass")
             
-            TextField("Suche", text: $searchText, onEditingChanged: { isEditing in
-            }, onCommit: {
-                print("onCommit")
-            })
-                .foregroundColor(.primary)
-                .disableAutocorrection(true)
+            TextField("Suche", text: $searchText) {
+                UIApplication.shared.endEditing()
+            }
+            .foregroundColor(.primary)
+            .disableAutocorrection(true)
             
             Button(action: {
                 self.searchText = ""
