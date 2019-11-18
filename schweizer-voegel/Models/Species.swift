@@ -44,20 +44,26 @@ struct Species: Identifiable, Hashable {
         return ""
     }
     
-    func matchesSearch(for text: String) -> Bool {
+    func nameMatches(_ text: String) -> Bool {
         if text.count == 0 {
             return true
         }
-        return name.lowercased().contains(text.lowercased())
+        let lowercaseName = name.lowercased() + " " + alternateName.lowercased()
+        for word in text.lowercased().split(separator: " ") {
+            if lowercaseName.contains(word) {
+                return true
+            }
+        }
+        return false
     }
     
-    func matchesFilter(_ matchingFilters: [FilterType: [Int]]) -> Bool {
-        if matchingFilters.count == 0 {
+    func categoryMatches(filters: [FilterType: [Int]]) -> Bool {
+        if filters.count == 0 {
             return true
         }
         
         var matchesAll = true
-        for (type, relevantIds) in matchingFilters {
+        for (type, relevantIds) in filters {
             matchesAll = matchesAll && (filterMap[type] ?? []).reduce(false, { $0 || relevantIds.contains($1)})
         }
         

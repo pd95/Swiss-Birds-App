@@ -54,7 +54,7 @@ struct FilterCriteria: View {
     }
     
     func countMatches() -> Int {
-        return allSpecies.filter {$0.matchesFilter(filters)}.count
+        return allSpecies.filter {$0.categoryMatches(filters: filters)}.count
     }
 
     var body: some View {

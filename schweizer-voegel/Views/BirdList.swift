@@ -79,7 +79,7 @@ struct BirdList: View {
                 }
 
                 Section {
-                    ForEach(species.filter{$0.matchesSearch(for: searchText) && $0.matchesFilter(self.filters)}) { bird in
+                    ForEach(species.filter{$0.nameMatches(searchText) && $0.categoryMatches(filters: self.filters)}) { bird in
                         NavigationLink(destination: BirdDetail(bird: bird)) {
                             BirdRow(bird: bird)
                         }
