@@ -121,5 +121,6 @@ struct BirdList_Previews: PreviewProvider {
             ContentView()
                 .environment(\.colorScheme, .dark)
         }
+        .environmentObject(ApplicationState())
     }
 }
