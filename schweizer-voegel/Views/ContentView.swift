@@ -13,6 +13,8 @@ struct ContentView: View {
         NavigationView {
             BirdList(species: allSpecies)
         }
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
+        .padding([.trailing])
     }
 }
 
