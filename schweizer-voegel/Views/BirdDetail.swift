@@ -13,7 +13,9 @@ struct BirdDetail: View {
 
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .leading) {
+                Text(bird.alternateName)
+                    .font(.body)
                 Image(bird.primaryPictureName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -21,6 +23,7 @@ struct BirdDetail: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
+            .padding()
         }
         .navigationBarTitle(bird.name)
     }
