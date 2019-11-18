@@ -87,7 +87,7 @@ struct FilterCriteria: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Filterkriterien (\(countMatches()))"))
+        .navigationBarTitle(Text("Filterkriterien (\(countMatches()))"), displayMode: .inline)
     }
 }
 
