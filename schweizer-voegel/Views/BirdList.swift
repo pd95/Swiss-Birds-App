@@ -22,14 +22,15 @@ struct BirdRow: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                .overlay(Circle().stroke(Color.secondary, lineWidth: 2))
                 .shadow(radius: 3)
             Text(bird.name)
+                .foregroundColor(.primary)
             Spacer()
             if hasEntwicklungsAtlasSymbol() {
                 SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
             }
-            SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24)
+            SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
         }
     }
 }
