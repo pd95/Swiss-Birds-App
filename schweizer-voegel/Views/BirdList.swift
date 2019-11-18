@@ -95,7 +95,11 @@ struct BirdList: View {
 //                }
 
                 Button(action: { self.showFilters = true },
-                       label: { Image(systemName: self.filters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle") })
+                       label: {
+                        HStack {
+                            Text("Filter")
+                            Image(systemName: self.filters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
+                        } })
             )
 
             NavigationLink(destination: FilterCriteria(filters: self.$filters),
