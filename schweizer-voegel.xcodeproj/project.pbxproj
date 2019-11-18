@@ -47,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
@@ -103,6 +104,7 @@
 		17B960E123699370003AA802 = {
 			isa = PBXGroup;
 			children = (
+				1703131B2382C76A007E2EE3 /* .gitignore */,
 				17B960EC23699370003AA802 /* schweizer-voegel */,
 				17B9610623699375003AA802 /* schweizer-voegelTests */,
 				17B9611123699375003AA802 /* schweizer-voegelUITests */,
