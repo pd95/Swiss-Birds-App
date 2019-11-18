@@ -12,9 +12,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             BirdList(species: allSpecies)
+            Text("Falls keine Liste sichtbar ist: von der linken Seite her wischen oder das Gerät um 90° drehen.")
         }
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
-        .padding([.trailing])
     }
 }
 
