@@ -64,21 +64,20 @@ struct SearchField: View {
 struct BirdList: View {
     var species: [Species]
     
-    @State private var searchText = ""
-    @State private var onlyCommon = false
+    @EnvironmentObject private var state : ApplicationState
+    
     @State private var showFilters = false
-    @State private var filters = [FilterType:[Int]]()
     
     var body: some View {
         
         VStack {
             List {
                 Section {
-                    SearchField(searchText: $searchText)
+                    SearchField(searchText: $state.searchText)
                 }
 
                 Section {
-                    ForEach(species.filter{$0.nameMatches(searchText) && $0.categoryMatches(filters: self.filters)}) { bird in
+                    ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.selectedFilters)}) { bird in
                         NavigationLink(destination: BirdDetail(bird: bird)) {
                             BirdRow(bird: bird)
                         }
@@ -97,11 +96,11 @@ struct BirdList: View {
                        label: {
                         HStack {
                             Text("Filter")
-                            Image(systemName: self.filters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
+                            Image(systemName: state.selectedFilters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
                         } })
             )
 
-            NavigationLink(destination: FilterCriteria(filters: self.$filters),
+            NavigationLink(destination: FilterCriteria(filters: $state.selectedFilters),
                            isActive: $showFilters) {
                             Text("*** never shown ***")
             }

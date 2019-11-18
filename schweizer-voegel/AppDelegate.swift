@@ -12,6 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var state = ApplicationState()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -78,6 +79,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    // MARK: - State preservation and restoration
+    
+    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
+        // Save the current app version to the archive.
+        coder.encode(1.0, forKey: "MyAppVersion")
+             
+        // Always save state information.
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
+        // Restore the state only if the app version matches.
+        let version = coder.decodeFloat(forKey: "MyAppVersion")
+        if version == 1.0 {
+            return true
+        }
+        
+        // Do not restore from old data.
+        return false
+    }
+    
+    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
+        print("saving \(state)")
+        coder.encode(state.searchText, forKey: "SearchText")
+        
+        var selectedFilters = [String : [Int]]()
+        state.selectedFilters.forEach { (key: FilterType, value: [Int]) in
+            selectedFilters[key.rawValue] = value
+        }
+        print(selectedFilters)
+        UserDefaults.standard.set(selectedFilters, forKey: "selectedFilters")
+    }
+    
+    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
+        state.searchText = coder.decodeObject(forKey: "SearchText") as! String
+        
+        if let selectedFilters = UserDefaults.standard.dictionary(forKey: "selectedFilters") as? [String : [Int]] {
+            state.selectedFilters.removeAll()
+            selectedFilters.forEach { (key: String, value: [Int]) in
+                if let filter = FilterType(rawValue: key) {
+                    state.selectedFilters[filter] = value
+                }
+            }
+            print(selectedFilters)
+        }
+        print("restored \(state)")
+    }
 }
 
 extension UIApplication {
