@@ -3,3 +3,6 @@
 
 ## Xcode User settings
 *xcuserdata*
+
+# Ignore Birds asset catalog data
+Birds.xcassets
