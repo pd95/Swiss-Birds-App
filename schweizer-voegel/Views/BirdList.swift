@@ -17,7 +17,7 @@ struct BirdRow: View {
     
     var body: some View {
         HStack {
-            Image(String(bird.speciesId))
+            Image("assets/\(bird.speciesId)")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 40, height: 40)

@@ -16,10 +16,10 @@ struct BirdDetail: View {
             VStack(alignment: .leading) {
                 Text(bird.alternateName)
                     .font(.body)
-                Image(bird.primaryPictureName)
+                Image("assets/\(bird.primaryPictureName).jpg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                Image(bird.secondaryPictureName)
+                Image("assets/\(bird.secondaryPictureName).jpg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
