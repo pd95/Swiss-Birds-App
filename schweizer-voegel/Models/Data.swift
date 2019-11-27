@@ -58,7 +58,6 @@ func loadSpeciesData() -> [Species] {
     var speciesList = [Species]()
 
     vdsList.forEach { (item) in
-        print(item)
         let species = Species(
             speciesId: Int(item.artID)!,
             name: item.artname,
