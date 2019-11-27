@@ -2,222 +2,222 @@
     {
         "type": "filterlebensraum",
         "filterID": "1",
-        "filterName": "felsiges Gelände"
+        "filterName": "rocky terrain"
     },
     {
         "type": "filterlebensraum",
         "filterID": "2",
-        "filterName": "Feuchtgebiete"
+        "filterName": "wetlands"
     },
     {
         "type": "filterlebensraum",
         "filterID": "3",
-        "filterName": "Gewässer"
+        "filterName": "rivers & streams"
     },
     {
         "type": "filterlebensraum",
         "filterID": "4",
-        "filterName": "Hochgebirge"
+        "filterName": "alpine habitats"
     },
     {
         "type": "filterlebensraum",
         "filterID": "5",
-        "filterName": "Wald"
+        "filterName": "forest"
     },
     {
         "type": "filterlebensraum",
         "filterID": "6",
-        "filterName": "Ödland"
+        "filterName": "wasteland"
     },
     {
         "type": "filterlebensraum",
         "filterID": "7",
-        "filterName": "halboffenes Kulturland"
+        "filterName": "semi-open farmland"
     },
     {
         "type": "filterlebensraum",
         "filterID": "8",
-        "filterName": "Ackerland"
+        "filterName": "farmland"
     },
     {
         "type": "filterlebensraum",
         "filterID": "9",
-        "filterName": "Wiesen und Weiden"
+        "filterName": "meadows and pastures"
     },
     {
         "type": "filterlebensraum",
         "filterID": "10",
-        "filterName": "Siedlungen"
+        "filterName": "settlements"
     },
     {
         "type": "filternahrung",
         "filterID": "1",
-        "filterName": "Aas"
+        "filterName": "carcasses"
     },
     {
         "type": "filternahrung",
         "filterID": "2",
-        "filterName": "Abfall"
+        "filterName": "rubbish"
     },
     {
         "type": "filternahrung",
         "filterID": "3",
-        "filterName": "Allesfresser"
+        "filterName": "omnivore"
     },
     {
         "type": "filternahrung",
         "filterID": "4",
-        "filterName": "Amphibien"
+        "filterName": "amphibians"
     },
     {
         "type": "filternahrung",
         "filterID": "5",
-        "filterName": "Insekten und Spinnen"
+        "filterName": "insects and spiders"
     },
     {
         "type": "filternahrung",
         "filterID": "6",
-        "filterName": "Samen"
+        "filterName": "seeds"
     },
     {
         "type": "filternahrung",
         "filterID": "7",
-        "filterName": "Früchte"
+        "filterName": "fruits"
     },
     {
         "type": "filternahrung",
         "filterID": "8",
-        "filterName": "Fische"
+        "filterName": "fish"
     },
     {
         "type": "filternahrung",
         "filterID": "9",
-        "filterName": "Säuger"
+        "filterName": "mammals"
     },
     {
         "type": "filternahrung",
         "filterID": "10",
-        "filterName": "Pflanzen"
+        "filterName": "plants"
     },
     {
         "type": "filternahrung",
         "filterID": "11",
-        "filterName": "andere Wassertiere"
+        "filterName": "other aquatic animals"
     },
     {
         "type": "filternahrung",
         "filterID": "12",
-        "filterName": "Reptilien"
+        "filterName": "reptiles"
     },
     {
         "type": "filternahrung",
         "filterID": "13",
-        "filterName": "Schnecken"
+        "filterName": "snails"
     },
     {
         "type": "filternahrung",
         "filterID": "14",
-        "filterName": "Vögel"
+        "filterName": "birds"
     },
     {
         "type": "filternahrung",
         "filterID": "15",
-        "filterName": "Würmer"
+        "filterName": "earthworms"
     },
     {
         "type": "filterrotelistech",
         "filterID": "1",
-        "filterName": "nicht gefährdet (LC)"
+        "filterName": "Least Concern (LC)"
     },
     {
         "type": "filterrotelistech",
         "filterID": "2",
-        "filterName": "potenziell gefährdet (NT)"
+        "filterName": "Near Threatened (NT)"
     },
     {
         "type": "filterrotelistech",
         "filterID": "3",
-        "filterName": "verletzlich (VU)"
+        "filterName": "Vulnerable (VU)"
     },
     {
         "type": "filterrotelistech",
         "filterID": "4",
-        "filterName": "stark gefährdet (EN)"
+        "filterName": "Endangered (EN)"
     },
     {
         "type": "filterrotelistech",
         "filterID": "5",
-        "filterName": "vom Aussterben bedroht (CR)"
+        "filterName": "Critically Endangered (CR)"
     },
     {
         "type": "filterrotelistech",
         "filterID": "6",
-        "filterName": "ausgestorben (RE)"
+        "filterName": "extinct (RE)"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "1",
-        "filterName": "Alken"
+        "filterName": "Auks"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "2",
-        "filterName": "Ammern"
+        "filterName": "Buntings"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "3",
-        "filterName": "Austernfischer"
+        "filterName": "Oystercatchers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "4",
-        "filterName": "Baumläufer"
+        "filterName": "Treecreepers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "5",
-        "filterName": "Beutelmeisen"
+        "filterName": "Penduline Tits"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "6",
-        "filterName": "Bienenfresser"
+        "filterName": "Bee-eaters"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "7",
-        "filterName": "Braunellen"
+        "filterName": "Accentors"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "8",
-        "filterName": "Drosselvögel"
+        "filterName": "Chats and Thrushes"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "9",
-        "filterName": "Eisvögel"
+        "filterName": "Kingfishers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "10",
-        "filterName": "Entenvögel"
+        "filterName": "Wildfowl"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "11",
-        "filterName": "Falken"
+        "filterName": "Falcons"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "12",
-        "filterName": "Finkenvögel"
+        "filterName": "Finches"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "13",
-        "filterName": "Fischadler"
+        "filterName": "Osprey"
     },
     {
         "type": "filtervogelguppe",
@@ -227,291 +227,291 @@
     {
         "type": "filtervogelguppe",
         "filterID": "15",
-        "filterName": "Fliegenschnäpper"
+        "filterName": "Flycatchers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "16",
-        "filterName": "Flughühner"
+        "filterName": "Sandgrouse"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "17",
-        "filterName": "Glattfusshühner"
+        "filterName": "Partriges, Quails, Pheasants and allies"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "18",
-        "filterName": "Habichtartige"
+        "filterName": "Hawks, Vultures and Eagles"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "19",
-        "filterName": "Ibisse"
+        "filterName": "Ibises"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "20",
-        "filterName": "Kleiber"
+        "filterName": "Nuthatches"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "21",
-        "filterName": "Kormorane"
+        "filterName": "Cormorants"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "22",
-        "filterName": "Kraniche"
+        "filterName": "Cranes"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "23",
-        "filterName": "Kuckucke"
+        "filterName": "Cuckoos"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "24",
-        "filterName": "Lappentaucher"
+        "filterName": "Grebes"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "25",
-        "filterName": "Lerchen"
+        "filterName": "Larks"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "26",
-        "filterName": "Löffler"
+        "filterName": "Spoonbills"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "27",
-        "filterName": "Mauerläufer"
+        "filterName": "Wallcreepers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "28",
-        "filterName": "Meisen"
+        "filterName": "Tits"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "29",
-        "filterName": "Möwen"
+        "filterName": "Gulls"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "30",
-        "filterName": "Nachtschwalben"
+        "filterName": "Nightjars"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "31",
-        "filterName": "Ohreulen und Käuze"
+        "filterName": "typical Owls"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "32",
-        "filterName": "Pelikane"
+        "filterName": "Pelicans"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "33",
-        "filterName": "Pieper und Stelzen"
+        "filterName": "Pipits and Wagtails"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "34",
-        "filterName": "Pirole"
+        "filterName": "Old World Orioles"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "35",
-        "filterName": "Rabenvögel"
+        "filterName": "Crows"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "36",
-        "filterName": "Racken"
+        "filterName": "Rollers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "37",
-        "filterName": "Rallen"
+        "filterName": "Rails"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "38",
-        "filterName": "Raubmöwen"
+        "filterName": "Skuas"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "39",
-        "filterName": "Raufusshühner"
+        "filterName": "Grouse"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "40",
-        "filterName": "Regenpfeifer"
+        "filterName": "Plovers and Lapwings"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "41",
-        "filterName": "Reiher"
+        "filterName": "Herons and Bitterns"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "42",
-        "filterName": "Rennvögel und Brachschwalben"
+        "filterName": "Coursers and pratincoles"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "43",
-        "filterName": "Schleiereulen"
+        "filterName": "Barn Owls"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "44",
-        "filterName": "Schnepfen"
+        "filterName": "Sandpipers and allies"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "45",
-        "filterName": "Schwalben"
+        "filterName": "Swallows"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "46",
-        "filterName": "Schwanzmeisen"
+        "filterName": "Long-tailed Tits"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "47",
-        "filterName": "Seeschwalben"
+        "filterName": "Terns"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "48",
-        "filterName": "Seetaucher"
+        "filterName": "Divers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "49",
-        "filterName": "Segler"
+        "filterName": "Swifts"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "50",
-        "filterName": "Seidenschwänze"
+        "filterName": "Waxwings"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "51",
-        "filterName": "Spechte"
+        "filterName": "Wrynecks, Woodpeckers and allies"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "52",
-        "filterName": "Sperlinge"
+        "filterName": "Sparrows"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "53",
-        "filterName": "Starenvögel"
+        "filterName": "Starlings"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "54",
-        "filterName": "Stelzenläufer und Säbelschnäbler"
+        "filterName": "Stilts and Avocets"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "55",
-        "filterName": "Störche"
+        "filterName": "Storks"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "56",
-        "filterName": "Sturmschwalben"
+        "filterName": "Storm-petrels"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "57",
-        "filterName": "Sturmtaucher"
+        "filterName": "Petrels and Shearwaters"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "58",
-        "filterName": "Tauben"
+        "filterName": "Pigeons"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "59",
-        "filterName": "Timalien"
+        "filterName": "Babblers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "60",
-        "filterName": "Tölpel"
+        "filterName": "Gannets and Boobies"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "61",
-        "filterName": "Trappen"
+        "filterName": "Bustards"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "62",
-        "filterName": "Triele"
+        "filterName": "Stone-curlews"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "63",
-        "filterName": "Wasseramseln"
+        "filterName": "Dippers"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "64",
-        "filterName": "Wiedehopfe"
+        "filterName": "Hoopoes"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "65",
-        "filterName": "Würger"
+        "filterName": "Shrikes"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "66",
-        "filterName": "Zaunkönige"
+        "filterName": "Wrens"
     },
     {
         "type": "filtervogelguppe",
         "filterID": "67",
-        "filterName": "Zweigsänger"
+        "filterName": "Warblers and allies"
     },
     {
         "type": "filterentwicklungatlas",
         "filterID": "1",
-        "filterName": "starke Zunahme"
+        "filterName": "strong increase"
     },
     {
         "type": "filterentwicklungatlas",
         "filterID": "2",
-        "filterName": "moderate Zunahme"
+        "filterName": "moderate increase"
     },
     {
         "type": "filterentwicklungatlas",
         "filterID": "3",
-        "filterName": "stabile Entwicklung"
+        "filterName": "stable"
     },
     {
         "type": "filterentwicklungatlas",
         "filterID": "4",
-        "filterName": "moderate Abnahme"
+        "filterName": "moderate decline"
     },
     {
         "type": "filterentwicklungatlas",
         "filterID": "5",
-        "filterName": "starke Abnahme"
+        "filterName": "steep decline"
     }
 ]

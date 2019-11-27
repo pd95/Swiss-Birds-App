@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  schweizer-voegel
+
+  Created by Philipp on 27.11.19.
+  Copyright © 2019 Philipp. All rights reserved.
+*/
+"Vögel der Schweiz" = "Vögel der Schweiz";
+"Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
+"Alle Vögel" = "Alle Arten";
+"Nur häufige Vögel" = "Nur häufige Arten";

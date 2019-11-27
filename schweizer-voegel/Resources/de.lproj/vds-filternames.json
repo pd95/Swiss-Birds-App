@@ -1,0 +1,517 @@
+[
+    {
+        "type": "filterlebensraum",
+        "filterID": "1",
+        "filterName": "felsiges Gelände"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "2",
+        "filterName": "Feuchtgebiete"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "3",
+        "filterName": "Gewässer"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "4",
+        "filterName": "Hochgebirge"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "5",
+        "filterName": "Wald"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "6",
+        "filterName": "Ödland"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "7",
+        "filterName": "halboffenes Kulturland"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "8",
+        "filterName": "Ackerland"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "9",
+        "filterName": "Wiesen und Weiden"
+    },
+    {
+        "type": "filterlebensraum",
+        "filterID": "10",
+        "filterName": "Siedlungen"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "1",
+        "filterName": "Aas"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "2",
+        "filterName": "Abfall"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "3",
+        "filterName": "Allesfresser"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "4",
+        "filterName": "Amphibien"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "5",
+        "filterName": "Insekten und Spinnen"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "6",
+        "filterName": "Samen"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "7",
+        "filterName": "Früchte"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "8",
+        "filterName": "Fische"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "9",
+        "filterName": "Säuger"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "10",
+        "filterName": "Pflanzen"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "11",
+        "filterName": "andere Wassertiere"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "12",
+        "filterName": "Reptilien"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "13",
+        "filterName": "Schnecken"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "14",
+        "filterName": "Vögel"
+    },
+    {
+        "type": "filternahrung",
+        "filterID": "15",
+        "filterName": "Würmer"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "1",
+        "filterName": "nicht gefährdet (LC)"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "2",
+        "filterName": "potenziell gefährdet (NT)"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "3",
+        "filterName": "verletzlich (VU)"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "4",
+        "filterName": "stark gefährdet (EN)"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "5",
+        "filterName": "vom Aussterben bedroht (CR)"
+    },
+    {
+        "type": "filterrotelistech",
+        "filterID": "6",
+        "filterName": "ausgestorben (RE)"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "1",
+        "filterName": "Alken"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "2",
+        "filterName": "Ammern"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "3",
+        "filterName": "Austernfischer"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "4",
+        "filterName": "Baumläufer"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "5",
+        "filterName": "Beutelmeisen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "6",
+        "filterName": "Bienenfresser"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "7",
+        "filterName": "Braunellen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "8",
+        "filterName": "Drosselvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "9",
+        "filterName": "Eisvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "10",
+        "filterName": "Entenvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "11",
+        "filterName": "Falken"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "12",
+        "filterName": "Finkenvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "13",
+        "filterName": "Fischadler"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "14",
+        "filterName": "Flamingos"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "15",
+        "filterName": "Fliegenschnäpper"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "16",
+        "filterName": "Flughühner"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "17",
+        "filterName": "Glattfusshühner"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "18",
+        "filterName": "Habichtartige"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "19",
+        "filterName": "Ibisse"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "20",
+        "filterName": "Kleiber"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "21",
+        "filterName": "Kormorane"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "22",
+        "filterName": "Kraniche"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "23",
+        "filterName": "Kuckucke"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "24",
+        "filterName": "Lappentaucher"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "25",
+        "filterName": "Lerchen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "26",
+        "filterName": "Löffler"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "27",
+        "filterName": "Mauerläufer"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "28",
+        "filterName": "Meisen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "29",
+        "filterName": "Möwen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "30",
+        "filterName": "Nachtschwalben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "31",
+        "filterName": "Ohreulen und Käuze"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "32",
+        "filterName": "Pelikane"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "33",
+        "filterName": "Pieper und Stelzen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "34",
+        "filterName": "Pirole"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "35",
+        "filterName": "Rabenvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "36",
+        "filterName": "Racken"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "37",
+        "filterName": "Rallen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "38",
+        "filterName": "Raubmöwen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "39",
+        "filterName": "Raufusshühner"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "40",
+        "filterName": "Regenpfeifer"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "41",
+        "filterName": "Reiher"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "42",
+        "filterName": "Rennvögel und Brachschwalben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "43",
+        "filterName": "Schleiereulen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "44",
+        "filterName": "Schnepfen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "45",
+        "filterName": "Schwalben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "46",
+        "filterName": "Schwanzmeisen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "47",
+        "filterName": "Seeschwalben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "48",
+        "filterName": "Seetaucher"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "49",
+        "filterName": "Segler"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "50",
+        "filterName": "Seidenschwänze"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "51",
+        "filterName": "Spechte"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "52",
+        "filterName": "Sperlinge"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "53",
+        "filterName": "Starenvögel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "54",
+        "filterName": "Stelzenläufer und Säbelschnäbler"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "55",
+        "filterName": "Störche"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "56",
+        "filterName": "Sturmschwalben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "57",
+        "filterName": "Sturmtaucher"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "58",
+        "filterName": "Tauben"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "59",
+        "filterName": "Timalien"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "60",
+        "filterName": "Tölpel"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "61",
+        "filterName": "Trappen"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "62",
+        "filterName": "Triele"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "63",
+        "filterName": "Wasseramseln"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "64",
+        "filterName": "Wiedehopfe"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "65",
+        "filterName": "Würger"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "66",
+        "filterName": "Zaunkönige"
+    },
+    {
+        "type": "filtervogelguppe",
+        "filterID": "67",
+        "filterName": "Zweigsänger"
+    },
+    {
+        "type": "filterentwicklungatlas",
+        "filterID": "1",
+        "filterName": "starke Zunahme"
+    },
+    {
+        "type": "filterentwicklungatlas",
+        "filterID": "2",
+        "filterName": "moderate Zunahme"
+    },
+    {
+        "type": "filterentwicklungatlas",
+        "filterID": "3",
+        "filterName": "stabile Entwicklung"
+    },
+    {
+        "type": "filterentwicklungatlas",
+        "filterID": "4",
+        "filterName": "moderate Abnahme"
+    },
+    {
+        "type": "filterentwicklungatlas",
+        "filterID": "5",
+        "filterName": "starke Abnahme"
+    }
+]

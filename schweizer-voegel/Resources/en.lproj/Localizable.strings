@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  schweizer-voegel
+
+  Created by Philipp on 27.11.19.
+  Copyright © 2019 Philipp. All rights reserved.
+*/
+"Vögel der Schweiz" = "Birds of Switzerland";
+"Suche" = "Search";
+"Filter" = "Filter";
+"Filterkriterien (%lld)" = "Filtering criteria (%lld species)";
+"Alle Vögel" = "All species";
+"Nur häufige Vögel" = "Only common species";
+"Lebensraum" = "Habitat";
+"Vogel Gruppe" = "Group";
+"Nahrung" = "Food";
+"Rote Liste" = "Red List CH";
+"Entwicklung" = "Evolution";
+"Stimme" = "Voice";
+

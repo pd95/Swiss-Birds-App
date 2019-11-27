@@ -74,7 +74,7 @@ struct FilterCriteria: View {
             }
 
             ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
-                Section(header: Text(filterType.description)) {
+                Section(header: Text(LocalizedStringKey(filterType.description), comment: "FilterType description")) {
                     ForEach(allFilters[filterType]!, id: \.self) { filter in
                         Button(action: { self.toggleFilter(filter)}) {
                             HStack {

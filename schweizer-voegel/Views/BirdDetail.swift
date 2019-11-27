@@ -23,7 +23,7 @@ struct BirdDetail: View {
                         .font(.body)
                     Spacer()
                     Button(action: playVoice) {
-                        Text("Stimme: ")
+                        Text("Stimme")
                         Image(systemName: isPlaying ? "stop.circle" : "play.circle")
                     }
                 }
@@ -54,7 +54,6 @@ struct BirdDetail: View {
             stopSound()
         }
     }
-    
 }
 
 struct BirdDetail_Previews: PreviewProvider {
@@ -84,4 +83,3 @@ func playSound(nameOfAudioFileInAssetCatalog: String) {
 func stopSound() {
     alarmAudioPlayer?.stop()
 }
-
