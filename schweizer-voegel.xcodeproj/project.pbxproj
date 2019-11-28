@@ -13,8 +13,6 @@
 		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
 		1752EACC238D629F00F2FA9E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752EACB238D629F00F2FA9E /* PlayerView.swift */; };
-		17B0F413238F1B2000A2F989 /* vds-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F415238F1B2000A2F989 /* vds-list.json */; };
-		17B0F416238F1B2600A2F989 /* vds-filternames.json in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F418238F1B2600A2F989 /* vds-filternames.json */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
@@ -57,14 +55,6 @@
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
 		1752EACB238D629F00F2FA9E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		17B0F414238F1B2000A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = "de.lproj/vds-list.json"; sourceTree = "<group>"; };
-		17B0F417238F1B2600A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = de; path = "de.lproj/vds-filternames.json"; sourceTree = "<group>"; };
-		17B0F419238F1B4C00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fr; path = "fr.lproj/vds-list.json"; sourceTree = "<group>"; };
-		17B0F41A238F1B4C00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = fr; path = "fr.lproj/vds-filternames.json"; sourceTree = "<group>"; };
-		17B0F41B238F1B5C00A2F989 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = it; path = "it.lproj/vds-list.json"; sourceTree = "<group>"; };
-		17B0F41C238F1B5C00A2F989 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = it; path = "it.lproj/vds-filternames.json"; sourceTree = "<group>"; };
-		17B0F41D238F1B7200A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = "en.lproj/vds-list.json"; sourceTree = "<group>"; };
-		17B0F41E238F1B7900A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = "en.lproj/vds-filternames.json"; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F425238F32B700A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -184,8 +174,6 @@
 		17D1A501236CD95900E8588C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				17B0F415238F1B2000A2F989 /* vds-list.json */,
-				17B0F418238F1B2600A2F989 /* vds-filternames.json */,
 				17B0F423238F1F6200A2F989 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -324,8 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				174E04C52377903F00079901 /* Birds.xcassets in Resources */,
-				17B0F413238F1B2000A2F989 /* vds-list.json in Resources */,
-				17B0F416238F1B2600A2F989 /* vds-filternames.json in Resources */,
 				17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
 				17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */,
@@ -403,28 +389,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		17B0F415238F1B2000A2F989 /* vds-list.json */ = {
-			isa = PBXVariantGroup;
-			children = (
-				17B0F414238F1B2000A2F989 /* de */,
-				17B0F419238F1B4C00A2F989 /* fr */,
-				17B0F41B238F1B5C00A2F989 /* it */,
-				17B0F41D238F1B7200A2F989 /* en */,
-			);
-			name = "vds-list.json";
-			sourceTree = "<group>";
-		};
-		17B0F418238F1B2600A2F989 /* vds-filternames.json */ = {
-			isa = PBXVariantGroup;
-			children = (
-				17B0F417238F1B2600A2F989 /* de */,
-				17B0F41A238F1B4C00A2F989 /* fr */,
-				17B0F41C238F1B5C00A2F989 /* it */,
-				17B0F41E238F1B7900A2F989 /* en */,
-			);
-			name = "vds-filternames.json";
-			sourceTree = "<group>";
-		};
 		17B0F423238F1F6200A2F989 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

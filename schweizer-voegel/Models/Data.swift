@@ -7,19 +7,29 @@
 //
 
 import Foundation
+import UIKit
 
 let allSpecies: [Species] = loadSpeciesData()
+
+let availableLanguages = ["de","fr","it","en"]
+let language = Bundle.preferredLocalizations(from: availableLanguages).first!
+
 
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
     
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-    else {
-        fatalError("Couldn't find \(filename) in main bundle.")
-    }
-    
     do {
-        data = try Data(contentsOf: file)
+        // Try first to fetch file from main bundle
+        if let file = Bundle.main.url(forResource: filename, withExtension: nil) {
+            data = try Data(contentsOf: file)
+        }
+        else {
+            // Then try to find a localized resource or otherwise a non-localized resource
+            guard let asset = NSDataAsset(name: "\(language)/\(filename)") ?? NSDataAsset(name: filename) else {
+                fatalError("Couldn't find asset \(filename) in bundle and asset catalog")
+            }
+            data = asset.data
+        }
     } catch {
         fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
     }
@@ -52,7 +62,7 @@ func loadSpeciesData() -> [Species] {
     }
 
     // Load and decode file
-    let vdsList : [VdsList] = load("vds-list.json", as: [VdsList].self)
+    let vdsList : [VdsList] = load("vds-list.json")
 
     
     var speciesList = [Species]()
@@ -88,7 +98,7 @@ func loadFilterData() -> [FilterType:[Filter]] {
     }
 
     // Load and decode file
-    let vdsFilternames : [VdsFilternames] = load("vds-filternames.json", as: [VdsFilternames].self)
+    let vdsFilternames : [VdsFilternames] = load("vds-filternames.json")
 
     
     var filterMap = [FilterType:[Filter]]()
