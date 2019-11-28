@@ -26,7 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView()
             .environment(\.managedObjectContext, context)
-            .environmentObject((UIApplication.shared.delegate as! AppDelegate).state)
+            .environmentObject(appState)
+
+        if let activity = session.stateRestorationActivity {
+            appState.restore(from: activity)
+        }
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -67,7 +71,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
+    
+    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
+        let activity = NSUserActivity(activityType: Bundle.main.activityType)
+        appState.store(in: activity)
+        return activity
+    }
 }
-

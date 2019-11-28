@@ -12,7 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var state = ApplicationState()
+    var state = AppState()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -98,33 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Do not restore from old data.
         return false
-    }
-    
-    func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
-        print("saving \(state)")
-        coder.encode(state.searchText, forKey: "SearchText")
-        
-        var selectedFilters = [String : [Int]]()
-        state.selectedFilters.forEach { (key: FilterType, value: [Int]) in
-            selectedFilters[key.rawValue] = value
-        }
-        print(selectedFilters)
-        UserDefaults.standard.set(selectedFilters, forKey: "selectedFilters")
-    }
-    
-    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
-        state.searchText = coder.decodeObject(forKey: "SearchText") as! String
-        
-        if let selectedFilters = UserDefaults.standard.dictionary(forKey: "selectedFilters") as? [String : [Int]] {
-            state.selectedFilters.removeAll()
-            selectedFilters.forEach { (key: String, value: [Int]) in
-                if let filter = FilterType(rawValue: key) {
-                    state.selectedFilters[filter] = value
-                }
-            }
-            print(selectedFilters)
-        }
-        print("restored \(state)")
     }
 }
 

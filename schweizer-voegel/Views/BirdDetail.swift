@@ -61,7 +61,6 @@ struct BirdDetail_Previews: PreviewProvider {
         NavigationView {
             BirdDetail(bird: allSpecies[3])
         }
-        .environmentObject(ApplicationState())
     }
 }
 

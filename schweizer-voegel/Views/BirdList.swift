@@ -65,9 +65,7 @@ struct SearchField: View {
 struct BirdList: View {
     var species: [Species]
     
-    @EnvironmentObject private var state : ApplicationState
-    
-    @State private var showFilters = false
+    @EnvironmentObject private var state : AppState
     
     var body: some View {
         
@@ -79,7 +77,7 @@ struct BirdList: View {
 
                 Section {
                     ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.selectedFilters)}) { bird in
-                        NavigationLink(destination: BirdDetail(bird: bird)) {
+                        NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBird) {
                             BirdRow(bird: bird)
                         }
                     }
@@ -93,7 +91,7 @@ struct BirdList: View {
 //                                Text("Filter")
 //                }
 
-                Button(action: { self.showFilters = true },
+                Button(action: { self.state.showFilters = true },
                        label: {
                         HStack {
                             Text("Filter")
@@ -102,7 +100,7 @@ struct BirdList: View {
             )
 
             NavigationLink(destination: FilterCriteria(filters: $state.selectedFilters),
-                           isActive: $showFilters) {
+                           isActive: $state.showFilters) {
                             Text("*** never shown ***")
             }
             .frame(width: 0, height: 0)
@@ -122,6 +120,6 @@ struct BirdList_Previews: PreviewProvider {
             ContentView()
                 .environment(\.colorScheme, .dark)
         }
-        .environmentObject(ApplicationState())
+        .environmentObject(appState)
     }
 }

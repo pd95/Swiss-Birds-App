@@ -96,6 +96,5 @@ struct FilterCriteria_Previews: PreviewProvider {
         NavigationView {
             FilterCriteria(filters: .constant([:]))
         }
-        .environmentObject(ApplicationState())
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Species: Identifiable, Hashable {
+struct Species: Identifiable, Hashable, CustomStringConvertible {
     let id = UUID()
 
     let speciesId : Int
@@ -68,5 +68,9 @@ struct Species: Identifiable, Hashable {
         }
         
         return matchesAll
+    }
+    
+    var description: String {
+        return "Species(speciesId=\(speciesId), name=\(name), filterMap=\(filterMap))"
     }
 }
