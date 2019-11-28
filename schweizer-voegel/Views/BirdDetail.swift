@@ -14,6 +14,10 @@ struct BirdDetail: View {
     var bird: Species
     
     @State var isPlaying : Bool = false
+    
+    func hasImageAsset(name: String) -> Bool {
+        UIImage(named: name) != nil
+    }
 
     var body: some View {
         ScrollView {
@@ -30,7 +34,7 @@ struct BirdDetail: View {
                 Image("assets/\(bird.primaryPictureName).jpg")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                if bird.secondaryPictureName.count > 0 {
+                if hasImageAsset(name: "assets/\(bird.secondaryPictureName).jpg"){
                     Image("assets/\(bird.secondaryPictureName).jpg")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
