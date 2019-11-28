@@ -10,15 +10,43 @@ import SwiftUI
 import AVKit
 
 
+struct BirdImageView: View {
+    var asset : String
+    var autor : String
+    var description : String
+    
+    var body: some View {
+        VStack {
+            Image(asset)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            HStack {
+                Text(description)
+                Spacer()
+                Text("© \(autor)")
+            }
+            .padding([.leading, .bottom, .trailing], 8)
+            .font(.caption)
+        }
+        .background(Color(red: 0.9, green: 0.9, blue: 0.9))
+        .cornerRadius(5)
+    }
+}
+
+
 struct BirdDetail: View {
     var bird: Species
-    
-    @State var isPlaying : Bool = false
-    
-    func hasImageAsset(name: String) -> Bool {
-        UIImage(named: name) != nil
+
+    private var birdDetails : SpeciesDetail? {
+        load("\(bird.speciesId).json", as: [SpeciesDetail].self).first
     }
 
+    private var voiceData : NSDataAsset? {
+        NSDataAsset(name: "assets/\(bird.speciesId).mp3")
+    }
+
+    @State var isPlaying : Bool = false
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -26,63 +54,70 @@ struct BirdDetail: View {
                     Text(bird.alternateName)
                         .font(.body)
                     Spacer()
-                    Button(action: playVoice) {
-                        Text("Stimme")
-                        Image(systemName: isPlaying ? "stop.circle" : "play.circle")
+                    if voiceData != nil {
+                        Button(action: playVoice) {
+                            Text("Stimme")
+                            Image(systemName: isPlaying ? "stop.circle" : "play.circle")
+                        }
                     }
                 }
-                Image("assets/\(bird.primaryPictureName).jpg")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                if hasImageAsset(name: "assets/\(bird.secondaryPictureName).jpg"){
-                    Image("assets/\(bird.secondaryPictureName).jpg")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                if birdDetails?.autor0 != "" {
+                    BirdImageView(asset: "assets/\(bird.speciesId)_0.jpg", autor: birdDetails!.autor0!, description: birdDetails!.bezeichnungDe0 ?? "")
                 }
+                if birdDetails?.autor1 != "" {
+                    BirdImageView(asset: "assets/\(bird.speciesId)_1.jpg", autor: birdDetails!.autor1!, description: birdDetails!.bezeichnungDe1 ?? "")
+                }
+                if birdDetails?.autor2 != "" {
+                    BirdImageView(asset: "assets/\(bird.speciesId)_2.jpg", autor: birdDetails!.autor2!, description: birdDetails!.bezeichnungDe2 ?? "")
+                }
+                Text(birdDetails!.infos!)
+                    .font(.body)
+                    .padding(.top)
+                
             }
             .padding()
         }
         .navigationBarTitle(Text(bird.name), displayMode: .inline)
         .onDisappear() {
-            stopSound()
+            self.stopSound()
         }
     }
     
     func playVoice() {
-        isPlaying.toggle()
-        if isPlaying {
-            playSound(nameOfAudioFileInAssetCatalog: "assets/\(bird.speciesId).mp3")
-            isPlaying = alarmAudioPlayer?.isPlaying ?? false
+        if let data = voiceData?.data {
+            isPlaying.toggle()
+            if isPlaying {
+                //playSound(nameOfAudioFileInAssetCatalog: "assets/\(bird.speciesId).mp3")
+                do {
+                    try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+                    try! AVAudioSession.sharedInstance().setActive(true)
+                    try alarmAudioPlayer = AVAudioPlayer(data: data, fileTypeHint: AVFileType.mp3.rawValue)
+                    alarmAudioPlayer!.play()
+                } catch {
+                    print("error initializing AVAudioPlayer")
+                }
+
+                isPlaying = alarmAudioPlayer?.isPlaying ?? false
+            }
+            else {
+                stopSound()
+            }
         }
-        else {
-            stopSound()
-        }
+    }
+
+    func stopSound() {
+        alarmAudioPlayer?.stop()
     }
 }
 
 struct BirdDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            BirdDetail(bird: allSpecies[3])
+            BirdDetail(bird: allSpecies[14])
         }
     }
 }
 
 /// Audio player routines
 private var alarmAudioPlayer: AVAudioPlayer?
-func playSound(nameOfAudioFileInAssetCatalog: String) {
-    if let sound = NSDataAsset(name: nameOfAudioFileInAssetCatalog) {
-        do {
-            try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-            try! AVAudioSession.sharedInstance().setActive(true)
-            try alarmAudioPlayer = AVAudioPlayer(data: sound.data, fileTypeHint: AVFileType.mp3.rawValue)
-            alarmAudioPlayer!.play()
-        } catch {
-            print("error initializing AVAudioPlayer")
-        }
-    }
-}
 
-func stopSound() {
-    alarmAudioPlayer?.stop()
-}
