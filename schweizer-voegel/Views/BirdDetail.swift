@@ -28,7 +28,7 @@ struct BirdImageView: View {
             .padding([.leading, .bottom, .trailing], 8)
             .font(.caption)
         }
-        .background(Color(red: 0.9, green: 0.9, blue: 0.9))
+        .background(Color(.systemGray5))
         .cornerRadius(5)
     }
 }
@@ -87,7 +87,6 @@ struct BirdDetail: View {
         if let data = voiceData?.data {
             isPlaying.toggle()
             if isPlaying {
-                //playSound(nameOfAudioFileInAssetCatalog: "assets/\(bird.speciesId).mp3")
                 do {
                     try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
                     try! AVAudioSession.sharedInstance().setActive(true)
@@ -115,6 +114,7 @@ struct BirdDetail_Previews: PreviewProvider {
         NavigationView {
             BirdDetail(bird: allSpecies[14])
         }
+//        .environment(\.colorScheme, .dark)
     }
 }
 
