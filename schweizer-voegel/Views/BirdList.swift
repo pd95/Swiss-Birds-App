@@ -92,7 +92,10 @@ struct BirdList: View {
 //                                Text("Filter")
 //                }
 
-                Button(action: { self.state.showFilters = true },
+                Button(action: {
+                    self.state.showFilters = true
+                    UIApplication.shared.endEditing()
+                },
                        label: {
                         HStack {
                             Text("Filter")
