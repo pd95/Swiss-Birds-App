@@ -48,10 +48,11 @@ struct SearchField: View {
             .foregroundColor(.primary)
             .disableAutocorrection(true)
             
-            Button(action: {
-                self.searchText = ""
-            }) {
+            Button(action: { }) {
                 Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+            }
+            .onTapGesture {
+                self.searchText = ""
             }
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
