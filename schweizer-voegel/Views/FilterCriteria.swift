@@ -61,14 +61,14 @@ struct FilterCriteria: View {
         List {
             Button(action: { self.clearFilters() }) {
                 HStack {
-                    Image(systemName: filters.count == 0 ? "checkmark.circle" : "circle")
+                    Checkmark(checked: filters.count == 0)
                     Text("Alle Vögel")
                 }
             }
             
             Button(action: { self.toggleFilter(self.commonBirds) }) {
                 HStack {
-                    Image(systemName: self.hasFilter(commonBirds) ? "checkmark.circle" : "circle")
+                    Checkmark(checked: self.hasFilter(commonBirds))
                     Text("Nur häufige Vögel")
                 }
             }
@@ -78,7 +78,7 @@ struct FilterCriteria: View {
                     ForEach(allFilters[filterType]!, id: \.self) { filter in
                         Button(action: { self.toggleFilter(filter)}) {
                             HStack {
-                                Image(systemName: self.hasFilter(filter) ? "checkmark.circle" : "circle")
+                                Checkmark(checked: self.hasFilter(filter))
                                 SymbolView(symbolName: filter.symbolName)
                                 Text(filter.name)
                             }
@@ -95,6 +95,23 @@ struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FilterCriteria(filters: .constant([:]))
+        }
+    }
+}
+
+struct Checkmark: View {
+    var checked = true
+    
+    let checkmark = Image(systemName: "checkmark")
+    
+    var body: some View {
+        Group {
+            if checked {
+                checkmark
+            }
+            else {
+                checkmark.hidden()
+            }
         }
     }
 }
