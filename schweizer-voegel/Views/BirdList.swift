@@ -42,23 +42,19 @@ struct SearchField: View {
         HStack {
             Image(systemName: "magnifyingglass")
             
-            TextField("Suche", text: $searchText) {
-                UIApplication.shared.endEditing()
-            }
+            TextField("Suche", text: $searchText)
             .foregroundColor(.primary)
             .disableAutocorrection(true)
             
-            Button(action: { }) {
+            Button(action: { self.searchText = "" }) {
                 Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
-            }
-            .onTapGesture {
-                self.searchText = ""
             }
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
         .foregroundColor(.secondary)
         .background(Color(.secondarySystemBackground))
         .cornerRadius(10.0)
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
