@@ -9,7 +9,7 @@
 "Suche" = "Search";
 "Filter" = "Filter";
 "Filterkriterien (%lld)" = "Filtering criteria (%lld species)";
-"Alle Vögel" = "All species";
+"Keine Filter" = "No filtering";
 "Nur häufige Vögel" = "Only common species";
 "Lebensraum" = "Habitat";
 "Vogel Gruppe" = "Group";

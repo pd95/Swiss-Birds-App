@@ -62,7 +62,7 @@ struct FilterCriteria: View {
             Button(action: { self.clearFilters() }) {
                 HStack {
                     Checkmark(checked: filters.count == 0)
-                    Text("Alle Vögel")
+                    Text("Keine Filter")
                 }
             }
             
