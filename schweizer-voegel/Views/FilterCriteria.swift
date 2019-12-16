@@ -79,7 +79,7 @@ struct FilterCriteria: View {
                         Button(action: { self.toggleFilter(filter)}) {
                             HStack {
                                 Checkmark(checked: self.hasFilter(filter))
-                                SymbolView(symbolName: filter.symbolName)
+                                SymbolView(symbolName: filter.uniqueFilterId)
                                 Text(filter.name)
                             }
                         }

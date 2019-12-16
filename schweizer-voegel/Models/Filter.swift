@@ -29,9 +29,4 @@ struct Filter: Identifiable, Equatable, Hashable {
             return "\(type.rawValue)-\(filterId)"
         }
     }
-    var symbolName : String {
-        get {
-            return uniqueFilterId
-        }
-    }
 }
