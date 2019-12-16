@@ -74,6 +74,9 @@
 		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
 		17D1A504236CDA8500E8588C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		17F7195C23A825C20060F02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17F7195E23A825C30060F02F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17F7196023A825C50060F02F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -400,6 +403,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				17B960FC23699375003AA802 /* Base */,
+				17F7195C23A825C20060F02F /* en */,
+				17F7195E23A825C30060F02F /* fr */,
+				17F7196023A825C50060F02F /* it */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

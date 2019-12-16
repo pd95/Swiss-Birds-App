@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,11 +12,11 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="27S-ir-prM">
-                                <rect key="frame" x="72" y="398" width="270" height="100"/>
+                                <rect key="frame" x="52.666666666666657" y="356" width="270" height="100"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vogelwarte" translatesAutoresizingMaskIntoConstraints="NO" id="e41-F4-cty">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -29,9 +29,17 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vögel der Schweiz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-s7-DsM">
+                                <rect key="frame" x="53.666666666666657" y="299.33333333333331" width="267.66666666666674" height="40.666666666666686"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Hak-s7-DsM" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4QN-QJ-aJT"/>
+                            <constraint firstItem="27S-ir-prM" firstAttribute="top" secondItem="Hak-s7-DsM" secondAttribute="bottom" constant="16" id="A21-kq-q1d"/>
                             <constraint firstItem="27S-ir-prM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ceq-2l-pSY"/>
                             <constraint firstItem="27S-ir-prM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="kxq-GE-Cpc"/>
                             <constraint firstItem="27S-ir-prM" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="odc-aN-QSn"/>
