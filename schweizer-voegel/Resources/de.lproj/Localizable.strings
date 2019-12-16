@@ -6,6 +6,8 @@
   Copyright © 2019 Philipp. All rights reserved.
 */
 "Vögel der Schweiz" = "Vögel der Schweiz";
+"Suche" = "Suche";
+"Filter" = "Filter";
 "Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
 "Keine Filter" = "Keine Filter";
 "Nur häufige Vögel" = "Nur häufige Arten";
