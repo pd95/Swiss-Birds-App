@@ -78,27 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-    // MARK: - State preservation and restoration
-    
-    func application(_ application: UIApplication, shouldSaveSecureApplicationState coder: NSCoder) -> Bool {
-        // Save the current app version to the archive.
-        coder.encode(1.0, forKey: "MyAppVersion")
-             
-        // Always save state information.
-        return true
-    }
-    
-    func application(_ application: UIApplication, shouldRestoreSecureApplicationState coder: NSCoder) -> Bool {
-        // Restore the state only if the app version matches.
-        let version = coder.decodeFloat(forKey: "MyAppVersion")
-        if version == 1.0 {
-            return true
-        }
-        
-        // Do not restore from old data.
-        return false
-    }
 }
 
 extension UIApplication {

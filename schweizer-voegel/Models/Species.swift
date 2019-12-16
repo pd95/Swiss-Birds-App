@@ -17,26 +17,6 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     
     let filterMap : [FilterType: [Int]]  // For each FilterType an array of related IDs
 
-    var isCommon : Bool {
-        return filterMap[.haeufigeart]![0] == 0
-    }
-    
-    var group : Int {
-        return filterMap[.vogelgruppe]![0]
-    }
-    
-    var breadCrumbImageName : String {
-        return "\(speciesId)"
-    }
-
-    var primaryPictureName : String {
-        return "\(speciesId)_0"
-    }
-
-    var secondaryPictureName : String {
-        return "\(speciesId)_1"
-    }
-
     func filterSymbolName(_ filterType : FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
             return "\(filterType.rawValue)-\(array[0])"
