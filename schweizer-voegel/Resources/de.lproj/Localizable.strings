@@ -9,3 +9,9 @@
 "Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
 "Keine Filter" = "Keine Filter";
 "Nur häufige Vögel" = "Nur häufige Arten";
+"filterlebensraum" = "Lebensraum";
+"filtervogelguppe" = "Vogel Gruppe";
+"filternahrung" = "Nahrung";
+"filterrotelistech" = "Rote Liste";
+"filterentwicklungsatlas" = "Entwicklung";
+"Stimme" = "Stimme";

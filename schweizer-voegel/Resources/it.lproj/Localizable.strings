@@ -11,10 +11,10 @@
 "Filterkriterien (%lld)" = "Criteri di filtro (%lld specie)";
 "Keine Filter" = "Senza filtri";
 "Nur häufige Vögel" = "Solo specie comuni";
-"Lebensraum" = "Habitat";
-"Vogel Gruppe" = "Gruppo";
-"Nahrung" = "Nutrimento";
-"Rote Liste" = "Lista rossa CH";
-"Entwicklung" = "Evoluzione";
+"filterlebensraum" = "Habitat";
+"filtervogelguppe" = "Gruppo";
+"filternahrung" = "Nutrimento";
+"filterrotelistech" = "Lista rossa CH";
+"filterentwicklungsatlas" = "Evoluzione";
 "Stimme" = "Voce";
 

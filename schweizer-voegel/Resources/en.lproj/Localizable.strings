@@ -11,10 +11,10 @@
 "Filterkriterien (%lld)" = "Filtering criteria (%lld species)";
 "Keine Filter" = "No filtering";
 "Nur häufige Vögel" = "Only common species";
-"Lebensraum" = "Habitat";
-"Vogel Gruppe" = "Group";
-"Nahrung" = "Food";
-"Rote Liste" = "Red List CH";
-"Entwicklung" = "Evolution";
+"filterlebensraum" = "Habitat";
+"filtervogelguppe" = "Group";
+"filternahrung" = "Food";
+"filterrotelistech" = "Red List CH";
+"filterentwicklungsatlas" = "Evolution";
 "Stimme" = "Voice";
 

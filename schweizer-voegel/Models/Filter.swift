@@ -8,25 +8,13 @@
 
 import Foundation
 
-enum FilterType: String, CaseIterable, CustomStringConvertible {
-    
+enum FilterType: String, CaseIterable {
     case haeufigeart = "filterhaeufigeart"
     case lebensraum = "filterlebensraum"
     case nahrung = "filternahrung"
     case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
     case vogelgruppe = "filtervogelguppe"
-
-    var description: String {
-        switch (self) {
-        case .lebensraum: return "Lebensraum"
-        case .nahrung: return "Nahrung"
-        case .haeufigeart: return "Häufige Art"
-        case .roteListe: return "Rote Liste"
-        case .vogelgruppe: return "Vogel Gruppe"
-        case .entwicklungatlas: return "Entwicklung"
-        }
-    }
 }
 
 struct Filter: Identifiable, Equatable, Hashable {
