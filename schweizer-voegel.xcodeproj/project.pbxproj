@@ -12,7 +12,6 @@
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
-		1752EACC238D629F00F2FA9E /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752EACB238D629F00F2FA9E /* PlayerView.swift */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
@@ -54,7 +53,6 @@
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
-		1752EACB238D629F00F2FA9E /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F425238F32B700A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				17FB3B8A236B96A20059D268 /* FilterCriteria.swift */,
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
-				1752EACB238D629F00F2FA9E /* PlayerView.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
 				17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */,
 			);
@@ -349,7 +346,6 @@
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,
 				17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
-				1752EACC238D629F00F2FA9E /* PlayerView.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
