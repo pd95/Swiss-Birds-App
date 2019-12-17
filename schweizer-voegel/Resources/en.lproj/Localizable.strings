@@ -18,3 +18,21 @@
 "filterentwicklungsatlas" = "Evolution";
 "Stimme" = "Voice";
 
+"Eigenschaften" = "Characteristics";
+"Laenge_cm" = "Length (cm)";
+"Spannweite_cm" = "Wing span (cm)";
+"Gewicht_g" = "Weight (g)";
+"Nahrung" = "Food";
+"Lebensraum" = "Habitat";
+"Zugverhalten" = "Migration behaviour";
+"Brutort" = "Nest site";
+"Brutdauer_Tage" = "Incubation (days)";
+"Jahresbruten" = "Broods per year";
+"Gelegegroesse" = "Clutch size";
+"Nestlingsdauer_Flugfaehigkeit_Tage" = "Nestling stage / airworthy (days)";
+"Hoechstalter_CH" = "Maximum age CH";
+"Hoechstalter_EURING" = "Maximum age EURING";
+"Status_in_CH" = "Status (in CH)";
+"Bestand" = "Population";
+"Rote_Liste_CH" = "Red List CH";
+"Prioritaetsart_Artenfoerderung" = "Prioritätsart Artenförderung";

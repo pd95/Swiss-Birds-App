@@ -183,8 +183,8 @@
 		17D1A502236CD96900E8588C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				17206830236B5A920008905F /* Filter.swift */,
 				1703131E2382DDF2007E2EE3 /* AppState.swift */,
+				17206830236B5A920008905F /* Filter.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
 			);

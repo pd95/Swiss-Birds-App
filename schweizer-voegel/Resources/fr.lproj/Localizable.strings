@@ -18,3 +18,21 @@
 "filterentwicklungsatlas" = "Évolution";
 "Stimme" = "Chant";
 
+"Eigenschaften" = "Caractéristiques";
+"Laenge_cm" = "Taille (cm)";
+"Spannweite_cm" = "Envergure (cm)";
+"Gewicht_g" = "Poids (g)";
+"Nahrung" = "Nourriture";
+"Lebensraum" = "Habitat";
+"Zugverhalten" = "Comportement migrateur";
+"Brutort" = "Site de nidification";
+"Brutdauer_Tage" = "Durée d'incubation (jours)";
+"Jahresbruten" = "Nombre de pontes";
+"Gelegegroesse" = "Nombre d'oeufs";
+"Nestlingsdauer_Flugfaehigkeit_Tage" = "Durée de séjour au nid / jusqu'à l'envol (jours)";
+"Hoechstalter_CH" = "Âge maximal CH";
+"Hoechstalter_EURING" = "Âge maximal EURING";
+"Status_in_CH" = "Statut (en CH)";
+"Bestand" = "Population";
+"Rote_Liste_CH" = "Liste rouge CH";
+"Prioritaetsart_Artenfoerderung" = "Espèce prioritaire pour une conservation ciblée";

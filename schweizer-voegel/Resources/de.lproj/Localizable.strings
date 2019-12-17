@@ -17,3 +17,22 @@
 "filterrotelistech" = "Rote Liste";
 "filterentwicklungsatlas" = "Entwicklung";
 "Stimme" = "Stimme";
+
+"Eigenschaften" = "Eigenschaften";
+"Laenge_cm" = "Länge (cm)";
+"Spannweite_cm" = "Spannweite (cm)";
+"Gewicht_g" = "Gewicht (g)";
+"Nahrung" = "Nahrung";
+"Lebensraum" = "Lebensraum";
+"Zugverhalten" = "Zugverhalten";
+"Brutort" = "Brutort";
+"Brutdauer_Tage" = "Brutdauer (Tage)";
+"Jahresbruten" = "Jahresbruten";
+"Gelegegroesse" = "Gelegegrösse";
+"Nestlingsdauer_Flugfaehigkeit_Tage" = "Nestlingsdauer / Flugfähigkeit (Tage)";
+"Hoechstalter_CH" = "Höchstalter CH";
+"Hoechstalter_EURING" = "Höchstalter EURING";
+"Status_in_CH" = "Status (in CH)";
+"Bestand" = "Bestand";
+"Rote_Liste_CH" = "Rote Liste CH";
+"Prioritaetsart_Artenfoerderung" = "Prioritätsart für Artenförderung";

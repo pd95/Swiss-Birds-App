@@ -23,7 +23,14 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         }
         return ""
     }
-    
+
+    func filterValue(_ filterType : FilterType) -> Filter? {
+        if let filterId = filterMap[filterType]?.first {
+            return allFilters[filterType]?.filter{$0.filterId == filterId}.first
+        }
+        return nil
+    }
+
     func nameMatches(_ text: String) -> Bool {
         if text.count == 0 {
             return true
