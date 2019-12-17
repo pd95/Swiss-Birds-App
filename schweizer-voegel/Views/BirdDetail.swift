@@ -90,13 +90,13 @@ struct BirdDetail: View {
                 do {
                     try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
                     try! AVAudioSession.sharedInstance().setActive(true)
-                    try alarmAudioPlayer = AVAudioPlayer(data: data, fileTypeHint: AVFileType.mp3.rawValue)
-                    alarmAudioPlayer!.play()
+                    try audioPlayer = AVAudioPlayer(data: data, fileTypeHint: AVFileType.mp3.rawValue)
+                    audioPlayer!.play()
                 } catch {
                     print("error initializing AVAudioPlayer")
                 }
 
-                isPlaying = alarmAudioPlayer?.isPlaying ?? false
+                isPlaying = audioPlayer?.isPlaying ?? false
             }
             else {
                 stopSound()
@@ -105,7 +105,7 @@ struct BirdDetail: View {
     }
 
     func stopSound() {
-        alarmAudioPlayer?.stop()
+        audioPlayer?.stop()
     }
 }
 
@@ -119,5 +119,5 @@ struct BirdDetail_Previews: PreviewProvider {
 }
 
 /// Audio player routines
-private var alarmAudioPlayer: AVAudioPlayer?
+private var audioPlayer: AVAudioPlayer?
 
