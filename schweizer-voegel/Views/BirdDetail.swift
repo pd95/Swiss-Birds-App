@@ -51,6 +51,8 @@ struct BirdDetail: View {
         self.bird = bird
         birdDetails = load("\(bird.speciesId).json", as: [SpeciesDetail].self).first!
         characteristicsMap = [
+            BirdCharacteristic.Header("Merkmale"),
+            BirdCharacteristic(header: "", text: birdDetails.merkmale, symbol: nil),
             BirdCharacteristic.Header("Eigenschaften"),
             BirdCharacteristic(header: FilterType.vogelgruppe.rawValue, text: bird.filterValue(.vogelgruppe)?.name, symbol: bird.filterSymbolName(.vogelgruppe)),
             BirdCharacteristic(header: "Laenge_cm", text: birdDetails.laengeCM, symbol: nil),
