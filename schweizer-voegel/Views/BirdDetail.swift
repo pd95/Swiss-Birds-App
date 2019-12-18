@@ -12,7 +12,7 @@ import AVKit
 
 struct BirdImageView: View {
     var asset : String
-    var autor : String
+    var author : String
     var description : String
     
     var body: some View {
@@ -23,13 +23,14 @@ struct BirdImageView: View {
             HStack {
                 Text(description)
                 Spacer()
-                Text("© \(autor)")
+                Text("© \(author)")
             }
             .padding([.leading, .bottom, .trailing], 8)
             .font(.caption)
         }
         .background(Color(.systemGray5))
         .cornerRadius(5)
+        .accessibility(label: Text("Bird image showing \(description). Author: \(author)"))
     }
 }
 
@@ -39,7 +40,7 @@ struct BirdDetail: View {
 
     private var birdDetails : SpeciesDetail
     
-    private var characteristicsMap : [BirdCharacteristic]
+    private var characteristics : [Characteristic]
 
     private var voiceData : NSDataAsset? {
         NSDataAsset(name: "assets/\(bird.speciesId).mp3")
@@ -50,35 +51,37 @@ struct BirdDetail: View {
     init(bird: Species) {
         self.bird = bird
         birdDetails = load("\(bird.speciesId).json", as: [SpeciesDetail].self).first!
-        characteristicsMap = [
-            BirdCharacteristic.Header("Merkmale"),
-            BirdCharacteristic(header: "", text: birdDetails.merkmale, symbol: nil),
-            BirdCharacteristic.Header("Eigenschaften"),
-            BirdCharacteristic(header: FilterType.vogelgruppe.rawValue, text: bird.filterValue(.vogelgruppe)?.name, symbol: bird.filterSymbolName(.vogelgruppe)),
-            BirdCharacteristic(header: "Laenge_cm", text: birdDetails.laengeCM, symbol: nil),
-            BirdCharacteristic(header: "Spannweite_cm", text: birdDetails.spannweiteCM, symbol: nil),
-            BirdCharacteristic(header: "Gewicht_g", text: birdDetails.gewichtG, symbol: nil),
-            BirdCharacteristic.Separator(),
-            BirdCharacteristic(header: "Nahrung", text: birdDetails.nahrung, symbol: nil),
-            BirdCharacteristic(header: "Lebensraum", text: birdDetails.lebensraum, symbol: nil),
-            BirdCharacteristic(header: "Zugverhalten", text: birdDetails.zugverhalten, symbol: nil),
-            BirdCharacteristic.Separator(),
-            BirdCharacteristic(header: "Brutort", text: birdDetails.brutort, symbol: nil),
-            BirdCharacteristic(header: "Brutdauer_Tage", text: birdDetails.brutdauerTage, symbol: nil),
-            BirdCharacteristic(header: "Jahresbruten", text: birdDetails.jahresbruten, symbol: nil),
-            BirdCharacteristic(header: "Gelegegroesse", text: birdDetails.gelegegroesse, symbol: nil),
-            BirdCharacteristic(header: "Nestlingsdauer_Flugfaehigkeit_Tage", text: birdDetails.nestlingsdauerFlugfaehigkeitTage, symbol: nil),
-            BirdCharacteristic.Separator(),
-            BirdCharacteristic(header: "Hoechstalter_CH", text: birdDetails.hoechstalterCH, symbol: nil),
-            BirdCharacteristic(header: "Hoechstalter_EURING", text: birdDetails.hoechstalterEURING, symbol: nil),
-            BirdCharacteristic.Separator(),
-            BirdCharacteristic.Header("Status_in_CH"),
-            BirdCharacteristic(header: "", text: birdDetails.statusInCH, symbol: nil),
-            BirdCharacteristic.Separator(),
-            BirdCharacteristic.Header("Bestand"),
-            BirdCharacteristic(header: "Bestand", text: birdDetails.bestand, symbol: nil),
-            BirdCharacteristic(header: "Rote_Liste_CH", text: birdDetails.roteListeCH, symbol: bird.filterSymbolName(.roteListe)),
-            BirdCharacteristic(header: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung, symbol: nil),
+        characteristics = [
+            .header(text: "Merkmale", children: [
+                .text(text: birdDetails.merkmale)
+            ]),
+            .header(text: "Eigenschaften", children: [
+                .text(label: FilterType.vogelgruppe.rawValue, text: bird.filterValue(.vogelgruppe)?.name, symbol: bird.filterSymbolName(.vogelgruppe)),
+                .text(label: "Laenge_cm", text: birdDetails.laengeCM),
+                .text(label: "Spannweite_cm", text: birdDetails.spannweiteCM),
+                .text(label: "Gewicht_g", text: birdDetails.gewichtG),
+                .separator,
+                .text(label: "Nahrung", text: birdDetails.nahrung),
+                .text(label: "Lebensraum", text: birdDetails.lebensraum),
+                .text(label: "Zugverhalten", text: birdDetails.zugverhalten),
+                .separator,
+                .text(label: "Brutort", text: birdDetails.brutort),
+                .text(label: "Brutdauer_Tage", text: birdDetails.brutdauerTage),
+                .text(label: "Jahresbruten", text: birdDetails.jahresbruten),
+                .text(label: "Gelegegroesse", text: birdDetails.gelegegroesse),
+                .text(label: "Nestlingsdauer_Flugfaehigkeit_Tage", text: birdDetails.nestlingsdauerFlugfaehigkeitTage),
+                .separator,
+                .text(label: "Hoechstalter_CH", text: birdDetails.hoechstalterCH),
+                .text(label: "Hoechstalter_EURING", text: birdDetails.hoechstalterEURING),
+            ]),
+            .header(text: "Status_in_CH", children: [
+                .text(text: birdDetails.statusInCH)
+            ]),
+            .header(text: "Bestand", children: [
+                .text(label: "Bestand", text: birdDetails.bestand),
+                .text(label: "Rote_Liste_CH", text: birdDetails.roteListeCH, symbol: bird.filterSymbolName(.roteListe)),
+                .text(label: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung),
+            ]),
         ]
     }
     
@@ -88,30 +91,36 @@ struct BirdDetail: View {
                 HStack {
                     Text(bird.alternateName)
                         .font(.body)
+                        .accessibility(label: Text("Alternate name"))
                     Spacer()
                     if voiceData != nil {
                         Button(action: playVoice) {
                             Text("Stimme")
                             Image(systemName: isPlaying ? "stop.circle" : "play.circle")
                         }
+                        .accessibility(label: Text("Play voice sample"))
+                        .accessibility(value: Text(isPlaying ? "Playing" : "Paused"))
                     }
                 }
                 if birdDetails.autor0 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_0.jpg", autor: birdDetails.autor0!, description: birdDetails.bezeichnungDe0 ?? "")
+                    BirdImageView(asset: "assets/\(bird.speciesId)_0.jpg", author: birdDetails.autor0!, description: birdDetails.bezeichnungDe0 ?? "")
+                        .accessibility(identifier: "bird_image_1")
                 }
                 if birdDetails.autor1 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_1.jpg", autor: birdDetails.autor1!, description: birdDetails.bezeichnungDe1 ?? "")
+                    BirdImageView(asset: "assets/\(bird.speciesId)_1.jpg", author: birdDetails.autor1!, description: birdDetails.bezeichnungDe1 ?? "")
+                    .accessibility(identifier: "bird_image_2")
                 }
                 if birdDetails.autor2 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_2.jpg", autor: birdDetails.autor2!, description: birdDetails.bezeichnungDe2 ?? "")
+                    BirdImageView(asset: "assets/\(bird.speciesId)_2.jpg", author: birdDetails.autor2!, description: birdDetails.bezeichnungDe2 ?? "")
+                    .accessibility(identifier: "bird_image_3")
                 }
                 Text(birdDetails.infos!)
                     .font(.body)
                     .padding(.top)
-                ForEach(self.characteristicsMap) { characteristic in
-                    BirdCharacteristicsRowView(characteristic:characteristic)
-                }
-                .padding(.top)
+                    .accessibility(label: Text("Description"))
+                
+                CharacteristicsView(characteristics: characteristics)
+                    .accessibility(label: Text("Table with characteristics"))
             }
             .padding()
         }
@@ -160,57 +169,90 @@ struct BirdDetail_Previews: PreviewProvider {
 private var audioPlayer: AVAudioPlayer?
 
 
-struct BirdCharacteristic : Identifiable {
-    let id = UUID()
+enum Characteristic : Hashable {
+    
+    indirect case header(text: String, children: [Characteristic])
+    case separator
+    case text(label: String = "", text: String?, symbol: String = "")
 
-    let header : String
-    let symbol : String?
-    let text   : String?
-
-    init(header: String, text: String?, symbol: String?) {
-        self.header = header
-        self.symbol = symbol
-        if let text = text, text.count > 0 {
-            self.text = text
-        }
-        else {
-            self.text = nil
+    var isEmpty: Bool {
+        switch self {
+        case let .header(_, children):
+            let r = children.reduce(true) {$0 && $1.isEmpty}
+            return r
+        case let .text(_, text, _):
+            let r = text == nil || text!.count == 0
+            return r
+        default:
+            return false
         }
     }
     
-    static let titleHeader = "###"
-    static let separatorHeader = "---"
-
-    static func Separator() -> BirdCharacteristic {
-        return BirdCharacteristic(header: separatorHeader, text: nil, symbol: nil)
-    }
-
-    static func Header(_ text: String) -> BirdCharacteristic {
-        return BirdCharacteristic(header: titleHeader, text: text, symbol: nil)
+    var isHeader: Bool {
+        switch self {
+        case .header:
+            return true
+        default:
+            return false
+        }
     }
     
-    var isTitle : Bool {
-        return header == BirdCharacteristic.titleHeader
+    var isSeparator: Bool {
+        switch self {
+        case .separator:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var text: String {
+        switch self {
+        case let .header(text, _):
+            return text
+        case let .text(_, text, _):
+            return text!
+        default:
+            return ""
+        }
+    }
+    
+    var label: String {
+        switch self {
+        case let .text(label, _, _):
+            return label
+        default:
+            return ""
+        }
     }
 
-    var isSeparator : Bool {
-        return header == BirdCharacteristic.separatorHeader
+    var symbol: String {
+        switch self {
+        case let .text(_, _, symbol):
+            return symbol
+        default:
+            return ""
+        }
     }
 
-    var hasHeader : Bool {
-        return !isTitle && !isSeparator && header.count > 0
+    var children: [Characteristic] {
+        switch self {
+        case let .header(_, children):
+            return children
+        default:
+            fatalError("This shouldn't happen!")
+        }
     }
 }
 
+struct CharacteristicView: View {
 
-struct BirdCharacteristicsRowView: View {
-    
-    let characteristic : BirdCharacteristic
-    
+    let characteristic : Characteristic
+
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
-            if characteristic.isTitle {
-                Text(LocalizedStringKey(characteristic.text!))
+            if characteristic.isHeader {
+                Text(LocalizedStringKey(characteristic.text))
                     .font(.title)
                     .padding(.top)
             }
@@ -219,25 +261,39 @@ struct BirdCharacteristicsRowView: View {
                     Spacer()
                 }
                 else {
-                    if characteristic.text != nil {
-                        if characteristic.hasHeader {
-                            Text(LocalizedStringKey(characteristic.header))
-                                .font(.headline)
-                                .fixedSize(horizontal: false, vertical: true)
-                                .multilineTextAlignment(.leading)
-                            Spacer(minLength: 30.0)
-                        }
-                        if characteristic.symbol != nil {
-                            SymbolView(symbolName: characteristic.symbol!, pointSize: 24)
-                        }
-                        Text(characteristic.text!)
-                            .font(.body)
+                    if characteristic.label != "" {
+                        Text(LocalizedStringKey(characteristic.label))
+                            .font(.headline)
                             .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(characteristic.hasHeader ? TextAlignment.trailing : TextAlignment.leading)
+                            .multilineTextAlignment(.leading)
+                            .accessibility(hidden: true)
+                        Spacer(minLength: 30.0)
                     }
-                    else {
-                        EmptyView()
+                    if characteristic.symbol != "" {
+                        SymbolView(symbolName: characteristic.symbol, pointSize: 18)
                     }
+                    Text(characteristic.text)
+                        .font(.body)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(characteristic.label != "" ? TextAlignment.trailing : TextAlignment.leading)
+                        .accessibility(label: Text("Characteristic \(characteristic.label)"))
+                        .accessibility(value: Text(characteristic.text))
+                }
+            }
+        }
+    }
+}
+
+struct CharacteristicsView : View {
+    let characteristics : [Characteristic]
+    
+    var body: some View {
+        ForEach(self.characteristics.filter {!$0.isEmpty}, id:\.self) { characteristic in
+            Group {
+                CharacteristicView(characteristic: characteristic)
+                if characteristic.isHeader {
+                    CharacteristicsView(characteristics: characteristic.children)
+                        .padding(.top, 10.0)
                 }
             }
         }

@@ -24,14 +24,22 @@ struct BirdRow: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
                 .shadow(radius: 4)
+                .accessibility(identifier: "Breadcrumn image")
+                .accessibility(hidden: true)
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
             if hasEntwicklungsAtlasSymbol() {
                 SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
+                    .accessibility(identifier: "Evolution image")
+                    .accessibility(hidden: true)
             }
             SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
+                .accessibility(identifier: "Group image")
+                .accessibility(hidden: true)
         }
+//        .accessibilityElement(children: .contain)
+        .accessibility(identifier: "Bird \(bird.speciesId)")
     }
 }
 
@@ -41,13 +49,18 @@ struct SearchField: View {
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-            
+                .accessibility(identifier: "Magnifying glass")
+                .accessibility(hidden: true)
+
             TextField("Suche", text: $searchText)
-            .foregroundColor(.primary)
-            .disableAutocorrection(true)
-            
+                .foregroundColor(.primary)
+                .disableAutocorrection(true)
+                .accessibility(label: Text("Search text"))
+
             Button(action: { self.searchText = "" }) {
-                Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                Image(systemName: "xmark.circle.fill")
+                    .opacity(searchText == "" ? 0 : 1)
+                    .accessibility(label: Text("Clear"))
             }
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
@@ -55,6 +68,8 @@ struct SearchField: View {
         .background(Color(.secondarySystemBackground))
         .cornerRadius(10.0)
         .buttonStyle(PlainButtonStyle())
+        .accessibilityElement(children: .contain)
+        .accessibility(addTraits: .isSearchField)
     }
 }
 
@@ -91,12 +106,12 @@ struct BirdList: View {
                 Button(action: {
                     self.state.showFilters = true
                     UIApplication.shared.endEditing()
-                },
-                       label: {
-                        HStack {
-                            Text("Filter")
-                            Image(systemName: state.selectedFilters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
-                        } })
+                }) {
+                    HStack {
+                        Text("Filter")
+                        Image(systemName: state.selectedFilters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
+                    }
+                }
             )
 
             NavigationLink(destination: FilterCriteria(filters: $state.selectedFilters),
