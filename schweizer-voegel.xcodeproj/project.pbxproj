@@ -13,6 +13,7 @@
 		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
+		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
 		17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */; };
@@ -49,14 +50,18 @@
 /* Begin PBXFileReference section */
 		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1703131E2382DDF2007E2EE3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1715651123AD742F00B8CC13 /* schweizer_voegelUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = schweizer_voegelUI.xctestplan; sourceTree = "<group>"; };
+		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
+		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "schweizer-voegelUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F425238F32B700A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F426238F32B700A2F989 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17B2701223AC132000B7846A /* MarketingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingTests.swift; sourceTree = "<group>"; };
 		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,7 +171,11 @@
 		17B9611123699375003AA802 /* schweizer-voegelUITests */ = {
 			isa = PBXGroup;
 			children = (
+				1715651223AD7FDA00B8CC13 /* README.md */,
+				1715651123AD742F00B8CC13 /* schweizer_voegelUI.xctestplan */,
 				17B9611223699375003AA802 /* schweizer_voegelUITests.swift */,
+				175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */,
+				17B2701223AC132000B7846A /* MarketingTests.swift */,
 				17B9611423699375003AA802 /* Info.plist */,
 			);
 			path = "schweizer-voegelUITests";
@@ -368,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B2701323AC132000B7846A /* MarketingTests.swift in Sources */,
 				17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

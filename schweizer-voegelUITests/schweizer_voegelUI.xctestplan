@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "BD932EAA-E8C6-45E0-8A8C-B3B2EDB20FC5",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "MarketingTests"
+      ],
+      "target" : {
+        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "identifier" : "17B9610D23699375003AA802",
+        "name" : "schweizer-voegelUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

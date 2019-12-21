@@ -1,0 +1,65 @@
+{
+  "configurations" : [
+    {
+      "id" : "716CCA7A-720B-4651-B909-EA6B577A8A1D",
+      "name" : "German",
+      "options" : {
+        "language" : "de"
+      }
+    },
+    {
+      "id" : "F42F5F66-0B95-4A61-ACB8-867A45DCE6CB",
+      "name" : "French",
+      "options" : {
+        "language" : "fr"
+      }
+    },
+    {
+      "id" : "4D92DA82-8A37-4C87-B300-42029C28BEE7",
+      "name" : "Italian",
+      "options" : {
+        "language" : "it"
+      }
+    },
+    {
+      "id" : "076966B4-C3B6-4B83-BB7E-602E3CE2841B",
+      "name" : "English",
+      "options" : {
+        "language" : "en"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "mainThreadCheckerEnabled" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:schweizer-voegel.xcodeproj",
+      "identifier" : "17B960E923699370003AA802",
+      "name" : "schweizer-voegel"
+    }
+  },
+  "testTargets" : [
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "identifier" : "17B9610223699375003AA802",
+        "name" : "schweizer-voegelTests"
+      }
+    },
+    {
+      "skippedTests" : [
+        "schweizer_voegelUITests",
+        "schweizer_voegelUITests\/testDetailNavigation()",
+        "schweizer_voegelUITests\/testFilterNavigation()",
+        "schweizer_voegelUITests\/testLaunchPerformance()"
+      ],
+      "target" : {
+        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "identifier" : "17B9610D23699375003AA802",
+        "name" : "schweizer-voegelUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
