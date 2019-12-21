@@ -92,12 +92,14 @@ struct BirdDetail: View {
                     Text(bird.alternateName)
                         .font(.body)
                         .accessibility(label: Text("Alternate name"))
+                        .accessibility(identifier: "alternateName")
                     Spacer()
                     if voiceData != nil {
                         Button(action: playVoice) {
                             Text("Stimme")
                             Image(systemName: isPlaying ? "stop.circle" : "play.circle")
                         }
+                        .accessibility(identifier: "playVoiceButton")
                         .accessibility(label: Text("Play voice sample"))
                         .accessibility(value: Text(isPlaying ? "Playing" : "Paused"))
                     }
@@ -118,7 +120,8 @@ struct BirdDetail: View {
                     .font(.body)
                     .padding(.top)
                     .accessibility(label: Text("Description"))
-                
+                    .accessibility(identifier: "description")
+
                 CharacteristicsView(characteristics: characteristics)
                     .accessibility(label: Text("Table with characteristics"))
             }
@@ -266,6 +269,7 @@ struct CharacteristicView: View {
                             .font(.headline)
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.leading)
+                            .accessibility(identifier: characteristic.label)
                             .accessibility(hidden: true)
                         Spacer(minLength: 30.0)
                     }
@@ -278,6 +282,7 @@ struct CharacteristicView: View {
                         .multilineTextAlignment(characteristic.label != "" ? TextAlignment.trailing : TextAlignment.leading)
                         .accessibility(label: Text("Characteristic \(characteristic.label)"))
                         .accessibility(value: Text(characteristic.text))
+                        .accessibility(identifier: "\(characteristic.label)_value")
                 }
             }
         }

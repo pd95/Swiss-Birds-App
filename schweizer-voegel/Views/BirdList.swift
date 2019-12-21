@@ -24,22 +24,18 @@ struct BirdRow: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
                 .shadow(radius: 4)
-                .accessibility(identifier: "Breadcrumn image")
                 .accessibility(hidden: true)
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
             if hasEntwicklungsAtlasSymbol() {
                 SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
-                    .accessibility(identifier: "Evolution image")
                     .accessibility(hidden: true)
             }
             SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
-                .accessibility(identifier: "Group image")
                 .accessibility(hidden: true)
         }
 //        .accessibilityElement(children: .contain)
-        .accessibility(identifier: "Bird \(bird.speciesId)")
     }
 }
 
@@ -55,6 +51,7 @@ struct SearchField: View {
             TextField("Suche", text: $searchText)
                 .foregroundColor(.primary)
                 .disableAutocorrection(true)
+                .accessibility(identifier: "searchText")
                 .accessibility(label: Text("Search text"))
 
             Button(action: { self.searchText = "" }) {
@@ -62,6 +59,7 @@ struct SearchField: View {
                     .opacity(searchText == "" ? 0 : 1)
                     .accessibility(label: Text("Clear"))
             }
+            .accessibility(identifier: "clearButton")
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
         .foregroundColor(.secondary)
@@ -92,6 +90,7 @@ struct BirdList: View {
                         NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBird) {
                             BirdRow(bird: bird)
                         }
+                        .accessibility(identifier: "birdRow_\(bird.speciesId)")
                     }
                 }
             }
@@ -112,6 +111,7 @@ struct BirdList: View {
                         Image(systemName: state.selectedFilters.count > 0 ? "line.horizontal.3.decrease.circle.fill" : "line.horizontal.3.decrease.circle")
                     }
                 }
+                .accessibility(identifier: "filterButton")
             )
 
             NavigationLink(destination: FilterCriteria(filters: $state.selectedFilters),

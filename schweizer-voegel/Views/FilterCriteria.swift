@@ -65,13 +65,15 @@ struct FilterCriteria: View {
                     Text("Keine Filter")
                 }
             }
-            
+            .accessibility(identifier: "noFiltering")
+
             Button(action: { self.toggleFilter(self.commonBirds) }) {
                 HStack {
                     Checkmark(checked: self.hasFilter(commonBirds))
                     Text("Nur häufige Vögel")
                 }
             }
+            .accessibility(identifier: "onlyCommon")
 
             ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header: Text(LocalizedStringKey(filterType.rawValue), comment: "FilterType description")) {
@@ -83,6 +85,7 @@ struct FilterCriteria: View {
                                 Text(filter.name)
                             }
                         }
+                        .accessibility(identifier: filter.uniqueFilterId)
                     }
                 }
             }
