@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        #if DEBUG
+        if CommandLine.arguments.contains("enable-testing") {
+            UIView.setAnimationsEnabled(false)
+        }
+        #endif
+
         return true
     }
 

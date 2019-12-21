@@ -28,7 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environment(\.managedObjectContext, context)
             .environmentObject(appState)
 
-        if let activity = session.stateRestorationActivity {
+        if let activity = session.stateRestorationActivity,
+            !CommandLine.arguments.contains("enable-testing") {
             appState.restore(from: activity)
         }
 
