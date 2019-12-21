@@ -7,5 +7,7 @@
 # Xcode test execution reports
 *.xcresult
 
+xcresult-parser/**/*.png
+
 # Ignore Birds asset catalog data
 Birds.xcassets
