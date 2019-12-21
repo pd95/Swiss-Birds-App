@@ -4,5 +4,8 @@
 ## Xcode User settings
 *xcuserdata*
 
+# Xcode test execution reports
+*.xcresult
+
 # Ignore Birds asset catalog data
 Birds.xcassets
