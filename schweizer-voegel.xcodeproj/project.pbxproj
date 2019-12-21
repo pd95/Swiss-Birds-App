@@ -77,6 +77,7 @@
 		17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9611223699375003AA802 /* schweizer_voegelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelUITests.swift; sourceTree = "<group>"; };
 		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17BED0E723ADAECF000D389C /* extract.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = extract.js; sourceTree = "<group>"; };
 		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
 		17D1A504236CDA8500E8588C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		17F7195C23A825C20060F02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 				17B960EC23699370003AA802 /* schweizer-voegel */,
 				17B9610623699375003AA802 /* schweizer-voegelTests */,
 				17B9611123699375003AA802 /* schweizer-voegelUITests */,
+				17BED0E623ADAECF000D389C /* xcresult-parser */,
 				17B960EB23699370003AA802 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -179,6 +181,14 @@
 				17B9611423699375003AA802 /* Info.plist */,
 			);
 			path = "schweizer-voegelUITests";
+			sourceTree = "<group>";
+		};
+		17BED0E623ADAECF000D389C /* xcresult-parser */ = {
+			isa = PBXGroup;
+			children = (
+				17BED0E723ADAECF000D389C /* extract.js */,
+			);
+			path = "xcresult-parser";
 			sourceTree = "<group>";
 		};
 		17D1A501236CD95900E8588C /* Resources */ = {
