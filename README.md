@@ -17,7 +17,7 @@ Cons:
  - SOI does not allow redistribution of their data, even though the data is publicly accessible on their website.
 
 
-## How to build this app
+## How to build the app
 
 The script to prefetch the data has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
 
@@ -33,3 +33,12 @@ The script to prefetch the data has to be executed before building the app. As t
 4. Move the resulting `Birds.xcassets` and `Filter.xcassets` into the app folder (along with `Assets.xcassets`).
 
 5. Start-up Xcode and build the app.
+
+
+## Impressions
+
+![iPhone 8 Mainscreen](_Pictures/iPhone_01_Main.png)
+![iPhone 8 Search](_Pictures/iPhone_02_Search.png)
+![iPhone 8 Detail info (top)](_Pictures/iPhone_03_Detail_Top.png)
+![iPhone 8 Detail info (middle)](_Pictures/iPhone_04_Detail_Middle.png)
+![iPhone 8 Filter categories](_Pictures/iPhone_05_Filtercriteria.png)
