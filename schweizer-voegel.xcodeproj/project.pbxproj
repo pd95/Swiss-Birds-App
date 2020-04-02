@@ -82,6 +82,13 @@
 		17BED0E723ADAECF000D389C /* extract.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = extract.js; sourceTree = "<group>"; };
 		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
 		17D1A504236CDA8500E8588C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		17DDB730243675B200ACE032 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		17DDB732243690C100ACE032 /* process_vds_data.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = process_vds_data.js; sourceTree = "<group>"; };
+		17DDB733243690C100ACE032 /* gen_curl.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = gen_curl.js; sourceTree = "<group>"; };
+		17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Birds.xcassets.sh; sourceTree = "<group>"; };
+		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
+		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
+		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
 		17F7195C23A825C20060F02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7195E23A825C30060F02F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7196023A825C50060F02F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -118,7 +125,9 @@
 		17B960E123699370003AA802 = {
 			isa = PBXGroup;
 			children = (
+				17DDB730243675B200ACE032 /* README.md */,
 				1703131B2382C76A007E2EE3 /* .gitignore */,
+				17DDB731243690C100ACE032 /* data-scripts */,
 				17B960EC23699370003AA802 /* schweizer-voegel */,
 				17B9610623699375003AA802 /* schweizer-voegelTests */,
 				17B9611123699375003AA802 /* schweizer-voegelUITests */,
@@ -224,6 +233,19 @@
 				17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		17DDB731243690C100ACE032 /* data-scripts */ = {
+			isa = PBXGroup;
+			children = (
+				17DDB737243690C100ACE032 /* fetch_data.sh */,
+				17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */,
+				17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */,
+				17DDB732243690C100ACE032 /* process_vds_data.js */,
+				17DDB733243690C100ACE032 /* gen_curl.js */,
+				17DDB735243690C100ACE032 /* symbol-template.svg */,
+			);
+			path = "data-scripts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
