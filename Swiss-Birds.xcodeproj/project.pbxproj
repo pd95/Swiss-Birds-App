@@ -64,7 +64,7 @@
 		17B0F425238F32B700A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F426238F32B700A2F989 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B2701223AC132000B7846A /* MarketingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingTests.swift; sourceTree = "<group>"; };
-		17B960EA23699370003AA802 /* schweizer-voegel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "schweizer-voegel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B960EA23699370003AA802 /* Swiss-Birds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiss-Birds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schweizer_voegel.xcdatamodel; sourceTree = "<group>"; };
@@ -73,10 +73,10 @@
 		17B960F923699375003AA802 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17B960FC23699375003AA802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B960FE23699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17B9610323699375003AA802 /* schweizer-voegelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9610723699375003AA802 /* schweizer_voegelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelTests.swift; sourceTree = "<group>"; };
 		17B9610923699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "schweizer-voegelUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9611223699375003AA802 /* schweizer_voegelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelUITests.swift; sourceTree = "<group>"; };
 		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17BED0E723ADAECF000D389C /* extract.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = extract.js; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 				17DDB730243675B200ACE032 /* README.md */,
 				1703131B2382C76A007E2EE3 /* .gitignore */,
 				17DDB731243690C100ACE032 /* data-scripts */,
-				17B960EC23699370003AA802 /* schweizer-voegel */,
-				17B9610623699375003AA802 /* schweizer-voegelTests */,
-				17B9611123699375003AA802 /* schweizer-voegelUITests */,
+				17B960EC23699370003AA802 /* Swiss-Birds */,
+				17B9610623699375003AA802 /* Swiss-BirdsTests */,
+				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
 				17BED0E623ADAECF000D389C /* xcresult-parser */,
 				17B960EB23699370003AA802 /* Products */,
 			);
@@ -139,14 +139,14 @@
 		17B960EB23699370003AA802 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				17B960EA23699370003AA802 /* schweizer-voegel.app */,
-				17B9610323699375003AA802 /* schweizer-voegelTests.xctest */,
-				17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */,
+				17B960EA23699370003AA802 /* Swiss-Birds.app */,
+				17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */,
+				17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		17B960EC23699370003AA802 /* schweizer-voegel */ = {
+		17B960EC23699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXGroup;
 			children = (
 				17D1A502236CD96900E8588C /* Models */,
@@ -162,7 +162,7 @@
 				17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */,
 				17B960F823699375003AA802 /* Preview Content */,
 			);
-			path = "schweizer-voegel";
+			path = "Swiss-Birds";
 			sourceTree = "<group>";
 		};
 		17B960F823699375003AA802 /* Preview Content */ = {
@@ -173,16 +173,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		17B9610623699375003AA802 /* schweizer-voegelTests */ = {
+		17B9610623699375003AA802 /* Swiss-BirdsTests */ = {
 			isa = PBXGroup;
 			children = (
 				17B9610723699375003AA802 /* schweizer_voegelTests.swift */,
 				17B9610923699375003AA802 /* Info.plist */,
 			);
-			path = "schweizer-voegelTests";
+			path = "Swiss-BirdsTests";
 			sourceTree = "<group>";
 		};
-		17B9611123699375003AA802 /* schweizer-voegelUITests */ = {
+		17B9611123699375003AA802 /* Swiss-BirdsUITests */ = {
 			isa = PBXGroup;
 			children = (
 				1715651223AD7FDA00B8CC13 /* README.md */,
@@ -192,7 +192,7 @@
 				17B2701223AC132000B7846A /* MarketingTests.swift */,
 				17B9611423699375003AA802 /* Info.plist */,
 			);
-			path = "schweizer-voegelUITests";
+			path = "Swiss-BirdsUITests";
 			sourceTree = "<group>";
 		};
 		17BED0E623ADAECF000D389C /* xcresult-parser */ = {
@@ -251,9 +251,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		17B960E923699370003AA802 /* schweizer-voegel */ = {
+		17B960E923699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegel" */;
+			buildConfigurationList = 17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-Birds" */;
 			buildPhases = (
 				17B960E623699370003AA802 /* Sources */,
 				17B960E723699370003AA802 /* Frameworks */,
@@ -263,14 +263,14 @@
 			);
 			dependencies = (
 			);
-			name = "schweizer-voegel";
+			name = "Swiss-Birds";
 			productName = "schweizer-voegel";
-			productReference = 17B960EA23699370003AA802 /* schweizer-voegel.app */;
+			productReference = 17B960EA23699370003AA802 /* Swiss-Birds.app */;
 			productType = "com.apple.product-type.application";
 		};
-		17B9610223699375003AA802 /* schweizer-voegelTests */ = {
+		17B9610223699375003AA802 /* Swiss-BirdsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelTests" */;
+			buildConfigurationList = 17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-BirdsTests" */;
 			buildPhases = (
 				17B960FF23699375003AA802 /* Sources */,
 				17B9610023699375003AA802 /* Frameworks */,
@@ -281,14 +281,14 @@
 			dependencies = (
 				17B9610523699375003AA802 /* PBXTargetDependency */,
 			);
-			name = "schweizer-voegelTests";
+			name = "Swiss-BirdsTests";
 			productName = "schweizer-voegelTests";
-			productReference = 17B9610323699375003AA802 /* schweizer-voegelTests.xctest */;
+			productReference = 17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		17B9610D23699375003AA802 /* schweizer-voegelUITests */ = {
+		17B9610D23699375003AA802 /* Swiss-BirdsUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelUITests" */;
+			buildConfigurationList = 17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-BirdsUITests" */;
 			buildPhases = (
 				17B9610A23699375003AA802 /* Sources */,
 				17B9610B23699375003AA802 /* Frameworks */,
@@ -299,9 +299,9 @@
 			dependencies = (
 				17B9611023699375003AA802 /* PBXTargetDependency */,
 			);
-			name = "schweizer-voegelUITests";
+			name = "Swiss-BirdsUITests";
 			productName = "schweizer-voegelUITests";
-			productReference = 17B9610E23699375003AA802 /* schweizer-voegelUITests.xctest */;
+			productReference = 17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -327,7 +327,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 17B960E523699370003AA802 /* Build configuration list for PBXProject "schweizer-voegel" */;
+			buildConfigurationList = 17B960E523699370003AA802 /* Build configuration list for PBXProject "Swiss-Birds" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = de;
 			hasScannedForEncodings = 0;
@@ -343,9 +343,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				17B960E923699370003AA802 /* schweizer-voegel */,
-				17B9610223699375003AA802 /* schweizer-voegelTests */,
-				17B9610D23699375003AA802 /* schweizer-voegelUITests */,
+				17B960E923699370003AA802 /* Swiss-Birds */,
+				17B9610223699375003AA802 /* Swiss-BirdsTests */,
+				17B9610D23699375003AA802 /* Swiss-BirdsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -423,12 +423,12 @@
 /* Begin PBXTargetDependency section */
 		17B9610523699375003AA802 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 17B960E923699370003AA802 /* schweizer-voegel */;
+			target = 17B960E923699370003AA802 /* Swiss-Birds */;
 			targetProxy = 17B9610423699375003AA802 /* PBXContainerItemProxy */;
 		};
 		17B9611023699375003AA802 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 17B960E923699370003AA802 /* schweizer-voegel */;
+			target = 17B960E923699370003AA802 /* Swiss-Birds */;
 			targetProxy = 17B9610F23699375003AA802 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -635,7 +635,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schweizer-voegel.app/schweizer-voegel";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swiss-Birds.app/Swiss-Birds";
 			};
 			name = Debug;
 		};
@@ -657,7 +657,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/schweizer-voegel.app/schweizer-voegel";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swiss-Birds.app/Swiss-Birds";
 			};
 			name = Release;
 		};
@@ -704,7 +704,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		17B960E523699370003AA802 /* Build configuration list for PBXProject "schweizer-voegel" */ = {
+		17B960E523699370003AA802 /* Build configuration list for PBXProject "Swiss-Birds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B9611523699375003AA802 /* Debug */,
@@ -713,7 +713,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegel" */ = {
+		17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-Birds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B9611823699375003AA802 /* Debug */,
@@ -722,7 +722,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelTests" */ = {
+		17B9611A23699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-BirdsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B9611B23699375003AA802 /* Debug */,
@@ -731,7 +731,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "schweizer-voegelUITests" */ = {
+		17B9611D23699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-BirdsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17B9611E23699375003AA802 /* Debug */,

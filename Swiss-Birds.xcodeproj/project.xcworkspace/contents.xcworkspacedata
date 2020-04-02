@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:schweizer-voegel.xcodeproj">
+      location = "self:/Users/philipp/Developer/Vo&#x308;gel/App/Swiss-Birds.xcodeproj">
    </FileRef>
 </Workspace>

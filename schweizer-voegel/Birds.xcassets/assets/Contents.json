@@ -1,9 +1,0 @@
-{
-  "info" : {
-    "version" : 1,
-    "author" : "script"
-  },
-  "properties" : {
-        "provides-namespace" : true
-  }
-}
