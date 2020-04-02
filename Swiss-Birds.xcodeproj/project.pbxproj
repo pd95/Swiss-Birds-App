@@ -18,7 +18,6 @@
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
 		17B960F523699370003AA802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F423699370003AA802 /* ContentView.swift */; };
 		17B960F723699375003AA802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F623699375003AA802 /* Assets.xcassets */; };
-		17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F923699375003AA802 /* Preview Assets.xcassets */; };
 		17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B960FB23699375003AA802 /* LaunchScreen.storyboard */; };
 		17B9610823699375003AA802 /* Swiss_BirdsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9610723699375003AA802 /* Swiss_BirdsTests.swift */; };
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
@@ -51,6 +50,7 @@
 		1703131E2382DDF2007E2EE3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Swiss_BirdsUI.xctestplan; sourceTree = "<group>"; };
 		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1715B3652436B00900413FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
@@ -66,7 +66,6 @@
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17B960F423699370003AA802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17B960F623699375003AA802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		17B960F923699375003AA802 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		17B960FC23699375003AA802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B960FE23699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,17 +153,8 @@
 				1790857B2431258D003A302F /* Filter.xcassets */,
 				17D1A501236CD95900E8588C /* Resources */,
 				17B960FE23699375003AA802 /* Info.plist */,
-				17B960F823699375003AA802 /* Preview Content */,
 			);
 			path = "Swiss-Birds";
-			sourceTree = "<group>";
-		};
-		17B960F823699375003AA802 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				17B960F923699375003AA802 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		17B9610623699375003AA802 /* Swiss-BirdsTests */ = {
@@ -353,7 +343,6 @@
 				17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
 				1790857C2431258D003A302F /* Filter.xcassets in Resources */,
-				17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */,
 				17B960F723699375003AA802 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +433,7 @@
 				17F7195C23A825C20060F02F /* en */,
 				17F7195E23A825C30060F02F /* fr */,
 				17F7196023A825C50060F02F /* it */,
+				1715B3652436B00900413FBF /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
