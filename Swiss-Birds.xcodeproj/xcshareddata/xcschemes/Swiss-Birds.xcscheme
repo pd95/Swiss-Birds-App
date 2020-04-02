@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:schweizer-voegelUITests/Marketing.xctestplan">
+            reference = "container:Swiss-BirdsUITests/Marketing.xctestplan">
          </TestPlanReference>
          <TestPlanReference
             reference = "container:Swiss-BirdsUITests/Swiss_BirdsUI.xctestplan"

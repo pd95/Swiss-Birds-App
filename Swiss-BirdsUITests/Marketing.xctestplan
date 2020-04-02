@@ -49,10 +49,10 @@
     },
     {
       "skippedTests" : [
-        "schweizer_voegelUITests",
-        "schweizer_voegelUITests\/testDetailNavigation()",
-        "schweizer_voegelUITests\/testFilterNavigation()",
-        "schweizer_voegelUITests\/testLaunchPerformance()"
+        "Swiss_BirdsUITests",
+        "Swiss_BirdsUITests\/testDetailNavigation()",
+        "Swiss_BirdsUITests\/testFilterNavigation()",
+        "Swiss_BirdsUITests\/testLaunchPerformance()"
       ],
       "target" : {
         "containerPath" : "container:Swiss-Birds.xcodeproj",

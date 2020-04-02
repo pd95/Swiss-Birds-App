@@ -54,7 +54,7 @@
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
-		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "schweizer-voegelUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
+		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
