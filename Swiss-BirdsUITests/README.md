@@ -11,8 +11,8 @@ To produce the relevant marketing images for the AppStore, the marketing testpla
     xcodebuild test -scheme "Swiss-Birds" -testPlan Marketing -resultBundlePath xcresult-parser/test5 \
         -destination "platform=iOS Simulator,name=iPhone 8 Plus" \
         -destination "platform=iOS Simulator,name=iPhone 11 Pro Max" \
-        -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (2nd generation)" \
-        -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (3rd generation)"
+        -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (3rd generation)" \
+        -destination "platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation)"
 
 The tool to extract the relevant files from the result bundle is a Node.js utility in directory `xcresult-parser`:
 
