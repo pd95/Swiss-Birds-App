@@ -1,6 +1,6 @@
 //
 //  SymbolView.swift
-//  schweizer-voegel
+//  Swiss-Birds
 //
 //  Created by Philipp on 31.10.19.
 //  Copyright © 2019 Philipp. All rights reserved.

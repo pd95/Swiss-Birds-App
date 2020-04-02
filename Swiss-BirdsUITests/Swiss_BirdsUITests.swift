@@ -1,6 +1,6 @@
 //
 //  schweizer_voegelUITests.swift
-//  schweizer-voegelUITests
+//  Swiss-BirdsUITests
 //
 //  Created by Philipp on 30.10.19.
 //  Copyright © 2019 Philipp. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class schweizer_voegelUITests: XCTestCase {
+class Swiss_BirdsUITests: XCTestCase {
 
     private var app: XCUIApplication!
 
@@ -71,6 +71,7 @@ class schweizer_voegelUITests: XCTestCase {
         // Search
         var search = "Amsel"
         var selectIndex = 0
+        print("Arguments \(CommandLine.arguments)")
         if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
             let language = CommandLine.arguments[langArgIndex+1]
             print("language=\(language)")

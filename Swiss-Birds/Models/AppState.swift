@@ -1,6 +1,6 @@
 //
 //  AppState.swift
-//  schweizer-voegel
+//  Swiss-Birds
 //
 //  Created by Philipp on 18.11.19.
 //  Copyright © 2019 Philipp. All rights reserved.

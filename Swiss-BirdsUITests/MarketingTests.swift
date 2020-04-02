@@ -1,6 +1,6 @@
 //
 //  MarketingTests.swift
-//  schweizer-voegelUITests
+//  Swiss-BirdsUITests
 //
 //  Created by Philipp on 19.12.19.
 //  Copyright © 2019 Philipp. All rights reserved.

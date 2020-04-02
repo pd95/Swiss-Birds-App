@@ -1,6 +1,6 @@
 //
 //  BirdDetail.swift
-//  schweizer-voegel
+//  Swiss-Birds
 //
 //  Created by Philipp on 01.11.19.
 //  Copyright © 2019 Philipp. All rights reserved.

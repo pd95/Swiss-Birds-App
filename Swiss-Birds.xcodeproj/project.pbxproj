@@ -20,8 +20,8 @@
 		17B960F723699375003AA802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F623699375003AA802 /* Assets.xcassets */; };
 		17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F923699375003AA802 /* Preview Assets.xcassets */; };
 		17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B960FB23699375003AA802 /* LaunchScreen.storyboard */; };
-		17B9610823699375003AA802 /* schweizer_voegelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9610723699375003AA802 /* schweizer_voegelTests.swift */; };
-		17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* schweizer_voegelUITests.swift */; };
+		17B9610823699375003AA802 /* Swiss_BirdsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9610723699375003AA802 /* Swiss_BirdsTests.swift */; };
+		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
@@ -49,7 +49,7 @@
 /* Begin PBXFileReference section */
 		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1703131E2382DDF2007E2EE3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		1715651123AD742F00B8CC13 /* schweizer_voegelUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = schweizer_voegelUI.xctestplan; sourceTree = "<group>"; };
+		1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Swiss_BirdsUI.xctestplan; sourceTree = "<group>"; };
 		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -70,10 +70,10 @@
 		17B960FC23699375003AA802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		17B960FE23699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17B9610723699375003AA802 /* schweizer_voegelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelTests.swift; sourceTree = "<group>"; };
+		17B9610723699375003AA802 /* Swiss_BirdsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiss_BirdsTests.swift; sourceTree = "<group>"; };
 		17B9610923699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17B9611223699375003AA802 /* schweizer_voegelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = schweizer_voegelUITests.swift; sourceTree = "<group>"; };
+		17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiss_BirdsUITests.swift; sourceTree = "<group>"; };
 		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17BED0E723ADAECF000D389C /* extract.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = extract.js; sourceTree = "<group>"; };
 		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		17B9610623699375003AA802 /* Swiss-BirdsTests */ = {
 			isa = PBXGroup;
 			children = (
-				17B9610723699375003AA802 /* schweizer_voegelTests.swift */,
+				17B9610723699375003AA802 /* Swiss_BirdsTests.swift */,
 				17B9610923699375003AA802 /* Info.plist */,
 			);
 			path = "Swiss-BirdsTests";
@@ -180,8 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				1715651223AD7FDA00B8CC13 /* README.md */,
-				1715651123AD742F00B8CC13 /* schweizer_voegelUI.xctestplan */,
-				17B9611223699375003AA802 /* schweizer_voegelUITests.swift */,
+				1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */,
+				17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */,
 				175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */,
 				17B2701223AC132000B7846A /* MarketingTests.swift */,
 				17B9611423699375003AA802 /* Info.plist */,
@@ -397,7 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17B9610823699375003AA802 /* schweizer_voegelTests.swift in Sources */,
+				17B9610823699375003AA802 /* Swiss_BirdsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B2701323AC132000B7846A /* MarketingTests.swift in Sources */,
-				17B9611323699375003AA802 /* schweizer_voegelUITests.swift in Sources */,
+				17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

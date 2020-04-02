@@ -1,15 +1,15 @@
 //
-//  schweizer_voegelTests.swift
-//  schweizer-voegelTests
+//  Swiss_BirdsTests.swift
+//  Swiss_BirdsTests
 //
 //  Created by Philipp on 30.10.19.
 //  Copyright © 2019 Philipp. All rights reserved.
 //
 
 import XCTest
-@testable import schweizer_voegel
+@testable import Swiss_Birds
 
-class schweizer_voegelTests: XCTestCase {
+class Swiss_BirdsTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -17,9 +17,9 @@
         "MarketingTests"
       ],
       "target" : {
-        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "containerPath" : "container:Swiss-Birds.xcodeproj",
         "identifier" : "17B9610D23699375003AA802",
-        "name" : "schweizer-voegelUITests"
+        "name" : "Swiss-BirdsUITests"
       }
     }
   ],

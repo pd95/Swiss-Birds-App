@@ -33,18 +33,18 @@
     "codeCoverage" : false,
     "mainThreadCheckerEnabled" : false,
     "targetForVariableExpansion" : {
-      "containerPath" : "container:schweizer-voegel.xcodeproj",
+      "containerPath" : "container:Swiss-Birds.xcodeproj",
       "identifier" : "17B960E923699370003AA802",
-      "name" : "schweizer-voegel"
+      "name" : "Swiss-Birds"
     }
   },
   "testTargets" : [
     {
       "enabled" : false,
       "target" : {
-        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "containerPath" : "container:Swiss-Birds.xcodeproj",
         "identifier" : "17B9610223699375003AA802",
-        "name" : "schweizer-voegelTests"
+        "name" : "Swiss-BirdsTests"
       }
     },
     {
@@ -55,9 +55,9 @@
         "schweizer_voegelUITests\/testLaunchPerformance()"
       ],
       "target" : {
-        "containerPath" : "container:schweizer-voegel.xcodeproj",
+        "containerPath" : "container:Swiss-Birds.xcodeproj",
         "identifier" : "17B9610D23699375003AA802",
-        "name" : "schweizer-voegelUITests"
+        "name" : "Swiss-BirdsUITests"
       }
     }
   ],
