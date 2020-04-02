@@ -10,14 +10,12 @@
 		1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703131E2382DDF2007E2EE3 /* AppState.swift */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
-		17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
-		17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */; };
 		17B960F523699370003AA802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F423699370003AA802 /* ContentView.swift */; };
 		17B960F723699375003AA802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F623699375003AA802 /* Assets.xcassets */; };
 		17B960FA23699375003AA802 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F923699375003AA802 /* Preview Assets.xcassets */; };
@@ -55,7 +53,6 @@
 		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
-		17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI_Utilities.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "schweizer-voegelUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
@@ -67,7 +64,6 @@
 		17B960EA23699370003AA802 /* Swiss-Birds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiss-Birds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schweizer_voegel.xcdatamodel; sourceTree = "<group>"; };
 		17B960F423699370003AA802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17B960F623699375003AA802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17B960F923699375003AA802 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -149,17 +145,15 @@
 		17B960EC23699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXGroup;
 			children = (
-				17D1A502236CD96900E8588C /* Models */,
-				17D1A501236CD95900E8588C /* Resources */,
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
+				17D1A502236CD96900E8588C /* Models */,
 				17D1A503236CD97800E8588C /* Views */,
 				17B960F623699375003AA802 /* Assets.xcassets */,
 				174E04C42377903F00079901 /* Birds.xcassets */,
 				1790857B2431258D003A302F /* Filter.xcassets */,
-				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
+				17D1A501236CD95900E8588C /* Resources */,
 				17B960FE23699375003AA802 /* Info.plist */,
-				17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */,
 				17B960F823699375003AA802 /* Preview Content */,
 			);
 			path = "Swiss-Birds";
@@ -206,6 +200,7 @@
 		17D1A501236CD95900E8588C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
 				17B0F423238F1F6200A2F989 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -230,7 +225,6 @@
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
-				17428D2D236C981B0098856E /* SwiftUI_Utilities.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -392,10 +386,8 @@
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,
-				17B960F323699370003AA802 /* schweizer_voegel.xcdatamodeld in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
-				17428D2E236C981B0098856E /* SwiftUI_Utilities.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,
 			);
@@ -581,15 +573,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_ASSET_PATHS = "\"schweizer-voegel/Preview Content\"";
 				DEVELOPMENT_TEAM = P8CC95REUG;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "schweizer-voegel/Info.plist";
+				INFOPLIST_FILE = "Swiss-Birds/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "schweizer-voegel";
+				PRODUCT_BUNDLE_IDENTIFIER = "Swiss-Birds";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -602,15 +593,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_ASSET_PATHS = "\"schweizer-voegel/Preview Content\"";
 				DEVELOPMENT_TEAM = P8CC95REUG;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "schweizer-voegel/Info.plist";
+				INFOPLIST_FILE = "Swiss-Birds/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "schweizer-voegel";
+				PRODUCT_BUNDLE_IDENTIFIER = "Swiss-Birds";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -624,14 +614,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8CC95REUG;
-				INFOPLIST_FILE = "schweizer-voegelTests/Info.plist";
+				INFOPLIST_FILE = "Swiss-BirdsTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.Swiss-Birds";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -646,14 +636,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8CC95REUG;
-				INFOPLIST_FILE = "schweizer-voegelTests/Info.plist";
+				INFOPLIST_FILE = "Swiss-BirdsTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.Swiss-Birds";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -667,17 +657,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8CC95REUG;
-				INFOPLIST_FILE = "schweizer-voegelUITests/Info.plist";
+				INFOPLIST_FILE = "Swiss-BirdsUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.Swiss-BirdsUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "schweizer-voegel";
+				TEST_TARGET_NAME = "Swiss-Birds";
 			};
 			name = Debug;
 		};
@@ -687,17 +677,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P8CC95REUG;
-				INFOPLIST_FILE = "schweizer-voegelUITests/Info.plist";
+				INFOPLIST_FILE = "Swiss-BirdsUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.schweizer-voegelUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.Swiss-BirdsUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "schweizer-voegel";
+				TEST_TARGET_NAME = "Swiss-Birds";
 			};
 			name = Release;
 		};
@@ -741,19 +731,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		17B960F123699370003AA802 /* schweizer_voegel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */,
-			);
-			currentVersion = 17B960F223699370003AA802 /* schweizer_voegel.xcdatamodel */;
-			path = schweizer_voegel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 17B960E223699370003AA802 /* Project object */;
 }
