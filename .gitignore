@@ -10,5 +10,11 @@
 xcresult-parser/**/*.png
 
 # Ignore Birds and Filter asset catalog data
-Birds.xcassets
-Filter.xcassets
+Birds*.xcassets
+Filter*.xcassets
+
+# Ignoring raw data files
+data-scripts/data
+data-scripts/images
+data-scripts/svg
+data-scripts/voices
