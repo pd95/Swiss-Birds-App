@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703131E2382DDF2007E2EE3 /* AppState.swift */; };
+		1715B36724372FD800413FBF /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B36624372FD800413FBF /* SearchField.swift */; };
+		1715B3692437305100413FBF /* BirdRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B3682437305100413FBF /* BirdRow.swift */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
@@ -51,6 +53,8 @@
 		1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Swiss_BirdsUI.xctestplan; sourceTree = "<group>"; };
 		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1715B3652436B00900413FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		1715B36624372FD800413FBF /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		1715B3682437305100413FBF /* BirdRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRow.swift; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
@@ -213,7 +217,9 @@
 				17B960F423699370003AA802 /* ContentView.swift */,
 				17FB3B8A236B96A20059D268 /* FilterCriteria.swift */,
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
+				1715B3682437305100413FBF /* BirdRow.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
+				1715B36624372FD800413FBF /* SearchField.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
 			);
 			path = Views;
@@ -374,8 +380,10 @@
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
+				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
+				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,

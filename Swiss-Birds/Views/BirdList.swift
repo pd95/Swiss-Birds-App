@@ -8,71 +8,9 @@
 
 import SwiftUI
 
-struct BirdRow: View {
-    var bird: Species
-    
-    func hasEntwicklungsAtlasSymbol() -> Bool {
-        return bird.filterSymbolName(.entwicklungatlas).count > 0
-    }
-    
-    var body: some View {
-        HStack {
-            Image("assets/\(bird.speciesId)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
-                .shadow(radius: 4)
-                .accessibility(hidden: true)
-            Text(bird.name)
-                .foregroundColor(.primary)
-            Spacer()
-            if hasEntwicklungsAtlasSymbol() {
-                SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
-                    .accessibility(hidden: true)
-            }
-            SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
-                .accessibility(hidden: true)
-        }
-//        .accessibilityElement(children: .contain)
-    }
-}
-
-struct SearchField: View {
-    @Binding public var searchText : String
-
-    var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .accessibility(identifier: "Magnifying glass")
-                .accessibility(hidden: true)
-
-            TextField("Suche", text: $searchText)
-                .foregroundColor(.primary)
-                .disableAutocorrection(true)
-                .accessibility(identifier: "searchText")
-                .accessibility(label: Text("Search text"))
-
-            Button(action: { self.searchText = "" }) {
-                Image(systemName: "xmark.circle.fill")
-                    .opacity(searchText == "" ? 0 : 1)
-                    .accessibility(label: Text("Clear"))
-            }
-            .accessibility(identifier: "clearButton")
-        }
-        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-        .foregroundColor(.secondary)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10.0)
-        .buttonStyle(PlainButtonStyle())
-        .accessibilityElement(children: .contain)
-        .accessibility(addTraits: .isSearchField)
-    }
-}
-
 
 struct BirdList: View {
+
     var species: [Species]
     
     @EnvironmentObject private var state : AppState
