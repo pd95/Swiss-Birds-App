@@ -23,7 +23,11 @@ struct ContentView: View {
                 guard let device = notification.object as? UIDevice else {
                     return
                 }
-                self.isPortrait = device.orientation.isPortrait || device.orientation == .unknown
+                self.isPortrait = device.orientation == .unknown ||
+                    device.orientation.isPortrait && (
+                        device.orientation != .faceUp ||
+                        device.orientation != .faceDown
+                    )
         }
     }
 }
