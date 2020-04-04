@@ -19,7 +19,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), selectedFilters=\(selectedFilters), selectedBird=\(String(describing:selectedBird)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), selectedFilters=\(selectedFilters), selectedBird=\(String(describing:selectedBird)))"
     }
 }
 
@@ -30,26 +30,30 @@ extension AppState {
         guard activity.activityType == Bundle.main.activityType,
             let stateArray : [String:Any] = activity.userInfo as? [String:Any]
             else { return }
+       
+        // Apply state changes asynchronously
+        DispatchQueue.main.async {
             
-        if let searchText = stateArray[Key.searchText] as? String {
-            self.searchText = searchText
-        }
-        if let showFilters = stateArray[Key.showFilters] as? Bool {
-            self.showFilters = showFilters
-        }
-        if let selectedFilters = stateArray[Key.selectedFilters] as? [String : [Int]] {
-            self.selectedFilters.removeAll()
-            selectedFilters.forEach { (key: String, value: [Int]) in
-                if let filter = FilterType(rawValue: key) {
-                    self.selectedFilters[filter] = value
+            if let searchText = stateArray[Key.searchText] as? String {
+                self.searchText = searchText
+            }
+            if let showFilters = stateArray[Key.showFilters] as? Bool {
+                self.showFilters = showFilters
+            }
+            if let selectedFilters = stateArray[Key.selectedFilters] as? [String : [Int]] {
+                self.selectedFilters.removeAll()
+                selectedFilters.forEach { (key: String, value: [Int]) in
+                    if let filter = FilterType(rawValue: key) {
+                        self.selectedFilters[filter] = value
+                    }
                 }
             }
+            if let selectedBird = stateArray[Key.selectedBird] as? Int, selectedBird > -1  {
+                self.selectedBird = selectedBird
+            }
+            
+            print("restored state: \(self)")
         }
-        if let selectedBird = stateArray[Key.selectedBird] as? Int, selectedBird > -1  {
-            self.selectedBird = selectedBird
-        }
-
-        print("restored state: \(self)")
     }
     
     func store(in activity: NSUserActivity) {
