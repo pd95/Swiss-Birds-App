@@ -11,6 +11,7 @@ import XCTest
 class MarketingTests: XCTestCase {
 
     private var app: XCUIApplication!
+    private var language = "de"
     
     func takeScreenShot(_ element: XCUIElement, name: String = "Screenshot") {
         let screenshot = element.screenshot()
@@ -36,6 +37,27 @@ class MarketingTests: XCTestCase {
             XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
         }
 
+        // Check if a specifc language has been passed on for testing
+        if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
+            let languageArgument = CommandLine.arguments[langArgIndex+1]
+            print("language argument=\(languageArgument)")
+            if languageArgument == "(fr)" {
+                language = "fr"
+            }
+            else if languageArgument == "(it)" {
+                language = "it"
+            }
+            else if languageArgument == "(en)" {
+                language = "en"
+            }
+        }
+        else {
+            language = Locale.current.languageCode ?? "de"
+            print("language from locale=\(language)")
+        }
+        
+        assert(["de", "fr", "it", "en"].contains(language), "Language \(language) is not supported for test execution")
+
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -51,25 +73,11 @@ class MarketingTests: XCTestCase {
         }
         
         // Search
-        var selectIndex = 0
+        let selectIndex = language == "fr" ? 2 : 0
         XCTContext.runActivity(named: "Search for a bird") { (_) in
-            var search = "Amsel"
+            let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
+            let search = searchTerms[language]!
 
-            if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
-                let languageArgument = CommandLine.arguments[langArgIndex+1]
-                print("language argument=\(languageArgument)")
-                if languageArgument == "(fr)" {
-                    search = "Merle"
-                    selectIndex = 2
-                }
-                else if languageArgument == "(it)" {
-                    search = "Merlo"
-                }
-                else if languageArgument == "(en)" {
-                    search = "Blackbird"
-                }
-            }
-            
             let searchText = app.searchFields.textFields["searchText"].firstMatch
             searchText.tap()
             searchText.typeText(search)

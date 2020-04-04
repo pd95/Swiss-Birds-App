@@ -11,6 +11,7 @@ import XCTest
 class Swiss_BirdsUITests: XCTestCase {
 
     private var app: XCUIApplication!
+    private var language = "de"
 
     override func setUp() {
         super.setUp()
@@ -24,6 +25,27 @@ class Swiss_BirdsUITests: XCTestCase {
         app = XCUIApplication()
         app.launchArguments.append("enable-testing")
         app.launch()
+
+        // Check if a specifc language has been passed on for testing
+        if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
+            let languageArgument = CommandLine.arguments[langArgIndex+1]
+            print("language argument=\(languageArgument)")
+            if languageArgument == "(fr)" {
+                language = "fr"
+            }
+            else if languageArgument == "(it)" {
+                language = "it"
+            }
+            else if languageArgument == "(en)" {
+                language = "en"
+            }
+        }
+        else {
+            language = Locale.current.languageCode ?? "de"
+            print("language from locale=\(language)")
+        }
+        
+        assert(["de", "fr", "it", "en"].contains(language), "Language \(language) is not supported for test execution")
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -69,23 +91,9 @@ class Swiss_BirdsUITests: XCTestCase {
         XCTAssert(nav.exists, "The main view navigation bar does not exist")
         
         // Search
-        var search = "Amsel"
-        var selectIndex = 0
-        print("Arguments \(CommandLine.arguments)")
-        if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
-            let language = CommandLine.arguments[langArgIndex+1]
-            print("language=\(language)")
-            if language == "(fr)" {
-                search = "Merle"
-                selectIndex = 2
-            }
-            else if language == "(it)" {
-                search = "Merlo"
-            }
-            else if language == "(en)" {
-                search = "Blackbird"
-            }
-        }
+        let selectIndex = language == "fr" ? 2 : 0
+        let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
+        let search = searchTerms[language]!
 
         let searchText = app.searchFields.textFields["searchText"].firstMatch
         searchText.tap()
