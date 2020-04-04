@@ -14,7 +14,8 @@ class AppState : ObservableObject {
     @Published var searchText : String = ""
     @Published var selectedFilters = [FilterType:[Int]]()
     @Published var showFilters = false
-    @Published var selectedBirdId : Int?   // Bird currently selected in bird List View
+    @Published var selectedBirdId : Int?    // Bird currently selected in bird list view
+    @Published var restoredBirdId : Int?   // Bird selected in list view last time the app was stopped
 }
 
 extension AppState : CustomStringConvertible {
@@ -49,7 +50,7 @@ extension AppState {
                 }
             }
             if let selectedBird = stateArray[Key.selectedBird] as? Int, selectedBird > -1  {
-                self.selectedBird = selectedBird
+                self.restoredBirdId = selectedBird
             }
             
             print("restored state: \(self)")

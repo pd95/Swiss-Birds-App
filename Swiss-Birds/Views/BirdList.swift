@@ -60,6 +60,19 @@ struct BirdList: View {
             }
             .frame(width: 0, height: 0)
             .hidden()
+
+            // Workaround SwiftUI: when state is restored, the currently selected bird
+            // can be at the bottom of the scrolling list. Therefore we add here an artificial row
+            // which is already selected
+            if state.restoredBirdId != nil {
+                NavigationLink(destination: BirdDetail(bird: species.first { $0.speciesId == state.restoredBirdId! }!
+                ), tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
+                    Text("*** never shown ***")
+                }
+                .hidden()
+                .accessibility(identifier: "birdRow_restored")
+            }
+
 /// 8< ----- Workaround broken SwiftUI end
 
         }
