@@ -1,6 +1,6 @@
 #  Birds of Switzerland
 
-This is the missing app which I hoped would be have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch). They do have a really nice website where you can lookup birds found in Switzerland and get more detailed information, but they are missing an iPhone app which makes the same information easily accessible "on the go".  
+This is the missing app which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch). They do have a really nice website where you can lookup birds found in Switzerland and get more detailed information, but they are missing an iPhone app which makes the same information easily accessible "on the go".  
 This is why I started to develop this app in November 2019.
 
 The goal is to provide an app accessing the data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
@@ -14,8 +14,11 @@ Pros:
 Cons:
  - Data increases the app size even if the data is not necessarily needed
  - Data can be outdated
- - SOI does not allow redistribution of their data, even though the data is publicly accessible on their website.
+ - **SOI does not allow redistribution of their data**, even though the data is publicly accessible on their website.
 
+The last point is the main reason why the App has not been published and made available on the App Store.
+
+In an upcoming update, I will "unbundle" the data from the app, so that it will always fetch the data from the SOI website. Even though this will erase all the "Pros" listed above, it is probably easier get approval to distribute the app to a wider audience.
 
 ## How to build the app
 
@@ -32,7 +35,7 @@ The script to prefetch the data has to be executed before building the app. As t
 
 4. Move the resulting `Birds.xcassets` and `Filter.xcassets` into the app folder (along with `Assets.xcassets`).
 
-5. Start-up Xcode and build the app.
+5. Start-up Xcode and build the app. At least Xcode 13 is needed as the UI is completely build using SwiftUI.
 
 ## Acknowledgments
 
