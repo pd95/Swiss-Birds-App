@@ -34,11 +34,13 @@ The script to prefetch the data has to be executed before building the app. As t
 
 5. Start-up Xcode and build the app.
 
+## Acknowledgments
+
+1. [Swiss Ornithological Institute](https://vogelwarte.ch) for their information gathering and their research and conservation projects to support our native birds.    
+They have also a great website with much more information.
+2. [@kocher_sandra](https://twitter.com/kocher_sandra) for the permission to her photograph of a Blue Tit as icon and start-up image
 
 ## Impressions
 
-![iPhone 8 Mainscreen](_Pictures/iPhone_01_Main.png)
-![iPhone 8 Search](_Pictures/iPhone_02_Search.png)
-![iPhone 8 Detail info (top)](_Pictures/iPhone_03_Detail_Top.png)
-![iPhone 8 Detail info (middle)](_Pictures/iPhone_04_Detail_Middle.png)
-![iPhone 8 Filter categories](_Pictures/iPhone_05_Filtercriteria.png)
+![iPhone Bird Search](_Pictures/iPhoneX_01_Bird_Search_de.gif)
+![iPhone Filter Search](_Pictures/iPhoneX_02_Filter_Search_de.gif)
