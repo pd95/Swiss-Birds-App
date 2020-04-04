@@ -14,12 +14,12 @@ class AppState : ObservableObject {
     @Published var searchText : String = ""
     @Published var selectedFilters = [FilterType:[Int]]()
     @Published var showFilters = false
-    @Published var selectedBird : Int?   // Bird currently selected in bird List View
+    @Published var selectedBirdId : Int?   // Bird currently selected in bird List View
 }
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), selectedFilters=\(selectedFilters), selectedBird=\(String(describing:selectedBird)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), selectedFilters=\(selectedFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
     }
 }
 
@@ -66,7 +66,7 @@ extension AppState {
             Key.searchText: searchText,
             Key.showFilters: showFilters,
             Key.selectedFilters: selectedFilters,
-            Key.selectedBird: (selectedBird ?? -1) as Int,
+            Key.selectedBird: (selectedBirdId ?? -1) as Int,
         ]
         activity.addUserInfoEntries(from: stateArray)
         

@@ -25,7 +25,7 @@ struct BirdList: View {
 
                 Section {
                     ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.selectedFilters)}) { bird in
-                        NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBird) {
+                        NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBirdId) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -42,7 +42,7 @@ struct BirdList: View {
 
                 Button(action: {
                     // Erase selected bird and show the filters
-                    self.state.selectedBird = nil
+                    self.state.selectedBirdId = nil
                     self.state.showFilters = true
                     UIApplication.shared.endEditing()
                 }) {
