@@ -15,24 +15,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vögel der Schweiz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-s7-DsM">
-                                <rect key="frame" x="53.666666666666657" y="390.66666666666669" width="267.66666666666674" height="40.666666666666686"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MrY-Qh-eAo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79Z-2f-6cw">
+                                <rect key="frame" x="16" y="649.33333333333337" width="343" height="80.666666666666629"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vögel der Schweiz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-s7-DsM">
+                                        <rect key="frame" x="6" y="19.999999999999996" width="331" height="40.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Hak-s7-DsM" secondAttribute="bottom" constant="20" id="3p5-W7-AmI"/>
+                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="top" secondItem="79Z-2f-6cw" secondAttribute="top" constant="20" id="AKw-rF-RpG"/>
+                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="centerY" secondItem="79Z-2f-6cw" secondAttribute="centerY" id="FoU-7W-VxP"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hak-s7-DsM" secondAttribute="trailing" constant="6" id="IhJ-KQ-V6e"/>
+                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="centerX" secondItem="79Z-2f-6cw" secondAttribute="centerX" id="gqH-B2-iwU"/>
+                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="leading" secondItem="79Z-2f-6cw" secondAttribute="leading" constant="6" id="xK2-bX-scr"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Hak-s7-DsM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="4QN-QJ-aJT"/>
-                            <constraint firstItem="Hak-s7-DsM" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="5" id="4cO-KP-zsZ"/>
+                            <constraint firstItem="MrY-Qh-eAo" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="4FJ-CA-bAU"/>
+                            <constraint firstItem="79Z-2f-6cw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7uB-Z4-mwm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="79Z-2f-6cw" secondAttribute="trailing" constant="16" id="faj-4Z-kBl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="79Z-2f-6cw" secondAttribute="bottom" constant="48" id="fuQ-8s-OB1"/>
+                            <constraint firstAttribute="bottom" secondItem="MrY-Qh-eAo" secondAttribute="bottom" id="he0-PI-XJ5"/>
+                            <constraint firstAttribute="trailing" secondItem="MrY-Qh-eAo" secondAttribute="trailing" id="x43-gk-nPK"/>
+                            <constraint firstItem="MrY-Qh-eAo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xuZ-A1-ldG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo" width="1024" height="1024"/>
+    </resources>
 </document>
