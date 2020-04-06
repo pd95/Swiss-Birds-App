@@ -66,7 +66,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     enum MyUIElements: String {
         case masterNavigationBar, detailNavigationBar
-        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon"
+        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton"
         case searchTextField = "searchText"
         case searchTextClearButton
         case birdDetailViewScrollView
@@ -78,7 +78,7 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().navigationBars.firstMatch
                 case .detailNavigationBar:
                     return XCUIApplication().navigationBars.element(boundBy: UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0)
-                case .filterButton, .noFilteringButton, .onlyCommonButton:
+                case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
                     return XCUIApplication().searchFields.textFields[self.rawValue]
@@ -175,7 +175,12 @@ class Swiss_BirdsUITests: XCTestCase {
         merlinBird.tap()
 
         scrollViewsQuery.swipeUp()
-        scrollViewsQuery.swipeUp()
+        scrollViewsQuery.swipeDown()
+        
+        let voiceButton = MyUIElements.playVoiceButton.element
+        voiceButton.tap()
+        sleep(5)
+        voiceButton.tap()
 
         // Tap "Back"
         if UIDevice.current.userInterfaceIdiom != .pad {
