@@ -34,7 +34,9 @@ class MarketingTests: XCTestCase {
 
         // Rotate iPad
         if UIDevice.current.userInterfaceIdiom == .pad {
+            // Change orientation twice to ensure double column navigation bar works
             XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
+            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
         }
 
         // Check if a specifc language has been passed on for testing
@@ -68,7 +70,7 @@ class MarketingTests: XCTestCase {
     func testMainNavigation() {
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-            XCTAssert(nav.exists, "The main view navigation bar does not exist")
+            XCTAssert(nav.waitForExistence(timeout: 2), "The main navigation bar exists")
             takeScreenShot(app, name: "01_Main")
         }
         
@@ -96,8 +98,16 @@ class MarketingTests: XCTestCase {
         }
 
         // Tap "Back"
-        XCTContext.runActivity(named: "Go back to main view and enter filter criteria") { (_) in
-            app.navigationBars.buttons.firstMatch.tap()
+        XCTContext.runActivity(named: "Clear search and enter filter criteria") { (_) in
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                app.navigationBars.buttons.firstMatch.tap()
+            }
+
+            // Clear search
+            let clearButton = app.searchFields.buttons.firstMatch
+            _ = clearButton.waitForExistence(timeout: 2)
+            clearButton.tap()
+
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.exists, "The main view navigation bar does not exist")
 
@@ -109,7 +119,9 @@ class MarketingTests: XCTestCase {
 
         // Tap "Back"
         XCTContext.runActivity(named: "Go back to main view") { (_) in
-            app.navigationBars.buttons.firstMatch.tap()
+            if UIDevice.current.userInterfaceIdiom != .pad {
+                app.navigationBars.buttons.firstMatch.tap()
+            }
         }
 
     }

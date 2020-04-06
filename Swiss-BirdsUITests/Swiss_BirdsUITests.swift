@@ -1,5 +1,5 @@
 //
-//  schweizer_voegelUITests.swift
+//  Swiss_BirdsUITests.swift
 //  Swiss-BirdsUITests
 //
 //  Created by Philipp on 30.10.19.
@@ -25,6 +25,13 @@ class Swiss_BirdsUITests: XCTestCase {
         app = XCUIApplication()
         app.launchArguments.append("enable-testing")
         app.launch()
+
+        // Rotate iPad
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // Change orientation twice to ensure double column navigation bar works
+            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
+            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
+        }
 
         // Check if a specifc language has been passed on for testing
         if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
@@ -56,64 +63,125 @@ class Swiss_BirdsUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+
+    enum MyUIElements: String {
+        case masterNavigationBar, detailNavigationBar
+        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon"
+        case searchTextField = "searchText"
+        case searchTextClearButton
+        case birdDetailViewScrollView
+        case filterScrollView
+        
+        var element: XCUIElement {
+            switch self {
+                case .masterNavigationBar:
+                    return XCUIApplication().navigationBars.firstMatch
+                case .detailNavigationBar:
+                    return XCUIApplication().navigationBars.element(boundBy: UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0)
+                case .filterButton, .noFilteringButton, .onlyCommonButton:
+                    return XCUIApplication().buttons[self.rawValue]
+                case .searchTextField:
+                    return XCUIApplication().searchFields.textFields[self.rawValue]
+                case .searchTextClearButton:
+                    return XCUIApplication().searchFields.buttons.firstMatch
+                case .birdDetailViewScrollView:
+                    return XCUIApplication().scrollViews.containing(.staticText, identifier: "alternateName").element
+                case .filterScrollView:
+                    return XCUIApplication().scrollViews.containing(.button, identifier: "noFiltering").element
+            }
+        }
+    }
+
     func testMainNavigation() {
-        let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-        XCTAssert(nav.exists, "The main view navigation bar does not exist")
+        let nav = MyUIElements.masterNavigationBar.element
+        XCTAssert(nav.waitForExistence(timeout: 2), "The main navigation bar exists")
+
+        let filterButton = MyUIElements.filterButton.element
+        XCTAssert(filterButton.exists, "The main navigation bar exists and contains the filter button")
+        
+        filterButton.tap()
+        
+        let detail = MyUIElements.detailNavigationBar.element
+        XCTAssert(detail.exists, "The detail navigation bar exists")
     }
 
     func testFilterNavigation() {
-        var nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-        XCTAssert(nav.exists, "The main view navigation bar does not exist")
-        nav.buttons["filterButton"].tap()
+        MyUIElements.filterButton.element.tap()
 
-        app.tables.buttons["noFiltering"].tap()
+        MyUIElements.noFilteringButton.element.tap()
 
-        nav = app.navigationBars.firstMatch
-        XCTAssert(nav.identifier.contains("(425 "), "No filtering should result in 425 species")
+        let birdDetailNav = MyUIElements.detailNavigationBar.element
+        _ = birdDetailNav.waitForExistence(timeout: 2)
+        XCTAssert(birdDetailNav.identifier.contains("(425 "), "No filtering should result in 425 species")
 
-        app.tables.buttons["onlyCommon"].tap()
-        XCTAssert(nav.identifier.contains("(94 "), "Common filter should reduce to 94 species")
+        MyUIElements.onlyCommonButton.element.tap()
+        XCTAssert(birdDetailNav.identifier.contains("(94 "), "Common filter should reduce to 94 species")
     }
 
     func testDetailNavigation() {
-        let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-        XCTAssert(nav.exists, "The main view navigation bar does not exist")
+        let nav = MyUIElements.masterNavigationBar.element
+        _ = nav.waitForExistence(timeout: 2)
 
-        app.tables.buttons["birdRow_1200"].tap()
+        app.tables.buttons.firstMatch.tap()
 
-        let scrollViewsQuery = app.scrollViews
-        scrollViewsQuery.otherElements.containing(.staticText, identifier:"alternateName").element.swipeUp()
-        scrollViewsQuery.otherElements.containing(.staticText, identifier:"Laenge_cm").element.swipeUp()
+        let scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
+        scrollViewsQuery.swipeUp()
+        scrollViewsQuery.swipeUp()
     }
     
     func testTestFullNavigation() {
-        let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-        XCTAssert(nav.exists, "The main view navigation bar does not exist")
-        
+        let nav = MyUIElements.masterNavigationBar.element
+        _ = nav.waitForExistence(timeout: 2)
+
         // Search
         let selectIndex = language == "fr" ? 2 : 0
         let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
         let search = searchTerms[language]!
 
-        let searchText = app.searchFields.textFields["searchText"].firstMatch
+        let searchText = MyUIElements.searchTextField.element
         searchText.tap()
         searchText.typeText(search)
 
         // Show Detail
         app.tables.buttons.element(boundBy: selectIndex).tap()
         
-        let scrollViewsQuery = app.scrollViews
-        scrollViewsQuery.otherElements.containing(.staticText, identifier:"alternateName").element.swipeUp()
-
+        let scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
+        scrollViewsQuery.swipeUp()
+        
         // Tap "Back"
-        app.navigationBars.buttons.firstMatch.tap()
-        XCTAssert(nav.exists, "The main view navigation bar does not exist")
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
+        }
+        
+        // Clear search
+        let clearButton = MyUIElements.searchTextClearButton.element
+        _ = clearButton.waitForExistence(timeout: 2)
+        clearButton.tap()
 
         // Enter filter criteria
-        nav.buttons["filterButton"].tap()
+        let filterButton = MyUIElements.filterButton.element
+        filterButton.tap()
+
+        MyUIElements.filterScrollView.element.swipeUp()
+
+        app.tables.buttons["filtervogelguppe-11"].tap()
+        
+        // Tap "Back"
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
+        }
+        
+        let merlinBird = app.tables.buttons["birdRow_1450"]
+        _ = merlinBird.waitForExistence(timeout: 2)
+        merlinBird.tap()
+
+        scrollViewsQuery.swipeUp()
+        scrollViewsQuery.swipeUp()
 
         // Tap "Back"
-        app.navigationBars.buttons.firstMatch.tap()
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
+        }
     }
 
     
