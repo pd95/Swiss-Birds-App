@@ -141,6 +141,7 @@ class Swiss_BirdsUITests: XCTestCase {
         let searchText = MyUIElements.searchTextField.element
         searchText.tap()
         searchText.typeText(search)
+        searchText.typeText("\n")
 
         // Show Detail
         app.tables.buttons.element(boundBy: selectIndex).tap()
