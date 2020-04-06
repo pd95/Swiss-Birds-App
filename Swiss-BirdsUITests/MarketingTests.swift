@@ -92,6 +92,11 @@ class MarketingTests: XCTestCase {
             app.tables.buttons.element(boundBy: selectIndex).tap()
             takeScreenShot(app, name: "03_Detail_Top")
 
+            let voiceButton = app.buttons["playVoiceButton"]
+            voiceButton.tap()
+            sleep(5)
+            voiceButton.tap()
+
             let scrollViewsQuery = app.scrollViews
             scrollViewsQuery.otherElements.containing(.staticText, identifier:"alternateName").element.swipeUp()
             takeScreenShot(app, name: "04_Detail_Middle")
