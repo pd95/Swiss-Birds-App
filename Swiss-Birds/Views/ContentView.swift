@@ -14,7 +14,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             BirdList(species: allSpecies)
-            Text("Falls keine Liste sichtbar ist: von der linken Seite her wischen oder das Gerät um 90° drehen.")
         }
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
         .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
