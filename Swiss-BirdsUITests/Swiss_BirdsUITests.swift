@@ -77,7 +77,7 @@ class Swiss_BirdsUITests: XCTestCase {
                 case .masterNavigationBar:
                     return XCUIApplication().navigationBars.firstMatch
                 case .detailNavigationBar:
-                    return XCUIApplication().navigationBars.element(boundBy: UIDevice.current.userInterfaceIdiom == .pad ? 1 : 0)
+                    return XCUIApplication().navigationBars.element(boundBy: XCUIApplication().windows.firstMatch.horizontalSizeClass == .regular ? 1 : 0)
                 case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
@@ -150,7 +150,7 @@ class Swiss_BirdsUITests: XCTestCase {
         scrollViewsQuery.swipeUp()
         
         // Tap "Back"
-        if UIDevice.current.userInterfaceIdiom != .pad {
+        if app.windows.firstMatch.horizontalSizeClass == .compact {
             MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
         }
         
@@ -167,7 +167,7 @@ class Swiss_BirdsUITests: XCTestCase {
         filterContainer.buttons["filtervogelguppe-11"].tap()
         
         // Tap "Back"
-        if UIDevice.current.userInterfaceIdiom != .pad {
+        if app.windows.firstMatch.horizontalSizeClass == .compact {
             MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
         }
         
@@ -184,7 +184,7 @@ class Swiss_BirdsUITests: XCTestCase {
         voiceButton.tap()
 
         // Tap "Back"
-        if UIDevice.current.userInterfaceIdiom != .pad {
+        if app.windows.firstMatch.horizontalSizeClass == .compact {
             MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
         }
     }

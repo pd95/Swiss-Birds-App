@@ -104,7 +104,7 @@ class MarketingTests: XCTestCase {
 
         // Tap "Back"
         XCTContext.runActivity(named: "Clear search and enter filter criteria") { (_) in
-            if UIDevice.current.userInterfaceIdiom != .pad {
+            if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }
 
@@ -124,7 +124,7 @@ class MarketingTests: XCTestCase {
 
         // Tap "Back"
         XCTContext.runActivity(named: "Go back to main view") { (_) in
-            if UIDevice.current.userInterfaceIdiom != .pad {
+            if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }
         }
