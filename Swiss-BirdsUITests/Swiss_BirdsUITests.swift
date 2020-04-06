@@ -70,7 +70,7 @@ class Swiss_BirdsUITests: XCTestCase {
         case searchTextField = "searchText"
         case searchTextClearButton
         case birdDetailViewScrollView
-        case filterScrollView
+        case filterContainerView
         
         var element: XCUIElement {
             switch self {
@@ -86,8 +86,8 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().searchFields.buttons.firstMatch
                 case .birdDetailViewScrollView:
                     return XCUIApplication().scrollViews.containing(.staticText, identifier: "alternateName").element
-                case .filterScrollView:
-                    return XCUIApplication().scrollViews.containing(.button, identifier: "noFiltering").element
+                case .filterContainerView:
+                    return XCUIApplication().tables.containing(.button, identifier: "noFiltering").element
             }
         }
     }
@@ -162,9 +162,8 @@ class Swiss_BirdsUITests: XCTestCase {
         let filterButton = MyUIElements.filterButton.element
         filterButton.tap()
 
-        MyUIElements.filterScrollView.element.swipeUp()
-
-        app.tables.buttons["filtervogelguppe-11"].tap()
+        let filterContainer = MyUIElements.filterContainerView.element
+        filterContainer.buttons["filtervogelguppe-11"].tap()
         
         // Tap "Back"
         if UIDevice.current.userInterfaceIdiom != .pad {
