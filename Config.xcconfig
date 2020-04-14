@@ -1,0 +1,7 @@
+// Overridable settings with some defaults
+
+PRODUCT_BUNDLE_IDENTIFIER = Swiss-Birds
+DEVELOPMENT_TEAM = None
+CODE_SIGN_STYLE = Automatic
+
+#include? "LocalConfig.xcconfig"

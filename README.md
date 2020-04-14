@@ -35,7 +35,13 @@ The script to prefetch the data has to be executed before building the app. As t
 
 4. Move the resulting `Birds.xcassets` and `Filter.xcassets` into the app folder (along with `Assets.xcassets`).
 
-5. Start-up Xcode and build the app. At least Xcode 13 is needed as the UI is completely build using SwiftUI.
+5. Start-up Xcode (at least version 13 is needed as the UI is completely build using SwiftUI) and try building the app for the simulator.  
+  If you want to deploy the app to your device, you will have to create a `LocalConfig.xcconfig` file with the following content (updated to your developer account)
+
+        // Local Config
+        PRODUCT_BUNDLE_IDENTIFIER = Swiss-Birds
+        DEVELOPMENT_TEAM = A1BC22XYZ
+        CODE_SIGN_STYLE = Automatic
 
 ## Acknowledgments
 
