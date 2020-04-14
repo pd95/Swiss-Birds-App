@@ -32,7 +32,7 @@ struct FilterCriteria: View {
             }
         }
         else {
-            print("removeFilter called without filter beeing selected!")
+            print("removeFilter called without filter being selected!")
         }
     }
 

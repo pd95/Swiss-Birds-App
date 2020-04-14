@@ -39,7 +39,7 @@ class MarketingTests: XCTestCase {
             XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
         }
 
-        // Check if a specifc language has been passed on for testing
+        // Check if a specific language has been passed on for testing
         if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
             let languageArgument = CommandLine.arguments[langArgIndex+1]
             print("language argument=\(languageArgument)")
