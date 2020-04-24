@@ -31,7 +31,7 @@ struct BirdImageView: View {
         .background(Color(.systemGray5))
         .cornerRadius(5)
         .accessibilityElement(children: .ignore)
-        .accessibility(label: Text("Bird image showing \(description)"))
+        .accessibility(label: Text("Vogelbild zeigt \(description)"))
     }
 }
 
@@ -93,7 +93,7 @@ struct BirdDetail: View {
                     if !bird.alternateName.isEmpty {
                         Text(bird.alternateName)
                             .font(.body)
-                            .accessibility(label: Text("Alternate name"))
+                            .accessibility(label: Text("Alternativname"))
                             .accessibility(value: Text(bird.alternateName))
                             .accessibility(identifier: "alternateName")
                     }
@@ -104,8 +104,8 @@ struct BirdDetail: View {
                             Image(systemName: isPlaying ? "stop.circle" : "play.circle")
                         }
                         .accessibility(identifier: "playVoiceButton")
-                        .accessibility(label: Text("Play voice sample"))
-                        .accessibility(value: Text(isPlaying ? "Playing" : "Paused"))
+                        .accessibility(label: Text("Stimme wiedergeben"))
+                        .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                     }
                 }
                 if birdDetails.autor0 != "" {

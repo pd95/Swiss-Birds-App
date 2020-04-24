@@ -38,9 +38,10 @@
 "Prioritaetsart_Artenfoerderung" = "Prioritätsart für Artenförderung";
 "Search text" = "Suchtext";
 "Clear" = "Löschen";
-"Alternate name" = "Alternativname";
-"Play voice sample" = "Stimme wiedergeben";
-"Playing" = "Spielt";
-"Paused" = "Pausiert";
-"Bird image showing %@" = "Vogelbild zeigt %@";
-"Description" = "Beschreibung";
+"Alternativname" = "Alternativname";
+"Stimme wiedergeben" = "Stimme wiedergeben";
+"Spielt" = "Spielt";
+"Pausiert" = "Pausiert";
+"Vogelbild zeigt %@" = "Vogelbild zeigt %@";
+"Beschreibung" = "Beschreibung";
+"Filtergruppe" = "Filtergruppe";

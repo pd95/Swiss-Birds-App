@@ -51,7 +51,7 @@ struct NoFilterCheckButton: View {
         Button(action: { self.filterManager.clearFilters() }) {
             HStack {
                 Checkmark(checked: filterManager.hasFilter())
-                Text(text)
+                Text(LocalizedStringKey(text))
             }
         }
         .accessibility(identifier: identifier)
