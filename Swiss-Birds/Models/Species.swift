@@ -32,7 +32,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     }
 
     func nameMatches(_ text: String) -> Bool {
-        if text.count == 0 {
+        if text.isEmpty {
             return true
         }
         let lowercaseName = name.lowercased() + " " + alternateName.lowercased()
@@ -45,7 +45,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     }
     
     func categoryMatches(filters: [FilterType: [Int]]) -> Bool {
-        if filters.count == 0 {
+        if filters.isEmpty {
             return true
         }
         

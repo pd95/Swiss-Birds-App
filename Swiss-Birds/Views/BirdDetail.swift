@@ -186,7 +186,7 @@ enum Characteristic : Hashable {
             let r = children.reduce(true) {$0 && $1.isEmpty}
             return r
         case let .text(_, text, _):
-            let r = text == nil || text!.count == 0
+            let r = text == nil || text!.isEmpty
             return r
         default:
             return false

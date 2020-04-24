@@ -34,7 +34,7 @@ class FilterManager: ObservableObject {
         if let index = activeFilters[filter.type]?.firstIndex(of: filter.filterId)
             ,index >= 0 {
             activeFilters[filter.type]!.remove(at:index)
-            if activeFilters[filter.type]!.count == 0 {
+            if activeFilters[filter.type]!.isEmpty {
                 activeFilters.removeValue(forKey: filter.type)
             }
         }
@@ -60,7 +60,7 @@ class FilterManager: ObservableObject {
 
     /// Check whether there is any filter at all
     func hasFilter() -> Bool {
-        activeFilters.count == 0
+        activeFilters.isEmpty
     }
 
     /// Remove all filters which have been set
