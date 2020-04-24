@@ -21,7 +21,7 @@ class FilterManager: ObservableObject {
 
     let commonBirds : Filter
 
-    func addFilter(_ filter: Filter) {
+    private func addFilter(_ filter: Filter) {
         if activeFilters[filter.type] == nil {
             activeFilters[filter.type] = [filter.filterId]
         }
@@ -30,7 +30,7 @@ class FilterManager: ObservableObject {
         }
     }
 
-    func removeFilter(_ filter: Filter) {
+    private func removeFilter(_ filter: Filter) {
         if let index = activeFilters[filter.type]?.firstIndex(of: filter.filterId)
             ,index >= 0 {
             activeFilters[filter.type]!.remove(at:index)
@@ -43,10 +43,12 @@ class FilterManager: ObservableObject {
         }
     }
 
+    /// Check whether a specific filter is set
     func hasFilter(_ filter: Filter) -> Bool {
         return activeFilters[filter.type]?.contains(filter.filterId) ?? false
     }
 
+    /// Toggle (=add/remove) a specific filter
     func toggleFilter(_ filter: Filter) {
         if hasFilter(filter) {
             removeFilter(filter)
@@ -56,10 +58,17 @@ class FilterManager: ObservableObject {
         }
     }
 
+    /// Check whether there is any filter at all
+    func hasFilter() -> Bool {
+        activeFilters.count == 0
+    }
+
+    /// Remove all filters which have been set
     func clearFilters() {
         activeFilters.removeAll()
     }
 
+    /// Returns the number of all species which would currently match the active filters
     func countMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: activeFilters)}.count
     }

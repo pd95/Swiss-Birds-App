@@ -26,9 +26,11 @@ struct SearchField: View {
             Button(action: { self.searchText = "" }) {
                 Image(systemName: "xmark.circle.fill")
                     .opacity(searchText == "" ? 0 : 1)
+                    .padding([.top, .bottom], 4)
                     .accessibility(label: Text("Clear"))
             }
             .accessibility(identifier: "clearButton")
+            .accessibility(hidden: searchText == "")
         }
         .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
         .foregroundColor(.secondary)
@@ -43,6 +45,6 @@ struct SearchField: View {
 
 struct SearchField_Previews: PreviewProvider {
     static var previews: some View {
-        SearchField(searchText: .constant(""))
+        SearchField(searchText: .constant("Hallo"))
     }
 }

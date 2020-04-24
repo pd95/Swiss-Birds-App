@@ -30,7 +30,8 @@ struct BirdImageView: View {
         }
         .background(Color(.systemGray5))
         .cornerRadius(5)
-        .accessibility(label: Text("Bird image showing \(description). Author: \(author)"))
+        .accessibilityElement(children: .ignore)
+        .accessibility(label: Text("Bird image showing \(description)"))
     }
 }
 
@@ -89,10 +90,13 @@ struct BirdDetail: View {
         ScrollView {
             VStack(alignment: .leading) {
                 HStack {
-                    Text(bird.alternateName)
-                        .font(.body)
-                        .accessibility(label: Text("Alternate name"))
-                        .accessibility(identifier: "alternateName")
+                    if !bird.alternateName.isEmpty {
+                        Text(bird.alternateName)
+                            .font(.body)
+                            .accessibility(label: Text("Alternate name"))
+                            .accessibility(value: Text(bird.alternateName))
+                            .accessibility(identifier: "alternateName")
+                    }
                     Spacer()
                     if voiceData != nil {
                         Button(action: playVoice) {
@@ -119,11 +123,9 @@ struct BirdDetail: View {
                 Text(birdDetails.infos!)
                     .font(.body)
                     .padding(.top)
-                    .accessibility(label: Text("Description"))
                     .accessibility(identifier: "description")
 
                 CharacteristicsView(characteristics: characteristics)
-                    .accessibility(label: Text("Table with characteristics"))
             }
             .padding()
         }
@@ -270,22 +272,21 @@ struct CharacteristicView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.leading)
                             .accessibility(identifier: characteristic.label)
-                            .accessibility(hidden: true)
-                        Spacer(minLength: 30.0)
+                            Spacer(minLength: 30.0)
                     }
                     if characteristic.symbol != "" {
                         SymbolView(symbolName: characteristic.symbol, pointSize: 18)
+                        .accessibility(hidden: true)
                     }
                     Text(characteristic.text)
                         .font(.body)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(characteristic.label != "" ? TextAlignment.trailing : TextAlignment.leading)
-                        .accessibility(label: Text("Characteristic \(characteristic.label)"))
-                        .accessibility(value: Text(characteristic.text))
                         .accessibility(identifier: "\(characteristic.label)_value")
                 }
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 
