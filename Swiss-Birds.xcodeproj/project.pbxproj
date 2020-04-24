@@ -14,6 +14,7 @@
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
+		177965812453195D00A2A1B2 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* FilterManager.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
@@ -62,6 +63,7 @@
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		177965802453195D00A2A1B2 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				1703131E2382DDF2007E2EE3 /* AppState.swift */,
 				17206830236B5A920008905F /* Filter.swift */,
+				177965802453195D00A2A1B2 /* FilterManager.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
 			);
@@ -384,6 +387,7 @@
 				17206831236B5A920008905F /* Filter.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
+				177965812453195D00A2A1B2 /* FilterManager.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,

@@ -26,7 +26,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
 
     func filterValue(_ filterType : FilterType) -> Filter? {
         if let filterId = filterMap[filterType]?.first {
-            return allFilters[filterType]?.filter{$0.filterId == filterId}.first
+            return Filter.filter(forId: filterId, ofType: filterType)
         }
         return nil
     }

@@ -12,7 +12,9 @@ let appState = AppState()
 
 class AppState : ObservableObject {
     @Published var searchText : String = ""
-    @Published var selectedFilters = [FilterType:[Int]]()
+
+    var filterManager = FilterManager.shared
+
     @Published var showFilters = false
     @Published var selectedBirdId : Int?    // Bird currently selected in bird list view
     @Published var restoredBirdId : Int?   // Bird selected in list view last time the app was stopped
@@ -20,7 +22,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), selectedFilters=\(selectedFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filterManager.activeFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
     }
 }
 
@@ -41,11 +43,11 @@ extension AppState {
             if let showFilters = stateArray[Key.showFilters] as? Bool {
                 self.showFilters = showFilters
             }
-            if let selectedFilters = stateArray[Key.selectedFilters] as? [String : [Int]] {
-                self.selectedFilters.removeAll()
-                selectedFilters.forEach { (key: String, value: [Int]) in
+            if let activeFilters = stateArray[Key.activeFilters] as? [String : [Int]] {
+                self.filterManager.activeFilters.removeAll()
+                activeFilters.forEach { (key: String, value: [Int]) in
                     if let filter = FilterType(rawValue: key) {
-                        self.selectedFilters[filter] = value
+                        self.filterManager.activeFilters[filter] = value
                     }
                 }
             }
@@ -58,15 +60,15 @@ extension AppState {
     }
     
     func store(in activity: NSUserActivity) {
-        var selectedFilters = [String : [Int]]()
-        self.selectedFilters.forEach { (key: FilterType, value: [Int]) in
-            selectedFilters[key.rawValue] = value
+        var activeFilters = [String : [Int]]()
+        self.filterManager.activeFilters.forEach { (key: FilterType, value: [Int]) in
+            activeFilters[key.rawValue] = value
         }
 
         let stateArray : [String:Any] = [
             Key.searchText: searchText,
             Key.showFilters: showFilters,
-            Key.selectedFilters: selectedFilters,
+            Key.activeFilters: activeFilters,
             Key.selectedBird: (selectedBirdId ?? -1) as Int,
         ]
         activity.addUserInfoEntries(from: stateArray)
@@ -77,7 +79,7 @@ extension AppState {
     private enum Key {
         static let searchText = "searchText"
         static let showFilters = "showFilters"
-        static let selectedFilters = "selectedFilters"
+        static let activeFilters = "activeFilters"
         static let selectedBird = "selectedBird"
     }
 }

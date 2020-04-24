@@ -123,5 +123,3 @@ func loadFilterData() -> [FilterType:[Filter]] {
 
     return filterMap
 }
-
-let allFilters : [FilterType:[Filter]] = loadFilterData()

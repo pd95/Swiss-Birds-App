@@ -29,4 +29,17 @@ struct Filter: Identifiable, Equatable, Hashable {
             return "\(type.rawValue)-\(filterId)"
         }
     }
+
+    static let allFiltersGrouped: [FilterType: [Filter]] = loadFilterData()
+
+    static var allFilters: [Filter] {
+        allFiltersGrouped.reduce([]) { (array, filterGroup) -> [Filter] in
+            let (_, values) = filterGroup
+            return array + values
+        }
+    }
+
+    static func filter(forId filterId: Int, ofType filterType: FilterType) -> Filter? {
+        allFiltersGrouped[filterType]?.filter{$0.filterId == filterId}.first
+    }
 }
