@@ -16,8 +16,8 @@ class AppState : ObservableObject {
     var filterManager = FilterManager.shared
 
     @Published var showFilters = false
-    @Published var selectedBirdId : Int?    // Bird currently selected in bird list view
-    @Published var restoredBirdId : Int?   // Bird selected in list view last time the app was stopped
+    @Published var selectedBirdId : Species.Id?    // Bird currently selected in bird list view
+    @Published var restoredBirdId : Species.Id?   // Bird selected in list view last time the app was stopped
 }
 
 extension AppState : CustomStringConvertible {
@@ -43,15 +43,19 @@ extension AppState {
             if let showFilters = stateArray[Key.showFilters] as? Bool {
                 self.showFilters = showFilters
             }
-            if let activeFilters = stateArray[Key.activeFilters] as? [String : [Int]] {
-                self.filterManager.activeFilters.removeAll()
-                activeFilters.forEach { (key: String, value: [Int]) in
-                    if let filter = FilterType(rawValue: key) {
-                        self.filterManager.activeFilters[filter] = value
+            if let activeFilters = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
+                self.filterManager.clearFilters()
+                activeFilters.forEach { (key: String, value: [Filter.Id]) in
+                    if let filterType = FilterType(rawValue: key) {
+                        for id in value {
+                            if let filter = Filter.filter(forId: id, ofType: filterType) {
+                                self.filterManager.toggleFilter(filter)
+                            }
+                        }
                     }
                 }
             }
-            if let selectedBird = stateArray[Key.selectedBird] as? Int, selectedBird > -1  {
+            if let selectedBird = stateArray[Key.selectedBird] as? Species.Id, selectedBird > -1  {
                 self.restoredBirdId = selectedBird
             }
             
@@ -60,8 +64,8 @@ extension AppState {
     }
     
     func store(in activity: NSUserActivity) {
-        var activeFilters = [String : [Int]]()
-        self.filterManager.activeFilters.forEach { (key: FilterType, value: [Int]) in
+        var activeFilters = [String : [Filter.Id]]()
+        self.filterManager.activeFilters.forEach { (key: FilterType, value: [Filter.Id]) in
             activeFilters[key.rawValue] = value
         }
 
@@ -69,7 +73,7 @@ extension AppState {
             Key.searchText: searchText,
             Key.showFilters: showFilters,
             Key.activeFilters: activeFilters,
-            Key.selectedBird: (selectedBirdId ?? -1) as Int,
+            Key.selectedBird: (selectedBirdId ?? -1) as Species.Id,
         ]
         activity.addUserInfoEntries(from: stateArray)
         

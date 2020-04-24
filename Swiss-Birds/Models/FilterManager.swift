@@ -17,7 +17,7 @@ class FilterManager: ObservableObject {
         commonBirds = Filter.allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
     }
 
-    @Published var activeFilters = [FilterType:[Int]]()
+    @Published var activeFilters = [FilterType:[Filter.Id]]()
 
     let commonBirds : Filter
 

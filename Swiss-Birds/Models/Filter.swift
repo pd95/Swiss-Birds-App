@@ -27,9 +27,11 @@ enum FilterType: String, CaseIterable {
 }
 
 struct Filter: Identifiable, Equatable, Hashable {
+    typealias  Id = Int
+
     let id = UUID()
 
-    let filterId: Int
+    let filterId: Id
     let name : String
     let type : FilterType
 
@@ -48,7 +50,7 @@ struct Filter: Identifiable, Equatable, Hashable {
         }
     }
 
-    static func filter(forId filterId: Int, ofType filterType: FilterType) -> Filter? {
+    static func filter(forId filterId: Id, ofType filterType: FilterType) -> Filter? {
         allFiltersGrouped[filterType]?.filter{$0.filterId == filterId}.first
     }
 }

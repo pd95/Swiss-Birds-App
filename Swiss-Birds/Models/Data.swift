@@ -69,20 +69,20 @@ func loadSpeciesData() -> [Species] {
 
     vdsList.forEach { (item) in
         let species = Species(
-            speciesId: Int(item.artID)!,
+            speciesId: Species.Id(item.artID)!,
             name: item.artname,
             alternateName: item.alternativName,
             filterMap: [
-                .lebensraum : item.filterlebensraum.split(separator: ",").map({ (s) -> Int in
-                    return Int(String(s.trimmingCharacters(in: .whitespaces)))!
+                .lebensraum : item.filterlebensraum.split(separator: ",").map({ (s) -> Filter.Id in
+                    return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
                 }),
-                .vogelgruppe : [Int(item.filtervogelgruppe)!],
-                .nahrung : item.filternahrung.split(separator: ",").map({ (s) -> Int in
-                    return Int(String(s.trimmingCharacters(in: .whitespaces)))!
+                .vogelgruppe : [Filter.Id(item.filtervogelgruppe)!],
+                .nahrung : item.filternahrung.split(separator: ",").map({ (s) -> Filter.Id in
+                    return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
                 }),
-                .haeufigeart : [Int(item.filterhaeufigeart)!],
-                .roteListe : (item.filterrotelistech.count > 0 ? [Int(item.filterrotelistech)!]:[]),
-                .entwicklungatlas : (item.filterentwicklungatlas?.count ?? 0 > 0 ? [Int(item.filterentwicklungatlas!)!]:[]),
+                .haeufigeart : [Filter.Id(item.filterhaeufigeart)!],
+                .roteListe : (item.filterrotelistech.count > 0 ? [Filter.Id(item.filterrotelistech)!]:[]),
+                .entwicklungatlas : (item.filterentwicklungatlas?.count ?? 0 > 0 ? [Filter.Id(item.filterentwicklungatlas!)!]:[]),
         ])
         speciesList.append(species)
     }
@@ -111,7 +111,7 @@ func loadFilterData() -> [FilterType:[Filter]] {
 
     vdsFilternames.forEach { (vdsFilter) in
         let filterType = FilterType(rawValue: vdsFilter.type)!
-        let filter = Filter(filterId: Int(vdsFilter.filterID) ?? -999, name: vdsFilter.filterName, type: filterType)
+        let filter = Filter(filterId: Filter.Id(vdsFilter.filterID) ?? -999, name: vdsFilter.filterName, type: filterType)
 
         if filterMap[filterType] == nil {
             filterMap[filterType] = [filter]

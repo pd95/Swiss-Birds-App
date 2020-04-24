@@ -9,13 +9,15 @@
 import Foundation
 
 struct Species: Identifiable, Hashable, CustomStringConvertible {
+    typealias  Id = Int
+
     let id = UUID()
 
-    let speciesId : Int
+    let speciesId : Id
     let name : String
     let alternateName : String
     
-    let filterMap : [FilterType: [Int]]  // For each FilterType an array of related IDs
+    let filterMap : [FilterType: [Filter.Id]]  // For each FilterType an array of related IDs
 
     func filterSymbolName(_ filterType : FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
@@ -44,7 +46,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         return false
     }
     
-    func categoryMatches(filters: [FilterType: [Int]]) -> Bool {
+    func categoryMatches(filters: [FilterType: [Filter.Id]]) -> Bool {
         if filters.isEmpty {
             return true
         }
