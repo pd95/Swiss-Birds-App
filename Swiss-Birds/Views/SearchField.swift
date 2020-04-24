@@ -15,37 +15,38 @@ struct SearchField: View {
 
     var body: some View {
         HStack {
-            TextField("Suche", text: $searchText)
-                .padding(7)
-                .padding(.horizontal, 25)
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.secondary)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                            .padding(.leading, 8)
-                            .accessibility(identifier: "magnifyingGlass")
-                            .accessibility(hidden: true)
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                    .padding(.leading, 8)
+                    .accessibility(identifier: "magnifyingGlass")
+                    .accessibility(hidden: true)
 
-                        if isEditing && !searchText.isEmpty {
-                            Button(action: { self.searchText = "" }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.secondary)
-                                    .padding(.trailing, 8)
-                                    .accessibility(label: Text("Clear"))
+                TextField("Suche", text: $searchText)
+                    .padding(7)
+                    .overlay(
+                        Group {
+                            if isEditing && !searchText.isEmpty {
+                                Button(action: { self.searchText = "" }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .foregroundColor(.secondary)
+                                        .padding(.trailing, 8)
+                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                                        .accessibility(label: Text("Clear"))
+                                }
+                                .accessibility(identifier: "clearButton")
                             }
-                            .accessibility(identifier: "clearButton")
                         }
+                    )
+                    .onTapGesture {
+                        self.isEditing = true
                     }
-                )
-                .onTapGesture {
-                    self.isEditing = true
-                }
-                .disableAutocorrection(true)
-                .accessibility(identifier: "searchText")
-                .accessibility(label: Text("Search text"))
+                    .disableAutocorrection(true)
+                    .accessibility(identifier: "searchText")
+                    .accessibility(label: Text("Search text"))
+            }
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(8)
 
             if isEditing {
                 Button(action: {
