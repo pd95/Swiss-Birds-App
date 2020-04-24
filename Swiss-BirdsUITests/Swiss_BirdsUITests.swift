@@ -85,7 +85,7 @@ class Swiss_BirdsUITests: XCTestCase {
                 case .searchTextClearButton:
                     return XCUIApplication().searchFields.buttons.firstMatch
                 case .birdDetailViewScrollView:
-                    return XCUIApplication().scrollViews.containing(.staticText, identifier: "alternateName").element
+                    return XCUIApplication().scrollViews.containing(.staticText, identifier: "description").element
                 case .filterContainerView:
                     return XCUIApplication().tables.containing(.button, identifier: "noFiltering").element
             }
