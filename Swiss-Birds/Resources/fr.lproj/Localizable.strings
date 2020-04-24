@@ -12,7 +12,7 @@
 "Keine Filter" = "No filtrage";
 "Nur häufige Vögel" = "Que les espèces communes";
 "filterlebensraum" = "Habitat";
-"filtervogelguppe" = "Groupe";
+"filtervogelguppe" = "Groupe d'oiseaux";
 "filternahrung" = "Nourriture";
 "filterrotelistech" = "Liste rouge CH";
 "filterentwicklungatlas" = "Évolution";
@@ -36,3 +36,12 @@
 "Bestand" = "Population";
 "Rote_Liste_CH" = "Liste rouge CH";
 "Prioritaetsart_Artenfoerderung" = "Espèce prioritaire pour une conservation ciblée";
+"Search text" = "Texte de recherche";
+"Clear" = "Effacer";
+"Alternativname" = "Nom alternatif";
+"Stimme wiedergeben" = "Reproduire l'appel d'oiseaux";
+"Spielt" = "Joue";
+"Pausiert" = "En pause";
+"Vogelbild zeigt %@" = "Image d'oiseaux montrant %@";
+"Beschreibung" = "Description";
+"Filtergruppe" = "Groupe de filtrage";

@@ -16,7 +16,7 @@
 "filternahrung" = "Food";
 "filterrotelistech" = "Red List CH";
 "filterentwicklungatlas" = "Evolution";
-"Stimme" = "Voice";
+"Stimme" = "Bird call";
 "Merkmale" = "Identification criteria";
 "Eigenschaften" = "Characteristics";
 "Laenge_cm" = "Length (cm)";
@@ -36,3 +36,12 @@
 "Bestand" = "Population";
 "Rote_Liste_CH" = "Red List CH";
 "Prioritaetsart_Artenfoerderung" = "Prioritätsart Artenförderung";
+"Search text" = "Search text";
+"Clear" = "Clear";
+"Alternativname" = "Alternate name";
+"Stimme wiedergeben" = "Play bird call";
+"Spielt" = "Playing";
+"Pausiert" = "Paused";
+"Vogelbild zeigt %@" = "Bird image showing %@";
+"Beschreibung" = "Description";
+"Filtergruppe" = "Filtergroup";
