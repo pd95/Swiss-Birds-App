@@ -15,6 +15,15 @@ enum FilterType: String, CaseIterable {
     case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
     case vogelgruppe = "filtervogelguppe"
+
+    var shouldSortForDisplay : Bool {
+        switch self {
+            case .lebensraum, .nahrung, .vogelgruppe:
+                return true
+            default:
+                return false
+        }
+    }
 }
 
 struct Filter: Identifiable, Equatable, Hashable {
