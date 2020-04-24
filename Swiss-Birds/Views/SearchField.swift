@@ -11,31 +11,59 @@ import SwiftUI
 struct SearchField: View {
     @Binding public var searchText : String
 
+    @State private var isEditing = false
+
     var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
-                .accessibility(identifier: "Magnifying glass")
-                .accessibility(hidden: true)
-
             TextField("Suche", text: $searchText)
-                .foregroundColor(.primary)
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8)
+                .overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.secondary)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 8)
+                            .accessibility(identifier: "magnifyingGlass")
+                            .accessibility(hidden: true)
+
+                        if isEditing && !searchText.isEmpty {
+                            Button(action: { self.searchText = "" }) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .foregroundColor(.secondary)
+                                    .padding(.trailing, 8)
+                                    .accessibility(label: Text("Clear"))
+                            }
+                            .accessibility(identifier: "clearButton")
+                        }
+                    }
+                )
+                .onTapGesture {
+                    self.isEditing = true
+                }
                 .disableAutocorrection(true)
                 .accessibility(identifier: "searchText")
                 .accessibility(label: Text("Search text"))
 
-            Button(action: { self.searchText = "" }) {
-                Image(systemName: "xmark.circle.fill")
-                    .opacity(searchText == "" ? 0 : 1)
-                    .padding([.top, .bottom], 4)
-                    .accessibility(label: Text("Clear"))
+            if isEditing {
+                Button(action: {
+                    self.isEditing = false
+                    self.searchText = ""
+                    UIApplication.shared.endEditing()
+                }) {
+                    Text("Cancel")
+                }
+                .buttonStyle(BorderlessButtonStyle())
+                .padding(.leading, 10)
+                .transition(.move(edge: .trailing))
+                .animation(.default)
             }
-            .accessibility(identifier: "clearButton")
-            .accessibility(hidden: searchText == "")
+
         }
-        .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-        .foregroundColor(.secondary)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(10.0)
+        .transition(.move(edge: .trailing))
+        .animation(.default)
         .buttonStyle(PlainButtonStyle())
         .accessibilityElement(children: .contain)
         .accessibility(addTraits: .isSearchField)
@@ -45,6 +73,9 @@ struct SearchField: View {
 
 struct SearchField_Previews: PreviewProvider {
     static var previews: some View {
-        SearchField(searchText: .constant("Hallo"))
+        VStack {
+            SearchField(searchText: .constant("Hallo"))
+                .padding(.horizontal, 10)
+        }
     }
 }
