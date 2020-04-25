@@ -54,3 +54,5 @@ struct Filter: Identifiable, Equatable, Hashable {
         allFiltersGrouped[filterType]?.filter{$0.filterId == filterId}.first
     }
 }
+
+typealias FilterList = [FilterType: [Filter.Id]]

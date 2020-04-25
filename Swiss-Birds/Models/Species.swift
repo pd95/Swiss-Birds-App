@@ -17,7 +17,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     let name : String
     let alternateName : String
     
-    let filterMap : [FilterType: [Filter.Id]]  // For each FilterType an array of related IDs
+    let filterMap : FilterList  // For each FilterType an array of related IDs
 
     func filterSymbolName(_ filterType : FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
@@ -46,7 +46,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         return false
     }
     
-    func categoryMatches(filters: [FilterType: [Filter.Id]]) -> Bool {
+    func categoryMatches(filters: FilterList) -> Bool {
         if filters.isEmpty {
             return true
         }
