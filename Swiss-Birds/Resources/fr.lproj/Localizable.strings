@@ -6,7 +6,6 @@
   Copyright © 2019 Philipp. All rights reserved.
 */
 "Vögel der Schweiz" = "Les oiseaux de Suisse";
-"Suche" = "Recherche";
 "Filter" = "Filtre";
 "Filterkriterien (%lld)" = "Critères de filtrage (%lld espèces)";
 "Keine Filter" = "No filtrage";
@@ -36,8 +35,9 @@
 "Bestand" = "Population";
 "Rote_Liste_CH" = "Liste rouge CH";
 "Prioritaetsart_Artenfoerderung" = "Espèce prioritaire pour une conservation ciblée";
-"Search text" = "Texte de recherche";
-"Clear" = "Effacer";
+"Search" = "Rechercher";
+"Clear" = "Effacer le texte";
+"Cancel" = "Annuler";
 "Alternativname" = "Nom alternatif";
 "Stimme wiedergeben" = "Reproduire l'appel d'oiseaux";
 "Spielt" = "Joue";

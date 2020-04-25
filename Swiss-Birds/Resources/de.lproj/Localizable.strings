@@ -6,7 +6,6 @@
   Copyright © 2019 Philipp. All rights reserved.
 */
 "Vögel der Schweiz" = "Vögel der Schweiz";
-"Suche" = "Suche";
 "Filter" = "Filter";
 "Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
 "Keine Filter" = "Keine Filter";
@@ -36,8 +35,9 @@
 "Bestand" = "Bestand";
 "Rote_Liste_CH" = "Rote Liste CH";
 "Prioritaetsart_Artenfoerderung" = "Prioritätsart für Artenförderung";
-"Search text" = "Suchtext";
-"Clear" = "Löschen";
+"Search" = "Suchen";
+"Clear" = "Text löschen";
+"Cancel" = "Abbrechen";
 "Alternativname" = "Alternativname";
 "Stimme wiedergeben" = "Stimme wiedergeben";
 "Spielt" = "Spielt";

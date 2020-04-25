@@ -18,33 +18,35 @@ struct SearchField: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
-                    .padding(.leading, 8)
+                    .padding(4)
                     .accessibility(identifier: "magnifyingGlass")
                     .accessibility(hidden: true)
 
-                TextField("Suche", text: $searchText)
-                    .padding(7)
+                TextField("Search", text: $searchText)
+                    .padding(.vertical, 7)
                     .overlay(
                         Group {
                             if isEditing && !searchText.isEmpty {
                                 Button(action: { self.searchText = "" }) {
                                     Image(systemName: "xmark.circle.fill")
                                         .foregroundColor(.secondary)
-                                        .padding(.trailing, 8)
-                                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                                        .accessibility(label: Text("Clear"))
                                 }
+                                .padding(4)
+                                .accessibility(label: Text("Clear"))
                                 .accessibility(identifier: "clearButton")
                             }
-                        }
+                        },
+                        alignment: .trailing
                     )
                     .onTapGesture {
                         self.isEditing = true
                     }
                     .disableAutocorrection(true)
                     .accessibility(identifier: "searchText")
-                    .accessibility(label: Text("Search text"))
+                    .accessibility(label: Text("Search"))
+                    .accessibility(addTraits: .isSearchField)
             }
+            .padding(.horizontal, 4)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
 
@@ -57,7 +59,7 @@ struct SearchField: View {
                     Text("Cancel")
                 }
                 .buttonStyle(BorderlessButtonStyle())
-                .padding(.leading, 10)
+                .padding(.leading, 4)
                 .transition(.move(edge: .trailing))
                 .animation(.default)
             }
@@ -67,7 +69,6 @@ struct SearchField: View {
         .animation(.default)
         .buttonStyle(PlainButtonStyle())
         .accessibilityElement(children: .contain)
-        .accessibility(addTraits: .isSearchField)
     }
 }
 
