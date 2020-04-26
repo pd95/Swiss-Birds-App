@@ -38,7 +38,9 @@ class AppState : ObservableObject {
             .assign(to: \.matchingSpecies, on: self)
             .store(in: &cancellables)
 
+        // Fetch the data and trigger a filter update
         allSpecies = loadSpeciesData()
+        filters.objectWillChange.send()
     }
 
     /// Returns the number of all species which would currently match the active filters
