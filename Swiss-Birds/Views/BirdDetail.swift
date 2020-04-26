@@ -162,11 +162,11 @@ struct BirdDetail: View {
 }
 
 struct BirdDetail_Previews: PreviewProvider {
+    static let allSpecies: [Species] = loadSpeciesData()
     static var previews: some View {
         NavigationView {
             BirdDetail(bird: allSpecies[14])
         }
-//        .environment(\.colorScheme, .dark)
     }
 }
 

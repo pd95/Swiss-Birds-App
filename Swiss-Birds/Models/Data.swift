@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-let allSpecies: [Species] = loadSpeciesData()
-
 let availableLanguages = ["de","fr","it","en"]
 let language = Bundle.preferredLocalizations(from: availableLanguages).first!
 

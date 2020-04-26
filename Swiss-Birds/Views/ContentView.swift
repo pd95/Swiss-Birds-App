@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            BirdList(species: allSpecies)
+            BirdList()
         }
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
         .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view

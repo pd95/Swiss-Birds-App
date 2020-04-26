@@ -71,11 +71,6 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
         objectWillChange.send()
     }
 
-    /// Returns the number of all species which would currently match the active filters
-    func countMatches() -> Int {
-        return allSpecies.filter {$0.categoryMatches(filters: _list)}.count
-    }
-
     var description: String {
         return "ManagedFilterList(\(_list))"
     }

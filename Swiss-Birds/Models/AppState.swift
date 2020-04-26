@@ -7,17 +7,44 @@
 //
 
 import SwiftUI
+import Combine
 
 let appState = AppState()
 
 class AppState : ObservableObject {
     @Published var searchText : String = ""
 
-    @ObservedObject var filters = ManagedFilterList()
+    var filters = ManagedFilterList()
+    @Published var allSpecies = [Species]()
+    @Published var matchingSpecies = [Species]()
 
     @Published var showFilters = false
     @Published var selectedBirdId : Species.Id?   // Bird currently selected in bird list view
     @Published var restoredBirdId : Species.Id?   // Bird selected in list view last time the app was stopped
+
+    var cancellables = Set<AnyCancellable>()
+
+    init() {
+        Publishers.CombineLatest3($allSpecies, filters.objectWillChange, $searchText)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.global())
+            .map { (input: ([Species], (), String)) -> [Species] in
+                let (allSpecies, _, searchText) = input
+                let filtered = allSpecies
+                    .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
+                print("filtered.count = \(filtered.count)")
+                return filtered
+            }
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.matchingSpecies, on: self)
+            .store(in: &cancellables)
+
+        allSpecies = loadSpeciesData()
+    }
+
+    /// Returns the number of all species which would currently match the active filters
+    func countFilterMatches() -> Int {
+        return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
+    }
 }
 
 extension AppState : CustomStringConvertible {

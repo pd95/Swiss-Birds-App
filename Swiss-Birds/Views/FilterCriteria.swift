@@ -9,12 +9,13 @@
 import SwiftUI
 
 struct FilterCriteria: View {
-    @ObservedObject var managedList: ManagedFilterList
+    @EnvironmentObject private var state : AppState
+    @ObservedObject var managedList : ManagedFilterList
 
     var body: some View {
         List {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
-            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: self.managedList.commonBirds)
+            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: managedList.commonBirds)
 
             ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header:
@@ -30,7 +31,7 @@ struct FilterCriteria: View {
             }
         }
         .environmentObject(managedList)
-        .navigationBarTitle(Text("Filterkriterien (\(managedList.countMatches()))"), displayMode: .inline)
+        .navigationBarTitle(Text("Filterkriterien (\(state.countFilterMatches()))"), displayMode: .inline)
     }
 }
 
@@ -38,6 +39,7 @@ struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FilterCriteria(managedList: ManagedFilterList())
+                .environmentObject(appState)
         }
     }
 }

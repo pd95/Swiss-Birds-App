@@ -10,8 +10,6 @@ import SwiftUI
 
 
 struct BirdList: View {
-
-    var species: [Species]
     
     @EnvironmentObject private var state : AppState
     
@@ -24,7 +22,7 @@ struct BirdList: View {
                 }
 
                 Section {
-                    ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.filters.list)}) { bird in
+                    ForEach(state.matchingSpecies) { bird in
                         NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBirdId) {
                             BirdRow(bird: bird)
                         }
@@ -65,7 +63,7 @@ struct BirdList: View {
             // can be at the bottom of the scrolling list. Therefore we add here an artificial row
             // which is already selected
             if state.restoredBirdId != nil {
-                NavigationLink(destination: BirdDetail(bird: species.first { $0.speciesId == state.restoredBirdId! }!
+                NavigationLink(destination: BirdDetail(bird: self.state.allSpecies.first { $0.speciesId == state.restoredBirdId! }!
                 ), tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
                     Text("*** never shown ***")
                 }
@@ -83,7 +81,7 @@ struct BirdList_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                BirdList(species: allSpecies)
+                BirdList()
             }
             ContentView()
                 .environment(\.colorScheme, .dark)

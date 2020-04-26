@@ -40,6 +40,7 @@ struct BirdRow: View {
 }
 
 struct BirdRow_Previews: PreviewProvider {
+    static let allSpecies: [Species] = loadSpeciesData()
     static var previews: some View {
         List {
             BirdRow(bird: allSpecies[40])
