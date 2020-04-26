@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FilterType: String, CaseIterable {
+enum FilterType: String, CaseIterable, CustomStringConvertible {
     case haeufigeart = "filterhaeufigeart"
     case lebensraum = "filterlebensraum"
     case nahrung = "filternahrung"
@@ -24,10 +24,14 @@ enum FilterType: String, CaseIterable {
                 return false
         }
     }
+
+    var description: String {
+        return "FilterType(\(self.rawValue))"
+    }
 }
 
 struct Filter: Identifiable, Equatable, Hashable {
-    typealias  Id = Int
+    typealias Id = Int
 
     let id = UUID()
 

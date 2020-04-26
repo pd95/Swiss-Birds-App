@@ -13,7 +13,7 @@ let appState = AppState()
 class AppState : ObservableObject {
     @Published var searchText : String = ""
 
-    var filterManager = FilterManager.shared
+    @ObservedObject var activeFilters = ManagedFilterList()
 
     @Published var showFilters = false
     @Published var selectedBirdId : Species.Id?    // Bird currently selected in bird list view
@@ -22,7 +22,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filterManager.activeFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(activeFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
     }
 }
 
@@ -43,15 +43,12 @@ extension AppState {
             if let showFilters = stateArray[Key.showFilters] as? Bool {
                 self.showFilters = showFilters
             }
-            if let activeFilters = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
-                self.filterManager.clearFilters()
-                activeFilters.forEach { (key: String, value: [Filter.Id]) in
+            if let restoredList = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
+                self.activeFilters.clearFilters()
+                restoredList.forEach { (key: String, value: [Filter.Id]) in
                     if let filterType = FilterType(rawValue: key) {
-                        for id in value {
-                            if let filter = Filter.filter(forId: id, ofType: filterType) {
-                                self.filterManager.toggleFilter(filter)
-                            }
-                        }
+                        value.compactMap { Filter.filter(forId: $0, ofType: filterType) }
+                            .forEach { self.activeFilters.toggleFilter($0) }
                     }
                 }
             }
@@ -64,15 +61,15 @@ extension AppState {
     }
     
     func store(in activity: NSUserActivity) {
-        var activeFilters = [String : [Filter.Id]]()
-        self.filterManager.activeFilters.forEach { (key: FilterType, value: [Filter.Id]) in
-            activeFilters[key.rawValue] = value
+        var storableList = [String : [Filter.Id]]()
+        self.activeFilters.list.forEach { (key: FilterType, value: [Filter.Id]) in
+            storableList[key.rawValue] = value
         }
 
         let stateArray : [String:Any] = [
             Key.searchText: searchText,
             Key.showFilters: showFilters,
-            Key.activeFilters: activeFilters,
+            Key.activeFilters: storableList,
             Key.selectedBird: (selectedBirdId ?? -1) as Species.Id,
         ]
         activity.addUserInfoEntries(from: stateArray)

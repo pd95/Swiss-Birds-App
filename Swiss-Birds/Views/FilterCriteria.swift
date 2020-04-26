@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct FilterCriteria: View {
-    @ObservedObject var filterManager = FilterManager.shared
+    @ObservedObject var managedList: ManagedFilterList
 
     var body: some View {
         List {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
-            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: self.filterManager.commonBirds)
+            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: self.managedList.commonBirds)
 
             ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header:
@@ -29,38 +29,39 @@ struct FilterCriteria: View {
 
             }
         }
-        .navigationBarTitle(Text("Filterkriterien (\(filterManager.countMatches()))"), displayMode: .inline)
+        .environmentObject(managedList)
+        .navigationBarTitle(Text("Filterkriterien (\(managedList.countMatches()))"), displayMode: .inline)
     }
 }
 
 struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FilterCriteria()
+            FilterCriteria(managedList: ManagedFilterList())
         }
     }
 }
 
 struct NoFilterCheckButton: View {
-    @ObservedObject var filterManager = FilterManager.shared
+    @EnvironmentObject var managedList: ManagedFilterList
 
     let identifier: String
     let text: String
 
     var body: some View {
-        Button(action: { self.filterManager.clearFilters() }) {
+        Button(action: { self.managedList.clearFilters() }) {
             HStack {
-                Checkmark(checked: filterManager.hasFilter())
+                Checkmark(checked: managedList.hasFilter())
                 Text(LocalizedStringKey(text))
             }
         }
         .accessibility(identifier: identifier)
-        .accessibility(addTraits: AccessibilityTraits(filterManager.hasFilter() ? [.isSelected] : []))
+        .accessibility(addTraits: AccessibilityTraits(managedList.hasFilter() ? [.isSelected] : []))
     }
 }
 
 struct FilterCheckButton: View {
-    @ObservedObject var filterManager = FilterManager.shared
+    @EnvironmentObject var managedList: ManagedFilterList
 
     let identifier: String
     let text: String
@@ -82,13 +83,13 @@ struct FilterCheckButton: View {
     }
 
     var accessibilityTraits : AccessibilityTraits {
-        filterManager.hasFilter(filter) ? [.isSelected] : []
+        managedList.hasFilter(filter) ? [.isSelected] : []
     }
 
     var body: some View {
-        Button(action: { self.filterManager.toggleFilter(self.filter)}) {
+        Button(action: { self.managedList.toggleFilter(self.filter)}) {
             HStack {
-                Checkmark(checked: filterManager.hasFilter(filter))
+                Checkmark(checked: managedList.hasFilter(filter))
                 if symbolName != nil {
                     SymbolView(symbolName: symbolName!)
                 }
@@ -96,7 +97,7 @@ struct FilterCheckButton: View {
             }
         }
         .accessibility(identifier: identifier)
-        .accessibility(addTraits: AccessibilityTraits(filterManager.hasFilter(filter) ? [.isSelected] : []))
+        .accessibility(addTraits: AccessibilityTraits(managedList.hasFilter(filter) ? [.isSelected] : []))
     }
 }
 

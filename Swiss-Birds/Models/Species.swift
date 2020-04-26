@@ -9,7 +9,7 @@
 import Foundation
 
 struct Species: Identifiable, Hashable, CustomStringConvertible {
-    typealias  Id = Int
+    typealias Id = Int
 
     let id = UUID()
 
