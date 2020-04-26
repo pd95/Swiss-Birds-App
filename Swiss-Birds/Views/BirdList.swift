@@ -24,7 +24,7 @@ struct BirdList: View {
                 }
 
                 Section {
-                    ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.activeFilters.list)}) { bird in
+                    ForEach(species.filter{$0.nameMatches(state.searchText) && $0.categoryMatches(filters: state.filters.list)}) { bird in
                         NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBirdId) {
                             BirdRow(bird: bird)
                         }
@@ -48,13 +48,13 @@ struct BirdList: View {
                 }) {
                     HStack {
                         Text("Filter")
-                        Image(systemName: state.activeFilters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
+                        Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
                     }
                 }
                 .accessibility(identifier: "filterButton")
             )
 
-            NavigationLink(destination: FilterCriteria(managedList: self.state.activeFilters),
+            NavigationLink(destination: FilterCriteria(managedList: self.state.filters),
                            isActive: $state.showFilters) {
                             Text("*** never shown ***")
             }

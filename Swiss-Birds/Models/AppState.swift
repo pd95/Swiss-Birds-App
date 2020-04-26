@@ -13,16 +13,16 @@ let appState = AppState()
 class AppState : ObservableObject {
     @Published var searchText : String = ""
 
-    @ObservedObject var activeFilters = ManagedFilterList()
+    @ObservedObject var filters = ManagedFilterList()
 
     @Published var showFilters = false
-    @Published var selectedBirdId : Species.Id?    // Bird currently selected in bird list view
+    @Published var selectedBirdId : Species.Id?   // Bird currently selected in bird list view
     @Published var restoredBirdId : Species.Id?   // Bird selected in list view last time the app was stopped
 }
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(activeFilters), selectedBirdId=\(String(describing:selectedBirdId)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)))"
     }
 }
 
@@ -44,11 +44,11 @@ extension AppState {
                 self.showFilters = showFilters
             }
             if let restoredList = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
-                self.activeFilters.clearFilters()
+                self.filters.clearFilters()
                 restoredList.forEach { (key: String, value: [Filter.Id]) in
                     if let filterType = FilterType(rawValue: key) {
                         value.compactMap { Filter.filter(forId: $0, ofType: filterType) }
-                            .forEach { self.activeFilters.toggleFilter($0) }
+                            .forEach { self.filters.toggleFilter($0) }
                     }
                 }
             }
@@ -62,7 +62,7 @@ extension AppState {
     
     func store(in activity: NSUserActivity) {
         var storableList = [String : [Filter.Id]]()
-        self.activeFilters.list.forEach { (key: FilterType, value: [Filter.Id]) in
+        self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
         }
 
