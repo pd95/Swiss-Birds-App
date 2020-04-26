@@ -68,7 +68,7 @@ class Swiss_BirdsUITests: XCTestCase {
         case masterNavigationBar, detailNavigationBar
         case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton"
         case searchTextField = "searchText"
-        case searchTextClearButton
+        case searchTextClearButton, searchTextCancelButton
         case birdDetailViewScrollView
         case filterContainerView
         
@@ -81,9 +81,11 @@ class Swiss_BirdsUITests: XCTestCase {
                 case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
-                    return XCUIApplication().searchFields.textFields[self.rawValue]
+                    return XCUIApplication().otherElements["searchBar"].searchFields.firstMatch
                 case .searchTextClearButton:
-                    return XCUIApplication().searchFields.buttons.firstMatch
+                    return XCUIApplication().otherElements["searchBar"].buttons["clearButton"]
+                case .searchTextCancelButton:
+                    return XCUIApplication().otherElements["searchBar"].buttons["cancelButton"]
                 case .birdDetailViewScrollView:
                     return XCUIApplication().scrollViews.containing(.staticText, identifier: "description").element
                 case .filterContainerView:
@@ -158,6 +160,15 @@ class Swiss_BirdsUITests: XCTestCase {
         let clearButton = MyUIElements.searchTextClearButton.element
         _ = clearButton.waitForExistence(timeout: 2)
         clearButton.tap()
+
+        // Type something random
+        searchText.tap()
+        MyUIElements.searchTextField.element.typeText("bi")
+
+        // Type Cancel
+        let cancelButton = MyUIElements.searchTextClearButton.element
+        _ = cancelButton.waitForExistence(timeout: 2)
+        cancelButton.tap()
 
         // Enter filter criteria
         let filterButton = MyUIElements.filterButton.element

@@ -80,7 +80,7 @@ class MarketingTests: XCTestCase {
             let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
             let search = searchTerms[language]!
 
-            let searchText = app.searchFields.textFields["searchText"].firstMatch
+            let searchText = app.searchFields["searchText"].firstMatch
             searchText.tap()
             searchText.typeText(search)
             takeScreenShot(app, name: "02_Search")
@@ -98,20 +98,20 @@ class MarketingTests: XCTestCase {
             voiceButton.tap()
 
             let scrollViewsQuery = app.scrollViews
-            scrollViewsQuery.otherElements.containing(.staticText, identifier:"alternateName").element.swipeUp()
+            scrollViewsQuery.otherElements.containing(.staticText, identifier:"description").element.swipeUp()
             takeScreenShot(app, name: "04_Detail_Middle")
         }
 
-        // Tap "Back"
-        XCTContext.runActivity(named: "Clear search and enter filter criteria") { (_) in
+        XCTContext.runActivity(named: "Cancel search and enter filter criteria") { (_) in
+            // Tap "Back"
             if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }
 
-            // Clear search
-            let clearButton = app.searchFields.buttons.firstMatch
-            _ = clearButton.waitForExistence(timeout: 2)
-            clearButton.tap()
+            // Cancel search
+            let cancelButton = app.otherElements["searchBar"].buttons["cancelButton"]
+            _ = cancelButton.waitForExistence(timeout: 2)
+            cancelButton.tap()
 
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.exists, "The main view navigation bar does not exist")
@@ -122,8 +122,8 @@ class MarketingTests: XCTestCase {
             takeScreenShot(app, name: "05_Filtercriteria")
         }
 
-        // Tap "Back"
         XCTContext.runActivity(named: "Go back to main view") { (_) in
+            // Tap "Back"
             if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }

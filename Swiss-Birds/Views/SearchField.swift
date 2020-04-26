@@ -24,6 +24,10 @@ struct SearchField: View {
 
                 TextField("Search", text: $searchText)
                     .padding(.vertical, 7)
+                    .disableAutocorrection(true)
+                    .accessibility(identifier: "searchText")
+                    .accessibility(label: Text("Search"))
+                    .accessibility(addTraits: .isSearchField)
                     .overlay(
                         Group {
                             if isEditing && !searchText.isEmpty {
@@ -41,10 +45,6 @@ struct SearchField: View {
                     .onTapGesture {
                         self.isEditing = true
                     }
-                    .disableAutocorrection(true)
-                    .accessibility(identifier: "searchText")
-                    .accessibility(label: Text("Search"))
-                    .accessibility(addTraits: .isSearchField)
             }
             .padding(.horizontal, 4)
             .background(Color(.secondarySystemBackground))
@@ -58,6 +58,7 @@ struct SearchField: View {
                 }) {
                     Text("Cancel")
                 }
+                .accessibility(identifier: "cancelButton")
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(.leading, 4)
                 .transition(.move(edge: .trailing))
@@ -69,15 +70,17 @@ struct SearchField: View {
         .animation(.default)
         .buttonStyle(PlainButtonStyle())
         .accessibilityElement(children: .contain)
+        .accessibility(identifier: "searchBar")
     }
 }
 
 
 struct SearchField_Previews: PreviewProvider {
     static var previews: some View {
-        VStack {
+        Group {
             SearchField(searchText: .constant("Hallo"))
                 .padding(.horizontal, 10)
+                .previewLayout(.fixed(width: 400, height: 70))
         }
     }
 }
