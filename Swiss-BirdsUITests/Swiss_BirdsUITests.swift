@@ -166,7 +166,7 @@ class Swiss_BirdsUITests: XCTestCase {
         MyUIElements.searchTextField.element.typeText("bi")
 
         // Type Cancel
-        let cancelButton = MyUIElements.searchTextClearButton.element
+        let cancelButton = MyUIElements.searchTextCancelButton.element
         _ = cancelButton.waitForExistence(timeout: 2)
         cancelButton.tap()
 
