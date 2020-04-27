@@ -51,13 +51,13 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
     /// Toggle (=add/remove) a specific filter
     func toggleFilter(_ filter: Filter) {
+        objectWillChange.send()
         if hasFilter(filter) {
             removeFilter(filter)
         }
         else {
             addFilter(filter)
         }
-        objectWillChange.send()
     }
 
     /// Check whether there is any filter at all
@@ -67,8 +67,8 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
     /// Remove all filters which have been set
     func clearFilters() {
-        _list.removeAll()
         objectWillChange.send()
+        _list.removeAll()
     }
 
     var description: String {
