@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchField: View {
     @Binding public var searchText : String
 
-    @State private var isEditing = false
+    @Binding public var isEditing : Bool
 
     var body: some View {
         HStack {
@@ -77,8 +77,10 @@ struct SearchField: View {
 
 struct SearchField_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            SearchField(searchText: .constant("Hallo"))
+        var query = "Hallo"
+        return Group {
+            SearchField(searchText: Binding<String>(get: {query}, set: {query=$0}),
+                        isEditing: .constant(true))
                 .padding(.horizontal, 10)
                 .previewLayout(.fixed(width: 400, height: 70))
         }

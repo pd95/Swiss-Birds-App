@@ -18,7 +18,7 @@ struct BirdList: View {
         VStack {
             List {
                 Section {
-                    SearchField(searchText: $state.searchText)
+                    SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField)
                 }
 
                 Section {
@@ -30,6 +30,13 @@ struct BirdList: View {
                     }
                 }
             }
+            .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
+                if self.state.isEditingSearchField {
+                    print("Searching was enabled, but drag occured => endEditing")
+                    self.state.isEditingSearchField = false
+                    UIApplication.shared.endEditing()
+                }
+            }))
             .navigationBarTitle(Text("Vögel der Schweiz"))
             .navigationBarItems(
                 trailing:

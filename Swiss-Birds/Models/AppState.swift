@@ -13,6 +13,7 @@ let appState = AppState()
 
 class AppState : ObservableObject {
     @Published var searchText : String = ""
+    @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
     @Published var allSpecies = [Species]()
