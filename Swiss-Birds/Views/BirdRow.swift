@@ -40,7 +40,7 @@ struct BirdRow: View {
             SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
                 .accessibility(hidden: true)
         }
-        .onReceive(appState.getHeadShot(for: bird)) { (image) in
+        .onReceive(state.getHeadShot(for: bird)) { (image) in
             self.image = image
         }
 //        .accessibilityElement(children: .contain)
@@ -55,5 +55,6 @@ struct BirdRow_Previews: PreviewProvider {
             BirdRow(bird: allSpecies[120])
             BirdRow(bird: allSpecies[304])
         }
+        .environmentObject(AppState.shared)
     }
 }

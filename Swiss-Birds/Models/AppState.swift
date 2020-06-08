@@ -9,8 +9,6 @@
 import SwiftUI
 import Combine
 
-let appState = AppState()
-
 class AppState : ObservableObject {
     @Published var searchText : String = ""
     @Published var isEditingSearchField: Bool = false
@@ -37,7 +35,10 @@ class AppState : ObservableObject {
 
     var headShotsCache: [Species.Id:UIImage] = [:]
 
-    init() {
+    // Singleton
+    static var shared = AppState()
+
+    private init() {
         // Fetch the birds data
         birdService
             .getBirds()

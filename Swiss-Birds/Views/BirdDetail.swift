@@ -187,12 +187,13 @@ struct BirdDetailContainer: View {
 }
 
 struct BirdDetail_Previews: PreviewProvider {
-    static let appState = AppState()
+    static let appState = AppState.shared
     static let allSpecies: [Species] = loadSpeciesData(vdsList: load("vds-list.json"))
     static var previews: some View {
         NavigationView {
             BirdDetailContainer(bird: allSpecies[14], birdService: appState.birdService)
         }
+        .environmentObject(AppState.shared)
     }
 }
 

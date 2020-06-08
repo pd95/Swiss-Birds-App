@@ -39,8 +39,8 @@ struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             FilterCriteria(managedList: ManagedFilterList())
-                .environmentObject(appState)
         }
+        .environmentObject(AppState.shared)
     }
 }
 
