@@ -11,15 +11,21 @@ import AVKit
 
 
 struct BirdImageView: View {
-    var asset : String
+    var image : UIImage?
     var author : String
     var description : String
-    
+
     var body: some View {
         VStack {
-            Image(asset)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
+            if image != nil {
+                Image(uiImage: image!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            else {
+                ActivityIndicatorView()
+                    .padding(50)
+            }
             HStack {
                 Text(description)
                 Spacer()
@@ -35,23 +41,24 @@ struct BirdImageView: View {
     }
 }
 
-
 struct BirdDetail: View {
-    var bird: Species
+    @ObservedObject var model: BirdDetailViewModel
 
-    private var birdDetails : SpeciesDetail
-    
-    private var characteristics : [Characteristic]
+    private let bird: Species
 
-    private var voiceData : NSDataAsset? {
-        NSDataAsset(name: "assets/\(bird.speciesId).mp3")
-    }
+    private let birdDetails : VdsSpecieDetail
+    private let characteristics : [Characteristic]
+
+//    private var voiceData : NSDataAsset? {
+//        NSDataAsset(name: "assets/\(bird.speciesId).mp3")
+//    }
 
     @State var isPlaying : Bool = false
     
-    init(bird: Species) {
-        self.bird = bird
-        birdDetails = load("\(bird.speciesId).json", as: [SpeciesDetail].self).first!
+    init(model: BirdDetailViewModel) {
+        self.model = model
+        self.bird = model.bird
+        self.birdDetails = model.details!
         characteristics = [
             .header(text: "Merkmale", children: [
                 .text(text: birdDetails.merkmale)
@@ -98,7 +105,7 @@ struct BirdDetail: View {
                             .accessibility(identifier: "alternateName")
                     }
                     Spacer()
-                    if voiceData != nil {
+                    if model.voiceData != nil {
                         Button(action: playVoice) {
                             Text("Stimme")
                             Image(systemName: isPlaying ? "stop.circle" : "play.circle")
@@ -108,17 +115,11 @@ struct BirdDetail: View {
                         .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                     }
                 }
-                if birdDetails.autor0 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_0.jpg", author: birdDetails.autor0!, description: birdDetails.bezeichnungDe0 ?? "")
-                        .accessibility(identifier: "bird_image_1")
-                }
-                if birdDetails.autor1 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_1.jpg", author: birdDetails.autor1!, description: birdDetails.bezeichnungDe1 ?? "")
-                    .accessibility(identifier: "bird_image_2")
-                }
-                if birdDetails.autor2 != "" {
-                    BirdImageView(asset: "assets/\(bird.speciesId)_2.jpg", author: birdDetails.autor2!, description: birdDetails.bezeichnungDe2 ?? "")
-                    .accessibility(identifier: "bird_image_3")
+                ForEach(model.imageDetails) { imageDetails in
+                    BirdImageView(image: imageDetails.image,
+                                  author: imageDetails.author,
+                                  description: imageDetails.description)
+                        .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
                 }
                 Text(birdDetails.infos!)
                     .font(.body)
@@ -136,7 +137,7 @@ struct BirdDetail: View {
     }
     
     private func playVoice() {
-        if let data = voiceData?.data {
+        if let data = model.voiceData {
             isPlaying.toggle()
             if isPlaying {
                 do {
@@ -161,11 +162,36 @@ struct BirdDetail: View {
     }
 }
 
+struct BirdDetailContainer: View {
+
+    @ObservedObject var model: BirdDetailViewModel
+
+    init(bird: Species, birdService: BirdService) {
+        model = BirdDetailViewModel(bird: bird, birdService: birdService)
+    }
+
+    var body: some View {
+        Group {
+            if self.model.details != nil {
+                BirdDetail(model: model)
+            }
+            else {
+                ActivityIndicatorView(style: .large)
+                .onAppear {
+                    self.model.fetchData()
+                }
+            }
+        }
+        .navigationBarTitle(Text(model.bird.name), displayMode: .inline)
+    }
+}
+
 struct BirdDetail_Previews: PreviewProvider {
-    static let allSpecies: [Species] = loadSpeciesData()
+    static let appState = AppState()
+    static let allSpecies: [Species] = loadSpeciesData(vdsList: load("vds-list.json"))
     static var previews: some View {
         NavigationView {
-            BirdDetail(bird: allSpecies[14])
+            BirdDetailContainer(bird: allSpecies[14], birdService: appState.birdService)
         }
     }
 }

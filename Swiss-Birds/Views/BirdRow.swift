@@ -10,6 +10,9 @@ import SwiftUI
 
 struct BirdRow: View {
     var bird: Species
+
+    @EnvironmentObject private var state : AppState
+    @State var image: UIImage? = UIImage(named: "placeholder-headshot")
     
     func hasEntwicklungsAtlasSymbol() -> Bool {
         return bird.filterSymbolName(.entwicklungatlas).count > 0
@@ -17,14 +20,16 @@ struct BirdRow: View {
     
     var body: some View {
         HStack {
-            Image("assets/\(bird.speciesId)")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
-                .shadow(radius: 4)
-                .accessibility(hidden: true)
+            if self.image != nil {
+                Image(uiImage: self.image!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
+                    .shadow(radius: 4)
+                    .accessibility(hidden: true)
+            }
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
@@ -35,12 +40,15 @@ struct BirdRow: View {
             SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
                 .accessibility(hidden: true)
         }
+        .onReceive(appState.getHeadShot(for: bird)) { (image) in
+            self.image = image
+        }
 //        .accessibilityElement(children: .contain)
     }
 }
 
 struct BirdRow_Previews: PreviewProvider {
-    static let allSpecies: [Species] = loadSpeciesData()
+    static let allSpecies: [Species] = loadSpeciesData(vdsList: load("vds-list.json"))
     static var previews: some View {
         List {
             BirdRow(bird: allSpecies[40])
