@@ -48,12 +48,9 @@ struct BirdRow: View {
 }
 
 struct BirdRow_Previews: PreviewProvider {
-    static let allSpecies: [Species] = loadSpeciesData(vdsList: load("vds-list.json"))
     static var previews: some View {
-        List {
-            BirdRow(bird: allSpecies[40])
-            BirdRow(bird: allSpecies[120])
-            BirdRow(bird: allSpecies[304])
+        List(AppState.shared.allSpecies[0..<3]) { bird in
+            BirdRow(bird: bird)
         }
         .environmentObject(AppState.shared)
     }
