@@ -85,6 +85,23 @@ class BirdDetailViewModel: ObservableObject {
             print("\(result.count) images load")
         })
         .store(in: &cancellables)
+
+        // Fetch voice data
+        objectWillChange.flatMap { _ -> AnyPublisher<Data?, Never> in
+            // Start as soon as images are load
+            guard self.imageDetails.filter({$0.image != nil}).count > 0 && self.voiceData == nil else {
+                return Just(self.voiceData)
+                    .eraseToAnyPublisher()
+            }
+
+            return self.birdService.getVoice(for: self.bird.speciesId)
+                .map { (d: Data) -> Data? in d }
+                .replaceError(with: nil)
+                .eraseToAnyPublisher()
+        }
+        .receive(on: DispatchQueue.main)
+        .assign(to: \.voiceData, on: self)
+        .store(in: &cancellables)
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
