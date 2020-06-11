@@ -17,7 +17,7 @@ class BirdDetailViewModel: ObservableObject {
     let bird: Species
 
     @Published var details : VdsSpecieDetail?
-    var imageDetails = [ImageDetails]()
+    @Published var imageDetails = [ImageDetails]()
     @Published var voiceData: Data?
 
     struct ImageDetails: Identifiable {
@@ -60,51 +60,46 @@ class BirdDetailViewModel: ObservableObject {
             })
             .store(in: &cancellables)
 
-        $details.flatMap { _ -> AnyPublisher<[(Int, UIImage?)], Never> in
+        $imageDetails
+            .flatMap { imageDetails -> AnyPublisher<[(Int, UIImage?)], Never> in
+                // Generate publisher for each missing image
+                let publishers = imageDetails
+                    .filter{ $0.image == nil }
+                    .map({ imageDetail -> UIImagePublisher in
+                        self.fetchImage(imageDetail: imageDetail)
+                    })
 
-            // Generate publisher for each missing image
-            let publishers = self.imageDetails
-                .filter{ $0.image == nil }
-                .map({ imageDetail -> UIImagePublisher in
-                    self.fetchImage(imageDetail: imageDetail)
-                })
-
-            let sequence = Publishers.Sequence<[UIImagePublisher], Never>(sequence: publishers)
-            return sequence.flatMap{ $0 }.collect()
-                .eraseToAnyPublisher()
-        }
-        .receive(on: DispatchQueue.main)
-        .sink(receiveValue: { result in
-            result.forEach { (element) in
-                let (index, image) = element
-                if self.imageDetails[index].image == nil && image != nil {
-                    self.imageDetails[index].image = image
-                }
-            }
-            self.objectWillChange.send()
-            print("\(result.count) images load")
-        })
-        .store(in: &cancellables)
-
-        // Fetch voice data
-        objectWillChange
-            .setFailureType(to: BirdService.APIError.self)
-            .flatMap { _ -> AnyPublisher<Data?, BirdService.APIError> in
-            // Start as soon as images are load
-            guard self.imageDetails.filter({$0.image != nil}).count > 0 && self.voiceData == nil else {
-                return Just(self.voiceData)
-                    .setFailureType(to: BirdService.APIError.self)
+                let sequence = Publishers.Sequence<[UIImagePublisher], Never>(sequence: publishers)
+                return sequence.flatMap{ $0 }.collect()
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                result.forEach { (element) in
+                    let (index, image) = element
+                    if self.imageDetails[index].image == nil && image != nil {
+                        self.imageDetails[index].image = image
+                    }
+                }
+                self.objectWillChange.send()
+                print("\(result.count) images load")
+            })
+            .store(in: &cancellables)
 
-            return self.birdService.getVoice(for: self.bird.speciesId)
-                .map { (d: Data) -> Data? in d }
-                .eraseToAnyPublisher()
-        }
-        .replaceError(with: nil)
-        .receive(on: DispatchQueue.main)
-        .assign(to: \.voiceData, on: self)
-        .store(in: &cancellables)
+        // Fetch voice data 1s after details have been load
+        $imageDetails
+            .compactMap({ $0.first })
+            .filter({ $0.image != nil})
+            .setFailureType(to: BirdService.APIError.self)
+            .flatMap { imageDetails -> AnyPublisher<Data?, BirdService.APIError> in
+                return self.birdService.getVoice(for: self.bird.speciesId)
+                    .map { (d: Data) -> Data? in d }
+                    .eraseToAnyPublisher()
+            }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.voiceData, on: self)
+            .store(in: &cancellables)
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
