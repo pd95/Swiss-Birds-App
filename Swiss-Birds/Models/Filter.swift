@@ -57,6 +57,10 @@ struct Filter: Identifiable, Equatable, Hashable {
     static func filter(forId filterId: Id, ofType filterType: FilterType) -> Filter? {
         allFiltersGrouped[filterType]?.filter{$0.filterId == filterId}.first
     }
+
+    static var commonBirds : Filter = {
+        allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
+    }()
 }
 
 typealias FilterList = [FilterType: [Filter.Id]]

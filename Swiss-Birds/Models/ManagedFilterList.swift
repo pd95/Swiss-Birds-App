@@ -14,10 +14,6 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
     var list: FilterList { _list }
 
-    lazy var commonBirds : Filter = {
-        Filter.allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
-    }()
-
     init(_ filterList: FilterList = [:]) {
         _list = filterList
     }
