@@ -105,15 +105,15 @@ struct BirdDetail: View {
                             .accessibility(identifier: "alternateName")
                     }
                     Spacer()
-                    if model.voiceData != nil {
-                        Button(action: playVoice) {
-                            Text("Stimme")
-                            Image(systemName: isPlaying ? "stop.circle" : "play.circle")
-                        }
-                        .accessibility(identifier: "playVoiceButton")
-                        .accessibility(label: Text("Stimme wiedergeben"))
-                        .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
+
+                    Button(action: playVoice) {
+                        Text("Stimme")
+                        Image(systemName: isPlaying ? "stop.circle" : "play.circle")
                     }
+                    .disabled(model.voiceData == nil)
+                    .accessibility(identifier: "playVoiceButton")
+                    .accessibility(label: Text("Stimme wiedergeben"))
+                    .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                 }
                 ForEach(model.imageDetails) { imageDetails in
                     BirdImageView(image: imageDetails.image,
