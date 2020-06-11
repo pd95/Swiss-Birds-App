@@ -9,8 +9,6 @@
 import SwiftUI
 import Combine
 
-let appState = AppState()
-
 class AppState : ObservableObject {
     @Published var searchText : String = ""
     @Published var isEditingSearchField: Bool = false
@@ -25,11 +23,55 @@ class AppState : ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    init() {
-        Publishers.CombineLatest3($allSpecies, filters.objectWillChange, $searchText)
-            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.global())
-            .map { (input: ([Species], (), String)) -> [Species] in
-                let (allSpecies, _, searchText) = input
+    lazy var urlSession : URLSession = {
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .returnCacheDataElseLoad
+        return URLSession(configuration: config)
+    }()
+
+    lazy var birdService : BirdService = {
+        BirdService(urlSession: urlSession)
+    }()
+
+    var headShotsCache: [Species.Id:UIImage] = [:]
+
+    // Singleton
+    static var shared = AppState()
+
+    private init() {
+        // Fetch the birds data
+        birdService
+            .getBirds()
+            .map { (birds: [VdsListElement]) -> [VdsListElement] in
+                var dictionary = [String: VdsListElement]()
+                birds.forEach { dictionary[$0.artID] = $0 }
+                return Array(dictionary.values)
+            }
+            .replaceError(with: [])
+            .map(loadSpeciesData)
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.allSpecies, on: self)
+            .store(in: &cancellables)
+
+        // Fetch filter data
+        birdService
+            .getFilters()
+            .map(loadFilterData)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { (filters) in
+                    Filter.allFiltersGrouped = filters
+                    self.filters.objectWillChange.send()
+                    //self.objectWillChange.send()
+            })
+            .store(in: &cancellables)
+
+        // Combine the 3 data sources to restrict the bird list:
+        Publishers.CombineLatest3($allSpecies, $searchText, filters.objectWillChange)
+            .subscribe(on: DispatchQueue.global())
+            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.global())
+            .map { (input: ([Species], String, Void)) -> [Species] in
+                let (allSpecies, searchText, _) = input
                 let filtered = allSpecies
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 print("filtered.count = \(filtered.count)")
@@ -38,10 +80,18 @@ class AppState : ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: \.matchingSpecies, on: self)
             .store(in: &cancellables)
+    }
 
-        // Fetch the data and trigger a filter update
-        allSpecies = loadSpeciesData()
-        filters.objectWillChange.send()
+    func getHeadShot(for bird: Species) -> AnyPublisher<UIImage?, Never> {
+        if let image = headShotsCache[bird.speciesId] {
+            return Just(image).eraseToAnyPublisher()
+        }
+        return birdService
+            .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
+            .map { self.headShotsCache[bird.speciesId] = $0; return $0 }
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
 
     /// Returns the number of all species which would currently match the active filters

@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Create required directories
-mkdir -p data/species voices images/headshots images/artbilder svg/download
+mkdir -p data svg/download
 
 # Fetching main JSON data
-for r in list labels filternames ; do
-    for l in de fr it en ; do
+for r in filternames ; do
+    for l in de ; do
         echo Fetching vds-$r-$l.json
         curl -#fo data/vds-$r-$l.json https://www.vogelwarte.ch/elements/snippets/vds/static/assets/data/vds-$r-$l.json
     done

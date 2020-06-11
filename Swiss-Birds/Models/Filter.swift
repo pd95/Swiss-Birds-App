@@ -45,7 +45,7 @@ struct Filter: Identifiable, Equatable, Hashable {
         }
     }
 
-    static let allFiltersGrouped: [FilterType: [Filter]] = loadFilterData()
+    static var allFiltersGrouped: [FilterType: [Filter]] = [:]
 
     static var allFilters: [Filter] {
         allFiltersGrouped.reduce([]) { (array, filterGroup) -> [Filter] in

@@ -23,7 +23,8 @@ struct BirdList: View {
 
                 Section {
                     ForEach(state.matchingSpecies) { bird in
-                        NavigationLink(destination: BirdDetail(bird: bird), tag: bird.speciesId, selection: self.$state.selectedBirdId) {
+                        NavigationLink(destination: BirdDetailContainer(bird: bird, birdService: self.state.birdService),
+                                       tag: bird.speciesId, selection: self.$state.selectedBirdId) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -69,9 +70,9 @@ struct BirdList: View {
             // Workaround SwiftUI: when state is restored, the currently selected bird
             // can be at the bottom of the scrolling list. Therefore we add here an artificial row
             // which is already selected
-            if state.restoredBirdId != nil {
-                NavigationLink(destination: BirdDetail(bird: self.state.allSpecies.first { $0.speciesId == state.restoredBirdId! }!
-                ), tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
+            if restoredBird != nil {
+                NavigationLink(destination: BirdDetailContainer(bird: restoredBird!, birdService: state.birdService),
+                               tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
                     Text("*** never shown ***")
                 }
                 .hidden()
@@ -81,6 +82,13 @@ struct BirdList: View {
 /// 8< ----- Workaround broken SwiftUI end
 
         }
+    }
+
+    var restoredBird: Species! {
+        if let restoredBird = state.restoredBirdId {
+            return self.state.allSpecies.first { $0.speciesId == restoredBird }
+        }
+        return nil
     }
 }
 
@@ -93,6 +101,6 @@ struct BirdList_Previews: PreviewProvider {
             ContentView()
                 .environment(\.colorScheme, .dark)
         }
-        .environmentObject(appState)
+        .environmentObject(AppState.shared)
     }
 }

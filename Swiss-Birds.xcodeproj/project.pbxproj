@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1703131E2382DDF2007E2EE3 /* AppState.swift */; };
+		17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17105A79248570B60024F464 /* ActivityIndicatorView.swift */; };
 		1715B36724372FD800413FBF /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B36624372FD800413FBF /* SearchField.swift */; };
 		1715B3692437305100413FBF /* BirdRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B3682437305100413FBF /* BirdRow.swift */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
-		174E04C52377903F00079901 /* Birds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 174E04C42377903F00079901 /* Birds.xcassets */; };
+		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
+		175CC8E024856BBD006F99D3 /* BirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DF24856BBD006F99D3 /* BirdService.swift */; };
+		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
@@ -52,6 +55,7 @@
 /* Begin PBXFileReference section */
 		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1703131E2382DDF2007E2EE3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		17105A79248570B60024F464 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Swiss_BirdsUI.xctestplan; sourceTree = "<group>"; };
 		1715651223AD7FDA00B8CC13 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1715B3652436B00900413FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -59,8 +63,10 @@
 		1715B3682437305100413FBF /* BirdRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRow.swift; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
-		174E04C42377903F00079901 /* Birds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Birds.xcassets; sourceTree = "<group>"; };
+		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
+		175CC8DF24856BBD006F99D3 /* BirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdService.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		177965802453195D00A2A1B2 /* ManagedFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFilterList.swift; sourceTree = "<group>"; };
@@ -89,7 +95,6 @@
 		17DDB730243675B200ACE032 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		17DDB732243690C100ACE032 /* process_vds_data.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = process_vds_data.js; sourceTree = "<group>"; };
 		17DDB733243690C100ACE032 /* gen_curl.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = gen_curl.js; sourceTree = "<group>"; };
-		17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Birds.xcassets.sh; sourceTree = "<group>"; };
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
@@ -126,6 +131,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		175CC8E124856C3C006F99D3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */,
+				175CC8DF24856BBD006F99D3 /* BirdService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		17B960E123699370003AA802 = {
 			isa = PBXGroup;
 			children = (
@@ -157,10 +171,10 @@
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				1779657E2453184D00A2A1B2 /* Extensions.swift */,
+				175CC8E124856C3C006F99D3 /* API */,
 				17D1A502236CD96900E8588C /* Models */,
 				17D1A503236CD97800E8588C /* Views */,
 				17B960F623699375003AA802 /* Assets.xcassets */,
-				174E04C42377903F00079901 /* Birds.xcassets */,
 				1790857B2431258D003A302F /* Filter.xcassets */,
 				17D1A501236CD95900E8588C /* Resources */,
 				17B960FE23699375003AA802 /* Info.plist */,
@@ -227,8 +241,10 @@
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
 				1715B3682437305100413FBF /* BirdRow.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
+				175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */,
 				1715B36624372FD800413FBF /* SearchField.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
+				17105A79248570B60024F464 /* ActivityIndicatorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				17DDB737243690C100ACE032 /* fetch_data.sh */,
-				17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */,
 				17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */,
 				17DDB732243690C100ACE032 /* process_vds_data.js */,
 				17DDB733243690C100ACE032 /* gen_curl.js */,
@@ -353,7 +368,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174E04C52377903F00079901 /* Birds.xcassets in Resources */,
 				17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
 				1790857C2431258D003A302F /* Filter.xcassets in Resources */,
@@ -388,13 +402,17 @@
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
+				175CC8E024856BBD006F99D3 /* BirdService.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
+				175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */,
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,
+				175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
+				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,
 				1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */,
 			);

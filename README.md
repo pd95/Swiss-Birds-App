@@ -5,37 +5,21 @@ This is why I started to develop this app in November 2019.
 
 The goal is to provide an app accessing the data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
 
-In the current initial version, the data has to be bundled with the app. There is currently no network data access done at runtime of the app.
-
-Pros:
- + Speed (=no latency)
- + Data is accessible even when you are far in the wilderness
-
-Cons:
- - Data increases the app size even if the data is not necessarily needed
- - Data can be outdated
- - **SOI does not allow redistribution of their data**, even though the data is publicly accessible on their website.
-
-The last point is the main reason why the App has not been published and made available on the App Store.
-
-In an upcoming update, I will "unbundle" the data from the app, so that it will always fetch the data from the SOI website. Even though this will erase all the "Pros" listed above, it is probably easier get approval to distribute the app to a wider audience.
+This app is loading the list of birds, images and sounds from the website and caches them locally, so the already fetched data can be accessed "on the go".
 
 ## How to build the app
 
 The script to prefetch the data has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
 
-1. Run the script `./fetch_data.sh` in the `scripts` directory.  
+1. Run the script `./fetch_data.sh` in the `data-scripts` directory.  
   This will first fetch the list of birds and filter categories, cleanup the data (remove duplicates) and then fetch detailed information, images and voices. Expected runtime: *10 minutes*
 
-2. Run the script `./prepare_Birds.xcassets.sh`  
-  This will create a `Birds.xcassets` folder containing the bird assets (images and voice data) and language folders (de/fr/it/en) containing the JSON data files.
-
-3. Run the script `./prepare_Filter.xcassets.sh`  
+2. Run the script `./prepare_Filter.xcassets.sh`  
   This will create a `Filter.xcassets` folder containing the transformed SVG symbols for the filter categories.
 
-4. Move the resulting `Birds.xcassets` and `Filter.xcassets` into the app folder (along with `Assets.xcassets`).
+3. Move the resulting `Filter.xcassets` into the app folder (along with `Assets.xcassets`): `mv Filter.xcassets ../Swiss-Birds/`
 
-5. Start-up Xcode (at least version 13 is needed as the UI is completely build using SwiftUI) and try building the app for the simulator.  
+4. Start-up Xcode (at least version 13 is needed as the UI is completely build using SwiftUI) and try building the app for the simulator.  
   If you want to deploy the app to your device, you will have to create a `LocalConfig.xcconfig` file with the following content (updated to your developer account)
 
         // Local Config

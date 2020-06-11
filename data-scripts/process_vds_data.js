@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 
-let types = ['list', 'labels', 'filternames'];
-let languages = ['de', 'fr', 'it', 'en'];
+let types = ['filternames'];
+let languages = ['de'];
 
 types.forEach(element => {
     languages.forEach(language => {

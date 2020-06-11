@@ -41,28 +41,8 @@ func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
 }
 
 
-func loadSpeciesData() -> [Species] {
+func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {
 
-    // Helper structure to decode JSON
-    struct VdsList: Codable {
-        let artID, sysNr, artname, alternativName: String
-        let alias, filterlebensraum, filtervogelgruppe, filternahrung: String
-        let filterhaeufigeart, filterrotelistech: String
-        let filterentwicklungatlas: String?
-
-        enum CodingKeys: String, CodingKey {
-            case artID = "ArtId"
-            case sysNr = "Sys_Nr"
-            case artname = "Artname"
-            case alternativName = "Alternativ_Name"
-            case alias, filterlebensraum, filtervogelgruppe, filternahrung, filterhaeufigeart, filterrotelistech, filterentwicklungatlas
-        }
-    }
-
-    // Load and decode file
-    let vdsList : [VdsList] = load("vds-list.json")
-
-    
     var speciesList = [Species]()
 
     vdsList.forEach { (item) in
@@ -89,16 +69,8 @@ func loadSpeciesData() -> [Species] {
 }
 
 
-func loadFilterData() -> [FilterType:[Filter]] {
-    // Helper structure to decode JSON
-    struct VdsFilternames: Codable {
-        let type, filterID, filterName: String
-    }
+func loadFilterData(vdsFilternames : [VdsFilter]) -> [FilterType:[Filter]] {
 
-    // Load and decode file
-    let vdsFilternames : [VdsFilternames] = load("vds-filternames.json")
-
-    
     var filterMap = [FilterType:[Filter]]()
 
     // Initialize "häufige Art" which is missing in the vds-filternames.json data

@@ -21,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
+        let appState = AppState.shared
         let contentView = ContentView()
             .environmentObject(appState)
 
@@ -68,7 +69,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         let activity = NSUserActivity(activityType: Bundle.main.activityType)
-        appState.store(in: activity)
+        AppState.shared.store(in: activity)
         return activity
     }
 }
