@@ -95,7 +95,6 @@
 		17DDB730243675B200ACE032 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		17DDB732243690C100ACE032 /* process_vds_data.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = process_vds_data.js; sourceTree = "<group>"; };
 		17DDB733243690C100ACE032 /* gen_curl.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = gen_curl.js; sourceTree = "<group>"; };
-		17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Birds.xcassets.sh; sourceTree = "<group>"; };
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
@@ -254,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				17DDB737243690C100ACE032 /* fetch_data.sh */,
-				17DDB734243690C100ACE032 /* prepare_Birds.xcassets.sh */,
 				17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */,
 				17DDB732243690C100ACE032 /* process_vds_data.js */,
 				17DDB733243690C100ACE032 /* gen_curl.js */,
