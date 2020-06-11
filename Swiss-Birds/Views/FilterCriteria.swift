@@ -15,7 +15,7 @@ struct FilterCriteria: View {
     var body: some View {
         List {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
-            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: managedList.commonBirds)
+            FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: Filter.commonBirds)
 
             ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header:
