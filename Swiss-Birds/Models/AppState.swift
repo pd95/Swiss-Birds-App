@@ -42,6 +42,11 @@ class AppState : ObservableObject {
         // Fetch the birds data
         birdService
             .getBirds()
+            .map { (birds: [VdsListElement]) -> [VdsListElement] in
+                var dictionary = [String: VdsListElement]()
+                birds.forEach { dictionary[$0.artID] = $0 }
+                return Array(dictionary.values)
+            }
             .replaceError(with: [])
             .map(loadSpeciesData)
             .receive(on: DispatchQueue.main)
