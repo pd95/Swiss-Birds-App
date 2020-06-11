@@ -124,37 +124,14 @@ struct BirdService {
         }
     }
 
-    private func bundleResource(for endPoint: Endpoint) throws -> Data {
-        let data: Data
-        // Try first to fetch file from main bundle
-        let filename = endPoint.resourceName(for: language)
-        if let file = Bundle.main.url(forResource: filename, withExtension: nil) {
-            data = try Data(contentsOf: file)
-        }
-        else {
-            // Then try to find data asset
-            guard let asset = NSDataAsset(name: filename) else {
-                throw APIError.resourceLoadError("Couldn't find asset \(filename) in bundle and asset catalog")
-            }
-            data = asset.data
-        }
-
-        return data
-    }
-
     // MARK: Helper
 
     func publisher(for endpoint: Endpoint) -> AnyPublisher<Data, APIError> {
 
         do {
             // try to fetch data from cache
-            var data = try? loadDataFromCache(for: endpoint)
-
-            // try to fetch data from bundle
-            if data == nil {
-                data = try bundleResource(for: endpoint)
-            }
-            return Just(data!)
+            let data = try loadDataFromCache(for: endpoint)
+            return Just(data)
                 .setFailureType(to: APIError.self)
                 .eraseToAnyPublisher()
         } catch {
