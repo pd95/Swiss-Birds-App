@@ -5,20 +5,7 @@ This is why I started to develop this app in November 2019.
 
 The goal is to provide an app accessing the data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
 
-In the current initial version, the data has to be bundled with the app. There is currently no network data access done at runtime of the app.
-
-Pros:
- + Speed (=no latency)
- + Data is accessible even when you are far in the wilderness
-
-Cons:
- - Data increases the app size even if the data is not necessarily needed
- - Data can be outdated
- - **SOI does not allow redistribution of their data**, even though the data is publicly accessible on their website.
-
-The last point is the main reason why the App has not been published and made available on the App Store.
-
-In an upcoming update, I will "unbundle" the data from the app, so that it will always fetch the data from the SOI website. Even though this will erase all the "Pros" listed above, it is probably easier get approval to distribute the app to a wider audience.
+This app is loading the list of birds, images and sounds from the website and caches them locally, so the already fetched data can be accessed "on the go".
 
 ## How to build the app
 
