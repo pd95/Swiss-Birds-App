@@ -94,6 +94,36 @@ struct BirdService {
         case decodingError(String)
     }
 
+    init(urlSession: URLSession) {
+        self.urlSession = urlSession
+
+        // Make sure cache directory is created
+        try? FileManager.default.createDirectory(at: self.cacheLocation, withIntermediateDirectories: true, attributes: nil)
+    }
+
+    var cacheLocation: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("Downloaded-Data")
+    }
+
+    private func loadDataFromCache(for endPoint: Endpoint) throws -> Data {
+        let filename = endPoint.fileName(for: language)
+        let url = cacheLocation.appendingPathComponent(filename)
+        let data = try Data(contentsOf: url)
+        return data
+    }
+
+    private func storeDataInCache(for endPoint: Endpoint, data: Data) {
+        let filename = endPoint.fileName(for: language)
+        let url = cacheLocation.appendingPathComponent(filename)
+        DispatchQueue.global(qos: .background).async {
+            do {
+                try data.write(to: url)
+            } catch {
+                os_log("Store to cache failed: %{Public}@\npath %{Public}@", error.localizedDescription, url.path)
+            }
+        }
+    }
+
     private func bundleResource(for endPoint: Endpoint) throws -> Data {
         let data: Data
         // Try first to fetch file from main bundle
@@ -112,15 +142,19 @@ struct BirdService {
         return data
     }
 
-
     // MARK: Helper
 
     func publisher(for endpoint: Endpoint) -> AnyPublisher<Data, APIError> {
 
         do {
+            // try to fetch data from cache
+            var data = try? loadDataFromCache(for: endpoint)
+
             // try to fetch data from bundle
-            let data = try bundleResource(for: endpoint)
-            return Just(data)
+            if data == nil {
+                data = try bundleResource(for: endpoint)
+            }
+            return Just(data!)
                 .setFailureType(to: APIError.self)
                 .eraseToAnyPublisher()
         } catch {
@@ -140,6 +174,7 @@ struct BirdService {
                         os_log("Unexpected HTTP response code: %d %{Public}@", statusCode, localizedMessage)
                         throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
                     }
+                    self.storeDataInCache(for: endpoint, data: $0.data)
                     return $0.data
                 }
                 .mapError({ (failure) -> APIError in
