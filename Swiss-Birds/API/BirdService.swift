@@ -89,6 +89,7 @@ struct BirdService {
 
     enum APIError: Error {
         case networkError(String)
+        case httpError(Int, String)
         case resourceLoadError(String)
         case decodingError(String)
     }
@@ -128,14 +129,21 @@ struct BirdService {
 
             let urlSession = self.urlSession ?? .shared
             return urlSession.dataTaskPublisher(for: url)
-                .map {
-                    if let response = $0.response as? HTTPURLResponse, response.statusCode != 200 {
-                        os_log("Unexpected HTTP response: %{Public}@", response)
+                .tryMap {
+                    guard let httpResponse = $0.response as? HTTPURLResponse else {
+                        throw APIError.networkError("Invalid HTTP response")
+                    }
+
+                    let statusCode = httpResponse.statusCode
+                    guard 200 ..< 300 ~= statusCode else {
+                        let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+                        os_log("Unexpected HTTP response code: %d %{Public}@", statusCode, localizedMessage)
+                        throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
                     }
                     return $0.data
                 }
                 .mapError({ (failure) -> APIError in
-                    os_log("HTTP failure: %{Public}@", failure.localizedDescription)
+                    os_log("Failure: %{Public}@", failure.localizedDescription)
                     return APIError.networkError(failure.localizedDescription)
                 })
                 .eraseToAnyPublisher()
