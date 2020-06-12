@@ -14,13 +14,18 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            if state.allSpecies.count > 0 && Filter.allFiltersGrouped.count > 0 {
+            if !state.initialLoadRunning {
                 BirdList()
             }
             else {
                 ActivityIndicatorView()
             }
         }
+        .alert(isPresented: showAlert, content: { () -> Alert in
+            Alert(title: Text("An error occured"),
+                  message: Text(state.error!.localizedDescription),
+                  dismissButton: .default(Text("Dismiss")))
+        })
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
         .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
         .onReceive(
@@ -34,6 +39,10 @@ struct ContentView: View {
                         device.orientation != .faceDown
                     )
         }
+    }
+
+    var showAlert: Binding<Bool> {
+        return Binding<Bool>(get: {self.state.error != nil}, set: { _ in self.state.error = nil })
     }
 }
 

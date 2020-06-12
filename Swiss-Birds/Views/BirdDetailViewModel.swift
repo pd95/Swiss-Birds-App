@@ -19,6 +19,7 @@ class BirdDetailViewModel: ObservableObject {
     @Published var details : VdsSpecieDetail?
     @Published var imageDetails = [ImageDetails]()
     @Published var voiceData: Data?
+    @Published var error: Error?
 
     struct ImageDetails: Identifiable {
         let id: UUID = UUID()
@@ -39,9 +40,14 @@ class BirdDetailViewModel: ObservableObject {
         birdService
             .getSpecie(for: bird.speciesId)
             .map { d -> VdsSpecieDetail? in d }
-            .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { (details) in
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        self.error = error
+                    }
+                },
+                receiveValue: { details in
                 if let details = details {
                     var imageDetails = [ImageDetails]()
                     if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{

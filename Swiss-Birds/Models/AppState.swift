@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 class AppState : ObservableObject {
+    @Published var initialLoadRunning: Bool
+
     @Published var searchText : String = ""
     @Published var isEditingSearchField: Bool = false
 
@@ -40,6 +42,8 @@ class AppState : ObservableObject {
     static var shared = AppState()
 
     private init() {
+        initialLoadRunning = true
+
         // Fetch the birds data
         birdService
             .getBirds()
@@ -55,6 +59,7 @@ class AppState : ObservableObject {
                     if case .failure(let error) = completion {
                         self.error = error
                     }
+                    self.initialLoadRunning = false
                 }, receiveValue: { (species) in
                     self.allSpecies = species
             })
