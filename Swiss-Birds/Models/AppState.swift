@@ -16,6 +16,7 @@ class AppState : ObservableObject {
     var filters = ManagedFilterList()
     @Published var allSpecies = [Species]()
     @Published var matchingSpecies = [Species]()
+    @Published var error: Error?
 
     @Published var showFilters = false
     @Published var selectedBirdId : Species.Id?   // Bird currently selected in bird list view
@@ -47,10 +48,16 @@ class AppState : ObservableObject {
                 birds.forEach { dictionary[$0.artID] = $0 }
                 return Array(dictionary.values)
             }
-            .replaceError(with: [])
             .map(loadSpeciesData)
             .receive(on: DispatchQueue.main)
-            .assign(to: \.allSpecies, on: self)
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        self.error = error
+                    }
+                }, receiveValue: { (species) in
+                    self.allSpecies = species
+            })
             .store(in: &cancellables)
 
         // Fetch filter data
@@ -58,11 +65,14 @@ class AppState : ObservableObject {
             .getFilters()
             .map(loadFilterData)
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { (filters) in
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        self.error = error
+                    }
+                }, receiveValue: { (filters) in
                     Filter.allFiltersGrouped = filters
                     self.filters.objectWillChange.send()
-                    //self.objectWillChange.send()
             })
             .store(in: &cancellables)
 
@@ -89,7 +99,7 @@ class AppState : ObservableObject {
         return birdService
             .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
             .map { self.headShotsCache[bird.speciesId] = $0; return $0 }
-            .replaceError(with: nil)
+            .replaceError(with: UIImage(named: "placeholder-headshot"))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

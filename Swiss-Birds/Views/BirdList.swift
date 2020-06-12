@@ -57,6 +57,7 @@ struct BirdList: View {
                         Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
                     }
                 }
+                .disabled(Filter.allFiltersGrouped.isEmpty)
                 .accessibility(identifier: "filterButton")
             )
 
