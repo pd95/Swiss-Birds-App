@@ -12,6 +12,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     private var app: XCUIApplication!
     private var language = "de"
+    private let wait4existenceTimeout: TimeInterval = 4
 
     override func setUp() {
         super.setUp()
@@ -96,7 +97,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     func testMainNavigation() {
         let nav = MyUIElements.masterNavigationBar.element
-        XCTAssert(nav.waitForExistence(timeout: 2), "The main navigation bar exists")
+        XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
 
         let filterButton = MyUIElements.filterButton.element
         XCTAssert(filterButton.exists, "The main navigation bar exists and contains the filter button")
@@ -113,7 +114,7 @@ class Swiss_BirdsUITests: XCTestCase {
         MyUIElements.noFilteringButton.element.tap()
 
         let birdDetailNav = MyUIElements.detailNavigationBar.element
-        _ = birdDetailNav.waitForExistence(timeout: 2)
+        _ = birdDetailNav.waitForExistence(timeout: wait4existenceTimeout)
         XCTAssert(birdDetailNav.identifier.contains("(425 "), "No filtering should result in 425 species")
 
         MyUIElements.onlyCommonButton.element.tap()
@@ -122,7 +123,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     func testDetailNavigation() {
         let nav = MyUIElements.masterNavigationBar.element
-        _ = nav.waitForExistence(timeout: 2)
+        _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 
         app.tables.buttons.firstMatch.tap()
 
@@ -133,7 +134,7 @@ class Swiss_BirdsUITests: XCTestCase {
     
     func testTestFullNavigation() {
         let nav = MyUIElements.masterNavigationBar.element
-        _ = nav.waitForExistence(timeout: 2)
+        _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 
         // Search
         let selectIndex = language == "fr" ? 2 : 0
@@ -158,20 +159,22 @@ class Swiss_BirdsUITests: XCTestCase {
         
         // Clear search
         let clearButton = MyUIElements.searchTextClearButton.element
-        _ = clearButton.waitForExistence(timeout: 2)
+        _ = clearButton.waitForExistence(timeout: wait4existenceTimeout)
         clearButton.tap()
 
         // Type something random
+        _ = searchText.waitForExistence(timeout: wait4existenceTimeout)
         searchText.tap()
         MyUIElements.searchTextField.element.typeText("bi")
 
         // Type Cancel
         let cancelButton = MyUIElements.searchTextCancelButton.element
-        _ = cancelButton.waitForExistence(timeout: 2)
+        _ = cancelButton.waitForExistence(timeout: wait4existenceTimeout)
         cancelButton.tap()
 
         // Enter filter criteria
         let filterButton = MyUIElements.filterButton.element
+        _ = filterButton.waitForExistence(timeout: wait4existenceTimeout)
         filterButton.tap()
 
         let filterContainer = MyUIElements.filterContainerView.element
@@ -183,7 +186,7 @@ class Swiss_BirdsUITests: XCTestCase {
         }
         
         let merlinBird = app.tables.buttons["birdRow_1450"]
-        _ = merlinBird.waitForExistence(timeout: 2)
+        _ = merlinBird.waitForExistence(timeout: wait4existenceTimeout)
         merlinBird.tap()
 
         scrollViewsQuery.swipeUp()

@@ -12,7 +12,8 @@ class MarketingTests: XCTestCase {
 
     private var app: XCUIApplication!
     private var language = "de"
-    
+    private let wait4existenceTimeout: TimeInterval = 4
+
     func takeScreenShot(_ element: XCUIElement, name: String = "Screenshot") {
         let screenshot = element.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
@@ -70,7 +71,7 @@ class MarketingTests: XCTestCase {
     func testMainNavigation() {
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
-            XCTAssert(nav.waitForExistence(timeout: 2), "The main navigation bar exists")
+            XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
             takeScreenShot(app, name: "01_Main")
         }
         
@@ -110,7 +111,7 @@ class MarketingTests: XCTestCase {
 
             // Cancel search
             let cancelButton = app.otherElements["searchBar"].buttons["cancelButton"]
-            _ = cancelButton.waitForExistence(timeout: 2)
+            _ = cancelButton.waitForExistence(timeout: wait4existenceTimeout)
             cancelButton.tap()
 
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
