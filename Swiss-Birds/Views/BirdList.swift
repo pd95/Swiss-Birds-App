@@ -23,7 +23,7 @@ struct BirdList: View {
 
                 Section {
                     ForEach(state.matchingSpecies) { bird in
-                        NavigationLink(destination: BirdDetailContainer(bird: bird, birdService: self.state.birdService),
+                        NavigationLink(destination: BirdDetailContainer(bird: bird),
                                        tag: bird.speciesId, selection: self.$state.selectedBirdId) {
                             BirdRow(bird: bird)
                         }
@@ -72,7 +72,7 @@ struct BirdList: View {
             // can be at the bottom of the scrolling list. Therefore we add here an artificial row
             // which is already selected
             if restoredBird != nil {
-                NavigationLink(destination: BirdDetailContainer(bird: restoredBird!, birdService: state.birdService),
+                NavigationLink(destination: BirdDetailContainer(bird: restoredBird!),
                                tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
                     Text("*** never shown ***")
                 }

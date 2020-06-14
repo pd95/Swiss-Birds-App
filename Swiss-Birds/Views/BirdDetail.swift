@@ -166,8 +166,8 @@ struct BirdDetailContainer: View {
 
     @ObservedObject var model: BirdDetailViewModel
 
-    init(bird: Species, birdService: BirdService) {
-        model = BirdDetailViewModel(bird: bird, birdService: birdService)
+    init(bird: Species) {
+        model = BirdDetailViewModel(bird: bird)
     }
 
     var body: some View {
@@ -199,7 +199,7 @@ struct BirdDetail_Previews: PreviewProvider {
     static let appState = AppState.shared
     static var previews: some View {
         NavigationView {
-            BirdDetailContainer(bird: appState.allSpecies[14], birdService: appState.birdService)
+            BirdDetailContainer(bird: appState.allSpecies[14])
         }
         .environmentObject(AppState.shared)
     }

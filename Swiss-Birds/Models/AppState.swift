@@ -26,16 +26,6 @@ class AppState : ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    lazy var urlSession : URLSession = {
-        let config = URLSessionConfiguration.default
-        config.requestCachePolicy = .returnCacheDataElseLoad
-        return URLSession(configuration: config)
-    }()
-
-    lazy var birdService : BirdService = {
-        BirdService(urlSession: urlSession)
-    }()
-
     var headShotsCache: [Species.Id:UIImage] = [:]
 
     // Singleton
@@ -45,7 +35,7 @@ class AppState : ObservableObject {
         initialLoadRunning = true
 
         // Fetch the birds data
-        birdService
+        VdsAPI
             .getBirds()
             .map { (birds: [VdsListElement]) -> [VdsListElement] in
                 var dictionary = [String: VdsListElement]()
@@ -66,7 +56,7 @@ class AppState : ObservableObject {
             .store(in: &cancellables)
 
         // Fetch filter data
-        birdService
+        VdsAPI
             .getFilters()
             .map(loadFilterData)
             .receive(on: DispatchQueue.main)
@@ -101,8 +91,9 @@ class AppState : ObservableObject {
         if let image = headShotsCache[bird.speciesId] {
             return Just(image).eraseToAnyPublisher()
         }
-        return birdService
+        return VdsAPI
             .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
+            .map { UIImage(data: $0) }
             .map { self.headShotsCache[bird.speciesId] = $0; return $0 }
             .replaceError(with: UIImage(named: "placeholder-headshot"))
             .receive(on: DispatchQueue.main)

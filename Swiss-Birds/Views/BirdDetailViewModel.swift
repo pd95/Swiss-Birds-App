@@ -13,7 +13,6 @@ class BirdDetailViewModel: ObservableObject {
 
     typealias UIImagePublisher = AnyPublisher<(Int, UIImage?), Never>
 
-    let birdService : BirdService
     let bird: Species
 
     @Published var details : VdsSpecieDetail?
@@ -31,13 +30,12 @@ class BirdDetailViewModel: ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    init(bird: Species, birdService: BirdService) {
+    init(bird: Species) {
         self.bird = bird
-        self.birdService = birdService
     }
 
     func fetchData() {
-        birdService
+        VdsAPI
             .getSpecie(for: bird.speciesId)
             .map { d -> VdsSpecieDetail? in d }
             .receive(on: DispatchQueue.main)
@@ -96,9 +94,9 @@ class BirdDetailViewModel: ObservableObject {
         $imageDetails
             .compactMap({ $0.first })
             .filter({ $0.image != nil})
-            .setFailureType(to: BirdService.APIError.self)
-            .flatMap { imageDetails -> AnyPublisher<Data?, BirdService.APIError> in
-                return self.birdService.getVoice(for: self.bird.speciesId)
+            .setFailureType(to: Error.self)
+            .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
+                return VdsAPI.getVoice(for: self.bird.speciesId)
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
@@ -109,7 +107,8 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
-        birdService.getSpecieImage(for: self.bird.speciesId, number: imageDetail.index)
+        VdsAPI.getSpecieImage(for: self.bird.speciesId, number: imageDetail.index)
+            .map { UIImage(data: $0) }
             .replaceError(with: nil)
             .map { (image: UIImage?) -> (Int, UIImage?) in
                 return (imageDetail.index, image)

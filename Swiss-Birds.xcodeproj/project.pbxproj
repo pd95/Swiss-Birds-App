@@ -14,10 +14,10 @@
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
-		175CC8E024856BBD006F99D3 /* BirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DF24856BBD006F99D3 /* BirdService.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
+		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
@@ -64,12 +64,12 @@
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
-		175CC8DF24856BBD006F99D3 /* BirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdService.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		177965802453195D00A2A1B2 /* ManagedFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFilterList.swift; sourceTree = "<group>"; };
+		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */,
-				175CC8DF24856BBD006F99D3 /* BirdService.swift */,
+				17863CDE2496D340005017F9 /* VdsAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -402,7 +402,6 @@
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
-				175CC8E024856BBD006F99D3 /* BirdService.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
 				175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */,
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
@@ -410,6 +409,7 @@
 				175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
+				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
