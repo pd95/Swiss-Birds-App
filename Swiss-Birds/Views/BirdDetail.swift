@@ -49,12 +49,9 @@ struct BirdDetail: View {
     private let birdDetails : VdsSpecieDetail
     private let characteristics : [Characteristic]
 
-//    private var voiceData : NSDataAsset? {
-//        NSDataAsset(name: "assets/\(bird.speciesId).mp3")
-//    }
-
     @State var isPlaying : Bool = false
-    
+    @State var shareItem : ShareSheet.Item?
+
     init(model: BirdDetailViewModel) {
         self.model = model
         self.bird = model.bird
@@ -120,6 +117,9 @@ struct BirdDetail: View {
                                   author: imageDetails.author,
                                   description: imageDetails.description)
                         .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
+                        .onLongPressGesture {
+                            self.shareImageDetail(imageDetails)
+                        }
                 }
                 Text(birdDetails.infos!)
                     .font(.body)
@@ -130,12 +130,35 @@ struct BirdDetail: View {
             }
             .padding()
         }
+        .sheet(item: $shareItem) { item in
+            ShareSheet(item: item)
+        }
         .navigationBarTitle(Text(bird.name), displayMode: .inline)
+        .navigationBarItems(trailing:
+            Button(action: self.shareDetails, label: {
+                Image(systemName: "square.and.arrow.up")
+                    .imageScale(.large)
+                    .padding(.vertical)
+            })
+            .disabled(self.model.details == nil)
+        )
         .onDisappear() {
             self.stopSound()
         }
     }
-    
+
+    func shareDetails() {
+        shareItem = .init(subject: self.model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(self.model.details?.uri ?? "")])
+    }
+
+    func shareImageDetail(_ imageDetails: BirdDetailViewModel.ImageDetails) {
+        if let image = imageDetails.image, let name = model.details?.artname {
+            shareItem = .init(subject:
+                "\(name): \(imageDetails.description)",
+                activityItems: [image])
+        }
+    }
+
     private func playVoice() {
         if let data = model.voiceData {
             isPlaying.toggle()
@@ -201,7 +224,7 @@ struct BirdDetail_Previews: PreviewProvider {
         NavigationView {
             BirdDetailContainer(bird: appState.allSpecies[14])
         }
-        .environmentObject(AppState.shared)
+        .environmentObject(appState)
     }
 }
 

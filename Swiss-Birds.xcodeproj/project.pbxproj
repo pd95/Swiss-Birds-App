@@ -13,6 +13,7 @@
 		1715B3692437305100413FBF /* BirdRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B3682437305100413FBF /* BirdRow.swift */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
+		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
@@ -63,6 +64,7 @@
 		1715B3682437305100413FBF /* BirdRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRow.swift; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */,
 				1715B36624372FD800413FBF /* SearchField.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
+				172D564D24A1077F00C8419E /* ShareSheet.swift */,
 				17105A79248570B60024F464 /* ActivityIndicatorView.swift */,
 			);
 			path = Views;
@@ -407,6 +410,7 @@
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
 				1703131F2382DDF2007E2EE3 /* AppState.swift in Sources */,
 				175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */,
+				172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
