@@ -41,34 +41,6 @@ func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
 }
 
 
-func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {
-
-    var speciesList = [Species]()
-
-    vdsList.forEach { (item) in
-        let species = Species(
-            speciesId: Species.Id(item.artID)!,
-            name: item.artname,
-            alternateName: item.alternativName,
-            filterMap: [
-                .lebensraum : item.filterlebensraum.split(separator: ",").map({ (s) -> Filter.Id in
-                    return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
-                }),
-                .vogelgruppe : [Filter.Id(item.filtervogelgruppe)!],
-                .nahrung : item.filternahrung.split(separator: ",").map({ (s) -> Filter.Id in
-                    return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
-                }),
-                .haeufigeart : [Filter.Id(item.filterhaeufigeart)!],
-                .roteListe : (item.filterrotelistech.count > 0 ? [Filter.Id(item.filterrotelistech)!]:[]),
-                .entwicklungatlas : (item.filterentwicklungatlas?.count ?? 0 > 0 ? [Filter.Id(item.filterentwicklungatlas!)!]:[]),
-        ])
-        speciesList.append(species)
-    }
-    
-    return speciesList.sorted { $0.name <= $1.name }
-}
-
-
 func loadFilterData(vdsFilternames : [VdsFilter]) -> [FilterType:[Filter]] {
 
     var filterMap = [FilterType:[Filter]]()
