@@ -10,37 +10,6 @@ import SwiftUI
 import AVKit
 
 
-struct BirdImageView: View {
-    var image : UIImage?
-    var author : String
-    var description : String
-
-    var body: some View {
-        VStack {
-            if image != nil {
-                Image(uiImage: image!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
-            else {
-                ActivityIndicatorView()
-                    .padding(50)
-            }
-            HStack {
-                Text(description)
-                Spacer()
-                Text("© \(author)")
-            }
-            .padding([.leading, .bottom, .trailing], 8)
-            .font(.caption)
-        }
-        .background(Color(.systemGray5))
-        .cornerRadius(5)
-        .accessibilityElement(children: .ignore)
-        .accessibility(label: Text("Vogelbild zeigt \(description)"))
-    }
-}
-
 struct BirdDetail: View {
     @ObservedObject var model: BirdDetailViewModel
 

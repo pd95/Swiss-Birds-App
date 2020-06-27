@@ -31,6 +31,7 @@
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -100,6 +101,7 @@
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
+		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17F7195C23A825C20060F02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7195E23A825C30060F02F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7196023A825C50060F02F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
 				1715B3682437305100413FBF /* BirdRow.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
+				17ECD39D24A72D1800226BF4 /* BirdImageView.swift */,
 				175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */,
 				1715B36624372FD800413FBF /* SearchField.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
@@ -414,6 +417,7 @@
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
+				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
