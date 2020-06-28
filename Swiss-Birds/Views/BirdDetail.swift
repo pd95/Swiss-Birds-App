@@ -86,6 +86,7 @@ struct BirdDetail: View {
                                   author: imageDetails.author,
                                   description: imageDetails.description)
                         .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
+                        .onTapGesture { }
                         .onLongPressGesture {
                             self.shareImageDetail(imageDetails)
                         }
