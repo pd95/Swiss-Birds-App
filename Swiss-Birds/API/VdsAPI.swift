@@ -17,7 +17,10 @@ enum VdsAPI {
         case httpError(Int, String)
         case resourceLoadError(String)
         case decodingError(String)
+        case invalidResponse
     }
+
+    typealias BirdOfTheDayData = (url: URL, speciesID: Int)
 
     static var urlSession: URLSession = {
         let cacheLocation: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("Downloaded-Data")
@@ -90,5 +93,23 @@ enum VdsAPI {
 
     static func getVoice(for id: Int) -> AnyPublisher<Data, Error> {
         return fetchData(URLRequest(url: base.appendingPathComponent("\(voiceAssetPath)/\(id).mp3")))
+    }
+
+    static func getBirdOfTheDaySpeciesIDandURL() -> AnyPublisher<BirdOfTheDayData, Error> {
+        return fetchData(URLRequest(url: base))
+            .tryMap { String(data: $0, encoding: .isoLatin1)!}
+            .tryMap { (html) -> (url: URL, artID: Int) in
+                let matches = html.matches(regex: "assets/images/headImages/vdt/([0-9]+).jpg")
+                if matches.count == 2, let id = Int(matches[1]) {
+                    let url = base.appendingPathComponent(matches[0])
+                    return (url, id)
+                }
+                throw APIError.invalidResponse
+            }
+            .eraseToAnyPublisher()
+    }
+
+    static func getBirdOfTheDay(for id: Int) -> AnyPublisher<Data, Error> {
+        return fetchData(URLRequest(url: base.appendingPathComponent("assets/images/headImages/vdt/\(id).jpg")))
     }
 }

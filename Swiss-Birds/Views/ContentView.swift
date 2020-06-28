@@ -21,6 +21,13 @@ struct ContentView: View {
                 ActivityIndicatorView()
             }
         }
+        .overlay(
+            Group {
+                if state.showBirdOfTheDay {
+                    BirdOfTheDay(isPresented: $state.showBirdOfTheDay, url: self.state.birdOfTheDay!.url, speciesId: self.state.birdOfTheDay!.speciesID)
+                }
+            }
+        )
         .alert(isPresented: showAlert, content: { () -> Alert in
             Alert(title: Text("An error occured"),
                   message: Text(state.error!.localizedDescription),

@@ -24,6 +24,10 @@ class AppState : ObservableObject {
     @Published var selectedBirdId : Species.Id?   // Bird currently selected in bird list view
     @Published var restoredBirdId : Species.Id?   // Bird selected in list view last time the app was stopped
 
+    var previousBirdOfTheDay: Int = -1
+    @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
+    @Published var showBirdOfTheDay: Bool = false
+
     var cancellables = Set<AnyCancellable>()
 
     var headShotsCache: [Species.Id:UIImage] = [:]
@@ -33,6 +37,22 @@ class AppState : ObservableObject {
 
     private init() {
         initialLoadRunning = true
+
+        // Fetch the bird of the day
+        VdsAPI
+            .getBirdOfTheDaySpeciesIDandURL()
+            .map {Optional.some($0)}
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { (birdOfTheDay) in
+                self.birdOfTheDay = birdOfTheDay
+                if let botd = birdOfTheDay {
+                    let currentBirdOfTheDay = botd.speciesID
+                    print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay)")
+                    self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
+                }
+            })
+            .store(in: &cancellables)
 
         // Fetch the birds data
         VdsAPI
@@ -100,6 +120,24 @@ class AppState : ObservableObject {
             .eraseToAnyPublisher()
     }
 
+    func getBirdOfTheDay() -> AnyPublisher<UIImage?, Never> {
+        guard let speciesId = birdOfTheDay?.speciesID else {
+            return Just(nil).eraseToAnyPublisher()
+        }
+        // abuse headshots cache ;-)
+        // TODO write a unified image cache
+        if let image = headShotsCache[-speciesId] {
+            return Just(image).eraseToAnyPublisher()
+        }
+        return VdsAPI
+            .getBirdOfTheDay(for: speciesId)
+            .map { UIImage(data: $0) }
+            .map { self.headShotsCache[-speciesId] = $0; return $0 }
+            .replaceError(with: UIImage(named: "placeholder-headshot"))
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
@@ -108,7 +146,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)))"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)),previousBirdOfTheDay=\(previousBirdOfTheDay)"
     }
 }
 
@@ -141,7 +179,11 @@ extension AppState {
             if let selectedBird = stateArray[Key.selectedBird] as? Species.Id, selectedBird > -1  {
                 self.restoredBirdId = selectedBird
             }
-            
+            if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int  {
+                self.previousBirdOfTheDay = previousBirdOfTheDay
+                //self.previousBirdOfTheDay = -1
+            }
+
             print("restored state: \(self)")
         }
     }
@@ -157,6 +199,7 @@ extension AppState {
             Key.showFilters: showFilters,
             Key.activeFilters: storableList,
             Key.selectedBird: (selectedBirdId ?? -1) as Species.Id,
+            Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
         ]
         activity.addUserInfoEntries(from: stateArray)
         
@@ -168,5 +211,6 @@ extension AppState {
         static let showFilters = "showFilters"
         static let activeFilters = "activeFilters"
         static let selectedBird = "selectedBird"
+        static let previousBirdOfTheDay = "previousBirdOfTheDay"
     }
 }
