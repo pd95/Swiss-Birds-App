@@ -86,6 +86,7 @@ struct BirdDetail: View {
                                   author: imageDetails.author,
                                   description: imageDetails.description)
                         .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
+                        // Workaround scrollview issue: onLongPressGesture conflicts with ScrollView, so we add a tap gesture recognizer!?
                         .onTapGesture { }
                         .onLongPressGesture {
                             self.shareImageDetail(imageDetails)
