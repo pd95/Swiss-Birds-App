@@ -29,6 +29,8 @@ struct ContentView: View {
             }
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
             .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
+            .accessibilityElement(children: showBirdOfTheDay ? .ignore : .contain)
+            .accessibility(hidden: showBirdOfTheDay)
 
             if showBirdOfTheDay {
                 // Dimmed background
@@ -41,11 +43,15 @@ struct ContentView: View {
                             self.showBirdOfTheDay = false
                         }
                     }
+                    .accessibility(label: Text("Hindergrund"))
+                    .accessibility(hint: Text("Antippen zum schliessen."))
                     .zIndex(10)
+                    .accessibility(sortPriority: 990)
 
                 BirdOfTheDay(isPresented: $showBirdOfTheDay.animation(), url: self.state.birdOfTheDay!.url, speciesId: self.state.birdOfTheDay!.speciesID)
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(20)
+                    .accessibility(sortPriority: 1000)
             }
         }
         .onReceive(state.$showBirdOfTheDay.debounce(for: .seconds(1), scheduler: RunLoop.main)) { value in

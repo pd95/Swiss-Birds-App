@@ -54,9 +54,11 @@ struct BirdOfTheDay: View {
                         .animation(nil)
                 }
             }
-            .accessibility(identifier: "showBirdOfTheDay")
-            .accessibility(label: Text("Vogel des Tages \(species?.name ?? "") anzeigen"))
         }
+        .accessibilityElement(children: .combine)
+        .accessibility(identifier: "showBirdOfTheDay")
+        .accessibility(label: Text("Vogel des Tages: \(species?.name ?? "")"))
+        .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
         .overlay(dismissButton, alignment: .topTrailing)
         .animation(.easeIn)
         .onDisappear() {
@@ -87,6 +89,7 @@ struct BirdOfTheDay: View {
             Image(systemName: "xmark")
                 .imageScale(.large)
                 .foregroundColor(Color.secondary)
+                .padding(.vertical, 5)
         }
         .accessibility(identifier: "dismissBirdOfTheDay")
         .accessibility(label: Text("Schliessen"))
