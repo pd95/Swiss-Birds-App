@@ -47,7 +47,8 @@ class AppState : ObservableObject {
                 .map {Optional.some($0)}
                 .replaceError(with: nil)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveValue: { (birdOfTheDay) in
+                .sink(receiveValue: { [weak self] (birdOfTheDay) in
+                    guard let self = self else { return }
                     self.birdOfTheDay = birdOfTheDay
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
@@ -69,12 +70,14 @@ class AppState : ObservableObject {
             .map(loadSpeciesData)
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { completion in
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
                     }
                     self.initialLoadRunning = false
-                }, receiveValue: { (species) in
+                }, receiveValue: { [weak self] species in
+                    guard let self = self else { return }
                     self.allSpecies = species
             })
             .store(in: &cancellables)
@@ -85,11 +88,13 @@ class AppState : ObservableObject {
             .map(loadFilterData)
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { completion in
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
                     }
-                }, receiveValue: { (filters) in
+                }, receiveValue: { [weak self] filters in
+                    guard let self = self else { return }
                     Filter.allFiltersGrouped = filters
                     self.filters.objectWillChange.send()
             })
@@ -99,7 +104,8 @@ class AppState : ObservableObject {
         Publishers.CombineLatest3($allSpecies, $searchText, filters.objectWillChange)
             .subscribe(on: DispatchQueue.global())
             .debounce(for: .seconds(0.1), scheduler: DispatchQueue.global())
-            .map { (input: ([Species], String, Void)) -> [Species] in
+            .map { [weak self] (input: ([Species], String, Void)) -> [Species] in
+                guard let self = self else { return [] }
                 let (allSpecies, searchText, _) = input
                 let filtered = allSpecies
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
@@ -117,8 +123,11 @@ class AppState : ObservableObject {
         }
         return VdsAPI
             .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
-            .map { UIImage(data: $0) }
-            .map { self.headShotsCache[bird.speciesId] = $0; return $0 }
+            .map { [weak self] data in
+                let image = UIImage(data: data)
+                self?.headShotsCache[bird.speciesId] = image
+                return image
+            }
             .replaceError(with: UIImage(named: "placeholder-headshot"))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -135,8 +144,11 @@ class AppState : ObservableObject {
         }
         return VdsAPI
             .getBirdOfTheDay(for: speciesId)
-            .map { UIImage(data: $0) }
-            .map { self.headShotsCache[-speciesId] = $0; return $0 }
+            .map { [weak self] data in
+                let image = UIImage(data: data)
+                self?.headShotsCache[-speciesId] = image
+                return image
+            }
             .replaceError(with: UIImage(named: "placeholder-headshot"))
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

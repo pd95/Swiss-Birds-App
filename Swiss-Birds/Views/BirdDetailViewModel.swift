@@ -35,33 +35,36 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     func fetchData() {
+        let speciesId = bird.speciesId
         VdsAPI
-            .getSpecie(for: bird.speciesId)
+            .getSpecie(for: speciesId)
             .map { d -> VdsSpecieDetail? in d }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { completion in
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
                     }
                 },
-                receiveValue: { details in
-                if let details = details {
-                    var imageDetails = [ImageDetails]()
-                    if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{
-                        imageDetails.append(.init(index: 0, image: nil, author: author, description: description))
-                    }
-                    if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty{
-                        imageDetails.append(.init(index: 1, image: nil, author: author, description: description))
-                    }
-                    if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty{
-                        imageDetails.append(.init(index: 2, image: nil, author: author, description: description))
-                    }
-                    self.imageDetails = imageDetails
+                receiveValue: { [weak self] details in
+                    guard let self = self else { return }
+                    if let details = details {
+                        var imageDetails = [ImageDetails]()
+                        if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{
+                            imageDetails.append(.init(index: 0, image: nil, author: author, description: description))
+                        }
+                        if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty{
+                            imageDetails.append(.init(index: 1, image: nil, author: author, description: description))
+                        }
+                        if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty{
+                            imageDetails.append(.init(index: 2, image: nil, author: author, description: description))
+                        }
+                        self.imageDetails = imageDetails
 
-                    self.details = details
-                }
-            })
+                        self.details = details
+                    }
+                })
             .store(in: &cancellables)
 
         $imageDetails
@@ -78,8 +81,9 @@ class BirdDetailViewModel: ObservableObject {
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                result.forEach { (element) in
+            .sink(receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                result.forEach { element in
                     let (index, image) = element
                     if self.imageDetails[index].image == nil && image != nil {
                         self.imageDetails[index].image = image
@@ -96,7 +100,7 @@ class BirdDetailViewModel: ObservableObject {
             .filter({ $0.image != nil})
             .setFailureType(to: Error.self)
             .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
-                return VdsAPI.getVoice(for: self.bird.speciesId)
+                return VdsAPI.getVoice(for: speciesId)
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
@@ -107,7 +111,7 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
-        VdsAPI.getSpecieImage(for: self.bird.speciesId, number: imageDetail.index)
+        VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index)
             .map { UIImage(data: $0) }
             .replaceError(with: nil)
             .map { (image: UIImage?) -> (Int, UIImage?) in
