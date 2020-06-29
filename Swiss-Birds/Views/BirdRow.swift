@@ -43,7 +43,6 @@ struct BirdRow: View {
         .onReceive(state.getHeadShot(for: bird)) { (image) in
             self.image = image
         }
-//        .accessibilityElement(children: .contain)
     }
 }
 

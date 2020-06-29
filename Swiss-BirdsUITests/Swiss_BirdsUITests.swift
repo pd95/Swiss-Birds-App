@@ -67,7 +67,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     enum MyUIElements: String {
         case masterNavigationBar, detailNavigationBar
-        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton"
+        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton", showBirdOfTheDayButton = "showBirdOfTheDay", dismissBirdOfTheDayButton = "dismissBirdOfTheDay"
         case searchTextField = "searchText"
         case searchTextClearButton, searchTextCancelButton
         case birdDetailViewScrollView
@@ -79,7 +79,7 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().navigationBars.firstMatch
                 case .detailNavigationBar:
                     return XCUIApplication().navigationBars.element(boundBy: XCUIApplication().windows.firstMatch.horizontalSizeClass == .regular ? 1 : 0)
-                case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton:
+                case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton, .showBirdOfTheDayButton, .dismissBirdOfTheDayButton:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
                     return XCUIApplication().otherElements["searchBar"].searchFields.firstMatch
@@ -95,7 +95,16 @@ class Swiss_BirdsUITests: XCTestCase {
         }
     }
 
+    func dismissBirdOfTheDay() {
+        let dismissButton = MyUIElements.dismissBirdOfTheDayButton.element
+        if dismissButton.waitForExistence(timeout: 1.3) {
+            dismissButton.tap()
+        }
+    }
+
     func testMainNavigation() {
+        dismissBirdOfTheDay()
+
         let nav = MyUIElements.masterNavigationBar.element
         XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
 
@@ -109,7 +118,11 @@ class Swiss_BirdsUITests: XCTestCase {
     }
 
     func testFilterNavigation() {
-        MyUIElements.filterButton.element.tap()
+        dismissBirdOfTheDay()
+
+        let filterButton = MyUIElements.filterButton.element
+        filterButton.waitForExistence(timeout: wait4existenceTimeout)
+        filterButton.tap()
 
         MyUIElements.noFilteringButton.element.tap()
 
@@ -122,6 +135,8 @@ class Swiss_BirdsUITests: XCTestCase {
     }
 
     func testDetailNavigation() {
+        dismissBirdOfTheDay()
+
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 
@@ -133,6 +148,8 @@ class Swiss_BirdsUITests: XCTestCase {
     }
     
     func testTestFullNavigation() {
+        dismissBirdOfTheDay()
+
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 

@@ -69,6 +69,13 @@ class MarketingTests: XCTestCase {
     }
 
     func testMainNavigation() {
+        XCTContext.runActivity(named: "Dismiss bird of the day") { (_) in
+            let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
+            XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
+            takeScreenShot(app, name: "00_BirdOfTheDay")
+            dismissButton.tap()
+        }
+
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")

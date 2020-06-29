@@ -54,8 +54,10 @@ struct BirdOfTheDay: View {
                         .animation(nil)
                 }
             }
-
+            .accessibility(identifier: "showBirdOfTheDay")
+            .accessibility(label: Text("Vogel des Tages \(species?.name ?? "") anzeigen"))
         }
+        .overlay(dismissButton, alignment: .topTrailing)
         .animation(.easeIn)
         .onDisappear() {
             self.state.previousBirdOfTheDay = self.speciesId
@@ -76,6 +78,18 @@ struct BirdOfTheDay: View {
             .stroke(Color.primary, lineWidth: 0.5))
         .shadow(radius: 20)
         .padding()
+    }
+
+    var dismissButton: some View {
+        Button(action: {
+            self.isPresented = false
+        }) {
+            Image(systemName: "xmark")
+                .imageScale(.large)
+                .foregroundColor(Color.secondary)
+        }
+        .accessibility(identifier: "dismissBirdOfTheDay")
+        .accessibility(label: Text("Schliessen"))
     }
 }
 
