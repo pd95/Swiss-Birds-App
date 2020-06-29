@@ -23,6 +23,7 @@ struct ContentView: View {
                 }
                 else {
                     BirdList()
+                        .edgesIgnoringSafeArea(.bottom)
                         .zIndex(2)
                 }
             }
