@@ -16,6 +16,8 @@
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
+		176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
+		176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E324AA725C00D38E6B /* SettingsStore.swift */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
@@ -31,8 +33,8 @@
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
-		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
+		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -71,6 +73,8 @@
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
+		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		177965802453195D00A2A1B2 /* ManagedFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFilterList.swift; sourceTree = "<group>"; };
 		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
@@ -102,8 +106,8 @@
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
-		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
+		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17F7195C23A825C20060F02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7195E23A825C30060F02F /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17F7196023A825C50060F02F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				1779657E2453184D00A2A1B2 /* Extensions.swift */,
+				176E89E124AA71D200D38E6B /* UserDefault.swift */,
 				175CC8E124856C3C006F99D3 /* API */,
 				17D1A502236CD96900E8588C /* Models */,
 				17D1A503236CD97800E8588C /* Views */,
@@ -231,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				1703131E2382DDF2007E2EE3 /* AppState.swift */,
+				176E89E324AA725C00D38E6B /* SettingsStore.swift */,
 				17206830236B5A920008905F /* Filter.swift */,
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
@@ -408,6 +414,7 @@
 				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
 				17206831236B5A920008905F /* Filter.swift in Sources */,
+				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
@@ -422,8 +429,8 @@
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
 				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
+				176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
-				17ECD39C24A6564A00226BF4 /* BirdImageView.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,

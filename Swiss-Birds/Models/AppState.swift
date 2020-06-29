@@ -10,6 +10,8 @@ import SwiftUI
 import Combine
 
 class AppState : ObservableObject {
+    let settings = SettingsStore()
+
     @Published var initialLoadRunning: Bool
 
     @Published var searchText : String = ""
@@ -39,20 +41,22 @@ class AppState : ObservableObject {
         initialLoadRunning = true
 
         // Fetch the bird of the day
-        VdsAPI
-            .getBirdOfTheDaySpeciesIDandURL()
-            .map {Optional.some($0)}
-            .replaceError(with: nil)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { (birdOfTheDay) in
-                self.birdOfTheDay = birdOfTheDay
-                if let botd = birdOfTheDay {
-                    let currentBirdOfTheDay = botd.speciesID
-                    print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay)")
-                    self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
-                }
-            })
-            .store(in: &cancellables)
+        if settings.startupCheckBirdOfTheDay {
+            VdsAPI
+                .getBirdOfTheDaySpeciesIDandURL()
+                .map {Optional.some($0)}
+                .replaceError(with: nil)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { (birdOfTheDay) in
+                    self.birdOfTheDay = birdOfTheDay
+                    if let botd = birdOfTheDay {
+                        let currentBirdOfTheDay = botd.speciesID
+                        print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay)")
+                        self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
+                    }
+                })
+                .store(in: &cancellables)
+        }
 
         // Fetch the birds data
         VdsAPI
