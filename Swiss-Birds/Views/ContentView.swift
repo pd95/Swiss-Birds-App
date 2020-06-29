@@ -10,31 +10,53 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var state : AppState
-    @State var isPortrait : Bool = true
+
+    @State private var isPortrait : Bool = true
+    @State private var showBirdOfTheDay = false
     
     var body: some View {
-        NavigationView {
-            if !state.initialLoadRunning {
-                BirdList()
-            }
-            else {
-                ActivityIndicatorView()
-            }
-        }
-        .overlay(
-            Group {
-                if state.showBirdOfTheDay {
-                    BirdOfTheDay(isPresented: $state.showBirdOfTheDay, url: self.state.birdOfTheDay!.url, speciesId: self.state.birdOfTheDay!.speciesID)
+        ZStack {
+            NavigationView {
+                if state.initialLoadRunning {
+                    ActivityIndicatorView()
+                        .zIndex(1)
+                }
+                else {
+                    BirdList()
+                        .zIndex(2)
                 }
             }
-        )
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
+
+            if showBirdOfTheDay {
+                // Dimmed background
+                Color.primary
+                    .opacity(0.4)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .onTapGesture {
+                        withAnimation {
+                            self.showBirdOfTheDay = false
+                        }
+                    }
+                    .zIndex(10)
+
+                BirdOfTheDay(isPresented: $showBirdOfTheDay.animation(), url: self.state.birdOfTheDay!.url, speciesId: self.state.birdOfTheDay!.speciesID)
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(20)
+            }
+        }
+        .onReceive(state.$showBirdOfTheDay.debounce(for: .seconds(1), scheduler: RunLoop.main)) { value in
+            withAnimation {
+                self.showBirdOfTheDay = value
+            }
+        }
         .alert(isPresented: showAlert, content: { () -> Alert in
             Alert(title: Text("An error occured"),
                   message: Text(state.error!.localizedDescription),
                   dismissButton: .default(Text("Dismiss")))
         })
-        .navigationViewStyle(DoubleColumnNavigationViewStyle())
-        .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
         .onReceive(
             NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification, object: nil)) { notification in
                 guard let device = notification.object as? UIDevice else {

@@ -22,16 +22,10 @@ struct BirdOfTheDay: View {
         VStack {
             Text("Vogel des Tages")
                 .font(.title)
-            Text(species?.name ?? " ")
-                .font(.largeTitle)
-                .lineLimit(1)
-                .minimumScaleFactor(0.2)
 
             Button(action: {
-                withAnimation {
-                    self.state.restoredBirdId = self.speciesId
-                    self.isPresented = false
-                }
+                self.state.restoredBirdId = self.speciesId
+                self.isPresented = false
             }) {
                 VStack {
                     Rectangle()
@@ -53,18 +47,26 @@ struct BirdOfTheDay: View {
                         .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.primary, lineWidth: 0.5))
 
-                    Text("Zum Vogel des Tages")
+                    Text(species?.name ?? " ")
+                        .font(.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.2)
+                        .animation(nil)
                 }
             }
+
         }
+        .animation(.easeIn)
         .onDisappear() {
             self.state.previousBirdOfTheDay = self.speciesId
         }
 
         // Fetch image and species data
         .onReceive(state.getBirdOfTheDay()) { (image) in
-            self.image = image
-            self.species = Species.species(for: self.speciesId)
+            withAnimation(.none) {
+                self.image = image
+                self.species = Species.species(for: self.speciesId)
+            }
         }
 
         .padding()
@@ -74,17 +76,6 @@ struct BirdOfTheDay: View {
             .stroke(Color.primary, lineWidth: 0.5))
         .shadow(radius: 20)
         .padding()
-
-        // Dimmed background
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.all)
-        .background(Color(.gray).opacity(0.4))
-        .animation(Animation.easeInOut)
-        .onTapGesture {
-            withAnimation {
-                self.isPresented = false
-            }
-        }
     }
 }
 
