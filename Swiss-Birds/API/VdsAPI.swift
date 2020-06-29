@@ -110,6 +110,6 @@ enum VdsAPI {
     }
 
     static func getBirdOfTheDay(for id: Int) -> AnyPublisher<Data, Error> {
-        return fetchData(URLRequest(url: base.appendingPathComponent("assets/images/headImages/vdt/\(id).jpg")))
+        return fetchData(URLRequest(url: base.appendingPathComponent("assets/images/headImages/vdt/\(String(format: "%04d", id)).jpg")))
     }
 }
