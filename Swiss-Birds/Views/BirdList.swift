@@ -55,7 +55,9 @@ struct BirdList: View {
                     HStack {
                         Text("Filter")
                         Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
+                            .imageScale(.large)
                     }
+                    .accessibilityElement(children: .combine)
                 }
                 .disabled(Filter.allFiltersGrouped.isEmpty)
                 .accessibility(identifier: "filterButton")

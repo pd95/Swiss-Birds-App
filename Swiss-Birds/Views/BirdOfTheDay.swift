@@ -89,7 +89,7 @@ struct BirdOfTheDay: View {
             Image(systemName: "xmark")
                 .imageScale(.large)
                 .foregroundColor(Color.secondary)
-                .padding(.vertical, 5)
+                .padding(10)
         }
         .accessibility(identifier: "dismissBirdOfTheDay")
         .accessibility(label: Text("Schliessen"))

@@ -40,6 +40,7 @@ struct BirdRow: View {
             SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
                 .accessibility(hidden: true)
         }
+        .accessibilityElement(children: .combine)
         .onReceive(state.getHeadShot(for: bird)) { (image) in
             self.image = image
         }

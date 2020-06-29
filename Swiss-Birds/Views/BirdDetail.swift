@@ -109,7 +109,8 @@ struct BirdDetail: View {
             Button(action: self.shareDetails, label: {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
-                    .padding(.vertical)
+                    .padding()
+                    .accessibility(label: Text("Teilen"))
             })
             .disabled(self.model.details == nil)
         )
