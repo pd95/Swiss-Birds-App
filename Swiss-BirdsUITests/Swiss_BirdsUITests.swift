@@ -25,6 +25,7 @@ class Swiss_BirdsUITests: XCTestCase {
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         app = XCUIApplication()
         app.launchArguments.append("enable-testing")
+        app.launchArguments.append("no-birdoftheday")
         app.launch()
 
         // Rotate iPad
@@ -95,16 +96,7 @@ class Swiss_BirdsUITests: XCTestCase {
         }
     }
 
-    func dismissBirdOfTheDay() {
-        let dismissButton = MyUIElements.dismissBirdOfTheDayButton.element
-        if dismissButton.waitForExistence(timeout: 1.3) {
-            dismissButton.tap()
-        }
-    }
-
     func testMainNavigation() {
-        dismissBirdOfTheDay()
-
         let nav = MyUIElements.masterNavigationBar.element
         XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
 
@@ -118,8 +110,6 @@ class Swiss_BirdsUITests: XCTestCase {
     }
 
     func testFilterNavigation() {
-        dismissBirdOfTheDay()
-
         let filterButton = MyUIElements.filterButton.element
         filterButton.waitForExistence(timeout: wait4existenceTimeout)
         filterButton.tap()
@@ -135,8 +125,6 @@ class Swiss_BirdsUITests: XCTestCase {
     }
 
     func testDetailNavigation() {
-        dismissBirdOfTheDay()
-
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 
@@ -148,8 +136,6 @@ class Swiss_BirdsUITests: XCTestCase {
     }
     
     func testTestFullNavigation() {
-        dismissBirdOfTheDay()
-
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 

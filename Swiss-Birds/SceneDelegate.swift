@@ -25,10 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let contentView = ContentView()
             .environmentObject(appState)
 
-        if let activity = session.stateRestorationActivity,
-            !CommandLine.arguments.contains("enable-testing") {
-            appState.restore(from: activity)
+        if CommandLine.arguments.contains("enable-testing") {
+            appState.settings.setupForTesting()
         }
+        else {
+            if let activity = session.stateRestorationActivity {
+                appState.restore(from: activity)
+            }
+        }
+
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
