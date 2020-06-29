@@ -111,7 +111,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
     func testFilterNavigation() {
         let filterButton = MyUIElements.filterButton.element
-        filterButton.waitForExistence(timeout: wait4existenceTimeout)
+        _ = filterButton.waitForExistence(timeout: wait4existenceTimeout)
         filterButton.tap()
 
         MyUIElements.noFilteringButton.element.tap()
