@@ -21,19 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let appState = AppState.shared
         let contentView = ContentView()
-            .environmentObject(appState)
-
-        if CommandLine.arguments.contains("enable-testing") {
-            appState.settings.setupForTesting()
-        }
-        else {
-            if let activity = session.stateRestorationActivity {
-                appState.restore(from: activity)
-            }
-        }
-
+            .environmentObject(AppState())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -70,11 +59,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }
-    
-    func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
-        let activity = NSUserActivity(activityType: Bundle.main.activityType)
-        AppState.shared.store(in: activity)
-        return activity
     }
 }

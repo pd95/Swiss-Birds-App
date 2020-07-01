@@ -13,18 +13,14 @@ struct BirdOfTheDay: View {
     @Binding var isPresented: Bool
 
     let url: URL
-    let speciesId: Species.Id
-
-    @State private var image : UIImage?
-    @State private var species: Species?
+    let speciesId: Int
 
     var body: some View {
         VStack {
-            Text("Vogel des Tages")
+            Text("Bird of the day")
                 .font(.title)
 
             Button(action: {
-                self.state.restoredBirdId = self.speciesId
                 self.isPresented = false
             }) {
                 VStack {
@@ -33,46 +29,33 @@ struct BirdOfTheDay: View {
                         .frame(maxWidth: 320, maxHeight: 220)
                         .background(
                             Group {
-                                if image != nil {
-                                    Image(uiImage: image!)
+                                if state.image != nil {
+                                    Image(uiImage: state.image!)
                                         .renderingMode(.original)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                 }
                                 else {
-                                    ActivityIndicatorView()
+                                    if !self.state.loadImage {
+                                        Button("Load Image") {
+                                            self.state.loadImage = true
+                                            // Fetch image and species data
+                                            self.state.getBirdOfTheDay()
+                                        }
+                                    }
+                                    else {
+                                        ActivityIndicatorView()
+                                    }
                                 }
                             })
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.primary, lineWidth: 0.5))
-
-                    Text(species?.name ?? " ")
-                        .font(.title)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.2)
-                        .animation(nil)
                 }
             }
         }
-        .accessibilityElement(children: .combine)
-        .accessibility(identifier: "showBirdOfTheDay")
-        .accessibility(label: Text("Vogel des Tages: \(species?.name ?? "")"))
-        .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
         .overlay(dismissButton, alignment: .topTrailing)
         .animation(.easeIn)
-        .onDisappear() {
-            self.state.previousBirdOfTheDay = self.speciesId
-        }
-
-        // Fetch image and species data
-        .onReceive(state.getBirdOfTheDay()) { (image) in
-            withAnimation(.none) {
-                self.image = image
-                self.species = Species.species(for: self.speciesId)
-            }
-        }
-
         .padding()
         .background(Color(.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -91,14 +74,12 @@ struct BirdOfTheDay: View {
                 .foregroundColor(Color.secondary)
                 .padding(10)
         }
-        .accessibility(identifier: "dismissBirdOfTheDay")
-        .accessibility(label: Text("Schliessen"))
     }
 }
 
 struct BirdOfTheDay_Previews: PreviewProvider {
     static var previews: some View {
         BirdOfTheDay(isPresented: .constant(true), url: URL(string: "https://www.vogelwarte.ch/assets/images/headImages/vdt/3640.jpg")!, speciesId: 3640)
-            .environmentObject(AppState.shared)
+            .environmentObject(AppState())
     }
 }

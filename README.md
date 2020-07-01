@@ -1,39 +1,52 @@
-#  Birds of Switzerland
+#  Memory leak in `Publisher.replaceError` 
 
-This is the missing app which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch). They do have a really nice website where you can lookup birds found in Switzerland and get more detailed information, but they are missing an iPhone app which makes the same information easily accessible "on the go".  
-This is why I started to develop this app in November 2019.
+This example code, which is derived from my full app (see master branch of https://github.com/pd95/Swiss-Birds-App), illustrates a memory leak caused by the `Publisher.replaceError()` modifier.
 
-The goal is to provide an app accessing the data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
+When the SwiftUI `ContentView` is displayed, a request for the "Bird of the day" is initiated (through `AppState.checkBirdOfTheDay`). In `VdsAPI.getBirdOfTheDaySpeciesIDandURL` a network request will load the homepage data from the base URL (`URLSession.dataTaskPublisher`). When the response is received, data is extracted, transformed and passed along the publisher chain. As the UI view does currently not care about possible errors, I use `replaceError(with: nil)` to simply ignore the response.
 
-This app is loading the list of birds, images and sounds from the website and caches them locally, so the already fetched data can be accessed "on the go".
+Here follows the relevant part of `AppState.swift` with the "error handling":
+```swift
+VdsAPI
+    .getBirdOfTheDaySpeciesIDandURL()
+    .map {Optional.some($0)}
+    .replaceError(with: nil)     // FIXME
+    .receive(on: DispatchQueue.main)
+    .print()
+    .sink(
+        receiveCompletion: { (result) in
+            print(result)
+        },
+        receiveValue: { [unowned self] (birdOfTheDay) in
+            self.birdOfTheDay = birdOfTheDay
+            self.showBirdOfTheDay = true
+        })
+```
+With this implementation, the app leaks memory, as soon as the app has started.
 
-## How to build the app
+1. Compile and run the app
+2. Use "Debug Memory Graph" and find the following situation:
+        ![Memory Leak](Memory-Leak.png)
+3. If you continue the execution and then press the button "Load image", the "bird of the day" will be displayed... and more memory was leaked, because the `AppState.getBirdOfTheDay` is similarly using the `replaceError` method to substitute a placeholder image in case an error occurs. See the code below:
 
-The script to prefetch the data has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
+```swift
+VdsAPI
+    .getBirdOfTheDay(for: speciesId)
+    .map { data in
+        let image = UIImage(data: data)
+        return image
+    }
+    .replaceError(with: UIImage(named: "placeholder-headshot")) // FIXME
+    .receive(on: DispatchQueue.main)
+    .sink(
+        receiveCompletion: { (result) in
+            print(result)
+        },
+        receiveValue: { [unowned self] (image) in
+            self.image = image
+        })
+```
 
-1. Run the script `./fetch_data.sh` in the `data-scripts` directory.  
-  This will first fetch the list of birds and filter categories, cleanup the data (remove duplicates) and then fetch detailed information, images and voices. Expected runtime: *10 minutes*
 
-2. Run the script `./prepare_Filter.xcassets.sh`  
-  This will create a `Filter.xcassets` folder containing the transformed SVG symbols for the filter categories.
+## Workaround
 
-3. Move the resulting `Filter.xcassets` into the app folder (along with `Assets.xcassets`): `mv Filter.xcassets ../Swiss-Birds/`
-
-4. Start-up Xcode (at least version 13 is needed as the UI is completely build using SwiftUI) and try building the app for the simulator.  
-  If you want to deploy the app to your device, you will have to create a `LocalConfig.xcconfig` file with the following content (updated to your developer account)
-
-        // Local Config
-        PRODUCT_BUNDLE_IDENTIFIER = Swiss-Birds
-        DEVELOPMENT_TEAM = A1BC22XYZ
-        CODE_SIGN_STYLE = Automatic
-
-## Acknowledgments
-
-1. [Swiss Ornithological Institute](https://vogelwarte.ch) for their information gathering and their research and conservation projects to support our native birds.    
-They have also a great website with much more information.
-2. [@kocher_sandra](https://twitter.com/kocher_sandra) for the permission to her photograph of a Blue Tit as icon and start-up image
-
-## Impressions
-
-![iPhone Bird Search](_Pictures/iPhoneX_01_Bird_Search_de.gif)
-![iPhone Filter Search](_Pictures/iPhoneX_02_Filter_Search_de.gif)
+Avoid `Publisher.replaceError` and handle the error in `.sink`
