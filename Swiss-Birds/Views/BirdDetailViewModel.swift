@@ -11,7 +11,7 @@ import SwiftUI
 
 class BirdDetailViewModel: ObservableObject {
 
-    typealias UIImagePublisher = AnyPublisher<(Int, UIImage?), Never>
+    typealias UIImagePublisher = AnyPublisher<(Int, UIImage?), Error>
 
     let bird: Species
 
@@ -43,14 +43,12 @@ class BirdDetailViewModel: ObservableObject {
             .map { d -> VdsSpecieDetail? in d }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [weak self] completion in
-                    guard let self = self else { return }
+                receiveCompletion: { [unowned self] completion in
                     if case .failure(let error) = completion {
                         self.error = error
                     }
                 },
-                receiveValue: { [weak self] details in
-                    guard let self = self else { return }
+                receiveValue: { [unowned self] details in
                     if let details = details {
                         self.details = details
                     }
@@ -73,7 +71,8 @@ class BirdDetailViewModel: ObservableObject {
                 self.imageDetails = imageDetails
                 return imageDetails
             })
-            .flatMap {[unowned self] (imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Never> in
+            .setFailureType(to: Error.self)
+            .flatMap {[unowned self] (imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Error> in
                 // Generate publisher for each missing image
                 let publishers = imageDetails
                     .filter{ $0.image == nil }
@@ -81,21 +80,25 @@ class BirdDetailViewModel: ObservableObject {
                         self.fetchImage(imageDetail: imageDetail)
                     })
 
-                let sequence = Publishers.Sequence<[UIImagePublisher], Never>(sequence: publishers)
+                let sequence = Publishers.Sequence<[UIImagePublisher], Error>(sequence: publishers)
                 return sequence.flatMap{ $0 }.collect()
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [unowned self] result in
-                result.forEach { element in
-                    let (index, image) = element
-                    if self.imageDetails[index].image == nil && image != nil {
-                        self.imageDetails[index].image = image
+            .sink(
+                receiveCompletion: { result in
+                    print("fetch imageDetails", result)
+                },
+                receiveValue: { [unowned self] result in
+                    result.forEach { element in
+                        let (index, image) = element
+                        if self.imageDetails[index].image == nil && image != nil {
+                            self.imageDetails[index].image = image
+                        }
                     }
-                }
-                self.objectWillChange.send()
-                print("\(result.count) images load")
-            })
+                    self.objectWillChange.send()
+                    print("\(result.count) images load")
+                })
 
         // Fetch voice data 1s after details have been load
         getVoiceCancellable = $imageDetails
@@ -107,15 +110,22 @@ class BirdDetailViewModel: ObservableObject {
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
-            .replaceError(with: nil)
+            //.replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .assign(to: \.voiceData, on: self)
+            //.assign(to: \.voiceData, on: self)
+            .sink(
+                receiveCompletion: { result in
+                    print("fetch voiceData", result)
+                },
+                receiveValue: { [unowned self] data in
+                    self.voiceData = data
+            })
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
         VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index)
             .map { UIImage(data: $0) }
-            .replaceError(with: nil)
+            //.replaceError(with: nil)
             .map { (image: UIImage?) -> (Int, UIImage?) in
                 return (imageDetail.index, image)
             }
