@@ -28,15 +28,17 @@ class BirdDetailViewModel: ObservableObject {
         let description: String
     }
 
-    var cancellables = Set<AnyCancellable>()
-
     init(bird: Species) {
         self.bird = bird
     }
 
+    var getSpecieCancellable: AnyCancellable?
+    var getImageDetailsCancellable: AnyCancellable?
+    var getVoiceCancellable: AnyCancellable?
+
     func fetchData() {
         let speciesId = bird.speciesId
-        VdsAPI
+        getSpecieCancellable = VdsAPI
             .getSpecie(for: speciesId)
             .map { d -> VdsSpecieDetail? in d }
             .receive(on: DispatchQueue.main)
@@ -50,25 +52,28 @@ class BirdDetailViewModel: ObservableObject {
                 receiveValue: { [weak self] details in
                     guard let self = self else { return }
                     if let details = details {
-                        var imageDetails = [ImageDetails]()
-                        if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{
-                            imageDetails.append(.init(index: 0, image: nil, author: author, description: description))
-                        }
-                        if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty{
-                            imageDetails.append(.init(index: 1, image: nil, author: author, description: description))
-                        }
-                        if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty{
-                            imageDetails.append(.init(index: 2, image: nil, author: author, description: description))
-                        }
-                        self.imageDetails = imageDetails
-
                         self.details = details
                     }
                 })
-            .store(in: &cancellables)
 
-        $imageDetails
-            .flatMap { imageDetails -> AnyPublisher<[(Int, UIImage?)], Never> in
+        getImageDetailsCancellable = $details
+            .compactMap {$0}
+            .receive(on: DispatchQueue.main)
+            .map({ [unowned self] (details: VdsSpecieDetail) -> [ImageDetails] in
+                var imageDetails = [ImageDetails]()
+                if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{
+                    imageDetails.append(.init(index: 0, image: nil, author: author, description: description))
+                }
+                if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty{
+                    imageDetails.append(.init(index: 1, image: nil, author: author, description: description))
+                }
+                if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty{
+                    imageDetails.append(.init(index: 2, image: nil, author: author, description: description))
+                }
+                self.imageDetails = imageDetails
+                return imageDetails
+            })
+            .flatMap {[unowned self] (imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Never> in
                 // Generate publisher for each missing image
                 let publishers = imageDetails
                     .filter{ $0.image == nil }
@@ -81,8 +86,7 @@ class BirdDetailViewModel: ObservableObject {
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] result in
-                guard let self = self else { return }
+            .sink(receiveValue: { [unowned self] result in
                 result.forEach { element in
                     let (index, image) = element
                     if self.imageDetails[index].image == nil && image != nil {
@@ -92,22 +96,20 @@ class BirdDetailViewModel: ObservableObject {
                 self.objectWillChange.send()
                 print("\(result.count) images load")
             })
-            .store(in: &cancellables)
 
         // Fetch voice data 1s after details have been load
-        $imageDetails
+        getVoiceCancellable = $imageDetails
             .compactMap({ $0.first })
             .filter({ $0.image != nil})
             .setFailureType(to: Error.self)
             .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
-                return VdsAPI.getVoice(for: speciesId)
+                VdsAPI.getVoice(for: speciesId)
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
             .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
             .assign(to: \.voiceData, on: self)
-            .store(in: &cancellables)
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {

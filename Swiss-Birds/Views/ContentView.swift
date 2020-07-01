@@ -6,6 +6,7 @@
 //  Copyright © 2019 Philipp. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 struct ContentView: View {
@@ -13,6 +14,7 @@ struct ContentView: View {
 
     @State private var isPortrait : Bool = true
     @State private var showBirdOfTheDay = false
+    @State private var cancellable: AnyCancellable?
     
     var body: some View {
         ZStack {
@@ -53,6 +55,9 @@ struct ContentView: View {
                     .zIndex(20)
                     .accessibility(sortPriority: 1000)
             }
+        }
+        .onAppear() {
+            self.cancellable = self.state.checkBirdOfTheDay()
         }
         .onReceive(state.$showBirdOfTheDay.debounce(for: .seconds(1), scheduler: RunLoop.main)) { value in
             withAnimation {

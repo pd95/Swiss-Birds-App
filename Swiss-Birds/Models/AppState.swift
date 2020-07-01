@@ -40,25 +40,6 @@ class AppState : ObservableObject {
     private init() {
         initialLoadRunning = true
 
-        // Fetch the bird of the day
-        if settings.startupCheckBirdOfTheDay {
-            VdsAPI
-                .getBirdOfTheDaySpeciesIDandURL()
-                .map {Optional.some($0)}
-                .replaceError(with: nil)
-                .receive(on: DispatchQueue.main)
-                .sink(receiveValue: { [weak self] (birdOfTheDay) in
-                    guard let self = self else { return }
-                    self.birdOfTheDay = birdOfTheDay
-                    if let botd = birdOfTheDay {
-                        let currentBirdOfTheDay = botd.speciesID
-                        print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay)")
-                        self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
-                    }
-                })
-                .store(in: &cancellables)
-        }
-
         // Fetch the birds data
         VdsAPI
             .getBirds()
@@ -104,6 +85,7 @@ class AppState : ObservableObject {
         Publishers.CombineLatest3($allSpecies, $searchText, filters.objectWillChange)
             .subscribe(on: DispatchQueue.global())
             .debounce(for: .seconds(0.1), scheduler: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
             .map { [weak self] (input: ([Species], String, Void)) -> [Species] in
                 guard let self = self else { return [] }
                 let (allSpecies, searchText, _) = input
@@ -112,7 +94,6 @@ class AppState : ObservableObject {
                 print("filtered.count = \(filtered.count)")
                 return filtered
             }
-            .receive(on: DispatchQueue.main)
             .assign(to: \.matchingSpecies, on: self)
             .store(in: &cancellables)
     }
@@ -123,14 +104,34 @@ class AppState : ObservableObject {
         }
         return VdsAPI
             .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
+            .receive(on: DispatchQueue.main)
             .map { [weak self] data in
                 let image = UIImage(data: data)
                 self?.headShotsCache[bird.speciesId] = image
                 return image
             }
             .replaceError(with: UIImage(named: "placeholder-headshot"))
-            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+    }
+
+    func checkBirdOfTheDay() -> AnyCancellable? {
+        if !settings.startupCheckBirdOfTheDay {
+            return nil
+        }
+        // Fetch the bird of the day
+        return VdsAPI
+            .getBirdOfTheDaySpeciesIDandURL()
+            .map {Optional.some($0)}
+            .replaceError(with: nil)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [unowned self] (birdOfTheDay) in
+                self.birdOfTheDay = birdOfTheDay
+                if let botd = birdOfTheDay {
+                    let currentBirdOfTheDay = botd.speciesID
+                    self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
+                    print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay): show = \(self.showBirdOfTheDay)")
+                }
+            })
     }
 
     func getBirdOfTheDay() -> AnyPublisher<UIImage?, Never> {
@@ -144,9 +145,9 @@ class AppState : ObservableObject {
         }
         return VdsAPI
             .getBirdOfTheDay(for: speciesId)
-            .map { [weak self] data in
+            .map { [unowned self] data in
                 let image = UIImage(data: data)
-                self?.headShotsCache[-speciesId] = image
+                self.headShotsCache[-speciesId] = image
                 return image
             }
             .replaceError(with: UIImage(named: "placeholder-headshot"))

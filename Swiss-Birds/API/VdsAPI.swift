@@ -97,8 +97,8 @@ enum VdsAPI {
 
     static func getBirdOfTheDaySpeciesIDandURL() -> AnyPublisher<BirdOfTheDayData, Error> {
         return fetchData(URLRequest(url: base))
-            .tryMap { String(data: $0, encoding: .isoLatin1)!}
-            .tryMap { (html) -> (url: URL, artID: Int) in
+            .tryMap { (data) -> (url: URL, artID: Int) in
+                let html = String(data: data, encoding: .isoLatin1)!
                 let matches = html.matches(regex: "assets/images/headImages/vdt/([0-9]+).jpg")
                 if matches.count == 2, let id = Int(matches[1]) {
                     let url = base.appendingPathComponent(matches[0])
