@@ -61,12 +61,15 @@ struct BirdOfTheDay: View {
         .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
         .overlay(dismissButton, alignment: .topTrailing)
         .animation(.easeIn)
+        .onAppear() {
+            self.state.getBirdOfTheDay()
+        }
         .onDisappear() {
             self.state.previousBirdOfTheDay = self.speciesId
         }
 
         // Fetch image and species data
-        .onReceive(state.getBirdOfTheDay()) { (image) in
+        .onReceive(self.state.$birdOfTheDayImage) { (image) in
             withAnimation(.none) {
                 self.image = image
                 self.species = Species.species(for: self.speciesId)

@@ -28,6 +28,7 @@ class AppState : ObservableObject {
 
     var previousBirdOfTheDay: Int = -1
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
+    @Published var birdOfTheDayImage: UIImage?
     @Published var showBirdOfTheDay: Bool = false
 
     var cancellables = Set<AnyCancellable>()
@@ -114,17 +115,22 @@ class AppState : ObservableObject {
             .eraseToAnyPublisher()
     }
 
-    func checkBirdOfTheDay() -> AnyCancellable? {
+    func checkBirdOfTheDay() {
         if !settings.startupCheckBirdOfTheDay {
-            return nil
+            return
         }
         // Fetch the bird of the day
-        return VdsAPI
+        VdsAPI
             .getBirdOfTheDaySpeciesIDandURL()
             .map {Optional.some($0)}
-            .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [unowned self] (birdOfTheDay) in
+            .sink(receiveCompletion: { [unowned self] result in
+                if case .failure(let error) = result {
+                    self.error = error
+                    self.birdOfTheDay = nil
+                }
+            },
+                receiveValue: { [unowned self] (birdOfTheDay) in
                 self.birdOfTheDay = birdOfTheDay
                 if let botd = birdOfTheDay {
                     let currentBirdOfTheDay = botd.speciesID
@@ -132,27 +138,30 @@ class AppState : ObservableObject {
                     print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay): show = \(self.showBirdOfTheDay)")
                 }
             })
+            .store(in: &cancellables)
     }
 
-    func getBirdOfTheDay() -> AnyPublisher<UIImage?, Never> {
+    func getBirdOfTheDay() {
         guard let speciesId = birdOfTheDay?.speciesID else {
-            return Just(nil).eraseToAnyPublisher()
+            return
         }
-        // abuse headshots cache ;-)
-        // TODO write a unified image cache
-        if let image = headShotsCache[-speciesId] {
-            return Just(image).eraseToAnyPublisher()
-        }
-        return VdsAPI
+        VdsAPI
             .getBirdOfTheDay(for: speciesId)
             .map { [unowned self] data in
                 let image = UIImage(data: data)
                 self.headShotsCache[-speciesId] = image
                 return image
             }
-            .replaceError(with: UIImage(named: "placeholder-headshot"))
             .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+            .sink(receiveCompletion: { [unowned self] (result) in
+                if case .failure(let error) = result {
+                    self.error = error
+                    self.birdOfTheDayImage = nil
+                }
+            }, receiveValue: { [unowned self] (image) in
+                self.birdOfTheDayImage = image
+            })
+            .store(in: &cancellables)
     }
 
     /// Returns the number of all species which would currently match the active filters
