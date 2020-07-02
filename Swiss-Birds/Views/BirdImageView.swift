@@ -21,8 +21,10 @@ struct BirdImageView: View {
                     .aspectRatio(contentMode: .fit)
             }
             else {
-                ActivityIndicatorView()
-                    .padding(50)
+                Color.clear
+                    .frame(maxWidth: .infinity)
+                    .overlay(ActivityIndicatorView())
+                    .aspectRatio(1.5, contentMode: .fit)
             }
             HStack {
                 Text(description)
