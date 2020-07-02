@@ -59,7 +59,7 @@ struct BirdOfTheDay: View {
         .accessibility(identifier: "showBirdOfTheDay")
         .accessibility(label: Text("Vogel des Tages: \(species?.name ?? "")"))
         .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
-        .overlay(dismissButton, alignment: .topTrailing)
+        .overlay(dismissButton, alignment: .topLeading)
         .animation(.easeIn)
         .onAppear() {
             self.state.getBirdOfTheDay()
