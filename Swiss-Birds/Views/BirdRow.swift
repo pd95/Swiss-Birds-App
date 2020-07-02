@@ -11,11 +11,16 @@ import SwiftUI
 struct BirdRow: View {
     var bird: Species
 
+    @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject private var state : AppState
     @State var image: UIImage? = UIImage(named: "placeholder-headshot")
     
     func hasEntwicklungsAtlasSymbol() -> Bool {
         return bird.filterSymbolName(.entwicklungatlas).count > 0
+    }
+
+    var dynamicImageSize: CGFloat {
+        UIFontMetrics.default.scaledValue(for: 40)
     }
     
     var body: some View {
@@ -24,7 +29,7 @@ struct BirdRow: View {
                 Image(uiImage: self.image!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
+                    .frame(width: dynamicImageSize, height: dynamicImageSize)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
                     .shadow(radius: 4)
@@ -33,12 +38,14 @@ struct BirdRow: View {
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
-            if hasEntwicklungsAtlasSymbol() {
-                SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
+            if !sizeCategory.isAccessibilityCategory {
+                if hasEntwicklungsAtlasSymbol() {
+                    SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
+                        .accessibility(hidden: true)
+                }
+                SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
                     .accessibility(hidden: true)
             }
-            SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
-                .accessibility(hidden: true)
         }
         .accessibilityElement(children: .combine)
         .onReceive(state.getHeadShot(for: bird)) { (image) in

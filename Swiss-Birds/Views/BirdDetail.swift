@@ -12,6 +12,7 @@ import AVKit
 
 struct BirdDetail: View {
     @Environment(\.horizontalSizeClass) var sizeClass
+    @Environment(\.sizeCategory) var sizeCategory
     @ObservedObject var model: BirdDetailViewModel
 
     private let bird: Species
@@ -82,7 +83,7 @@ struct BirdDetail: View {
                     .accessibility(label: Text("Stimme wiedergeben"))
                     .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                 }
-                if sizeClass == .regular {
+                if sizeClass == .regular && !sizeCategory.isAccessibilityCategory  {
                     HStack(alignment: .center) {
                         birdImages
                     }

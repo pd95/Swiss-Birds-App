@@ -30,10 +30,15 @@ struct SymbolView: View {
     var pointSize : CGFloat = 24
     var color : Color? = nil
         
+    var symbolConfiguration: UIImage.SymbolConfiguration {
+        UIImage.SymbolConfiguration(pointSize:
+            UIFontMetrics.default.scaledValue(for: pointSize))
+    }
+
     var body: some View {
         Image(uiImage:
-            UIImage(named: symbolName, in: nil, with: UIImage.SymbolConfiguration(pointSize: pointSize))
-                ?? UIImage(systemName: "questionmark.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: pointSize))!
+            UIImage(named: symbolName, in: nil, with: symbolConfiguration)
+                ?? UIImage(systemName: "questionmark.circle", withConfiguration: symbolConfiguration)!
         )
             .renderingMode(Image.TemplateRenderingMode.template)
             .foregroundColor(color ?? symbolColors[symbolName] ?? .primary)
