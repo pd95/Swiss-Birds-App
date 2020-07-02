@@ -11,6 +11,7 @@ import AVKit
 
 
 struct BirdDetail: View {
+    @Environment(\.horizontalSizeClass) var sizeClass
     @ObservedObject var model: BirdDetailViewModel
 
     private let bird: Species
@@ -81,16 +82,15 @@ struct BirdDetail: View {
                     .accessibility(label: Text("Stimme wiedergeben"))
                     .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                 }
-                ForEach(model.imageDetails) { imageDetails in
-                    BirdImageView(image: imageDetails.image,
-                                  author: imageDetails.author,
-                                  description: imageDetails.description)
-                        .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
-                        // Workaround scrollview issue: onLongPressGesture conflicts with ScrollView, so we add a tap gesture recognizer!?
-                        .onTapGesture { }
-                        .onLongPressGesture {
-                            self.shareImageDetail(imageDetails)
-                        }
+                if sizeClass == .regular {
+                    HStack(alignment: .center) {
+                        birdImages
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                else {
+                    birdImages
+                        .frame(maxWidth: .infinity)
                 }
                 Text(birdDetails.infos!)
                     .font(.body)
@@ -116,6 +116,23 @@ struct BirdDetail: View {
         )
         .onDisappear() {
             self.stopSound()
+        }
+    }
+
+    var birdImages: some View {
+        Group {
+            ForEach(model.imageDetails) { imageDetails in
+                BirdImageView(image: imageDetails.image,
+                              author: imageDetails.author,
+                              description: imageDetails.description)
+                    .frame(maxWidth: imageDetails.image == nil ? .infinity : imageDetails.image!.size.width / 1.5)
+                    .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
+                    // Workaround scrollview issue: onLongPressGesture conflicts with ScrollView, so we add a tap gesture recognizer!?
+                    .onTapGesture { }
+                    .onLongPressGesture {
+                        self.shareImageDetail(imageDetails)
+                    }
+            }
         }
     }
 
