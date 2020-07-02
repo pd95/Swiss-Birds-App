@@ -45,3 +45,7 @@
 "Vogelbild zeigt %@" = "Image d'oiseaux montrant %@";
 "Beschreibung" = "Description";
 "Filtergruppe" = "Groupe de filtrage";
+"Vogel des Tages" = "L'oiseau du jour";
+"Vogel des Tages: %@" = "L'oiseau du jour: %@";
+"Zeige Details zum Vogel des Tages an." = "Montre les détails de l'oiseau du jour.";
+"Schliessen" = "Fermer";

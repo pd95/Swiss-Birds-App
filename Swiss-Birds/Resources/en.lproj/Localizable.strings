@@ -45,3 +45,7 @@
 "Vogelbild zeigt %@" = "Bird image showing %@";
 "Beschreibung" = "Description";
 "Filtergruppe" = "Filtergroup";
+"Vogel des Tages" = "Bird of the day";
+"Vogel des Tages: %@" = "Bird of the day: %@";
+"Zeige Details zum Vogel des Tages an." = "Show details for the bird of the day.";
+"Schliessen" = "Close";
