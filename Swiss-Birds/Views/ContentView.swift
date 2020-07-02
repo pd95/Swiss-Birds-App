@@ -63,6 +63,9 @@ struct ContentView: View {
                 self.showBirdOfTheDay = value
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in
+            self.state.checkBirdOfTheDay()
+        })
         .alert(isPresented: showAlert, content: { () -> Alert in
             Alert(title: Text("An error occured"),
                   message: Text(state.error!.localizedDescription),
