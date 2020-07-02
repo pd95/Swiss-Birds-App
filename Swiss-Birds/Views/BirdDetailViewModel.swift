@@ -43,12 +43,14 @@ class BirdDetailViewModel: ObservableObject {
             .map { d -> VdsSpecieDetail? in d }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [unowned self] completion in
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
                     }
                 },
-                receiveValue: { [unowned self] details in
+                receiveValue: { [weak self] details in
+                    guard let self = self else { return }
                     if let details = details {
                         self.details = details
 
@@ -88,7 +90,8 @@ class BirdDetailViewModel: ObservableObject {
                 receiveCompletion: { result in
                     print("fetch imageDetails", result)
                 },
-                receiveValue: { [unowned self] result in
+                receiveValue: { [weak self] result in
+                    guard let self = self else { return }
                     var imageDetails = self.imageDetails
                     result.forEach { element in
                         let (index, image) = element
@@ -97,6 +100,7 @@ class BirdDetailViewModel: ObservableObject {
                         }
                     }
                     self.imageDetails = imageDetails
+                    self.objectWillChange.send()
                     print("\(result.count) images load")
                 })
 
@@ -117,7 +121,8 @@ class BirdDetailViewModel: ObservableObject {
                 receiveCompletion: { result in
                     print("fetch voiceData", result)
                 },
-                receiveValue: { [unowned self] data in
+                receiveValue: { [weak self] data in
+                    guard let self = self else { return }
                     self.voiceData = data
             })
     }
