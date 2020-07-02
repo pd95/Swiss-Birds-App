@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(appState)
 
         if CommandLine.arguments.contains("enable-testing") {
-            appState.settings.setupForTesting()
+            SettingsStore.shared.setupForTesting()
         }
         else {
             if let activity = session.stateRestorationActivity {

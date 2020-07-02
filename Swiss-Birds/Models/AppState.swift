@@ -11,8 +11,6 @@ import SwiftUI
 import Combine
 
 class AppState : ObservableObject {
-    let settings = SettingsStore()
-
     @Published var initialLoadRunning: Bool
 
     @Published var searchText : String = ""
@@ -120,7 +118,7 @@ class AppState : ObservableObject {
     }
 
     func checkBirdOfTheDay() {
-        if !settings.startupCheckBirdOfTheDay {
+        if !SettingsStore.shared.startupCheckBirdOfTheDay {
             return
         }
         // Fetch the bird of the day

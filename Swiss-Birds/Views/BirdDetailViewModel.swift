@@ -114,7 +114,7 @@ class BirdDetailViewModel: ObservableObject {
             .filter({ $0.image != nil})
             .setFailureType(to: Error.self)
             .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
-                VdsAPI.getVoice(for: speciesId)
+                VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess)
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
@@ -125,6 +125,9 @@ class BirdDetailViewModel: ObservableObject {
                 receiveCompletion: { completion in
                     if case .failure(let error) = completion {
                         os_log("fetch voiceData error: %{Public}@", error.localizedDescription)
+                        if let urlError = error as? URLError, let unavailableReason = urlError.networkUnavailableReason {
+                            os_log("fetch voiceData failed due to unavailableReason = %{Public}@", unavailableReason.description)
+                        }
                     }
                 },
                 receiveValue: { [weak self] data in

@@ -93,8 +93,10 @@ enum VdsAPI {
         return fetchData(URLRequest(url: base.appendingPathComponent("\(imageAssetPath)/headshots/80x80/\(id)@\(scale)x.jpg")))
     }
 
-    static func getVoice(for id: Int) -> AnyPublisher<Data, Error> {
-        return fetchData(URLRequest(url: base.appendingPathComponent("\(voiceAssetPath)/\(id).mp3")))
+    static func getVoice(for id: Int, allowsConstrainedNetworkAccess: Bool = false) -> AnyPublisher<Data, Error> {
+        var request = URLRequest(url: base.appendingPathComponent("\(voiceAssetPath)/\(id).mp3"))
+        request.allowsConstrainedNetworkAccess = allowsConstrainedNetworkAccess
+        return fetchData(request)
     }
 
     static func getBirdOfTheDaySpeciesIDandURL() -> AnyPublisher<BirdOfTheDayData, Error> {

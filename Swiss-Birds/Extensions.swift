@@ -45,3 +45,18 @@ extension String {
         }
     }
 }
+
+extension URLError.NetworkUnavailableReason: CustomStringConvertible {
+    public var description: String {
+        switch self {
+            case .cellular:
+                return "cellular"
+            case .expensive:
+                return "expensive"
+            case .constrained:
+                return "constrained"
+            @unknown default:
+                return "unknown"
+        }
+    }
+}

@@ -10,9 +10,15 @@ import Foundation
 
 class SettingsStore: ObservableObject {
 
+    static let shared = SettingsStore()
+
+    private init() {}
+
     @UserDefault(key: UserDefaults.Keys.startupCheckBirdOfTheDay, defaultValue: true)
     var startupCheckBirdOfTheDay: Bool
 
+    @UserDefault(key: UserDefaults.Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
+    var voiceDataOverConstrainedNetworkAccess: Bool
 
     func setupForTesting() {
         if CommandLine.arguments.contains("no-settings") {
