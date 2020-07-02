@@ -1,0 +1,6 @@
+"Show bird of the day on startup" = "Affiche l'oiseau du jour au lancement de l'application";
+"Allow loading bird voices over constrained networks" = "Permettre le chargement de voix d'oiseaux sur des réseaux restreints";
+"Info" = "Info";
+"Version" = "Version";
+"Reset app settings" = "Réinitialisation les paramètres de l'application";
+"Resets all settings upon next start of the app" = "Réinitialise tous les paramètres au prochain démarrage de l'application";
