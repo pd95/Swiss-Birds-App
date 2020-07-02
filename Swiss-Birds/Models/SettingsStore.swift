@@ -29,5 +29,6 @@ extension UserDefaults {
 
     fileprivate struct Keys {
         static let startupCheckBirdOfTheDay = "startupCheckBirdOfTheDay"
+        static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
     }
 }

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Philipp. All rights reserved.
 //
 
+import os.log
 import SwiftUI
 import Combine
 
@@ -56,12 +57,14 @@ class AppState : ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
+                        os_log("getBirds error: %{Public}@", error.localizedDescription)
                     }
                     self.initialLoadRunning = false
-                }, receiveValue: { [weak self] species in
+                },
+                receiveValue: { [weak self] species in
                     guard let self = self else { return }
                     self.allSpecies = species
-            })
+                })
             .store(in: &cancellables)
 
         // Fetch filter data
@@ -74,12 +77,14 @@ class AppState : ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
+                        os_log("getFilters error: %{Public}@", error.localizedDescription)
                     }
-                }, receiveValue: { [weak self] filters in
+                },
+                receiveValue: { [weak self] filters in
                     guard let self = self else { return }
                     Filter.allFiltersGrouped = filters
                     self.filters.objectWillChange.send()
-            })
+                })
             .store(in: &cancellables)
 
         // Combine the 3 data sources to restrict the bird list:
@@ -92,7 +97,6 @@ class AppState : ObservableObject {
                 let (allSpecies, searchText, _) = input
                 let filtered = allSpecies
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
-                print("filtered.count = \(filtered.count)")
                 return filtered
             }
             .assign(to: \.matchingSpecies, on: self)
@@ -124,20 +128,21 @@ class AppState : ObservableObject {
             .getBirdOfTheDaySpeciesIDandURL()
             .map {Optional.some($0)}
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [unowned self] result in
-                if case .failure(let error) = result {
-                    self.error = error
-                    self.birdOfTheDay = nil
-                }
-            },
+            .sink(
+                receiveCompletion: { [unowned self] result in
+                    if case .failure(let error) = result {
+                        self.error = error
+                        os_log("getBirdOfTheDaySpeciesIDandURL error: %{Public}@", error.localizedDescription)
+                        self.birdOfTheDay = nil
+                    }
+                },
                 receiveValue: { [unowned self] (birdOfTheDay) in
-                self.birdOfTheDay = birdOfTheDay
-                if let botd = birdOfTheDay {
-                    let currentBirdOfTheDay = botd.speciesID
-                    self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
-                    print("previous = \(self.previousBirdOfTheDay) ==> \(currentBirdOfTheDay): show = \(self.showBirdOfTheDay)")
-                }
-            })
+                    self.birdOfTheDay = birdOfTheDay
+                    if let botd = birdOfTheDay {
+                        let currentBirdOfTheDay = botd.speciesID
+                        self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
+                    }
+                })
             .store(in: &cancellables)
     }
 
@@ -153,14 +158,17 @@ class AppState : ObservableObject {
                 return image
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [unowned self] (result) in
-                if case .failure(let error) = result {
-                    self.error = error
-                    self.birdOfTheDayImage = nil
-                }
-            }, receiveValue: { [unowned self] (image) in
-                self.birdOfTheDayImage = image
-            })
+            .sink(
+                receiveCompletion: { [unowned self] (result) in
+                    if case .failure(let error) = result {
+                        self.error = error
+                        os_log("getBirdOfTheDay error: %{Public}@", error.localizedDescription)
+                        self.birdOfTheDayImage = nil
+                    }
+                },
+                receiveValue: { [unowned self] (image) in
+                    self.birdOfTheDayImage = image
+                })
             .store(in: &cancellables)
     }
 
@@ -172,7 +180,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)),previousBirdOfTheDay=\(previousBirdOfTheDay)"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
     }
 }
 

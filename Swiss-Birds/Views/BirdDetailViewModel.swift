@@ -7,6 +7,7 @@
 //
 
 import Combine
+import os.log
 import SwiftUI
 
 class BirdDetailViewModel: ObservableObject {
@@ -47,6 +48,7 @@ class BirdDetailViewModel: ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
+                        os_log("getSpecie error: %{Public}@", error.localizedDescription)
                     }
                 },
                 receiveValue: { [weak self] details in
@@ -87,8 +89,11 @@ class BirdDetailViewModel: ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { result in
-                    print("fetch imageDetails", result)
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        self.error = error
+                        os_log("fetch imageDetails error: %{Public}@", error.localizedDescription)
+                    }
                 },
                 receiveValue: { [weak self] result in
                     guard let self = self else { return }
@@ -101,7 +106,6 @@ class BirdDetailViewModel: ObservableObject {
                     }
                     self.imageDetails = imageDetails
                     self.objectWillChange.send()
-                    print("\(result.count) images load")
                 })
 
         // Fetch voice data 1s after details have been load
@@ -118,8 +122,10 @@ class BirdDetailViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             //.assign(to: \.voiceData, on: self)
             .sink(
-                receiveCompletion: { result in
-                    print("fetch voiceData", result)
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        os_log("fetch voiceData error: %{Public}@", error.localizedDescription)
+                    }
                 },
                 receiveValue: { [weak self] data in
                     guard let self = self else { return }

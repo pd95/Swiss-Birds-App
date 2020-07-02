@@ -28,6 +28,7 @@ enum VdsAPI {
 
         var config = URLSessionConfiguration.default
         config.urlCache = URLCache(memoryCapacity: cacheSize, diskCapacity: cacheSize, directory: cacheLocation)
+        config.timeoutIntervalForRequest = 30
 
         return URLSession(configuration: config)
     }()
@@ -42,6 +43,7 @@ enum VdsAPI {
     private static func fetchData(_ request: URLRequest) -> AnyPublisher<Data, Error> {
         return urlSession
             .dataTaskPublisher(for: request)
+            .retry(1)
             .tryMap { result -> Data in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
                     os_log("Invalid HTTP response: %{Public}@", result.response)
@@ -51,7 +53,7 @@ enum VdsAPI {
                 let statusCode = httpResponse.statusCode
                 guard 200 ..< 300 ~= statusCode else {
                     let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-                    os_log("Unexpected HTTP response code: %d %{Public}@\n%{Public}@", statusCode, localizedMessage, httpResponse.url!.path)
+                    os_log("HTTP response: %d '%{Public}@' for %{Public}@", statusCode, localizedMessage, httpResponse.url?.path ?? "n/a")
                     throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
                 }
                 return result.data
