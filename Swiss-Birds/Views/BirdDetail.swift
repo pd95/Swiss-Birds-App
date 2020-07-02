@@ -213,6 +213,7 @@ struct BirdDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             BirdDetailContainer(bird: appState.allSpecies[14])
+                //.environment(\.sizeCategory, .large)
         }
         .environmentObject(appState)
     }
@@ -320,11 +321,12 @@ struct CharacteristicView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.leading)
                             .accessibility(identifier: characteristic.label)
-                            Spacer(minLength: 30.0)
+
+                        Spacer(minLength: 30.0)
                     }
                     if characteristic.symbol != "" {
-                        SymbolView(symbolName: characteristic.symbol, pointSize: 18)
-                        .accessibility(hidden: true)
+                        SymbolView(symbolName: characteristic.symbol, pointSize: 24)
+                            .accessibility(hidden: true)
                     }
                     Text(characteristic.text)
                         .font(.body)
