@@ -94,7 +94,7 @@ enum VdsAPI {
     }
 
     static func getVoice(for id: Int, allowsConstrainedNetworkAccess: Bool = false) -> AnyPublisher<Data, Error> {
-        var request = URLRequest(url: base.appendingPathComponent("\(voiceAssetPath)/\(id).mp3"))
+        var request = URLRequest(url: base.appendingPathComponent("\(voiceAssetPath)/\(String(format: "%04d", id)).mp3"))
         request.allowsConstrainedNetworkAccess = allowsConstrainedNetworkAccess
         return fetchData(request)
     }
