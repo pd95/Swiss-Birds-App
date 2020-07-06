@@ -11,6 +11,26 @@
 		17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17105A79248570B60024F464 /* ActivityIndicatorView.swift */; };
 		1715B36724372FD800413FBF /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B36624372FD800413FBF /* SearchField.swift */; };
 		1715B3692437305100413FBF /* BirdRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715B3682437305100413FBF /* BirdRow.swift */; };
+		171BE47D24B06AB900CDF93D /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE47C24B06AB900CDF93D /* IntentHandler.swift */; };
+		171BE48624B06AB900CDF93D /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 171BE48524B06AB900CDF93D /* IntentsUI.framework */; };
+		171BE48924B06AB900CDF93D /* IntentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE48824B06AB900CDF93D /* IntentViewController.swift */; };
+		171BE48C24B06AB900CDF93D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171BE48A24B06AB900CDF93D /* MainInterface.storyboard */; };
+		171BE49024B06AB900CDF93D /* Swiss-BirdsIntentUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 171BE48324B06AB900CDF93D /* Swiss-BirdsIntentUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		171BE49324B06AB900CDF93D /* Swiss-BirdsIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 171BE47A24B06AB900CDF93D /* Swiss-BirdsIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		171BE4A124B070F400CDF93D /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E324AA725C00D38E6B /* SettingsStore.swift */; };
+		171BE4A324B071D800CDF93D /* ActivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4A224B071D800CDF93D /* ActivityKeys.swift */; };
+		171BE4A424B071D800CDF93D /* ActivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4A224B071D800CDF93D /* ActivityKeys.swift */; };
+		171BE4A524B0723E00CDF93D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
+		171BE4A724B30C6B00CDF93D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */; };
+		171BE4A824B30C8000CDF93D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */; };
+		171BE4AC24B340E100CDF93D /* BirdOfTheDayHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */; };
+		171BE4AF24B343B200CDF93D /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
+		171BE4B024B3455900CDF93D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
+		171BE4B124B3473400CDF93D /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
+		171BE4B224B3474000CDF93D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		171BE4B324B3474B00CDF93D /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
+		171BE4B424B347AB00CDF93D /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
+		171BE4BC24B35B9600CDF93D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
@@ -42,6 +62,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		171BE48E24B06AB900CDF93D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 171BE48224B06AB900CDF93D;
+			remoteInfo = "Swiss-BirdsIntentUI";
+		};
+		171BE49124B06AB900CDF93D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 171BE47924B06AB900CDF93D;
+			remoteInfo = "Swiss-BirdsIntent";
+		};
 		17B9610423699375003AA802 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17B960E223699370003AA802 /* Project object */;
@@ -58,6 +92,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		171BE49A24B06AB900CDF93D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				171BE49024B06AB900CDF93D /* Swiss-BirdsIntentUI.appex in Embed App Extensions */,
+				171BE49324B06AB900CDF93D /* Swiss-BirdsIntent.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1703131E2382DDF2007E2EE3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -67,6 +116,21 @@
 		1715B3652436B00900413FBF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1715B36624372FD800413FBF /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
 		1715B3682437305100413FBF /* BirdRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdRow.swift; sourceTree = "<group>"; };
+		171BE47524B06A5F00CDF93D /* Swiss-Birds.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-Birds.entitlements"; sourceTree = "<group>"; };
+		171BE47A24B06AB900CDF93D /* Swiss-BirdsIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swiss-BirdsIntent.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		171BE47C24B06AB900CDF93D /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		171BE47E24B06AB900CDF93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		171BE48324B06AB900CDF93D /* Swiss-BirdsIntentUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swiss-BirdsIntentUI.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		171BE48524B06AB900CDF93D /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		171BE48824B06AB900CDF93D /* IntentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentViewController.swift; sourceTree = "<group>"; };
+		171BE48B24B06AB900CDF93D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		171BE48D24B06AB900CDF93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		171BE49E24B06F3F00CDF93D /* ShowBirdIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBirdIntentHandler.swift; sourceTree = "<group>"; };
+		171BE4A024B0707F00CDF93D /* Swiss-BirdsIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-BirdsIntent.entitlements"; sourceTree = "<group>"; };
+		171BE4A224B071D800CDF93D /* ActivityKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityKeys.swift; sourceTree = "<group>"; };
+		171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDayHandler.swift; sourceTree = "<group>"; };
+		171BE4BD24B35E4100CDF93D /* Swiss-BirdsIntentUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-BirdsIntentUI.entitlements"; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -119,6 +183,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		171BE47724B06AB900CDF93D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		171BE48024B06AB900CDF93D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				171BE48624B06AB900CDF93D /* IntentsUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E723699370003AA802 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +222,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		171BE47B24B06AB900CDF93D /* Swiss-BirdsIntent */ = {
+			isa = PBXGroup;
+			children = (
+				171BE4A024B0707F00CDF93D /* Swiss-BirdsIntent.entitlements */,
+				171BE47C24B06AB900CDF93D /* IntentHandler.swift */,
+				171BE49E24B06F3F00CDF93D /* ShowBirdIntentHandler.swift */,
+				171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */,
+				171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */,
+				171BE47E24B06AB900CDF93D /* Info.plist */,
+			);
+			path = "Swiss-BirdsIntent";
+			sourceTree = "<group>";
+		};
+		171BE48424B06AB900CDF93D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				171BE48524B06AB900CDF93D /* IntentsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		171BE48724B06AB900CDF93D /* Swiss-BirdsIntentUI */ = {
+			isa = PBXGroup;
+			children = (
+				171BE4BD24B35E4100CDF93D /* Swiss-BirdsIntentUI.entitlements */,
+				171BE48824B06AB900CDF93D /* IntentViewController.swift */,
+				171BE48A24B06AB900CDF93D /* MainInterface.storyboard */,
+				171BE48D24B06AB900CDF93D /* Info.plist */,
+			);
+			path = "Swiss-BirdsIntentUI";
+			sourceTree = "<group>";
+		};
 		175CC8E124856C3C006F99D3 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +274,9 @@
 				17B9610623699375003AA802 /* Swiss-BirdsTests */,
 				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
 				17BED0E623ADAECF000D389C /* xcresult-parser */,
+				171BE47B24B06AB900CDF93D /* Swiss-BirdsIntent */,
+				171BE48724B06AB900CDF93D /* Swiss-BirdsIntentUI */,
+				171BE48424B06AB900CDF93D /* Frameworks */,
 				17B960EB23699370003AA802 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -173,6 +287,8 @@
 				17B960EA23699370003AA802 /* Swiss-Birds.app */,
 				17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */,
 				17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */,
+				171BE47A24B06AB900CDF93D /* Swiss-BirdsIntent.appex */,
+				171BE48324B06AB900CDF93D /* Swiss-BirdsIntentUI.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +296,7 @@
 		17B960EC23699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXGroup;
 			children = (
+				171BE47524B06A5F00CDF93D /* Swiss-Birds.entitlements */,
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				1779657E2453184D00A2A1B2 /* Extensions.swift */,
@@ -244,6 +361,7 @@
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
+				171BE4A224B071D800CDF93D /* ActivityKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -282,6 +400,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		171BE47924B06AB900CDF93D /* Swiss-BirdsIntent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 171BE49724B06AB900CDF93D /* Build configuration list for PBXNativeTarget "Swiss-BirdsIntent" */;
+			buildPhases = (
+				171BE47624B06AB900CDF93D /* Sources */,
+				171BE47724B06AB900CDF93D /* Frameworks */,
+				171BE47824B06AB900CDF93D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swiss-BirdsIntent";
+			productName = "Swiss-BirdsIntent";
+			productReference = 171BE47A24B06AB900CDF93D /* Swiss-BirdsIntent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		171BE48224B06AB900CDF93D /* Swiss-BirdsIntentUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 171BE49424B06AB900CDF93D /* Build configuration list for PBXNativeTarget "Swiss-BirdsIntentUI" */;
+			buildPhases = (
+				171BE47F24B06AB900CDF93D /* Sources */,
+				171BE48024B06AB900CDF93D /* Frameworks */,
+				171BE48124B06AB900CDF93D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swiss-BirdsIntentUI";
+			productName = "Swiss-BirdsIntentUI";
+			productReference = 171BE48324B06AB900CDF93D /* Swiss-BirdsIntentUI.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		17B960E923699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-Birds" */;
@@ -289,10 +441,13 @@
 				17B960E623699370003AA802 /* Sources */,
 				17B960E723699370003AA802 /* Frameworks */,
 				17B960E823699370003AA802 /* Resources */,
+				171BE49A24B06AB900CDF93D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				171BE48F24B06AB900CDF93D /* PBXTargetDependency */,
+				171BE49224B06AB900CDF93D /* PBXTargetDependency */,
 			);
 			name = "Swiss-Birds";
 			productName = "schweizer-voegel";
@@ -341,10 +496,16 @@
 		17B960E223699370003AA802 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1110;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Philipp;
 				TargetAttributes = {
+					171BE47924B06AB900CDF93D = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					171BE48224B06AB900CDF93D = {
+						CreatedOnToolsVersion = 11.5;
+					};
 					17B960E923699370003AA802 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -377,11 +538,28 @@
 				17B960E923699370003AA802 /* Swiss-Birds */,
 				17B9610223699375003AA802 /* Swiss-BirdsTests */,
 				17B9610D23699375003AA802 /* Swiss-BirdsUITests */,
+				171BE47924B06AB900CDF93D /* Swiss-BirdsIntent */,
+				171BE48224B06AB900CDF93D /* Swiss-BirdsIntentUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		171BE47824B06AB900CDF93D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		171BE48124B06AB900CDF93D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				171BE48C24B06AB900CDF93D /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E823699370003AA802 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,6 +589,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		171BE47624B06AB900CDF93D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				171BE4AF24B343B200CDF93D /* VdsAPI.swift in Sources */,
+				171BE4B324B3474B00CDF93D /* Filter.swift in Sources */,
+				171BE4A724B30C6B00CDF93D /* Intents.intentdefinition in Sources */,
+				171BE4AC24B340E100CDF93D /* BirdOfTheDayHandler.swift in Sources */,
+				171BE4A124B070F400CDF93D /* SettingsStore.swift in Sources */,
+				171BE4B224B3474000CDF93D /* Data.swift in Sources */,
+				171BE4B424B347AB00CDF93D /* Species.swift in Sources */,
+				171BE4B024B3455900CDF93D /* Extensions.swift in Sources */,
+				171BE4B124B3473400CDF93D /* VdsDataTypes.swift in Sources */,
+				171BE4A524B0723E00CDF93D /* UserDefault.swift in Sources */,
+				171BE4A424B071D800CDF93D /* ActivityKeys.swift in Sources */,
+				171BE47D24B06AB900CDF93D /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		171BE47F24B06AB900CDF93D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				171BE4BC24B35B9600CDF93D /* Intents.intentdefinition in Sources */,
+				171BE48924B06AB900CDF93D /* IntentViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E623699370003AA802 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,6 +624,7 @@
 				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
 				17206831236B5A920008905F /* Filter.swift in Sources */,
+				171BE4A324B071D800CDF93D /* ActivityKeys.swift in Sources */,
 				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
@@ -438,6 +645,7 @@
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,
+				171BE4A824B30C8000CDF93D /* Intents.intentdefinition in Sources */,
 				1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +670,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		171BE48F24B06AB900CDF93D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 171BE48224B06AB900CDF93D /* Swiss-BirdsIntentUI */;
+			targetProxy = 171BE48E24B06AB900CDF93D /* PBXContainerItemProxy */;
+		};
+		171BE49224B06AB900CDF93D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 171BE47924B06AB900CDF93D /* Swiss-BirdsIntent */;
+			targetProxy = 171BE49124B06AB900CDF93D /* PBXContainerItemProxy */;
+		};
 		17B9610523699375003AA802 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17B960E923699370003AA802 /* Swiss-Birds */;
@@ -475,6 +693,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		171BE48A24B06AB900CDF93D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				171BE48B24B06AB900CDF93D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		17B0F423238F1F6200A2F989 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -501,6 +727,86 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		171BE49524B06AB900CDF93D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntentUI/Swiss-BirdsIntentUI.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Swiss-BirdsIntentUI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntentUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		171BE49624B06AB900CDF93D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntentUI/Swiss-BirdsIntentUI.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Swiss-BirdsIntentUI/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntentUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		171BE49824B06AB900CDF93D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntent/Swiss-BirdsIntent.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Swiss-BirdsIntent/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		171BE49924B06AB900CDF93D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntent/Swiss-BirdsIntent.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Swiss-BirdsIntent/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		17B9611523699375003AA802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
@@ -622,7 +928,9 @@
 		17B9611823699375003AA802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Swiss-Birds/Swiss-Birds.entitlements";
 				CURRENT_PROJECT_VERSION = 9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Swiss-Birds/Info.plist";
@@ -640,7 +948,9 @@
 		17B9611923699375003AA802 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Swiss-Birds/Swiss-Birds.entitlements";
 				CURRENT_PROJECT_VERSION = 9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Swiss-Birds/Info.plist";
@@ -734,6 +1044,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		171BE49424B06AB900CDF93D /* Build configuration list for PBXNativeTarget "Swiss-BirdsIntentUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				171BE49524B06AB900CDF93D /* Debug */,
+				171BE49624B06AB900CDF93D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		171BE49724B06AB900CDF93D /* Build configuration list for PBXNativeTarget "Swiss-BirdsIntent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				171BE49824B06AB900CDF93D /* Debug */,
+				171BE49924B06AB900CDF93D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		17B960E523699370003AA802 /* Build configuration list for PBXProject "Swiss-Birds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,6 +9,7 @@
 import os.log
 import SwiftUI
 import Combine
+import Intents
 
 class AppState : ObservableObject {
     @Published var initialLoadRunning: Bool
@@ -58,6 +59,7 @@ class AppState : ObservableObject {
                         os_log("getBirds error: %{Public}@", error.localizedDescription)
                     }
                     self.initialLoadRunning = false
+                    self.updateSharedBirds()
                 },
                 receiveValue: { [weak self] species in
                     guard let self = self else { return }
@@ -163,6 +165,9 @@ class AppState : ObservableObject {
                         os_log("getBirdOfTheDay error: %{Public}@", error.localizedDescription)
                         self.birdOfTheDayImage = nil
                     }
+                    else {
+                        self.donateBirdOfTheDayIntent()
+                    }
                 },
                 receiveValue: { [unowned self] (image) in
                     self.birdOfTheDayImage = image
@@ -174,11 +179,41 @@ class AppState : ObservableObject {
     func countFilterMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
     }
+
+    func updateSharedBirds() {
+        var dict = [String:Int]()
+        self.allSpecies.forEach {
+            dict[$0.name] = $0.speciesId
+        }
+        SettingsStore.shared.sharedBirds = dict
+
+        INPreferences.requestSiriAuthorization { (status) in
+            switch status {
+                case .authorized:
+                    os_log("updateSharedBirds: Siri is enabled")
+                default:
+                    break
+            }
+        }
+    }
+
+    func donateBirdOfTheDayIntent() {
+        let intent = BirdOfTheDayIntent()
+        intent.suggestedInvocationPhrase = "Show bird of the day"
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate { (error) in
+            if let error = error as NSError? {
+                os_log("getBirdOfTheDay: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
+            } else {
+                os_log("getBirdOfTheDay: Successfully donated interaction")
+            }
+        }
+    }
 }
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing:showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing:selectedBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing: showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing: selectedBirdId)), restoredBirdId=\(String(describing: restoredBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
     }
 }
 
@@ -230,7 +265,7 @@ extension AppState {
             Key.searchText: searchText,
             Key.showFilters: showFilters,
             Key.activeFilters: storableList,
-            Key.selectedBird: (selectedBirdId ?? -1) as Species.Id,
+            Key.selectedBird: (selectedBirdId ?? restoredBirdId ?? -1) as Species.Id,
             Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
         ]
         activity.addUserInfoEntries(from: stateArray)

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Philipp. All rights reserved.
 //
 
+import os.log
 import UIKit
 import SwiftUI
 
@@ -34,6 +35,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
+        os_log("scene(_, willConnectTo:,options:) => activities %ld", connectionOptions.userActivities.count)
+        for activity in connectionOptions.userActivities {
+            handleUserActivity(activity)
+        }
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -76,5 +81,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let activity = NSUserActivity(activityType: Bundle.main.activityType)
         AppState.shared.store(in: activity)
         return activity
+    }
+
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        os_log("scene(_, continue:) => activity %{public}@", userActivity.activityType)
+        handleUserActivity(userActivity)
+    }
+
+    func handleUserActivity(_ userActivity: NSUserActivity) {
+        print("handleUserActivity(\(userActivity.activityType))")
+        guard userActivity.activityType == ActivityKeys.ShowBirdActivity,
+            let birdID = userActivity.userInfo?[ActivityKeys.ShowBirdActivityResult] as? Int else {
+                print("Skipping unsupported \(userActivity.activityType)")
+                return
+        }
+        let state = AppState.shared
+        print("current state: ", state)
+
+        print("handleUserActivity: birdID=\(birdID)")
+
+        if state.selectedBirdId != nil {
+            DispatchQueue.main.async {
+                print("clear current selection: ", state.selectedBirdId!)
+                state.selectedBirdId = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    state.restoredBirdId = birdID
+                    print("Restoring bird selection: ", state.restoredBirdId)
+                }
+            }
+        }
+        else {
+            DispatchQueue.main.async {
+                state.restoredBirdId = birdID
+            }
+        }
     }
 }

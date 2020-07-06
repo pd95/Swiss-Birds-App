@@ -25,6 +25,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).SceneBasedStateRestoration.StateRestoration.activity</string>
+		<string>BirdOfTheDayIntent</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

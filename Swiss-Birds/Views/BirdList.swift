@@ -31,6 +31,12 @@ struct BirdList: View {
                     }
                 }
             }
+            .onReceive(self.state.$restoredBirdId, perform: { (x) in
+                print("$restoredBirdId =",x)
+            })
+            .onReceive(self.state.$selectedBirdId, perform: { (x) in
+                print("$selectedBirdId =",x)
+            })
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if self.state.isEditingSearchField {
                     print("Searching was enabled, but drag occured => endEditing")
@@ -73,7 +79,7 @@ struct BirdList: View {
             // Workaround SwiftUI: when state is restored, the currently selected bird
             // can be at the bottom of the scrolling list. Therefore we add here an artificial row
             // which is already selected
-            if restoredBird != nil {
+            if self.state.restoredBirdId != nil {
                 NavigationLink(destination: BirdDetailContainer(bird: restoredBird!),
                                tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
                     Text("*** never shown ***")
@@ -88,7 +94,10 @@ struct BirdList: View {
     }
 
     var restoredBird: Species! {
+        print("state.selectedBirdId=\(state.selectedBirdId)")
+        print("state.restoredBirdId=\(state.restoredBirdId)")
         if let restoredBird = state.restoredBirdId {
+            print("*** Restoring restoredBird=\(restoredBird)")
             return self.state.allSpecies.first { $0.speciesId == restoredBird }
         }
         return nil
