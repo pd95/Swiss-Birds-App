@@ -12,12 +12,12 @@ import Combine
 import Intents
 
 class AppState : ObservableObject {
-    @Published var initialLoadRunning: Bool
 
     @Published var searchText : String = ""
     @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
+    var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var matchingSpecies = [Species]()
     @Published var error: Error?
@@ -39,7 +39,6 @@ class AppState : ObservableObject {
     static var shared = AppState()
 
     private init() {
-        initialLoadRunning = true
 
         // Fetch the birds data
         VdsAPI
@@ -58,7 +57,6 @@ class AppState : ObservableObject {
                         self.error = error
                         os_log("getBirds error: %{Public}@", error.localizedDescription)
                     }
-                    self.initialLoadRunning = false
                     self.updateSharedBirds()
                 },
                 receiveValue: { [weak self] species in
@@ -84,6 +82,20 @@ class AppState : ObservableObject {
                     guard let self = self else { return }
                     Filter.allFiltersGrouped = filters
                     self.filters.objectWillChange.send()
+
+                    // restore filter settings
+                    self.filters.clearFilters()
+                    self.restorableFilters.forEach { (key: String, value: [Filter.Id]) in
+                        if let filterType = FilterType(rawValue: key) {
+                            value.compactMap {
+                                    Filter.filter(forId: $0, ofType: filterType)
+                                }
+                                .forEach {
+                                    self.filters.toggleFilter($0)
+                                }
+                        }
+                    }
+                    self.restorableFilters.removeAll()
                 })
             .store(in: &cancellables)
 
@@ -101,6 +113,10 @@ class AppState : ObservableObject {
             }
             .assign(to: \.matchingSpecies, on: self)
             .store(in: &cancellables)
+    }
+
+    var initialLoadRunning: Bool {
+        Filter.allFiltersGrouped.isEmpty || self.allSpecies.isEmpty
     }
 
     func getHeadShot(for bird: Species) -> AnyPublisher<UIImage?, Never> {
@@ -213,7 +229,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing: showFilters)), activeFilters=\(filters), selectedBirdId=\(String(describing: selectedBirdId)), restoredBirdId=\(String(describing: restoredBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
+        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing: showFilters)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), selectedBirdId=\(String(describing: selectedBirdId)), restoredBirdId=\(String(describing: restoredBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
     }
 }
 
@@ -224,35 +240,24 @@ extension AppState {
         guard activity.activityType == Bundle.main.activityType,
             let stateArray : [String:Any] = activity.userInfo as? [String:Any]
             else { return }
-       
-        // Apply state changes asynchronously
-        DispatchQueue.main.async {
-            
-            if let searchText = stateArray[Key.searchText] as? String {
-                self.searchText = searchText
-            }
-            if let showFilters = stateArray[Key.showFilters] as? Bool {
-                self.showFilters = showFilters
-            }
-            if let restoredList = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
-                self.filters.clearFilters()
-                restoredList.forEach { (key: String, value: [Filter.Id]) in
-                    if let filterType = FilterType(rawValue: key) {
-                        value.compactMap { Filter.filter(forId: $0, ofType: filterType) }
-                            .forEach { self.filters.toggleFilter($0) }
-                    }
-                }
-            }
-            if let selectedBird = stateArray[Key.selectedBird] as? Species.Id, selectedBird > -1  {
-                self.restoredBirdId = selectedBird
-            }
-            if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int  {
-                self.previousBirdOfTheDay = previousBirdOfTheDay
-                //self.previousBirdOfTheDay = -1
-            }
 
-            print("restored state: \(self)")
+        if let searchText = stateArray[Key.searchText] as? String {
+            self.searchText = searchText
         }
+        if let showFilters = stateArray[Key.showFilters] as? Bool {
+            self.showFilters = showFilters
+        }
+        if let restoredFilters = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
+            self.restorableFilters = restoredFilters
+        }
+        if let selectedBird = stateArray[Key.selectedBird] as? Species.Id, selectedBird > -1  {
+            self.restoredBirdId = selectedBird
+        }
+        if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int  {
+            self.previousBirdOfTheDay = previousBirdOfTheDay
+        }
+
+        print("restored state: \(self)")
     }
     
     func store(in activity: NSUserActivity) {
