@@ -32,7 +32,7 @@ struct BirdList: View {
                 }
         })
 
-        return VStack {
+        return VStack(spacing: 0) {
             List {
                 Section {
                     SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField)
