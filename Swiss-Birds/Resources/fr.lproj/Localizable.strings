@@ -49,3 +49,5 @@
 "Vogel des Tages: %@" = "L'oiseau du jour: %@";
 "Zeige Details zum Vogel des Tages an." = "Montre les détails de l'oiseau du jour.";
 "Schliessen" = "Fermer";
+"An error occurred" = "Une erreur s'est produite";
+"Dismiss" = "Schliessen";

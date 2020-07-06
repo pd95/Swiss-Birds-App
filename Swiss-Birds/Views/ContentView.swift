@@ -67,7 +67,7 @@ struct ContentView: View {
             self.state.checkBirdOfTheDay()
         })
         .alert(isPresented: showAlert, content: { () -> Alert in
-            Alert(title: Text("An error occured"),
+            Alert(title: Text("An error occurred"),
                   message: Text(state.error!.localizedDescription),
                   dismissButton: .default(Text("Dismiss")))
         })
