@@ -14,8 +14,25 @@ struct BirdList: View {
     @EnvironmentObject private var state : AppState
 
     var body: some View {
-        
-        VStack {
+
+        // Define custom bindings to avoid "duplicate assignments" (which often causes navigation hick-ups)
+        let selectedBirdIdBinding = Binding<Species.Id?>(
+            get: { self.state.selectedBirdId },
+            set: { (newValue) in
+                if self.state.selectedBirdId != newValue {
+                    self.state.selectedBirdId = newValue
+                }
+        })
+
+        let restoredBirdIdBinding = Binding<Species.Id?>(
+            get: { self.state.restoredBirdId },
+            set: { (newValue) in
+                if self.state.restoredBirdId != newValue {
+                    self.state.restoredBirdId = newValue
+                }
+        })
+
+        return VStack {
             List {
                 Section {
                     SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField)
@@ -24,19 +41,14 @@ struct BirdList: View {
                 Section {
                     ForEach(state.matchingSpecies) { bird in
                         NavigationLink(destination: BirdDetailContainer(bird: bird),
-                                       tag: bird.speciesId, selection: self.$state.selectedBirdId) {
+                                       tag: bird.speciesId,
+                                       selection: selectedBirdIdBinding) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
                     }
                 }
             }
-            .onReceive(self.state.$restoredBirdId, perform: { (x) in
-                print("$restoredBirdId =",x)
-            })
-            .onReceive(self.state.$selectedBirdId, perform: { (x) in
-                print("$selectedBirdId =",x)
-            })
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if self.state.isEditingSearchField {
                     print("Searching was enabled, but drag occured => endEditing")
@@ -81,7 +93,7 @@ struct BirdList: View {
             // which is already selected
             if self.state.restoredBirdId != nil {
                 NavigationLink(destination: BirdDetailContainer(bird: Species.species(for: self.state.restoredBirdId!)!),
-                               tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
+                               tag: state.restoredBirdId!, selection: restoredBirdIdBinding) {
                     Text("*** never shown ***")
                 }
                 .hidden()
