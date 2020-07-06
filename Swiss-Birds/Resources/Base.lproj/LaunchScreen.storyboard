@@ -18,33 +18,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MrY-Qh-eAo">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79Z-2f-6cw">
-                                <rect key="frame" x="16" y="649.33333333333337" width="343" height="80.666666666666629"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vögel der Schweiz" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-s7-DsM">
-                                        <rect key="frame" x="30.666666666666657" y="19.999999999999996" width="281.66666666666674" height="40.666666666666657"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="34"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Hak-s7-DsM" secondAttribute="bottom" constant="20" id="3p5-W7-AmI"/>
-                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="top" secondItem="79Z-2f-6cw" secondAttribute="top" constant="20" id="AKw-rF-RpG"/>
-                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="centerY" secondItem="79Z-2f-6cw" secondAttribute="centerY" id="FoU-7W-VxP"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Hak-s7-DsM" secondAttribute="trailing" constant="6" id="IhJ-KQ-V6e"/>
-                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="centerX" secondItem="79Z-2f-6cw" secondAttribute="centerX" id="gqH-B2-iwU"/>
-                                    <constraint firstItem="Hak-s7-DsM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="79Z-2f-6cw" secondAttribute="leading" constant="6" id="xK2-bX-scr"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="MrY-Qh-eAo" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="4FJ-CA-bAU"/>
-                            <constraint firstItem="79Z-2f-6cw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7uB-Z4-mwm"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="79Z-2f-6cw" secondAttribute="trailing" constant="16" id="faj-4Z-kBl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="79Z-2f-6cw" secondAttribute="bottom" constant="48" id="fuQ-8s-OB1"/>
                             <constraint firstAttribute="bottom" secondItem="MrY-Qh-eAo" secondAttribute="bottom" id="he0-PI-XJ5"/>
                             <constraint firstAttribute="trailing" secondItem="MrY-Qh-eAo" secondAttribute="trailing" id="x43-gk-nPK"/>
                             <constraint firstItem="MrY-Qh-eAo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xuZ-A1-ldG"/>
