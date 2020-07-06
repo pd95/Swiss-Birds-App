@@ -105,8 +105,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 print("clear current selection: ", state.selectedBirdId!)
                 state.selectedBirdId = nil
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    print("Restoring bird selection: ", birdID)
                     state.restoredBirdId = birdID
-                    print("Restoring bird selection: ", state.restoredBirdId)
                 }
             }
         }

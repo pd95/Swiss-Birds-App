@@ -12,7 +12,7 @@ import SwiftUI
 struct BirdList: View {
     
     @EnvironmentObject private var state : AppState
-    
+
     var body: some View {
         
         VStack {
@@ -80,7 +80,7 @@ struct BirdList: View {
             // can be at the bottom of the scrolling list. Therefore we add here an artificial row
             // which is already selected
             if self.state.restoredBirdId != nil {
-                NavigationLink(destination: BirdDetailContainer(bird: restoredBird!),
+                NavigationLink(destination: BirdDetailContainer(bird: Species.species(for: self.state.restoredBirdId!)!),
                                tag: state.restoredBirdId!, selection: self.$state.restoredBirdId) {
                     Text("*** never shown ***")
                 }
@@ -91,16 +91,6 @@ struct BirdList: View {
 /// 8< ----- Workaround broken SwiftUI end
 
         }
-    }
-
-    var restoredBird: Species! {
-        print("state.selectedBirdId=\(state.selectedBirdId)")
-        print("state.restoredBirdId=\(state.restoredBirdId)")
-        if let restoredBird = state.restoredBirdId {
-            print("*** Restoring restoredBird=\(restoredBird)")
-            return self.state.allSpecies.first { $0.speciesId == restoredBird }
-        }
-        return nil
     }
 }
 
