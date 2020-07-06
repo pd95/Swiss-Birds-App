@@ -111,9 +111,9 @@ struct BirdDetail: View {
                 Image(systemName: "square.and.arrow.up")
                     .imageScale(.large)
                     .padding()
-                    .accessibility(label: Text("Teilen"))
             })
             .disabled(self.model.details == nil)
+            .accessibility(label: Text("Teilen"))
         )
         .onDisappear() {
             self.stopSound()
