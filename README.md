@@ -9,7 +9,7 @@ This app is loading the list of birds, images and sounds from the website and ca
 
 ## How to build the app
 
-The script to prefetch the data has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
+The script to prefetch the filter icons has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
 
 1. Run the script `./fetch_data.sh` in the `data-scripts` directory.  
   This will first fetch the list of birds and filter categories, cleanup the data (remove duplicates) and then fetch detailed information, images and voices. Expected runtime: *10 minutes*
