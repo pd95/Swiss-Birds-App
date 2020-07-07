@@ -66,7 +66,6 @@ struct BirdList: View {
 
                 Button(action: {
                     // Erase selected bird and show the filters
-                    self.state.selectedBirdId = nil
                     self.state.showFilters = true
                     UIApplication.shared.endEditing()
                 }) {

@@ -191,6 +191,36 @@ class AppState : ObservableObject {
             .store(in: &cancellables)
     }
 
+    func showBird(_ speciesId: Int) {
+        guard (selectedBirdId ?? -1) != speciesId,
+              (restoredBirdId ?? -1) != speciesId
+        else {
+            print("bird \(speciesId) already shown")
+            return
+        }
+
+        if showFilters || selectedBirdId != nil {
+            if let currentBirdId = selectedBirdId {
+
+                print("clear current selection: ", currentBirdId)
+                selectedBirdId = nil
+            }
+            else if showFilters {
+                print("closing filter")
+                showFilters = false
+            }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
+                print("Selecting bird: ", speciesId)
+                self?.restoredBirdId = speciesId
+            }
+        }
+        else {
+            print("Selecting bird: ", speciesId)
+            restoredBirdId = speciesId
+        }
+    }
+
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count

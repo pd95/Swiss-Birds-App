@@ -24,8 +24,8 @@ struct BirdOfTheDay: View {
                 .font(.title)
 
             Button(action: {
-                self.state.restoredBirdId = self.speciesId
                 self.isPresented = false
+                self.state.showBird(self.speciesId)
             }) {
                 VStack {
                     Rectangle()

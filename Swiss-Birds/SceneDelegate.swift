@@ -91,7 +91,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func handleUserActivity(_ userActivity: NSUserActivity) {
         print("handleUserActivity(\(userActivity.activityType))")
         guard userActivity.activityType == ActivityKeys.ShowBirdActivity,
-            let birdID = userActivity.userInfo?[ActivityKeys.ShowBirdActivityResult] as? Int else {
+            let birdID = userActivity.userInfo?[ActivityKeys.ShowBirdActivityResult] as? Int
+        else {
                 print("Skipping unsupported \(userActivity.activityType)")
                 return
         }
@@ -99,21 +100,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("current state: ", state)
 
         print("handleUserActivity: birdID=\(birdID)")
-
-        if state.selectedBirdId != nil {
-            DispatchQueue.main.async {
-                print("clear current selection: ", state.selectedBirdId!)
-                state.selectedBirdId = nil
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                    print("Restoring bird selection: ", birdID)
-                    state.restoredBirdId = birdID
-                }
-            }
-        }
-        else {
-            DispatchQueue.main.async {
-                state.restoredBirdId = birdID
-            }
-        }
+        state.showBird(birdID)
     }
 }
