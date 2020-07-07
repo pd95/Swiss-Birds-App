@@ -27,7 +27,6 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>BirdOfTheDayIntent</string>
-				<string>INSendMessageIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionMainStoryboard</key>
