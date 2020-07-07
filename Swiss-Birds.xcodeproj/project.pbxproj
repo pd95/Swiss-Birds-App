@@ -31,6 +31,7 @@
 		171BE4B324B3474B00CDF93D /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		171BE4B424B347AB00CDF93D /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		171BE4BC24B35B9600CDF93D /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 171BE49B24B06B9E00CDF93D /* Intents.intentdefinition */; };
+		171BE4C724B4A65E00CDF93D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 171BE4C924B4A65E00CDF93D /* InfoPlist.strings */; };
 		1720682F236AD0F40008905F /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720682E236AD0F40008905F /* SymbolView.swift */; };
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
@@ -130,6 +131,10 @@
 		171BE4A224B071D800CDF93D /* ActivityKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityKeys.swift; sourceTree = "<group>"; };
 		171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDayHandler.swift; sourceTree = "<group>"; };
 		171BE4BD24B35E4100CDF93D /* Swiss-BirdsIntentUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-BirdsIntentUI.entitlements"; sourceTree = "<group>"; };
+		171BE4C824B4A65E00CDF93D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		171BE4CA24B4A66000CDF93D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		171BE4CB24B4A66100CDF93D /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		171BE4CC24B4A66200CDF93D /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1720682E236AD0F40008905F /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -343,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
+				171BE4C924B4A65E00CDF93D /* InfoPlist.strings */,
 				17B0F423238F1F6200A2F989 /* Localizable.strings */,
 			);
 			path = Resources;
@@ -561,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */,
+				171BE4C724B4A65E00CDF93D /* InfoPlist.strings in Resources */,
 				17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */,
 				172DF95D24AE6A12009F430C /* Settings.bundle in Resources */,
 				1790857C2431258D003A302F /* Filter.xcassets in Resources */,
@@ -695,6 +702,17 @@
 				171BE48B24B06AB900CDF93D /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		171BE4C924B4A65E00CDF93D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				171BE4C824B4A65E00CDF93D /* de */,
+				171BE4CA24B4A66000CDF93D /* en */,
+				171BE4CB24B4A66100CDF93D /* fr */,
+				171BE4CC24B4A66200CDF93D /* it */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		17B0F423238F1F6200A2F989 /* Localizable.strings */ = {
