@@ -49,6 +49,10 @@
 				<dict>
 					<key>INIntentParameterCombinationIsPrimary</key>
 					<true/>
+					<key>INIntentParameterCombinationSubtitle</key>
+					<string>Lädt den aktuellen Vogel des Tages der Vogelwarte Sempach.</string>
+					<key>INIntentParameterCombinationSubtitleID</key>
+					<string>fuH5PI</string>
 					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
 					<true/>
 					<key>INIntentParameterCombinationTitle</key>
@@ -96,7 +100,7 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseParameterDisplayName</key>
-						<string>Bird Species ID</string>
+						<string>interne ID des Vogels</string>
 						<key>INIntentResponseParameterDisplayNameID</key>
 						<string>CVqXGi</string>
 						<key>INIntentResponseParameterDisplayPriority</key>
@@ -110,7 +114,7 @@
 					</dict>
 					<dict>
 						<key>INIntentResponseParameterDisplayName</key>
-						<string>Bird Image URL</string>
+						<string>URL des Vogelbilds</string>
 						<key>INIntentResponseParameterDisplayNameID</key>
 						<string>9nydnQ</string>
 						<key>INIntentResponseParameterDisplayPriority</key>
