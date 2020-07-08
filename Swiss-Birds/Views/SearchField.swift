@@ -14,30 +14,17 @@ struct SearchField: View {
     @Binding public var isEditing : Bool
 
     var body: some View {
-        HStack {
-            ZStack {
+        HStack(spacing: 0) {
+            HStack(spacing: 0) {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
-                    .padding(4)
+                    .padding(.leading, 8)
+                    .padding(.trailing, 4)
                     .accessibility(identifier: "magnifyingGlass")
                     .accessibility(hidden: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                if isEditing && !searchText.isEmpty {
-                    Button(action: { withAnimation { self.searchText = "" }}) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.horizontal, 4)
-                    .padding(.vertical, 8)
-                    .accessibility(label: Text("Clear"))
-                    .accessibility(identifier: "clearButton")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .animation(Animation.easeInOut)
-                }
 
                 TextField("Search", text: $searchText)
-                    .padding(.horizontal, 26)
+                    .padding(.horizontal, 4)
                     .padding(.vertical, 7)
                     .disableAutocorrection(true)
                     .accessibility(identifier: "searchText")
@@ -47,8 +34,20 @@ struct SearchField: View {
                         self.isEditing = true
                     }
                     .animation(.easeInOut)
+
+                if isEditing && !searchText.isEmpty {
+                    Button(action: { withAnimation { self.searchText = "" }}) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 8)
+                    .accessibility(label: Text("Clear"))
+                    .accessibility(identifier: "clearButton")
+                    //.frame(maxWidth: .infinity, alignment: .trailing)
+                    .animation(Animation.easeInOut)
+                }
             }
-            .padding(.horizontal, 4)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8)
 
@@ -62,7 +61,7 @@ struct SearchField: View {
                 }
                 .accessibility(identifier: "cancelButton")
                 .buttonStyle(BorderlessButtonStyle())
-                .padding(.leading, 4)
+                .padding(.leading, 8)
                 .transition(.move(edge: .trailing))
                 .animation(.easeInOut)
             }
