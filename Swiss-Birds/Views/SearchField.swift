@@ -15,36 +15,38 @@ struct SearchField: View {
 
     var body: some View {
         HStack {
-            HStack {
+            ZStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.secondary)
                     .padding(4)
                     .accessibility(identifier: "magnifyingGlass")
                     .accessibility(hidden: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                if isEditing && !searchText.isEmpty {
+                    Button(action: { withAnimation { self.searchText = "" }}) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 8)
+                    .accessibility(label: Text("Clear"))
+                    .accessibility(identifier: "clearButton")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .animation(Animation.easeInOut)
+                }
 
                 TextField("Search", text: $searchText)
+                    .padding(.horizontal, 26)
                     .padding(.vertical, 7)
                     .disableAutocorrection(true)
                     .accessibility(identifier: "searchText")
                     .accessibility(label: Text("Search"))
                     .accessibility(addTraits: .isSearchField)
-                    .overlay(
-                        Group {
-                            if isEditing && !searchText.isEmpty {
-                                Button(action: { self.searchText = "" }) {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .foregroundColor(.secondary)
-                                }
-                                .padding(4)
-                                .accessibility(label: Text("Clear"))
-                                .accessibility(identifier: "clearButton")
-                            }
-                        },
-                        alignment: .trailing
-                    )
                     .onTapGesture {
                         self.isEditing = true
                     }
+                    .animation(.easeInOut)
             }
             .padding(.horizontal, 4)
             .background(Color(.secondarySystemBackground))
@@ -62,12 +64,12 @@ struct SearchField: View {
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(.leading, 4)
                 .transition(.move(edge: .trailing))
-                .animation(.default)
+                .animation(.easeInOut)
             }
 
         }
         .transition(.move(edge: .trailing))
-        .animation(.default)
+        .animation(.easeInOut)
         .buttonStyle(PlainButtonStyle())
         .accessibilityElement(children: .contain)
         .accessibility(identifier: "searchBar")
@@ -75,14 +77,45 @@ struct SearchField: View {
 }
 
 
+struct SearchField_Preview_Helper: View {
+    @State var query: String
+    @State var edit: Bool
+
+    init(query: String, edit: Bool) {
+        _query = State<String>(initialValue: query)
+        _edit = State<Bool>(initialValue: edit)
+    }
+
+    var body: some View {
+        VStack {
+            SearchField(searchText: $query,
+                        isEditing: $edit)
+                .padding()
+
+            Button(action: {
+                self.edit.toggle()
+                if !self.edit {
+                    UIApplication.shared.endEditing()
+                }
+            }) {
+                Text("Toggle Edit")
+            }
+        }
+
+    }
+}
+
 struct SearchField_Previews: PreviewProvider {
     static var previews: some View {
-        var query = "Hallo"
-        return Group {
-            SearchField(searchText: Binding<String>(get: {query}, set: {query=$0}),
-                        isEditing: .constant(true))
-                .padding(.horizontal, 10)
-                .previewLayout(.fixed(width: 400, height: 70))
+        VStack {
+            SearchField_Preview_Helper(query: "", edit: false)
+                .previewLayout(.fixed(width: 400, height: 120))
+            Divider()
+            SearchField_Preview_Helper(query: "Amsel Drossel", edit: false)
+                .previewLayout(.fixed(width: 400, height: 120))
+            Divider()
+            SearchField_Preview_Helper(query: "Amsel Drossel", edit: true)
+                .previewLayout(.fixed(width: 400, height: 120))
         }
     }
 }
