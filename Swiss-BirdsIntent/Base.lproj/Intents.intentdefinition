@@ -24,7 +24,7 @@
 			<key>INIntentDefaultImageName</key>
 			<string>Logo</string>
 			<key>INIntentDescription</key>
-			<string>Vogel des Tages von Vogelwarte.ch</string>
+			<string>Lädt und zeigt den Vogel des Tages von https://vogelwarte.ch</string>
 			<key>INIntentDescriptionID</key>
 			<string>WfnxFy</string>
 			<key>INIntentManagedParameterCombinations</key>
