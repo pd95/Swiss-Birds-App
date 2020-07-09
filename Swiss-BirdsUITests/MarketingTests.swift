@@ -70,10 +70,11 @@ class MarketingTests: XCTestCase {
     }
 
     func testMainNavigation() {
+        takeScreenShot(app, name: "00_Startup")
+
         XCTContext.runActivity(named: "Dismiss bird of the day") { (_) in
             let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
             XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
-            takeScreenShot(app, name: "00_BirdOfTheDay")
             dismissButton.tap()
         }
 
@@ -126,8 +127,16 @@ class MarketingTests: XCTestCase {
             XCTAssert(nav.exists, "The main view navigation bar does not exist")
 
             // Enter filter criteria
-            nav.buttons["filterButton"].tap()
-            app.tables.buttons["onlyCommon"].tap()
+            let filterButton = nav.buttons["filterButton"]
+            XCTAssert(filterButton.exists, "filter button exists")
+            let commonBirdsButton = app.tables.buttons["onlyCommon"]
+            var count = 0
+            while !commonBirdsButton.exists && count < 5 {
+                filterButton.tap()
+                count += 1
+            }
+            XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
+            commonBirdsButton.tap()
             takeScreenShot(app, name: "05_Filtercriteria")
         }
 

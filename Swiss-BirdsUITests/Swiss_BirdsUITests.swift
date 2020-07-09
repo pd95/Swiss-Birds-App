@@ -151,15 +151,15 @@ class Swiss_BirdsUITests: XCTestCase {
 
         // Show Detail
         app.tables.buttons.element(boundBy: selectIndex).tap()
-        
-        let scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
+
+        var scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
         scrollViewsQuery.swipeUp()
-        
+
         // Tap "Back"
         if app.windows.firstMatch.horizontalSizeClass == .compact {
             MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
         }
-        
+
         // Clear search
         let clearButton = MyUIElements.searchTextClearButton.element
         _ = clearButton.waitForExistence(timeout: wait4existenceTimeout)
@@ -181,6 +181,9 @@ class Swiss_BirdsUITests: XCTestCase {
         filterButton.tap()
 
         let filterContainer = MyUIElements.filterContainerView.element
+        filterContainer.swipeUp()
+        filterContainer.swipeUp()
+        filterContainer.swipeUp()
         filterContainer.buttons["filtervogelguppe-11"].tap()
         
         // Tap "Back"
@@ -192,6 +195,7 @@ class Swiss_BirdsUITests: XCTestCase {
         _ = merlinBird.waitForExistence(timeout: wait4existenceTimeout)
         merlinBird.tap()
 
+        scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
         scrollViewsQuery.swipeUp()
         scrollViewsQuery.swipeDown()
         
@@ -211,7 +215,10 @@ class Swiss_BirdsUITests: XCTestCase {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.
             measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
+                app = XCUIApplication()
+                app.launchArguments.append("enable-testing")
+                app.launchArguments.append("no-birdoftheday")
+                app.launch()
             }
         }
     }
