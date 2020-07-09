@@ -129,14 +129,12 @@ class MarketingTests: XCTestCase {
             // Enter filter criteria
             let filterButton = nav.buttons["filterButton"]
             XCTAssert(filterButton.exists, "filter button exists")
+            filterButton.tap()
+
             let commonBirdsButton = app.tables.buttons["onlyCommon"]
-            var count = 0
-            while !commonBirdsButton.exists && count < 5 {
-                filterButton.tap()
-                count += 1
-            }
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
+
             takeScreenShot(app, name: "05_Filtercriteria")
         }
 

@@ -14,21 +14,12 @@ struct BirdList: View {
     @EnvironmentObject private var state : AppState
 
     var body: some View {
-
         // Define custom bindings to avoid "duplicate assignments" (which often causes navigation hick-ups)
-        let selectedBirdIdBinding = Binding<Species.Id?>(
-            get: { self.state.selectedBirdId },
+        let selectedNavigationLinkBinding = Binding<MainNavigationLinkTarget?>(
+            get: { self.state.selectedNavigationLink },
             set: { (newValue) in
-                if self.state.selectedBirdId != newValue {
-                    self.state.selectedBirdId = newValue
-                }
-        })
-
-        let restoredBirdIdBinding = Binding<Species.Id?>(
-            get: { self.state.restoredBirdId },
-            set: { (newValue) in
-                if self.state.restoredBirdId != newValue {
-                    self.state.restoredBirdId = newValue
+                if self.state.selectedNavigationLink != newValue {
+                    self.state.selectedNavigationLink = newValue
                 }
         })
 
@@ -41,8 +32,8 @@ struct BirdList: View {
                 Section {
                     ForEach(state.matchingSpecies) { bird in
                         NavigationLink(destination: BirdDetailContainer(bird: bird),
-                                       tag: bird.speciesId,
-                                       selection: selectedBirdIdBinding) {
+                                       tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
+                                       selection: selectedNavigationLinkBinding) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -59,16 +50,7 @@ struct BirdList: View {
             .navigationBarTitle(Text("Vögel der Schweiz"))
             .navigationBarItems(
                 trailing:
-/// 8< ----- Workaround broken SwiftUI: NavigationLink cannot be child of .navigationBarItems()
-//                NavigationLink(destination: FilterCriteria(filters: self.$filters)) {
-//                                Text("Filter")
-//                }
-
-                Button(action: {
-                    // Erase selected bird and show the filters
-                    self.state.showFilters = true
-                    UIApplication.shared.endEditing()
-                }) {
+                Button(action: self.state.showFilter) {
                     HStack {
                         Text("Filter")
                         Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
@@ -80,27 +62,44 @@ struct BirdList: View {
                 .accessibility(identifier: "filterButton")
             )
 
-            NavigationLink(destination: FilterCriteria(managedList: self.state.filters),
-                           isActive: $state.showFilters) {
-                            Text("*** never shown ***")
-            }
-            .frame(width: 0, height: 0)
-            .hidden()
-
-            // Workaround SwiftUI: when state is restored, the currently selected bird
-            // can be at the bottom of the scrolling list. Therefore we add here an artificial row
-            // which is already selected
-            if self.state.restoredBirdId != nil {
-                NavigationLink(destination: BirdDetailContainer(bird: Species.species(for: self.state.restoredBirdId!)!),
-                               tag: state.restoredBirdId!, selection: restoredBirdIdBinding) {
-                    Text("*** never shown ***")
-                }
-                .hidden()
-                .accessibility(identifier: "birdRow_restored")
+            if self.state.selectedNavigationLink != nil {
+                dynamicNavigationLinkTarget
             }
 
 /// 8< ----- Workaround broken SwiftUI end
 
+        }
+    }
+
+    // Here we handle the dynamically generated links (filter list or restored bird selection)
+    var dynamicNavigationLinkTarget: some View {
+        let currentTag = self.state.selectedNavigationLink!
+        let species: Species?
+        if case .programmaticBirdDetails(let speciesId) = currentTag {
+            species = Species.species(for: speciesId)!
+        }
+        else {
+            species = nil
+        }
+        return Group {
+            if currentTag == .filterList {
+                NavigationLink(destination: FilterCriteria(managedList: self.state.filters),
+                               tag: currentTag,
+                               selection: self.$state.selectedNavigationLink) {
+                                Text("*** never shown ***")
+                }
+                .frame(width: 0, height: 0)
+                .hidden()
+            }
+            else if species != nil {
+                NavigationLink(destination: BirdDetailContainer(bird: species!),
+                               tag: currentTag,
+                               selection: self.$state.selectedNavigationLink) {
+                                Text("*** never shown ***")
+                }
+                .frame(width: 0, height: 0)
+                .hidden()
+            }
         }
     }
 }

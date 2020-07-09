@@ -11,6 +11,55 @@ import SwiftUI
 import Combine
 import Intents
 
+// Enumeration of all possible cases of the current selected NavigationLink
+enum MainNavigationLinkTarget: Hashable, Codable {
+    case filterList
+    case birdDetails(Int)
+    case programmaticBirdDetails(Int)
+
+
+    // MARK: Codable protocol
+    enum Key: CodingKey {
+        case rawValue
+        case associatedValue
+    }
+
+    enum CodingError: Error {
+        case unknownValue
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: Key.self)
+        let rawValue = try container.decode(Int.self, forKey: .rawValue)
+        switch rawValue {
+        case 0:
+            self = .filterList
+        case 1:
+            let speciesId = try container.decode(Int.self, forKey: .associatedValue)
+            self = .birdDetails(speciesId)
+        case 2:
+            let speciesId = try container.decode(Int.self, forKey: .associatedValue)
+            self = .programmaticBirdDetails(speciesId)
+        default:
+            throw CodingError.unknownValue
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: Key.self)
+        switch self {
+        case .filterList:
+            try container.encode(0, forKey: .rawValue)
+        case .birdDetails(let speciesId):
+            try container.encode(1, forKey: .rawValue)
+            try container.encode(speciesId, forKey: .associatedValue)
+        case .programmaticBirdDetails(let speciesId):
+            try container.encode(2, forKey: .rawValue)
+            try container.encode(speciesId, forKey: .associatedValue)
+        }
+    }
+}
+
 class AppState : ObservableObject {
 
     @Published var searchText : String = ""
@@ -22,9 +71,7 @@ class AppState : ObservableObject {
     @Published var matchingSpecies = [Species]()
     @Published var error: Error?
 
-    @Published var showFilters = false
-    @Published var selectedBirdId : Species.Id?   // Bird currently selected in bird list view
-    @Published var restoredBirdId : Species.Id?   // Bird selected in list view last time the app was stopped
+    @Published var selectedNavigationLink: MainNavigationLinkTarget? = nil
 
     var previousBirdOfTheDay: Int = -1
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
@@ -192,33 +239,19 @@ class AppState : ObservableObject {
     }
 
     func showBird(_ speciesId: Int) {
-        guard (selectedBirdId ?? -1) != speciesId,
-              (restoredBirdId ?? -1) != speciesId
-        else {
-            print("bird \(speciesId) already shown")
-            return
+        if isEditingSearchField {
+            UIApplication.shared.endEditing()
         }
 
-        if showFilters || selectedBirdId != nil {
-            if let currentBirdId = selectedBirdId {
+        selectedNavigationLink = .programmaticBirdDetails(speciesId)
+    }
 
-                print("clear current selection: ", currentBirdId)
-                selectedBirdId = nil
-            }
-            else if showFilters {
-                print("closing filter")
-                showFilters = false
-            }
+    func showFilter() {
+        if isEditingSearchField {
+            UIApplication.shared.endEditing()
+        }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
-                print("Selecting bird: ", speciesId)
-                self?.restoredBirdId = speciesId
-            }
-        }
-        else {
-            print("Selecting bird: ", speciesId)
-            restoredBirdId = speciesId
-        }
+        selectedNavigationLink = .filterList
     }
 
     /// Returns the number of all species which would currently match the active filters
@@ -259,7 +292,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), showFilters=\(String(describing: showFilters)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), selectedBirdId=\(String(describing: selectedBirdId)), restoredBirdId=\(String(describing: restoredBirdId)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
+        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
     }
 }
 
@@ -274,17 +307,16 @@ extension AppState {
         if let searchText = stateArray[Key.searchText] as? String {
             self.searchText = searchText
         }
-        if let showFilters = stateArray[Key.showFilters] as? Bool {
-            self.showFilters = showFilters
-        }
         if let restoredFilters = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
             self.restorableFilters = restoredFilters
         }
-        if let selectedBird = stateArray[Key.selectedBird] as? Species.Id, selectedBird > -1  {
-            self.restoredBirdId = selectedBird
-        }
         if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int  {
             self.previousBirdOfTheDay = previousBirdOfTheDay
+        }
+
+        // Restore latest navigation
+        if let selectedNavigationLinkData = stateArray[Key.selectedNavigationLink] as? Data {
+            self.selectedNavigationLink = try? JSONDecoder().decode(MainNavigationLinkTarget.self, from: selectedNavigationLinkData)
         }
 
         print("restored state: \(self)")
@@ -295,24 +327,23 @@ extension AppState {
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
         }
+        let selectedNavigationLinkData = (try? JSONEncoder().encode(selectedNavigationLink)) ?? Data()
 
         let stateArray : [String:Any] = [
             Key.searchText: searchText,
-            Key.showFilters: showFilters,
             Key.activeFilters: storableList,
-            Key.selectedBird: (selectedBirdId ?? restoredBirdId ?? -1) as Species.Id,
+            Key.selectedNavigationLink: selectedNavigationLinkData,
             Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
         ]
         activity.addUserInfoEntries(from: stateArray)
-        
+
         print("saved state: \(self)")
     }
     
     private enum Key {
         static let searchText = "searchText"
-        static let showFilters = "showFilters"
         static let activeFilters = "activeFilters"
-        static let selectedBird = "selectedBird"
         static let previousBirdOfTheDay = "previousBirdOfTheDay"
+        static let selectedNavigationLink = "selectedNavigationLink"
     }
 }
