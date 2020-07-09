@@ -37,8 +37,8 @@ class ShowBirdIntentHandler: NSObject, ShowBirdIntentHandling {
             foundBirdIDs.append(birdId)
         }
 
-        let userActivity = NSUserActivity(activityType: ActivityKeys.ShowBirdActivity)
-        userActivity.userInfo = [ActivityKeys.ShowBirdActivityResult: foundBirdIDs.first!]
+        let userActivity = NSUserActivity(activityType: NSUserActivity.showBirdActivityType)
+        userActivity.userInfo = [NSUserActivity.ActivityKeys.birdID: foundBirdIDs.first!]
 
         let response = ShowBirdIntentResponse(code: .continueInApp, userActivity: userActivity)
         completion(response)

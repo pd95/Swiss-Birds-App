@@ -18,8 +18,6 @@
 		171BE49024B06AB900CDF93D /* Swiss-BirdsIntentUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 171BE48324B06AB900CDF93D /* Swiss-BirdsIntentUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		171BE49324B06AB900CDF93D /* Swiss-BirdsIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 171BE47A24B06AB900CDF93D /* Swiss-BirdsIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		171BE4A124B070F400CDF93D /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E324AA725C00D38E6B /* SettingsStore.swift */; };
-		171BE4A324B071D800CDF93D /* ActivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4A224B071D800CDF93D /* ActivityKeys.swift */; };
-		171BE4A424B071D800CDF93D /* ActivityKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4A224B071D800CDF93D /* ActivityKeys.swift */; };
 		171BE4A524B0723E00CDF93D /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
 		171BE4AC24B340E100CDF93D /* BirdOfTheDayHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */; };
 		171BE4AF24B343B200CDF93D /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
@@ -127,7 +125,6 @@
 		171BE48D24B06AB900CDF93D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		171BE49E24B06F3F00CDF93D /* ShowBirdIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBirdIntentHandler.swift; sourceTree = "<group>"; };
 		171BE4A024B0707F00CDF93D /* Swiss-BirdsIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-BirdsIntent.entitlements"; sourceTree = "<group>"; };
-		171BE4A224B071D800CDF93D /* ActivityKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityKeys.swift; sourceTree = "<group>"; };
 		171BE4AA24B340E100CDF93D /* BirdOfTheDayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDayHandler.swift; sourceTree = "<group>"; };
 		171BE4BD24B35E4100CDF93D /* Swiss-BirdsIntentUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swiss-BirdsIntentUI.entitlements"; sourceTree = "<group>"; };
 		171BE4C824B4A65E00CDF93D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -367,7 +364,6 @@
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
-				171BE4A224B071D800CDF93D /* ActivityKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -610,7 +606,6 @@
 				171BE4B024B3455900CDF93D /* Extensions.swift in Sources */,
 				171BE4B124B3473400CDF93D /* VdsDataTypes.swift in Sources */,
 				171BE4A524B0723E00CDF93D /* UserDefault.swift in Sources */,
-				171BE4A424B071D800CDF93D /* ActivityKeys.swift in Sources */,
 				171BE47D24B06AB900CDF93D /* IntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,7 +626,6 @@
 				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
 				17206831236B5A920008905F /* Filter.swift in Sources */,
-				171BE4A324B071D800CDF93D /* ActivityKeys.swift in Sources */,
 				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,

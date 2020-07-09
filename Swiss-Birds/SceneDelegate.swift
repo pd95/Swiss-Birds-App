@@ -90,8 +90,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func handleUserActivity(_ userActivity: NSUserActivity) {
         print("handleUserActivity(\(userActivity.activityType))")
-        guard userActivity.activityType == ActivityKeys.ShowBirdActivity,
-            let birdID = userActivity.userInfo?[ActivityKeys.ShowBirdActivityResult] as? Int
+        guard userActivity.activityType == NSUserActivity.showBirdActivityType,
+            let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID] as? Int
         else {
                 print("Skipping unsupported \(userActivity.activityType)")
                 return

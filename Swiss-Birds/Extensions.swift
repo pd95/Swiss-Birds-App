@@ -24,7 +24,6 @@ extension UIApplication {
 
 extension String {
 
-
     /// Matches string with a regular expression, returning an array of `String`
     ///
     ///     html.matches(regex: "http(s)://.*/([a-z0-9]+).jpg")
@@ -59,4 +58,13 @@ extension URLError.NetworkUnavailableReason: CustomStringConvertible {
                 return "unknown"
         }
     }
+}
+
+extension NSUserActivity {
+
+    public enum ActivityKeys: String {
+        case birdID
+    }
+
+    public static let showBirdActivityType = "swiss-birds.ShowBirdActivity"
 }
