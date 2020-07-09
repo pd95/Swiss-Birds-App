@@ -49,7 +49,7 @@ class BirdOfTheDayHandler: NSObject, BirdOfTheDayIntentHandling {
 
             // Activity to be executed when response is tapped
             let userActivity = NSUserActivity(activityType: NSUserActivity.showBirdActivityType)
-            userActivity.userInfo = [NSUserActivity.ActivityKeys.birdID: speciesID]
+            userActivity.userInfo = [NSUserActivity.ActivityKeys.birdID.rawValue: speciesID]
             os_log("handle(): preparing userActivity %{public}@", userActivity.activityType.description)
 
             // Prepare success response with all relevant details for display
