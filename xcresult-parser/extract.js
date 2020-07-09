@@ -14,7 +14,7 @@ if (!fs.existsSync(testFile)){
 }
 
 function callXCResultTool(file, id = null, format = "json") {
-    let opts = {}
+    let opts = {maxBuffer: 1024 * 1024 * 100}
     let idParam = id ? ` --id ${id}` : ''
     let formatParam = ''
 
@@ -38,7 +38,7 @@ actionsInvocationRecord.actions._values.forEach(actionRecord => {
     let taskName = actionRecord.schemeTaskName._value
     let runDestination = actionRecord.runDestination.displayName._value
     console.log('actionRecord', commandName, taskName, runDestination)
-    if (commandName === "Test" && taskName === "Action") {
+    if (commandName === "Test" && (taskName === "Action" || taskName === 'BuildAndAction')) {
         console.log('> processing test action...')
         let testRefId = actionRecord.actionResult.testsRef.id._value
         if (testRefId) {
