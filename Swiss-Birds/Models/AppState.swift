@@ -103,7 +103,6 @@ class AppState : ObservableObject {
         Publishers.CombineLatest3($allSpecies, $searchText, filters.objectWillChange)
             .subscribe(on: DispatchQueue.global())
             .debounce(for: .seconds(0.1), scheduler: DispatchQueue.global())
-            .receive(on: DispatchQueue.main)
             .map { [weak self] (input: ([Species], String, Void)) -> [Species] in
                 guard let self = self else { return [] }
                 let (allSpecies, searchText, _) = input
@@ -111,6 +110,7 @@ class AppState : ObservableObject {
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 return filtered
             }
+            .receive(on: DispatchQueue.main)
             .assign(to: \.matchingSpecies, on: self)
             .store(in: &cancellables)
     }
