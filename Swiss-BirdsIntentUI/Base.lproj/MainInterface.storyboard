@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yDl-t8-Km5">
-                                <rect key="frame" x="141.5" y="153.5" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="137.5" width="37" height="37"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="zdZ-Hb-B6i">
                                 <rect key="frame" x="0.0" y="44" width="320" height="250"/>
@@ -41,9 +41,9 @@
                             <constraint firstItem="zdZ-Hb-B6i" firstAttribute="trailing" secondItem="4PN-XC-lEE" secondAttribute="trailing" id="2JT-4R-TbC"/>
                             <constraint firstAttribute="bottom" secondItem="zdZ-Hb-B6i" secondAttribute="bottom" constant="6" id="ALj-Xd-7Lq"/>
                             <constraint firstItem="zdZ-Hb-B6i" firstAttribute="leading" secondItem="4PN-XC-lEE" secondAttribute="leading" id="IDc-6k-Dtl"/>
-                            <constraint firstItem="yDl-t8-Km5" firstAttribute="centerX" secondItem="4PN-XC-lEE" secondAttribute="centerX" id="gCn-wj-PBu"/>
-                            <constraint firstItem="yDl-t8-Km5" firstAttribute="centerY" secondItem="4PN-XC-lEE" secondAttribute="centerY" id="gLm-vh-YUz"/>
+                            <constraint firstItem="yDl-t8-Km5" firstAttribute="centerX" secondItem="iwV-XN-9Y8" secondAttribute="centerX" id="Vuh-zh-ase"/>
                             <constraint firstItem="4PN-XC-lEE" firstAttribute="top" secondItem="zdZ-Hb-B6i" secondAttribute="top" id="lVz-ZN-wZG"/>
+                            <constraint firstItem="yDl-t8-Km5" firstAttribute="centerY" secondItem="iwV-XN-9Y8" secondAttribute="centerY" id="z3t-fG-AAf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4PN-XC-lEE"/>
                     </view>
