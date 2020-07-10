@@ -6,3 +6,4 @@
   Copyright © 2020 Philipp. All rights reserved.
 */
 "CFBundleDisplayName" = "Oiseaux";
+"NSSiriUsageDescription" = "L'utilisation de la fonction 'Oiseau du jour' sera partagée avec Siri, qui pourra ainsi proposer cette action de manière intelligente.";

@@ -6,3 +6,4 @@
   Copyright © 2020 Philipp. All rights reserved.
 */
 "CFBundleDisplayName" = "Vögel";
+"NSSiriUsageDescription" = "Die Nutzung der Funktion 'Vogel des Tages' wird mit Siri geteilt, so dass Siri in der Lage sein wird, diese Aktion intelligent vorzuschlagen.";

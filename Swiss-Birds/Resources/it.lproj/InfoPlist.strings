@@ -6,3 +6,4 @@
   Copyright © 2020 Philipp. All rights reserved.
 */
 "CFBundleDisplayName" = "Uccelli";
+"NSSiriUsageDescription" = "L'utilizzo della funzione 'Uccello del giorno' sarà condiviso con Siri, così Siri potrà proporre questa azione in modo intelligente.";

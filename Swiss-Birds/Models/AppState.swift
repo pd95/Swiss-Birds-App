@@ -228,9 +228,6 @@ class AppState : ObservableObject {
                         os_log("getBirdOfTheDay error: %{Public}@", error.localizedDescription)
                         self.birdOfTheDayImage = nil
                     }
-                    else {
-                        self.donateBirdOfTheDayIntent()
-                    }
                 },
                 receiveValue: { [unowned self] (image) in
                     self.birdOfTheDayImage = image
@@ -277,14 +274,19 @@ class AppState : ObservableObject {
     }
 
     func donateBirdOfTheDayIntent() {
-        let intent = BirdOfTheDayIntent()
-        intent.suggestedInvocationPhrase = "Show bird of the day"
-        let interaction = INInteraction(intent: intent, response: nil)
-        interaction.donate { (error) in
-            if let error = error as NSError? {
-                os_log("getBirdOfTheDay: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
-            } else {
-                os_log("getBirdOfTheDay: Successfully donated interaction")
+        INPreferences.requestSiriAuthorization { (authorization) in
+            guard authorization == INSiriAuthorizationStatus.authorized else {
+                return
+            }
+            let intent = BirdOfTheDayIntent()
+            intent.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Vogel des Tages anzeigen") as String
+            let interaction = INInteraction(intent: intent, response: nil)
+            interaction.donate { (error) in
+                if let error = error as NSError? {
+                    os_log("getBirdOfTheDay: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
+                } else {
+                    os_log("getBirdOfTheDay: Successfully donated interaction")
+                }
             }
         }
     }
