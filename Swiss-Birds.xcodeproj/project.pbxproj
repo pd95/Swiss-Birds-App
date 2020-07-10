@@ -758,7 +758,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntentUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Swiss-BirdsIntentUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -777,7 +777,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntentUI";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Swiss-BirdsIntentUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -796,7 +796,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntent";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Swiss-BirdsIntent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -815,7 +815,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ch.donze-it.swiss-birds.Swiss-BirdsIntent";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).Swiss-BirdsIntent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
