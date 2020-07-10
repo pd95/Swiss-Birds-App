@@ -196,7 +196,7 @@ struct BirdDetailContainer: View {
             }
         }
         .alert(isPresented: showAlert, content: { () -> Alert in
-            Alert(title: Text("An error occured"),
+            Alert(title: Text("An error occurred"),
                   message: Text(model.error!.localizedDescription),
                   dismissButton: .default(Text("Dismiss")))
         })

@@ -30,7 +30,7 @@ types.forEach(element => {
             let filename = `./data/vds-${element}-${language}.json`
             fs.writeFile(filename, jsonContent, 'utf8', function (err) {
                 if (err) {
-                    console.log(`An error occured while writing JSON Object to File ${filename}`);
+                    console.log(`An error occurred while writing JSON Object to File ${filename}`);
                     return console.log(err);
                 }
                 console.log(`File ${filename} written`)
