@@ -752,6 +752,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntentUI/Swiss-BirdsIntentUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = "Swiss-BirdsIntentUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -771,6 +772,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntentUI/Swiss-BirdsIntentUI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = "Swiss-BirdsIntentUI/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -790,6 +792,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntent/Swiss-BirdsIntent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = "Swiss-BirdsIntent/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -809,6 +812,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Swiss-BirdsIntent/Swiss-BirdsIntent.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
 				INFOPLIST_FILE = "Swiss-BirdsIntent/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
