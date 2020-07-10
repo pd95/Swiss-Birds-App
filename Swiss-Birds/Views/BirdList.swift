@@ -27,6 +27,7 @@ struct BirdList: View {
             List {
                 Section {
                     SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField)
+                        .autocapitalization(.words)
                 }
 
                 Section {
