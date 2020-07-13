@@ -90,11 +90,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func handleUserActivity(_ userActivity: NSUserActivity) {
         print("handleUserActivity(\(userActivity.activityType))")
-        guard userActivity.activityType == NSUserActivity.showBirdActivityType,
-            let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
+        guard userActivity.activityType == NSStringFromClass(ShowBirdIntent.self) ||
+            userActivity.activityType == NSUserActivity.showBirdActivityType else {
+            os_log("Can't continue unknown NSUserActivity type %@", userActivity.activityType)
+            return
+        }
+        guard let birdID = (userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int) ?? Int((userActivity.interaction?.intent as? ShowBirdIntent)?.bird?.identifier ?? "")
         else {
-                print("Skipping unsupported \(userActivity.activityType)")
-                return
+            print("Unable to identify bird for \(userActivity.activityType)")
+            return
         }
         let state = AppState.shared
         print("current state: ", state)

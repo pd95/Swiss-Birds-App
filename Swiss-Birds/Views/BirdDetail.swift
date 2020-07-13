@@ -177,6 +177,7 @@ struct BirdDetail: View {
 
 struct BirdDetailContainer: View {
 
+    @EnvironmentObject private var state : AppState
     @ObservedObject var model: BirdDetailViewModel
 
     init(bird: Species) {
@@ -187,6 +188,9 @@ struct BirdDetailContainer: View {
         Group {
             if self.model.details != nil {
                 BirdDetail(model: model)
+                    .onAppear {
+                        self.state.donateCurrentBird()
+                    }
             }
             else {
                 ActivityIndicatorView(style: .large)

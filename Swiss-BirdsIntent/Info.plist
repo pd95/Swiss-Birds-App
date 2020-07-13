@@ -31,6 +31,7 @@
 			<key>IntentsSupported</key>
 			<array>
 				<string>BirdOfTheDayIntent</string>
+				<string>ShowBirdIntent</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

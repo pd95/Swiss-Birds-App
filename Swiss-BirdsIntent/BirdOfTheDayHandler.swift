@@ -26,21 +26,21 @@ class BirdOfTheDayHandler: NSObject, BirdOfTheDayIntentHandling {
     var cancellable: AnyCancellable?
 
     func confirm(intent: BirdOfTheDayIntent, completion: @escaping (BirdOfTheDayIntentResponse) -> Void) {
-        os_log("confirm()")
+        os_log("🟣 confirm()")
         cancellable = VdsAPI.getBirdOfTheDaySpeciesIDandURL()
             .map {Optional.some($0)}
             .replaceError(with: nil)
             .sink(receiveValue: { (birdOfTheDay) in
                 self.birdOfTheDaySpeciesID = birdOfTheDay?.speciesID ?? -1
                 self.birdOfTheDayURL = birdOfTheDay?.url.absoluteString ?? ""
-                os_log("confirm().sink() received: speciesID: %ld, url: %{public}@", self.birdOfTheDaySpeciesID, self.birdOfTheDayURL)
+                os_log("🟣 confirm().sink() received: speciesID: %ld, url: %{public}@", self.birdOfTheDaySpeciesID, self.birdOfTheDayURL)
 
                 completion(BirdOfTheDayIntentResponse(code: birdOfTheDay != nil ? .ready : .failure, userActivity: nil))
             })
     }
 
     func handle(intent: BirdOfTheDayIntent, completion: @escaping (BirdOfTheDayIntentResponse) -> Void) {
-        os_log("handle(): speciesID: %ld, url: %{public}@", self.birdOfTheDaySpeciesID, self.birdOfTheDayURL)
+        os_log("🟣 handle(): speciesID: %ld, url: %{public}@", self.birdOfTheDaySpeciesID, self.birdOfTheDayURL)
         let speciesID = birdOfTheDaySpeciesID
         if let url = URL(string: birdOfTheDayURL), speciesID > -1 {
 
@@ -50,7 +50,7 @@ class BirdOfTheDayHandler: NSObject, BirdOfTheDayIntentHandling {
             // Activity to be executed when response is tapped
             let userActivity = NSUserActivity(activityType: NSUserActivity.showBirdActivityType)
             userActivity.userInfo = [NSUserActivity.ActivityKeys.birdID.rawValue: speciesID]
-            os_log("handle(): preparing userActivity %{public}@", userActivity.activityType.description)
+            os_log("🟣 handle(): preparing userActivity %{public}@", userActivity.activityType.description)
 
             // Prepare success response with all relevant details for display
             let response = BirdOfTheDayIntentResponse(code: .success, userActivity: userActivity)

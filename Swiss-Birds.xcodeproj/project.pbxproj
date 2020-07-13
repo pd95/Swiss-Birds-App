@@ -42,6 +42,7 @@
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
+		179212AC24B8B49700D6C786 /* ShowBirdIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171BE49E24B06F3F00CDF93D /* ShowBirdIntentHandler.swift */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
 		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
@@ -596,6 +597,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				179212AC24B8B49700D6C786 /* ShowBirdIntentHandler.swift in Sources */,
 				171BE4AF24B343B200CDF93D /* VdsAPI.swift in Sources */,
 				171BE4B324B3474B00CDF93D /* Filter.swift in Sources */,
 				171BE4CE24B4AEAF00CDF93D /* Intents.intentdefinition in Sources */,

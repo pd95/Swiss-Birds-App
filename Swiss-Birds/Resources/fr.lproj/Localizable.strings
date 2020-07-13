@@ -52,3 +52,4 @@
 "An error occurred" = "Une erreur s'est produite";
 "Dismiss" = "Schliessen";
 "Vogel des Tages anzeigen" = "Montre l'oiseau du jour";
+"Vogelart %@ anzeigen" = "Mostra le specie di uccelli %@";

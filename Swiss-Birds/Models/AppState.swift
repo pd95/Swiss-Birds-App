@@ -274,18 +274,56 @@ class AppState : ObservableObject {
     }
 
     func donateBirdOfTheDayIntent() {
+        let imageData = headShotsCache[previousBirdOfTheDay]?.pngData()
+
         INPreferences.requestSiriAuthorization { (authorization) in
             guard authorization == INSiriAuthorizationStatus.authorized else {
                 return
             }
             let intent = BirdOfTheDayIntent()
+            if let data = imageData {
+                intent.setImage(INImage(imageData: data), forParameterNamed: \.self)
+            }
             intent.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Vogel des Tages anzeigen") as String
             let interaction = INInteraction(intent: intent, response: nil)
             interaction.donate { (error) in
                 if let error = error as NSError? {
-                    os_log("getBirdOfTheDay: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
+                    os_log("donateBirdOfTheDayIntent: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
                 } else {
-                    os_log("getBirdOfTheDay: Successfully donated interaction")
+                    os_log("donateBirdOfTheDayIntent: Successfully donated interaction")
+                }
+            }
+        }
+    }
+
+    func donateCurrentBird() {
+        guard case .birdDetails(let speciesId) = selectedNavigationLink,
+            let species = Species.species(for: speciesId)
+        else {
+            os_log("donateCurrentBird: Abort, currently no species shown")
+            return
+        }
+
+        let imageData = headShotsCache[species.speciesId]?.pngData()
+
+        INPreferences.requestSiriAuthorization { (authorization) in
+            guard authorization == INSiriAuthorizationStatus.authorized else {
+                return
+            }
+            let intent = ShowBirdIntent()
+            intent.bird = Bird(identifier: "\(speciesId)", display: species.name)
+
+            if let data = imageData {
+                intent.setImage(INImage(imageData: data), forParameterNamed: \ShowBirdIntent.bird)
+            }
+            intent.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Vogelart %@ anzeigen", species.name) as String
+
+            let interaction = INInteraction(intent: intent, response: nil)
+            interaction.donate { (error) in
+                if let error = error as NSError? {
+                    os_log("donateCurrentBird: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
+                } else {
+                    os_log("donateCurrentBird: Successfully donated interaction")
                 }
             }
         }

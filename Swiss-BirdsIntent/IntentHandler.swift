@@ -14,9 +14,9 @@ class IntentHandler: INExtension {
         if intent is BirdOfTheDayIntent {
             return BirdOfTheDayHandler()
         }
-//        else if intent is ShowBirdIntent {
-//            return ShowBirdIntentHandler()
-//        }
+        else if intent is ShowBirdIntent {
+            return ShowBirdIntentHandler()
+        }
         fatalError("Unsupported intent of type: \(intent)")
     }
 }
