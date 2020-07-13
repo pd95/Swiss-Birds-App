@@ -139,13 +139,20 @@ class Swiss_BirdsUITests: XCTestCase {
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)
 
-        // Search
+        // Type something random into search field
+        let searchText = MyUIElements.searchTextField.element
+        searchText.tap()
+        searchText.typeText("bi")
+
+        // Clear search again
+        let clearButton = MyUIElements.searchTextClearButton.element
+        _ = clearButton.waitForExistence(timeout: wait4existenceTimeout)
+        clearButton.tap()
+
+        // Search a real bird
         let selectIndex = language == "fr" ? 2 : 0
         let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
         let search = searchTerms[language]!
-
-        let searchText = MyUIElements.searchTextField.element
-        searchText.tap()
         searchText.typeText(search)
         searchText.typeText("\n")
 
@@ -159,16 +166,6 @@ class Swiss_BirdsUITests: XCTestCase {
         if app.windows.firstMatch.horizontalSizeClass == .compact {
             MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
         }
-
-        // Clear search
-        let clearButton = MyUIElements.searchTextClearButton.element
-        _ = clearButton.waitForExistence(timeout: wait4existenceTimeout)
-        clearButton.tap()
-
-        // Type something random
-        _ = searchText.waitForExistence(timeout: wait4existenceTimeout)
-        searchText.tap()
-        MyUIElements.searchTextField.element.typeText("bi")
 
         // Type Cancel
         let cancelButton = MyUIElements.searchTextCancelButton.element
