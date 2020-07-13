@@ -26,7 +26,6 @@ struct BirdOfTheDay: View {
             Button(action: {
                 self.isPresented = false
                 self.state.showBird(self.speciesId)
-                self.state.donateBirdOfTheDayIntent()
             }) {
                 VStack {
                     Rectangle()

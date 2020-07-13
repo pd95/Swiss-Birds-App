@@ -38,9 +38,6 @@ class SettingsStore: ObservableObject {
     @UserDefault(key: UserDefaults.Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
     var voiceDataOverConstrainedNetworkAccess: Bool
 
-    @UserDefault(key: UserDefaults.Keys.sharedBirds, defaultValue: [:], storage: UserDefaults(suiteName: "group.swiss-birds")!)
-    var sharedBirds: [String:Int]
-
     func setupForTesting() {
         if CommandLine.arguments.contains("no-settings") {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -73,6 +70,5 @@ extension UserDefaults {
         static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
         static let reset = "reset"
         static let appVersion = "appVersion"
-        static let sharedBirds = "sharedBirds"
     }
 }

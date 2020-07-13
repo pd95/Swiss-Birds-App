@@ -9,7 +9,6 @@
 import os.log
 import SwiftUI
 import Combine
-import Intents
 
 // Enumeration of all possible cases of the current selected NavigationLink
 enum MainNavigationLinkTarget: Hashable, Codable {
@@ -104,7 +103,6 @@ class AppState : ObservableObject {
                         self.error = error
                         os_log("getBirds error: %{Public}@", error.localizedDescription)
                     }
-                    self.updateSharedBirds()
                 },
                 receiveValue: { [weak self] species in
                     guard let self = self else { return }
@@ -254,41 +252,6 @@ class AppState : ObservableObject {
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
-    }
-
-    func updateSharedBirds() {
-        var dict = [String:Int]()
-        self.allSpecies.forEach {
-            dict[$0.name] = $0.speciesId
-        }
-        SettingsStore.shared.sharedBirds = dict
-
-        INPreferences.requestSiriAuthorization { (status) in
-            switch status {
-                case .authorized:
-                    os_log("updateSharedBirds: Siri is enabled")
-                default:
-                    break
-            }
-        }
-    }
-
-    func donateBirdOfTheDayIntent() {
-        INPreferences.requestSiriAuthorization { (authorization) in
-            guard authorization == INSiriAuthorizationStatus.authorized else {
-                return
-            }
-            let intent = BirdOfTheDayIntent()
-            intent.suggestedInvocationPhrase = NSString.deferredLocalizedIntentsString(with: "Vogel des Tages anzeigen") as String
-            let interaction = INInteraction(intent: intent, response: nil)
-            interaction.donate { (error) in
-                if let error = error as NSError? {
-                    os_log("getBirdOfTheDay: Interaction donation failed: %@", log: OSLog.default, type: .error, error)
-                } else {
-                    os_log("getBirdOfTheDay: Successfully donated interaction")
-                }
-            }
-        }
     }
 }
 
