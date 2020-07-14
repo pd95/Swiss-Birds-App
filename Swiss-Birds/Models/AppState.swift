@@ -279,8 +279,14 @@ extension AppState {
         }
 
         // Restore latest navigation
-        if let selectedNavigationLinkData = stateArray[Key.selectedNavigationLink] as? Data {
-            self.selectedNavigationLink = try? JSONDecoder().decode(MainNavigationLinkTarget.self, from: selectedNavigationLinkData)
+        if let selectedNavigationLinkData = stateArray[Key.selectedNavigationLink] as? Data,
+            let selectedNavigationLink = try? JSONDecoder().decode(MainNavigationLinkTarget.self, from: selectedNavigationLinkData) {
+            if case .birdDetails(let speciesId) = selectedNavigationLink {
+                self.selectedNavigationLink = .programmaticBirdDetails(speciesId)
+            }
+            else {
+                self.selectedNavigationLink = selectedNavigationLink
+            }
         }
 
         os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
