@@ -44,7 +44,7 @@ struct ContentView: View {
                             self.showBirdOfTheDay = false
                         }
                     }
-                    .accessibility(label: Text("Hindergrund"))
+                    .accessibility(label: Text("Hintergrund"))
                     .accessibility(hint: Text("Antippen zum schliessen."))
                     .zIndex(10)
                     .accessibility(sortPriority: 990)
