@@ -35,8 +35,8 @@ struct ContentView: View {
 
             if showBirdOfTheDay {
                 // Dimmed background
-                Color.primary
-                    .opacity(0.4)
+                Color(.systemBackground)
+                    .opacity(0.6)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
