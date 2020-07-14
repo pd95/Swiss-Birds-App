@@ -7,3 +7,4 @@
 */
 "CFBundleDisplayName" = "Swiss-Birds";
 "NSSiriUsageDescription" = "Usage of the Bird of the day feature will be shared with Siri, so Siri will be able to propose this action intelligently.";
+"Vogel des Tages" = "Bird of the day";

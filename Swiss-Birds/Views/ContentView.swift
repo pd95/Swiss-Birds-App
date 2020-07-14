@@ -56,7 +56,9 @@ struct ContentView: View {
             }
         }
         .onAppear() {
-            self.state.checkBirdOfTheDay()
+            if SettingsStore.shared.startupCheckBirdOfTheDay {
+                self.state.checkBirdOfTheDay()
+            }
         }
         .onReceive(state.$showBirdOfTheDay.debounce(for: .seconds(1), scheduler: RunLoop.main)) { value in
             withAnimation {

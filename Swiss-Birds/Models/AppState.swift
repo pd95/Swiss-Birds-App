@@ -180,10 +180,8 @@ class AppState : ObservableObject {
             .eraseToAnyPublisher()
     }
 
-    func checkBirdOfTheDay() {
-        if !SettingsStore.shared.startupCheckBirdOfTheDay {
-            return
-        }
+    func checkBirdOfTheDay(showAlways: Bool = false) {
+        os_log("checkBirdOfTheDay(showAlways: %d)", showAlways)
         // Fetch the bird of the day
         VdsAPI
             .getBirdOfTheDaySpeciesIDandURL()
@@ -201,7 +199,7 @@ class AppState : ObservableObject {
                     self.birdOfTheDay = birdOfTheDay
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
-                        self.showBirdOfTheDay = currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay
+                        self.showBirdOfTheDay = showAlways || (currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay)
                     }
                 })
             .store(in: &cancellables)
@@ -265,6 +263,7 @@ extension AppState : CustomStringConvertible {
 extension AppState {
 
     func restore(from activity: NSUserActivity) {
+        os_log("restore(from: %{public}@%)", activity.activityType)
         guard activity.activityType == Bundle.main.activityType,
             let stateArray : [String:Any] = activity.userInfo as? [String:Any]
             else { return }
@@ -284,10 +283,11 @@ extension AppState {
             self.selectedNavigationLink = try? JSONDecoder().decode(MainNavigationLinkTarget.self, from: selectedNavigationLinkData)
         }
 
-        print("restored state: \(self)")
+        os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
     }
     
     func store(in activity: NSUserActivity) {
+        os_log("store(in: %{public}@)", activity.activityType)
         var storableList = [String : [Filter.Id]]()
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
@@ -302,7 +302,7 @@ extension AppState {
         ]
         activity.addUserInfoEntries(from: stateArray)
 
-        print("saved state: \(self)")
+        os_log("store(in: %{public}@): %{public}@", activity.activityType, self.description)
     }
     
     private enum Key {

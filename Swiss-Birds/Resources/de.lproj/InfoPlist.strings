@@ -7,3 +7,4 @@
 */
 "CFBundleDisplayName" = "Vögel";
 "NSSiriUsageDescription" = "Die Nutzung der Funktion 'Vogel des Tages' wird mit Siri geteilt, so dass Siri in der Lage sein wird, diese Aktion intelligent vorzuschlagen.";
+"Vogel des Tages" = "Vogel des Tages";

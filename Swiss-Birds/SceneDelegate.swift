@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        os_log("scene(_, willConnectTo:,options:) => activities %ld", connectionOptions.userActivities.count)
 
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
@@ -35,7 +36,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
 
-        os_log("scene(_, willConnectTo:,options:) => activities %ld", connectionOptions.userActivities.count)
+        if let shortcutItem = connectionOptions.shortcutItem {
+            handleShortcutItem(shortcutItem)
+        }
+
         for activity in connectionOptions.userActivities {
             handleUserActivity(activity)
         }
@@ -47,6 +51,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        os_log("windowScene(_, performActionFor:, completionHandler:) => item %{public}@", shortcutItem.description)
+        let handled = handleShortcutItem(shortcutItem)
+        completionHandler(handled)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -101,5 +111,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         print("handleUserActivity: birdID=\(birdID)")
         state.showBird(birdID)
+    }
+
+    @discardableResult
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        os_log("handleShortcutItem(shortcutItem: %{public}@)", shortcutItem.type)
+
+        if shortcutItem.type == "BirdOfTheDay" {
+            let appState = AppState.shared
+            appState.checkBirdOfTheDay(showAlways: true)
+            return true
+        }
+        return false
     }
 }
