@@ -19,12 +19,11 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
 ## Danksagungen
 
 1. [Schweizerische Vogelwarte Sempach](https://vogelwarte.ch) für ihre umfangreiche Datensammlung und Forschung, sowie für die Schutzprojekte zur Unterstützung der heimischen Vögel.    
-They have also a great website with much more information.
 2. [@kocher_sandra](https://twitter.com/kocher_sandra) für die Erlaubnis ihr Blaumeisen Foto für das AppIcon und den Startbildschirm zu verwenden.
 
 ## Eindrücke
 
-### Screenshots
+### Bildschirmfotos
 
 <table>
   <thead>
@@ -60,6 +59,6 @@ They have also a great website with much more information.
   </tbody>
 </table>
 
-### Screencasts
+### Bildschirmaufzeichnungen
 
-<img src="assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Vogelarten Suche" width="49%"><img src="assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filterkriterien" width="49%">
+<img src="/Swiss-Birds-App/assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Vogelarten Suche" width="49%"><img src="/Swiss-Birds-App/assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filterkriterien" width="49%">
