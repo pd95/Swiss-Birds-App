@@ -12,6 +12,10 @@ so the already fetched data can be accessed "on the go".
 
 The app is currently in a closed beta testing state. Please get in touch with [me](mailto:pd95@users.noreply.github.com?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
 
+## Privacy
+
+You can read the privacy policy [here](privacy.md).
+
 ## Acknowledgments
 
 1. [Swiss Ornithological Institute](https://vogelwarte.ch) for their information gathering and their research and conservation projects to support our native birds.    
