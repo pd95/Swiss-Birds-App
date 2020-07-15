@@ -24,6 +24,42 @@ They have also a great website with much more information.
 
 ## Impressions
 
-Find [here a few iPhone & iPad screenshots](screenshots.md).
+### Screenshots
+
+<table>
+  <thead>
+    <tr>
+      <th>Device</th>
+      <th>Bird of the day</th>
+      <th>Main screen</th>
+      <th>Search</th>
+      <th>Detail (top)</th>
+      <th>Detail (middle)</th>
+      <th>Filter criteria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="vertical-align:top">iPhone</td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_00_BirdOfTheDay.jpeg" width="100%" alt="BirdOfTheDay"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_01_Main.jpeg" width="100%" alt="Main"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg" width="100%" alt="Search"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg" width="100%" alt="Detail_Top"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg" width="100%" alt="Detail_Middle"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg" width="100%" alt="Filtercriteria"></a></td>
+    </tr>
+    <tr>
+      <td style="vertical-align:top">iPad</td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_00_BirdOfTheDay.jpeg" width="100%" alt="BirdOfTheDay"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_01_Main.jpeg" width="100%" alt="Main"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_02_Search.jpeg" width="100%" alt="Search"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_03_Detail_Top.jpeg" width="100%" alt="Detail_Top"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_04_Detail_Middle.jpeg" width="100%" alt="Detail_Middle"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPad/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_05_Filtercriteria.jpeg" width="100%" alt="Filtercriteria"></a></td>
+    </tr>
+  </tbody>
+</table>
+
+### Screencasts
 
 <img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Bird Search" width="49%"><img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filter Search" width="49%">
