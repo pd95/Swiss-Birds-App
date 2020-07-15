@@ -1,3 +1,5 @@
+[Deutsch](de/README.md)
+
 #  Birds of Switzerland
 
 This is the missing app for iOS, which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch).
