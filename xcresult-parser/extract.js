@@ -74,7 +74,9 @@ actionsInvocationRecord.actions._values.forEach(actionRecord => {
                                                 let payloadRefId = attachment.payloadRef.id._value
                                                 let data = callXCResultTool(testFile, payloadRefId, type)
                                                 if (data) {
-                                                    let dir = `${runDestination}/${testPlanRunName}/${actionTestSummaryName}`
+                                                    //let dir = `${runDestination}/${testPlanRunName}/${actionTestSummaryName}`
+                                                    let dir = `${runDestination}`
+                                                    filename = `${testPlanRunName}_${filename}`
                                                     if (!fs.existsSync(dir)){
                                                         console.log('Creating dir',dir)
                                                         fs.mkdirSync(dir, {recursive:true});
