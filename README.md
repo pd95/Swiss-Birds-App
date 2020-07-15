@@ -62,4 +62,4 @@ They have also a great website with much more information.
 
 ### Screencasts
 
-<img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Bird Search" width="49%"><img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filter Search" width="49%">
+<img src="assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Bird Search" width="49%"><img src="assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filter Search" width="49%">
