@@ -24,5 +24,5 @@ They have also a great website with much more information.
 
 ## Impressions
 
-![iPhone Bird Search](../assets/images/iPhoneX_01_Bird_Search_de.gif)
-![iPhone Filter Search](../assets/images/iPhoneX_02_Filter_Search_de.gif)
+![iPhone Bird Search](assets/images/iPhoneX_01_Bird_Search_de.gif)
+![iPhone Filter Search](assets/images/iPhoneX_02_Filter_Search_de.gif)
