@@ -70,11 +70,11 @@ class MarketingTests: XCTestCase {
     }
 
     func testMainNavigation() {
-        takeScreenShot(app, name: "00_Startup")
 
-        XCTContext.runActivity(named: "Dismiss bird of the day") { (_) in
+        XCTContext.runActivity(named: "Bird of the day is shown") { (_) in
             let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
             XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
+            takeScreenShot(app, name: "00_BirdOfTheDay")
             dismissButton.tap()
         }
 
@@ -100,6 +100,8 @@ class MarketingTests: XCTestCase {
         // Show Detail
         XCTContext.runActivity(named: "Show detail view and scroll down") { (_) in
             app.tables.buttons.element(boundBy: selectIndex).tap()
+            let birdImage = app.otherElements["bird_image_1"]
+            _ = birdImage.waitForExistence(timeout: 4.0)
             takeScreenShot(app, name: "03_Detail_Top")
 
             let voiceButton = app.buttons["playVoiceButton"]
