@@ -3,7 +3,7 @@
 There is not much to write here. This is an open source project...  
 This app is not collecting any information on you, your device or your behaviour.
 
-As the app accesses the internet solely to fetch data from https://vogelwarte.ch, it is possible and also probable that this websites server, owned by the Swiss Ornithological Institute, is collecting standard access information similar to one shown below:
+As the app accesses the internet solely to fetch data from [https://vogelwarte.ch](https://vogelwarte.ch), it is possible and also probable that this websites server, owned by the Swiss Ornithological Institute, is collecting standard access information similar to one shown below:
 
 | IP Address | Time of access | Access details | Status / Size | App Name/OS version |
 | --- | --- | --- | --- | --- | 
@@ -11,4 +11,4 @@ As the app accesses the internet solely to fetch data from https://vogelwarte.ch
 
 These logs are not personally identifiable and you are not exposing yourself more than browsing the website directly.
 
-You can read the privacy policy of the Swiss Ornithological Institute here: https://www.vogelwarte.ch/en/vogelwarte/privacy-statement
+You can read the privacy policy of the Swiss Ornithological Institute here: [https://www.vogelwarte.ch/en/vogelwarte/privacy-statement](https://www.vogelwarte.ch/en/vogelwarte/privacy-statement)
