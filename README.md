@@ -1,3 +1,5 @@
+Visit the [Github Pages for this project](https://pd95.github.io/Swiss-Birds-App) for more app related information.
+
 #  Birds of Switzerland
 
 This is the missing app which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch). They do have a really nice website where you can lookup birds found in Switzerland and get more detailed information, but they are missing an iPhone app which makes the same information easily accessible "on the go".  
