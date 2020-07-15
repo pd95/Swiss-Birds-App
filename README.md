@@ -35,5 +35,5 @@ They have also a great website with much more information.
 
 ## Impressions
 
-![iPhone Bird Search](docs/_Pictures/iPhoneX_01_Bird_Search_de.gif)
-![iPhone Filter Search](docs/_Pictures/iPhoneX_02_Filter_Search_de.gif)
+![iPhone Bird Search](docs/_pictures/iPhoneX_01_Bird_Search_de.gif)
+![iPhone Filter Search](docs/_pictures/iPhoneX_02_Filter_Search_de.gif)
