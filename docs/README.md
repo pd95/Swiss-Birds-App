@@ -24,5 +24,4 @@ They have also a great website with much more information.
 
 ## Impressions
 
-![iPhone Bird Search](https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_01_Bird_Search_de.gif)
-![iPhone Filter Search](https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_02_Filter_Search_de.gif)
+<img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Bird Search" width="49%"><img src="https://github.com/pd95/Swiss-Birds-App/raw/master/assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filter Search" width="49%">
