@@ -8,6 +8,7 @@
       }
     },
     {
+      "enabled" : false,
       "id" : "F42F5F66-0B95-4A61-ACB8-867A45DCE6CB",
       "name" : "French",
       "options" : {
@@ -15,6 +16,7 @@
       }
     },
     {
+      "enabled" : false,
       "id" : "4D92DA82-8A37-4C87-B300-42029C28BEE7",
       "name" : "Italian",
       "options" : {
@@ -22,6 +24,7 @@
       }
     },
     {
+      "enabled" : false,
       "id" : "076966B4-C3B6-4B83-BB7E-602E3CE2841B",
       "name" : "English",
       "options" : {
