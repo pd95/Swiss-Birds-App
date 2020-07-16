@@ -29,7 +29,7 @@ They have also a great website with much more information.
 
 ### Screenshots
 
-<table style="hyphens: auto;">
+<table class="screenshots">
   <thead>
     <tr>
       <th>Device</th>

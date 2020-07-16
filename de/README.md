@@ -26,16 +26,16 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
 
 ### Bildschirmfotos
 
-<table style="hyphens: auto;">
+<table class="screenshots">
   <thead>
     <tr>
       <th>Gerät</th>
       <th>Vogel des Tages</th>
-      <th>Hauptscreen</th>
+      <th>Haupt-screen</th>
       <th>Suche</th>
       <th>Detail (Oben)</th>
       <th>Detail (Mitte)</th>
-      <th>Filterkriterien</th>
+      <th>Filter-kriterien</th>
     </tr>
   </thead>
   <tbody>
