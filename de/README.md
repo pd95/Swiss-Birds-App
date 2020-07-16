@@ -1,4 +1,8 @@
-[english](../README.md)
+---
+title: Vögel der Schweiz
+description: Die kleine Vogelwarte für die Hosentasche
+---
+[English](../README.md)
 
 #  Vögel der Schweiz
 

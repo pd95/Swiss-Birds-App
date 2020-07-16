@@ -1,7 +1,8 @@
 ---
-title: Datenschutzerklärung
+title: Vögel der Schweiz - Datenschutzerklärung
+description: Die kleine Vogelwarte für die Hosentasche
 ---
-[english](../privacy.md)
+[English](../privacy.md)
 
 # Datenschutzerklärung
 
