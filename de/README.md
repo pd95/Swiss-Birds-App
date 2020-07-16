@@ -2,6 +2,7 @@
 
 #  Vögel der Schweiz
 
+<img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px; vertical-align: text-top; float: left; padding-right: 1em;"> 
 Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://vogelwarte.ch) entwickelt würde.
 Die Vogelwarte Sempach hat zwar eine wirklich gute Website auf der man die in der Schweiz vorkommenden Vogelarten nachschlagen kann und detailliertere Informationen und Fotos erhält, aber es fehlt eine iOS-App, die dieselben Informationen auch unterwegs leicht zugänglich macht.  
 Aus diesem Grund habe ich im November 2019 mit der Entwicklung dieser App begonnen.
