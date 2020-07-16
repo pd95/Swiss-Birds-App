@@ -26,7 +26,7 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
 
 ### Bildschirmfotos
 
-<table>
+<table style="hyphens: auto;">
   <thead>
     <tr>
       <th>Gerät</th>

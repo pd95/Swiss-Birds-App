@@ -29,7 +29,7 @@ They have also a great website with much more information.
 
 ### Screenshots
 
-<table>
+<table style="hyphens: auto;">
   <thead>
     <tr>
       <th>Device</th>
