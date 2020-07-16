@@ -1,6 +1,5 @@
 ---
-title: Swiss-Birds-App
-description: Privacy Policy
+title: Privacy Policy
 ---
 [Deutsch](de/privacy.md)
 

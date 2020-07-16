@@ -1,7 +1,3 @@
----
-title: Swiss-Birds-App
-description: Die kleine Vogelwarte für die Hosentasche
----
 [English](../README.md)
 
 #  Vögel der Schweiz

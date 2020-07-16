@@ -1,7 +1,3 @@
----
-title: Swiss-Birds-App
-description: A pocket reference app
----
 [Deutsch](de/README.md)
 
 #  Birds of Switzerland
