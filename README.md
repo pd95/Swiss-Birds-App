@@ -2,7 +2,9 @@
 
 #  Birds of Switzerland
 
-<img src="assets/AppIcon.png" alt="App icon" style="max-width: 100px; vertical-align: text-top; float: left; padding-right: 1em;"> 
+<div style="float:left;vertical-align: text-top;padding-right: 1em;filter:drop-shadow(2px 0px 5px #888)">
+<img src="assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
+</div>
 This is the missing app for iOS, which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch).
 They do have a really nice website where you can lookup bird species found in Switzerland and get more detailed information and photos, but they are missing
 an iOS app which makes the same information easily accessible "on the go".  
