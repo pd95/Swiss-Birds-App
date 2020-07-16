@@ -40,7 +40,7 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
   </thead>
   <tbody>
     <tr>
-      <td style="vertical-align:top">iPhone</td>
+      <td style="vertical-align:top; padding: 10px">iPhone</td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_00_BirdOfTheDay.jpeg" width="100%" alt="Vogel des Tages"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_01_Main.jpeg" width="100%" alt="Hauptscreen"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg" width="100%" alt="Suche"></a></td>
@@ -49,7 +49,7 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg" width="100%" alt="Filter Kriterien"></a></td>
     </tr>
     <tr>
-      <td style="vertical-align:top">iPad</td>
+      <td style="vertical-align:top; padding: 10px">iPad</td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/German_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_00_BirdOfTheDay.jpeg" width="100%" alt="Vogel des Tages"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/German_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_01_Main.jpeg" width="100%" alt="Hauptscreen"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/German_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_02_Search.jpeg" width="100%" alt="Suche"></a></td>

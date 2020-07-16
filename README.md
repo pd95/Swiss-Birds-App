@@ -43,7 +43,7 @@ They have also a great website with much more information.
   </thead>
   <tbody>
     <tr>
-      <td style="vertical-align:top">iPhone</td>
+      <td style="vertical-align:top; padding: 10px">iPhone</td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/English_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_00_BirdOfTheDay.jpeg" width="100%" alt="BirdOfTheDay"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/English_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_01_Main.jpeg" width="100%" alt="Main"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/English_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_02_Search.jpeg" width="100%" alt="Search"></a></td>
@@ -52,7 +52,7 @@ They have also a great website with much more information.
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/English_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_05_Filtercriteria.jpeg" width="100%" alt="Filtercriteria"></a></td>
     </tr>
     <tr>
-      <td style="vertical-align:top">iPad</td>
+      <td style="vertical-align:top; padding: 10px">iPad</td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/English_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_00_BirdOfTheDay.jpeg" width="100%" alt="BirdOfTheDay"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/English_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_01_Main.jpeg" width="100%" alt="Main"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPad/English_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_02_Search.jpeg" width="100%" alt="Search"></a></td>
