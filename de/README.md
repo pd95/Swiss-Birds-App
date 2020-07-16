@@ -2,7 +2,7 @@
 
 #  Vögel der Schweiz
 
-<div style="float:left;vertical-align: text-top;padding-right: 1em;filter:drop-shadow(2px 0px 5px #888)">
+<div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
 Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://vogelwarte.ch) entwickelt würde.
