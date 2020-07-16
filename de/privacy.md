@@ -1,6 +1,6 @@
 ---
-title: Vögel der Schweiz - Datenschutzerklärung
-description: Die kleine Vogelwarte für die Hosentasche
+title: Swiss-Birds-App
+description: Datenschutzerklärung
 ---
 [English](../privacy.md)
 

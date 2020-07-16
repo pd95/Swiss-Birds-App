@@ -1,6 +1,6 @@
 ---
-title: Birds of Switzerland - Privacy Policy
-description: A pocket reference app
+title: Swiss-Birds-App
+description: Privacy Policy
 ---
 [Deutsch](de/privacy.md)
 
