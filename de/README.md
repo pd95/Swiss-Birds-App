@@ -1,3 +1,6 @@
+---
+title: Vögel der Schweiz
+---
 [English](../README.md)
 
 #  Vögel der Schweiz

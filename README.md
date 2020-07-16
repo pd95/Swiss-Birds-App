@@ -1,3 +1,6 @@
+---
+title: Birds of Switzerland
+---
 [Deutsch](de/README.md)
 
 #  Birds of Switzerland
