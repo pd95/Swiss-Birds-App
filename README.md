@@ -14,10 +14,10 @@ This app is loading the list of birds, images and sounds from the website and ca
 The script to prefetch the filter icons has to be executed before building the app. As the current implementation of the script is a mixture of unix shell and JavaScript, please make sure you have [node.js](https://nodejs.org) installed on your build machine.
 
 1. Run the script `./fetch_data.sh` in the `data-scripts` directory.  
-  This will first fetch the list of birds and filter categories, cleanup the data (remove duplicates) and then fetch detailed information, images and voices. Expected runtime: *10 minutes*
+  This will first fetch the list of filter categories and cleanup the data (remove duplicates). (Yes, this script is overly complicated for the simple task it does today...)
 
 2. Run the script `./prepare_Filter.xcassets.sh`  
-  This will create a `Filter.xcassets` folder containing the transformed SVG symbols for the filter categories.
+  This will create a `Filter.xcassets` folder containing transformed SVG symbols for the filter categories.
 
 3. Move the resulting `Filter.xcassets` into the app folder (along with `Assets.xcassets`): `mv Filter.xcassets ../Swiss-Birds/`
 
