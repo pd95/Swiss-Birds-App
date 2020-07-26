@@ -5,7 +5,7 @@
 
 table.screenshots {
     td { 
-        padding: 0
+        padding: 1px
     }
 
     td {
@@ -14,6 +14,12 @@ table.screenshots {
             padding: 0px !important; 
             border: 0px !important;
         }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    table.screenshots thead {
+        display: none;
     }
 }
 
