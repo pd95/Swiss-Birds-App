@@ -6,7 +6,7 @@
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
 
-Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://vogelwarte.ch/de/) entwickelt würde.
+Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://www.vogelwarte.ch/de/) entwickelt würde.
 Die Vogelwarte Sempach hat zwar eine wirklich gute Website auf der man die in der Schweiz vorkommenden Vogelarten nachschlagen kann und detailliertere Informationen und Fotos erhält, aber es fehlt eine iOS-App, die dieselben Informationen auch unterwegs leicht zugänglich macht.  
 Aus diesem Grund habe ich im November 2019 mit der Entwicklung dieser App begonnen.
 
@@ -19,7 +19,7 @@ Die App befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kont
 ## Copyright
 
 Die App wurde als Open Source Projekt geschrieben und ist mit dem vollständigen Source Code verfügbar auf [GitHub](https://github.com/pd95/Swiss-Birds-App).  
-Die Vogeldaten, Fotos und Töne werden von der [Homepage der Vogelwarte Sempach](https://vogelwarte.ch/de/) geladen und gehören den entsprechenden Rechteinhaber. Sie dürfen nicht ohne Erlaubniss der Vogelwarte Sempach verwendet werden. [Mehr Details gibt es hier.](https://www.vogelwarte.ch/de/vogelwarte/impressum).
+Die Vogeldaten, Fotos und Töne werden von der [Homepage der Vogelwarte Sempach](https://www.vogelwarte.ch/de/) geladen und gehören den entsprechenden Rechteinhaber. Sie dürfen nicht ohne Erlaubniss der Vogelwarte Sempach verwendet werden. [Mehr Details gibt es hier.](https://www.vogelwarte.ch/de/vogelwarte/impressum).
 
 ## Datenschutz
 
@@ -27,7 +27,7 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
 
 ## Danksagungen
 
-1. [Schweizerische Vogelwarte Sempach](https://vogelwarte.ch) für ihre umfangreiche Datensammlung und Forschung, sowie für die Schutzprojekte zur Unterstützung der heimischen Vögel.    
+1. [Schweizerische Vogelwarte Sempach](https://www.vogelwarte.ch) für ihre umfangreiche Datensammlung und Forschung, sowie für die Schutzprojekte zur Unterstützung der heimischen Vögel.    
 2. [@kocher_sandra](https://twitter.com/kocher_sandra) für die Erlaubnis ihr Blaumeisen Foto für das AppIcon und den Startbildschirm zu verwenden.
 
 ## Eindrücke
