@@ -5,7 +5,8 @@
 <div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
-Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://vogelwarte.ch) entwickelt würde.
+
+Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://vogelwarte.ch/de/) entwickelt würde.
 Die Vogelwarte Sempach hat zwar eine wirklich gute Website auf der man die in der Schweiz vorkommenden Vogelarten nachschlagen kann und detailliertere Informationen und Fotos erhält, aber es fehlt eine iOS-App, die dieselben Informationen auch unterwegs leicht zugänglich macht.  
 Aus diesem Grund habe ich im November 2019 mit der Entwicklung dieser App begonnen.
 
@@ -13,7 +14,12 @@ Ziel ist es, eine App zur Verfügung zu stellen, die auf die öffentlich zugäng
 
 Diese App lädt die Liste der Vogelarten, Bilder und Töne von der Website https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/ und speichert sie lokal im Cache, so dass unterwegs auf die bereits abgerufenen Daten zugegriffen werden kann.
 
-Die App befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte setzen Sie sich mit [mir](mailto:pd95@users.noreply.github.com?subject=Swiss-Birds-App%20beta) in Verbindung, wenn Sie eine Einladung erhalten möchten.
+Die App befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
+
+## Copyright
+
+Die App wurde als Open Source Projekt geschrieben und ist mit dem vollständigen Source Code verfügbar auf [GitHub](https://github.com/pd95/Swiss-Birds-App).  
+Die Vogeldaten, Fotos und Töne werden von der [Homepage der Vogelwarte Sempach](https://vogelwarte.ch/de/) geladen und gehören den entsprechenden Rechteinhaber. Sie dürfen nicht ohne Erlaubniss der Vogelwarte Sempach verwendet werden. [Mehr Details gibt es hier.](https://www.vogelwarte.ch/de/vogelwarte/impressum).
 
 ## Datenschutz
 
@@ -48,7 +54,7 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_02_Search.jpeg" width="100%" alt="Suche"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg" width="100%" alt="Detail (Oben)"></a></td>
       <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg" width="100%" alt="Detail (Mitte)"></a></td>
-      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg" width="100%" alt="Filter Kriterien"></a></td>
+      <td><a href="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg" width="100%" alt="Filterkriterien"></a></td>
     </tr>
     <tr>
       <td style="vertical-align:top; padding: 10px">iPad</td>

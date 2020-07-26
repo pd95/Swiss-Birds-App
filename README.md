@@ -5,7 +5,8 @@
 <div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
-This is the missing app for iOS, which I hoped would have been developed by [Swiss Ornithological Institute (SOI)](https://vogelwarte.ch).
+
+This is the missing app for iOS, which I hoped would have been developed by [Swiss Ornithological Institute](https://vogelwarte.ch/en/).
 They do have a really nice website where you can lookup bird species found in Switzerland and get more detailed information and photos, but they are missing
 an iOS app which makes the same information easily accessible "on the go".  
 This is why I started to develop this app in November 2019.
@@ -15,7 +16,12 @@ The goal is to provide an app accessing the publicly accessible data of the webs
 This app is loading the list of birds, images and sounds from the website https://www.vogelwarte.ch/en/birds/birds-of-switzerland/ and caches them locally, 
 so the already fetched data can be accessed "on the go".
 
-The app is currently in a closed beta testing state. Please get in touch with [me](mailto:pd95@users.noreply.github.com?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
+The app is currently in a closed beta testing state. Please [contact me](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
+
+## Copyright
+
+The app has been written as an open source project, i.e. the full app code is available on [GitHub](https://github.com/pd95/Swiss-Birds-App).  
+The bird related data, photos and sounds are load from the [Swiss Ornithological Institute website](https://vogelwarte.ch/en/) and belong to their respective copyright holders. They cannot be used without permission from the Swiss Ornithological Institute [(more details here)](https://www.vogelwarte.ch/en/vogelwarte/impressum).
 
 ## Privacy
 
