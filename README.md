@@ -13,7 +13,7 @@ This is why I started to develop this app in November 2019.
 
 The goal is to provide an app accessing the publicly accessible data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
 
-This app is loading the list of birds, images and sounds from the website https://www.vogelwarte.ch/en/birds/birds-of-switzerland/ and caches them locally, 
+This app is loading the list of birds, images and sounds from the website [https://www.vogelwarte.ch/en/birds/birds-of-switzerland/](https://www.vogelwarte.ch/en/birds/birds-of-switzerland/) and caches them locally, 
 so the already fetched data can be accessed "on the go".
 
 The app is currently in a closed beta testing state. Please [contact me](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.

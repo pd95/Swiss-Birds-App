@@ -12,7 +12,7 @@ Aus diesem Grund habe ich im November 2019 mit der Entwicklung dieser App begonn
 
 Ziel ist es, eine App zur Verfügung zu stellen, die auf die öffentlich zugänglichen Daten der Website zugreift. Sie soll es dem Benutzer ermöglichen, die umfangreiche Vogelliste nach Namen und Kategorie zu durchsuchen und weitere Details anzuzeigen.
 
-Diese App lädt die Liste der Vogelarten, Bilder und Töne von der Website https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/ und speichert sie lokal im Cache, so dass unterwegs auf die bereits abgerufenen Daten zugegriffen werden kann.
+Diese App lädt die Liste der Vogelarten, Bilder und Töne von der Website [https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/](https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/) und speichert sie lokal im Cache, so dass unterwegs auf die bereits abgerufenen Daten zugegriffen werden kann.
 
 Die App befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
 
