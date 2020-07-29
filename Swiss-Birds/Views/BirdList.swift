@@ -41,6 +41,7 @@ struct BirdList: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if self.state.isEditingSearchField {
                     print("Searching was enabled, but drag occured => endEditing")
