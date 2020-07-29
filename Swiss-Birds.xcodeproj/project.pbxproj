@@ -35,6 +35,7 @@
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		17E9BB0824D2111B00A87DF4 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */; };
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
 		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
@@ -112,6 +113,7 @@
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
+		17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
 		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				1715651223AD7FDA00B8CC13 /* README.md */,
+				17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */,
 				1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */,
 				17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */,
 				175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */,
@@ -466,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B2701323AC132000B7846A /* MarketingTests.swift in Sources */,
+				17E9BB0824D2111B00A87DF4 /* XCTestCase+Extensions.swift in Sources */,
 				17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -83,7 +83,7 @@ class Swiss_BirdsUITests: XCTestCase {
                 case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton, .showBirdOfTheDayButton, .dismissBirdOfTheDayButton:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
-                    return XCUIApplication().otherElements["searchBar"].searchFields.firstMatch
+                    return XCUIApplication().otherElements["searchBar"].searchFields.allElementsBoundByIndex.last!
                 case .searchTextClearButton:
                     return XCUIApplication().otherElements["searchBar"].buttons["clearButton"]
                 case .searchTextCancelButton:
@@ -142,7 +142,7 @@ class Swiss_BirdsUITests: XCTestCase {
         // Type something random into search field
         let searchText = MyUIElements.searchTextField.element
         searchText.tap()
-        searchText.typeText("bi")
+        searchText.typeText("Bi")
 
         // Clear search again
         let clearButton = MyUIElements.searchTextClearButton.element
@@ -153,7 +153,7 @@ class Swiss_BirdsUITests: XCTestCase {
         let selectIndex = language == "fr" ? 2 : 0
         let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
         let search = searchTerms[language]!
-        searchText.typeText(search)
+        typeText(search)
         searchText.typeText("\n")
 
         // Show Detail

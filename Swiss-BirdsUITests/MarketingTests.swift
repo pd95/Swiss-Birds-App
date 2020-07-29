@@ -90,9 +90,9 @@ class MarketingTests: XCTestCase {
             let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
             let search = searchTerms[language]!
 
-            let searchText = app.searchFields["searchText"].firstMatch
+            let searchText = app.searchFields.allElementsBoundByIndex.last!
             searchText.tap()
-            searchText.typeText(search)
+            typeText(search)
             takeScreenShot(app, name: "02_Search")
             searchText.typeText("\n")
         }
@@ -110,7 +110,8 @@ class MarketingTests: XCTestCase {
             voiceButton.tap()
 
             let scrollViewsQuery = app.scrollViews
-            scrollViewsQuery.otherElements.containing(.staticText, identifier:"description").element.swipeUp()
+            scrollViewsQuery.otherElements["bird_image_2"].swipeUp()
+            scrollViewsQuery.staticTexts["header_Eigenschaften"].swipeUp()
             takeScreenShot(app, name: "04_Detail_Middle")
         }
 
