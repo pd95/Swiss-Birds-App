@@ -52,6 +52,7 @@ struct BirdOfTheDay: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.2)
                         .animation(nil)
+                        .hoverEffect()
                 }
             }
         }
@@ -94,6 +95,7 @@ struct BirdOfTheDay: View {
                 .foregroundColor(Color.secondary)
                 .padding(10)
         }
+        .hoverEffect()
         .accessibility(identifier: "dismissBirdOfTheDay")
         .accessibility(label: Text("Schliessen"))
     }

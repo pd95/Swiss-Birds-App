@@ -75,10 +75,14 @@ struct BirdDetail: View {
                     Spacer()
 
                     Button(action: playVoice) {
-                        Text("Stimme")
-                        Image(systemName: isPlaying ? "stop.circle" : "play.circle")
+                        HStack {
+                            Text("Stimme")
+                            Image(systemName: isPlaying ? "stop.circle" : "play.circle")
+                        }
+                        .padding(4)
                     }
                     .disabled(model.voiceData == nil)
+                    .hoverEffect()
                     .accessibility(identifier: "playVoiceButton")
                     .accessibility(label: Text("Stimme wiedergeben"))
                     .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
@@ -106,15 +110,7 @@ struct BirdDetail: View {
             ShareSheet(item: item)
         }
         .navigationBarTitle(Text(bird.name), displayMode: .inline)
-        .navigationBarItems(trailing:
-            Button(action: self.shareDetails, label: {
-                Image(systemName: "square.and.arrow.up")
-                    .imageScale(.large)
-                    .padding()
-            })
-            .disabled(self.model.details == nil)
-            .accessibility(label: Text("Teilen"))
-        )
+        .navigationBarItems(trailing: shareButton)
         .onDisappear() {
             self.stopSound()
         }
@@ -137,8 +133,20 @@ struct BirdDetail: View {
         }
     }
 
+    var shareButton: some View {
+        Button(action: self.shareDetails, label: {
+            Image(systemName: "square.and.arrow.up")
+                .imageScale(.large)
+                .padding([.horizontal], 4)
+                .padding([.vertical], 8)
+        })
+        .hoverEffect()
+        .disabled(self.model.details == nil || shareItem != nil)
+        .accessibility(label: Text("Teilen"))
+    }
+
     func shareDetails() {
-        shareItem = .init(subject: self.model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(self.model.details?.uri ?? "")])
+        shareItem = ShareSheet.Item(subject: self.model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(self.model.details?.uri ?? "")])
     }
 
     func shareImageDetail(_ imageDetails: BirdDetailViewModel.ImageDetails) {
@@ -210,12 +218,20 @@ struct BirdDetailContainer: View {
 
 struct BirdDetail_Previews: PreviewProvider {
     static let appState = AppState.shared
+    static var bird = {
+        AppState.shared.allSpecies[14]
+    }()
     static var previews: some View {
         NavigationView {
-            BirdDetailContainer(bird: appState.allSpecies[14])
+            List {
+                Text(bird.name)
+            }
+            BirdDetailContainer(bird: bird)
                 //.environment(\.sizeCategory, .large)
         }
+//        .padding(.leading, 1)
         .environmentObject(appState)
+        .previewLayout(.fixed(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width))
     }
 }
 

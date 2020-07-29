@@ -39,9 +39,10 @@ struct SearchField: View {
                     Button(action: { withAnimation { self.searchText = "" }}) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 8)
                     }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 8)
+                    .hoverEffect()
                     .accessibility(label: Text("Clear"))
                     .accessibility(identifier: "clearButton")
                     //.frame(maxWidth: .infinity, alignment: .trailing)
@@ -59,6 +60,7 @@ struct SearchField: View {
                 }) {
                     Text("Cancel")
                 }
+                .hoverEffect()
                 .accessibility(identifier: "cancelButton")
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(.leading, 8)
