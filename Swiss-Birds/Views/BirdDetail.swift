@@ -245,6 +245,20 @@ enum Characteristic : Hashable {
     case separator
     case text(label: String = "", text: String?, symbol: String = "")
 
+    var identifier: String {
+        switch self {
+            case .header(text: let text, _):
+                return "header_\(text)"
+            case .separator:
+                return "separator_\(hashValue)"
+            case .text(label: let label, text: let text, _):
+                if let text = text {
+                    return "text_\(label.isEmpty ? text : label)"
+                }
+                return "text_\(label)"
+        }
+    }
+
     var isEmpty: Bool {
         switch self {
         case let .header(_, children):
@@ -336,7 +350,6 @@ struct CharacteristicView: View {
                             .font(.headline)
                             .fixedSize(horizontal: false, vertical: true)
                             .multilineTextAlignment(.leading)
-                            .accessibility(identifier: characteristic.label)
 
                         Spacer(minLength: 30.0)
                     }
@@ -348,11 +361,11 @@ struct CharacteristicView: View {
                         .font(.body)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(characteristic.label != "" ? TextAlignment.trailing : TextAlignment.leading)
-                        .accessibility(identifier: "\(characteristic.label)_value")
                 }
             }
         }
         .accessibilityElement(children: .combine)
+        .accessibility(identifier: characteristic.identifier)
     }
 }
 
