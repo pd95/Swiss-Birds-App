@@ -18,6 +18,10 @@ struct BirdList: View {
         let selectedNavigationLinkBinding = Binding<MainNavigationLinkTarget?>(
             get: { self.state.selectedNavigationLink },
             set: { (newValue) in
+                // Workaround flickering and non-visible list selection on iPad by ignoring `nil` assignment
+                if UIDevice.current.userInterfaceIdiom == .pad && newValue == nil {
+                    return
+                }
                 if self.state.selectedNavigationLink != newValue {
                     self.state.selectedNavigationLink = newValue
                 }
