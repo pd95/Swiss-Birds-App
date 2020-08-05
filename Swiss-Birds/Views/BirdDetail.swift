@@ -124,11 +124,6 @@ struct BirdDetail: View {
                               description: imageDetails.description)
                     .frame(maxWidth: imageDetails.image == nil ? .infinity : imageDetails.image!.size.width / 1.5)
                     .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
-                    // Workaround scrollview issue: onLongPressGesture conflicts with ScrollView, so we add a tap gesture recognizer!?
-                    .onTapGesture { }
-                    .onLongPressGesture {
-                        self.shareImageDetail(imageDetails)
-                    }
             }
         }
     }
@@ -145,16 +140,8 @@ struct BirdDetail: View {
         .accessibility(label: Text("Teilen"))
     }
 
-    func shareDetails() {
+    private func shareDetails() {
         shareItem = ShareSheet.Item(subject: self.model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(self.model.details?.uri ?? "")])
-    }
-
-    func shareImageDetail(_ imageDetails: BirdDetailViewModel.ImageDetails) {
-        if let image = imageDetails.image, let name = model.details?.artname {
-            shareItem = .init(subject:
-                "\(name): \(imageDetails.description)",
-                activityItems: [image])
-        }
     }
 
     private func playVoice() {
