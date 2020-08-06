@@ -6,29 +6,27 @@
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
 
-Dies ist die fehlende App für iOS, von der ich gehofft habe, dass sie von der [Schweizerischen Vogelwarte Sempach](https://www.vogelwarte.ch/de/) entwickelt würde.
-Die Vogelwarte Sempach hat zwar eine wirklich gute Website auf der man die in der Schweiz vorkommenden Vogelarten nachschlagen kann und detailliertere Informationen und Fotos erhält, aber es fehlt eine iOS-App, die dieselben Informationen auch unterwegs leicht zugänglich macht.  
-Aus diesem Grund habe ich im November 2019 mit der Entwicklung dieser App begonnen.
+*Vögel der Schweiz* ist die fehlende App für iOS, von der ich gehofft hatte, sie würde von der [Schweizerischen Vogelwarte Sempach](https://www.vogelwarte.ch/de/) angeboten. Auf deren Website lassen sich zahlreiche in der Schweiz vorkommende Vogelarten nachschlagen sowie detaillierte Informationen und Fotos abrufen.
 
-Ziel ist es, eine App zur Verfügung zu stellen, die auf die öffentlich zugänglichen Daten der Website zugreift. Sie soll es dem Benutzer ermöglichen, die umfangreiche Vogelliste nach Namen und Kategorie zu durchsuchen und weitere Details anzuzeigen.
+Um diese Informationen auch unterwegs einfach zugänglich zu machen, habe ich im November 2019 mit der Entwicklung von *Vögel der Schweiz* für iOS begonnen.
 
-Diese App lädt die Liste der Vogelarten, Bilder und Töne von der Website [https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/](https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/) und speichert sie lokal im Cache, so dass unterwegs auf die bereits abgerufenen Daten zugegriffen werden kann.
+*Vögel der Schweiz* erlaubt es, Vögel in einer langen Liste nach Namen oder verschiedenen Kategorien zu suchen und Details dazu anzuzeigen. Besteht eine Internetverbindung, werden Daten von der Website der Schweizerischen Vogelwarte Sempach [https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/](https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/) geladen und lokal im Cache gespeichert, damit unterwegs auf die bereits abgerufenen Daten zugegriffen werden kann.
 
-Die App befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
+*Vögel der Schweiz* befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
 
 ## Copyright
 
-Die App wurde als Open Source Projekt geschrieben und ist mit dem vollständigen Source Code verfügbar auf [GitHub](https://github.com/pd95/Swiss-Birds-App).  
-Die Vogeldaten, Fotos und Töne werden von der [Homepage der Vogelwarte Sempach](https://www.vogelwarte.ch/de/) geladen und gehören den entsprechenden Rechteinhaber. Sie dürfen nicht ohne Erlaubniss der Vogelwarte Sempach verwendet werden. [Mehr Details gibt es hier.](https://www.vogelwarte.ch/de/vogelwarte/impressum).
+*Vögel der Schweiz* wurde als Open Source Projekt geschrieben und ist mit dem vollständigen Source Code verfügbar auf [GitHub](https://github.com/pd95/Swiss-Birds-App).  
+Die Liste der Vögel, Fotos und Töne werden von der [Homepage der Vogelwarte Sempach](https://www.vogelwarte.ch/de/) geladen und gehören den entsprechenden Rechteinhaber. Sie dürfen nicht ohne Erlaubnis der Vogelwarte Sempach verwendet werden. [Mehr Details gibt es hier.](https://www.vogelwarte.ch/de/vogelwarte/impressum).
 
 ## Datenschutz
 
-Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
+Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
 
 ## Danksagungen
 
-1. [Schweizerische Vogelwarte Sempach](https://www.vogelwarte.ch) für ihre umfangreiche Datensammlung und Forschung, sowie für die Schutzprojekte zur Unterstützung der heimischen Vögel.    
-2. [@kocher_sandra](https://twitter.com/kocher_sandra) für die Erlaubnis ihr Blaumeisen Foto für das AppIcon und den Startbildschirm zu verwenden.
+1. [Schweizerische Vogelwarte Sempach](https://www.vogelwarte.ch) für die umfangreiche Datensammlung und Forschung, die Schutzprojekte zur Unterstützung der heimischen Vögel sowie die detaillierte Webseite.
+2. [@kocher_sandra](https://twitter.com/kocher_sandra) für die Erlaubnis, ihr Foto einer Blaumeise für Icon und den Startbildschirm zu verwenden.
 
 ## Eindrücke
 
@@ -39,11 +37,11 @@ Zum Thema Datenschutz hat es [hier](privacy.md) ein eigenes Dokument.
     <tr>
       <th>Gerät</th>
       <th>Vogel des Tages</th>
-      <th>Haupt-screen</th>
+      <th>Hauptseite</th>
       <th>Suche</th>
-      <th>Detail (Oben)</th>
-      <th>Detail (Mitte)</th>
-      <th>Filter-kriterien</th>
+      <th>Detail (oben)</th>
+      <th>Detail (mitte)</th>
+      <th>Filterkriterien</th>
     </tr>
   </thead>
   <tbody>

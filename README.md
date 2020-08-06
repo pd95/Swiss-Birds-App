@@ -6,22 +6,18 @@
 <img src="assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
 
-This is the missing app for iOS, which I hoped would have been developed by [Swiss Ornithological Institute](https://www.vogelwarte.ch/en/).
-They do have a really nice website where you can lookup bird species found in Switzerland and get more detailed information and photos, but they are missing
-an iOS app which makes the same information easily accessible "on the go".  
-This is why I started to develop this app in November 2019.
+*Birds of Switzerland* is the missing iOS app I'd hoped would be provided by the [Swiss Ornithological Institute](https://www.vogelwarte.ch/en/) along with their very informative website, on which all kinds of bird species that can be found in Switzerland can be looked up, linked to more detailed information and photos.
 
-The goal is to provide an app accessing the publicly accessible data of the website. It should allow the user to search through the vast list of birds (by name and category) and show more details.
+In order to make this same information accessible on the go I started developing *Birds of Switzerland* in November 2019. 
 
-This app is loading the list of birds, images and sounds from the website [https://www.vogelwarte.ch/en/birds/birds-of-switzerland/](https://www.vogelwarte.ch/en/birds/birds-of-switzerland/) and caches them locally, 
-so the already fetched data can be accessed "on the go".
+*Birds of Switzerland* allows the user to find birds by searching through the vast list by name or one of several categories. While used with a network connection, *Birds of Switzerland* loads the requested list of birds, images and sounds from the Swiss Ornithological Institute's website [https://www.vogelwarte.ch/en/birds/birds-of-switzerland/](https://www.vogelwarte.ch/en/birds/birds-of-switzerland/) and caches the data locally in order to keep already accessed data available on the go. Data is not preloaded but accessed data is cached.
 
-The app is currently in a closed beta testing state. Please [contact me](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
+*Birds of Switzerland* is currently in a closed beta testing state. Please [contact me](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
 
 ## Copyright
 
-The app has been written as an open source project, i.e. the full app code is available on [GitHub](https://github.com/pd95/Swiss-Birds-App).  
-The bird related data, photos and sounds are load from the [Swiss Ornithological Institute website](https://www.vogelwarte.ch/en/) and belong to their respective copyright holders. They cannot be used without permission from the Swiss Ornithological Institute [(more details here)](https://www.vogelwarte.ch/en/vogelwarte/impressum).
+*Birds of Switzerland* has been written as an open source project, i.e. the full app code is available on [GitHub](https://github.com/pd95/Swiss-Birds-App).  
+The bird related data, including photos and sounds is loaded from the [Swiss Ornithological Institute's website](https://www.vogelwarte.ch/en/) and belongs to their respective copyright holders. It cannot be used without permission from the Swiss Ornithological Institute [(more details here)](https://www.vogelwarte.ch/en/vogelwarte/impressum).
 
 ## Privacy
 
@@ -29,9 +25,8 @@ You can read the privacy policy [here](privacy.md).
 
 ## Acknowledgments
 
-1. [Swiss Ornithological Institute](https://www.vogelwarte.ch) for their information gathering and their research and conservation projects to support our native birds.    
-They have also a great website with much more information.
-2. [@kocher_sandra](https://twitter.com/kocher_sandra) for the permission to her photograph of a Blue Tit as icon and start-up image
+1. [Swiss Ornithological Institute](https://www.vogelwarte.ch) for their information gathering, their research and conservation projects to support our native birds and their  very detailed and informative website with plenty of information.
+2. [@kocher_sandra](https://twitter.com/kocher_sandra) for the permission to use her picture of a Blue Tit as icon and start-up image for *Birds of Switzerland*.
 
 ## Impressions
 
@@ -41,8 +36,8 @@ They have also a great website with much more information.
   <thead>
     <tr>
       <th>Device</th>
-      <th>Bird of the day</th>
-      <th>Main screen</th>
+      <th>Bird of the Day</th>
+      <th>Main Screen</th>
       <th>Search</th>
       <th>Detail (top)</th>
       <th>Detail (middle)</th>
