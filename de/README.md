@@ -37,11 +37,11 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
     <tr>
       <th>Gerät</th>
       <th>Vogel des Tages</th>
-      <th>Hauptseite</th>
+      <th>Haupt&shy;seite</th>
       <th>Suche</th>
       <th>Detail (oben)</th>
       <th>Detail (mitte)</th>
-      <th>Filterkriterien</th>
+      <th>Filter&shy;kriterien</th>
     </tr>
   </thead>
   <tbody>
