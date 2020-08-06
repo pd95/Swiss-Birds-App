@@ -25,7 +25,7 @@ You can read the privacy policy [here](privacy.md).
 
 ## Acknowledgments
 
-1. [Swiss Ornithological Institute](https://www.vogelwarte.ch) for their information gathering, their research and conservation projects to support our native birds and their  very detailed and informative website with plenty of information.
+1. [Swiss Ornithological Institute](https://www.vogelwarte.ch) for their information gathering, their research and conservation projects to support our native birds and their very detailed website.
 2. [@kocher_sandra](https://twitter.com/kocher_sandra) for the permission to use her picture of a Blue Tit as icon and start-up image for *Birds of Switzerland*.
 
 ## Impressions
