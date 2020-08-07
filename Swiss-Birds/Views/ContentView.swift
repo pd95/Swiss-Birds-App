@@ -55,6 +55,9 @@ struct ContentView: View {
                     .accessibility(sortPriority: 1000)
             }
         }
+        .alert(item: self.$state.alertItem, content: { (alertItem) -> Alert in
+            alertItem.alert
+        })
         .onAppear() {
             if SettingsStore.shared.startupCheckBirdOfTheDay {
                 self.state.checkBirdOfTheDay()
@@ -68,11 +71,6 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in
             self.state.checkBirdOfTheDay()
         })
-        .alert(isPresented: showAlert, content: { () -> Alert in
-            Alert(title: Text("An error occurred"),
-                  message: Text(state.error!.localizedDescription),
-                  dismissButton: .default(Text("Dismiss")))
-        })
         .onReceive(
             NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification, object: nil)) { notification in
                 guard let device = notification.object as? UIDevice else {
@@ -84,10 +82,6 @@ struct ContentView: View {
                         device.orientation != .faceDown
                     )
         }
-    }
-
-    var showAlert: Binding<Bool> {
-        return Binding<Bool>(get: {self.state.error != nil}, set: { _ in self.state.error = nil })
     }
 }
 

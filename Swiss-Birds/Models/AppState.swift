@@ -68,7 +68,21 @@ class AppState : ObservableObject {
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var matchingSpecies = [Species]()
-    @Published var error: Error?
+
+    @Published var alertItem: AlertItem?
+    var error: Error? {
+        willSet {
+            self.objectWillChange.send()
+        }
+        didSet {
+            if let error = error {
+                alertItem = AlertItem(title: Text("An error occurred"),
+                      message: Text(error.localizedDescription),
+                      dismissButton: .default(Text("Dismiss")))
+            }
+        }
+    }
+
 
     @Published var selectedNavigationLink: MainNavigationLinkTarget? = nil
 

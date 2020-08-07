@@ -190,11 +190,6 @@ struct BirdDetailContainer: View {
                 }
             }
         }
-        .alert(isPresented: showAlert, content: { () -> Alert in
-            Alert(title: Text("An error occurred"),
-                  message: Text(model.error!.localizedDescription),
-                  dismissButton: .default(Text("Dismiss")))
-        })
         .navigationBarTitle(Text(model.bird.name), displayMode: .inline)
     }
 

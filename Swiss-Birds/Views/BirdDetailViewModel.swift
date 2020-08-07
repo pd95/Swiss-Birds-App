@@ -19,7 +19,15 @@ class BirdDetailViewModel: ObservableObject {
     @Published var details : VdsSpecieDetail?
     @Published var imageDetails = [ImageDetails]()
     @Published var voiceData: Data?
-    @Published var error: Error?
+    var error: Error? {
+        willSet {
+            self.objectWillChange.send()
+        }
+        didSet {
+            // Sync error on AppState
+            AppState.shared.error = error
+        }
+    }
 
     struct ImageDetails: Identifiable {
         let id: UUID = UUID()
