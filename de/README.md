@@ -14,6 +14,12 @@ Um diese Informationen auch unterwegs einfach zugänglich zu machen, habe ich im
 
 *Vögel der Schweiz* befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
 
+Voraussetzungen um die *Vögel der Schweiz* App zu installieren:
+
+- iPhone oder iPad mit aktuellem iOS 13
+- [Testflight app](https://apps.apple.com/ch/app/testflight/id899247664) von Apple
+- Mobile Daten
+
 ## Copyright
 
 *Vögel der Schweiz* wurde als Open Source Projekt geschrieben und ist mit dem vollständigen Source Code auf [GitHub](https://github.com/pd95/Swiss-Birds-App) verfügbar.  

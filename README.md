@@ -14,6 +14,12 @@ In order to make this same information accessible on the go I started developing
 
 *Birds of Switzerland* is currently in a closed beta testing state. Please [contact me](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) if you would like to get an invitation.
 
+Prerequisites to install *Birds of Switzerland* app:
+
+- iPhone or iPad running latest iOS 13
+- [Testflight app](https://apps.apple.com/ch/app/testflight/id899247664) from Apple
+- Mobile network access
+
 ## Copyright
 
 *Birds of Switzerland* has been written as an open source project, i.e. the full app code is available on [GitHub](https://github.com/pd95/Swiss-Birds-App).  
