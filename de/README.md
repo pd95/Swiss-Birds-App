@@ -1,10 +1,23 @@
 [English](../README.md)
 
 #  Vögel der Schweiz
+## Die kleine Vogelwarte für die Hosentasche
 
 <div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
 </div>
+
+*Vögel der Schweiz* ist ein kleines Nachschlagewerk für Unterwegs.
+
+Als Eltern kennt man vielleicht die Situation, dass die Kinder fragen, was denn das für ein schöner Vogel da auf dem Baum sei und man dann keine Antwort weiss:  *"Ist es eine Elster oder ein Eichelhäher?"*
+
+Mit dieser App kann man rasch durch die Liste der schweizer Vögel scrollen und, dank den schönen Bildern der Vogelwarte Sempach, seine Vermutung bestätigen, dass es sich doch um einen Eichelhäher handelt.
+
+Mit dieser App hat man einfachen Zugriff auf die Daten der Schweizerischen Vogelwarte Sempach (https://www.vogelwarte.ch/voegel/) ohne den Griff zum Webbrowser.
+
+Die App wurde als OpenSource Projekt entwickelt und der Quellcode ist frei zugänglich. Jeder kann mit Anregungen, Feedback und Ideen etwas beitragen.
+
+# Neue Vögel App? Wieso und Warum?
 
 *Vögel der Schweiz* ist die fehlende App für iOS, von der ich gehofft hatte, sie würde von der [Schweizerischen Vogelwarte Sempach](https://www.vogelwarte.ch/de/) angeboten. Auf deren Website lassen sich zahlreiche in der Schweiz vorkommende Vogelarten nachschlagen sowie detaillierte Informationen und Fotos abrufen.
 
@@ -12,13 +25,19 @@ Um diese Informationen auch unterwegs einfach zugänglich zu machen, habe ich im
 
 *Vögel der Schweiz* erlaubt es, Vögel in einer langen Liste nach Namen oder verschiedenen Kategorien zu suchen und Details dazu anzuzeigen. Besteht eine Internetverbindung, werden die gewünschten Daten von der Website der Schweizerischen Vogelwarte Sempach [https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/](https://www.vogelwarte.ch/de/voegel/voegel-der-schweiz/) geladen und lokal im Cache gespeichert, damit unterwegs auf diese bereits abgerufenen Daten zurückgegriffen werden kann.
 
-*Vögel der Schweiz* befindet sich derzeit in einer geschlossenen Beta-Testphase. Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) falls Sie eine Einladung erhalten möchten.
+## Beta-Testphase
 
+*Vögel der Schweiz* befindet sich derzeit in einer öffentlichen Beta-Testphase.  
 Voraussetzungen um die *Vögel der Schweiz* App zu installieren:
 
 - iPhone oder iPad mit aktuellem iOS 13
-- [Testflight app](https://apps.apple.com/ch/app/testflight/id899247664) von Apple
-- Mobile Daten
+- [TestFlight app](https://apps.apple.com/ch/app/testflight/id899247664) von Apple
+- WLAN oder Mobile Daten
+
+Wenn Sie an den Tests teilnehmen und Feedback geben möchten, erhalten Sie hier Ihre TestFlight-Einladung: 
+  [https://testflight.apple.com/join/Yn6BOjxX](https://testflight.apple.com/join/Yn6BOjxX)
+
+Bitte [kontaktieren Sie mich](mailto:philipp_dev@gmx.net?subject=Swiss-Birds-App%20beta) bei Fragen oder Problemen zur Beta.
 
 ## Copyright
 
