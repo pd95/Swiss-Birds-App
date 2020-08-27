@@ -1,7 +1,7 @@
 [English](../README.md)
 
 #  Vögel der Schweiz
-## Die kleine Vogelwarte für die Hosentasche
+## Die Hosentaschen-Vogelwarte
 
 <div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="../assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
@@ -17,7 +17,7 @@ Mit dieser App hat man einfachen Zugriff auf die Daten der Schweizerischen Vogel
 
 Die App wurde als OpenSource Projekt entwickelt und der Quellcode ist frei zugänglich. Jeder kann mit Anregungen, Feedback und Ideen etwas beitragen.
 
-# Neue Vögel App? Wieso und Warum?
+## Neue Vögel App? Warum?
 
 *Vögel der Schweiz* ist die fehlende App für iOS, von der ich gehofft hatte, sie würde von der [Schweizerischen Vogelwarte Sempach](https://www.vogelwarte.ch/de/) angeboten. Auf deren Website lassen sich zahlreiche in der Schweiz vorkommende Vogelarten nachschlagen sowie detaillierte Informationen und Fotos abrufen.
 

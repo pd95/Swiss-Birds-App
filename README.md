@@ -1,7 +1,7 @@
 [Deutsch](de/README.md)
 
 #  Birds of Switzerland
-## The small ornithological station for your pocket
+## A pocket reference
 
 <div class="dropshadow" style="float:left;vertical-align:text-top;padding-right:1em">
 <img src="assets/AppIcon.png" alt="App icon" style="max-width: 100px;">
