@@ -69,7 +69,9 @@ struct ContentView: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in
-            self.state.checkBirdOfTheDay()
+            if SettingsStore.shared.startupCheckBirdOfTheDay {
+                self.state.checkBirdOfTheDay()
+            }
         })
         .onReceive(
             NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification, object: nil)) { notification in
