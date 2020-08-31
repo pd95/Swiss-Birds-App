@@ -14,19 +14,6 @@ struct BirdList: View {
     @EnvironmentObject private var state : AppState
 
     var body: some View {
-        // Define custom bindings to avoid "duplicate assignments" (which often causes navigation hick-ups)
-        let selectedNavigationLinkBinding = Binding<MainNavigationLinkTarget?>(
-            get: { self.state.selectedNavigationLink },
-            set: { (newValue) in
-                // Workaround flickering and non-visible list selection on iPad by ignoring `nil` assignment
-                if UIDevice.current.userInterfaceIdiom == .pad && newValue == nil {
-                    return
-                }
-                if self.state.selectedNavigationLink != newValue {
-                    self.state.selectedNavigationLink = newValue
-                }
-        })
-
         return VStack(spacing: 0) {
             List {
                 Section {
@@ -38,7 +25,7 @@ struct BirdList: View {
                     ForEach(state.matchingSpecies) { bird in
                         NavigationLink(destination: BirdDetailContainer(bird: bird),
                                        tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                       selection: selectedNavigationLinkBinding) {
+                                       selection: self.state.selectedNavigationLinkBinding) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -48,7 +35,7 @@ struct BirdList: View {
             .listStyle(PlainListStyle())
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if self.state.isEditingSearchField {
-                    print("Searching was enabled, but drag occured => endEditing")
+                    print("Searching was enabled, but drag occurred => endEditing")
                     self.state.isEditingSearchField = false
                     UIApplication.shared.endEditing()
                 }
@@ -93,7 +80,7 @@ struct BirdList: View {
             if currentTag == .filterList {
                 NavigationLink(destination: FilterCriteria(managedList: self.state.filters),
                                tag: currentTag,
-                               selection: self.$state.selectedNavigationLink) {
+                               selection: state.selectedNavigationLinkBinding) {
                                 Text("*** never shown ***")
                 }
                 .frame(width: 0, height: 0)
@@ -102,7 +89,7 @@ struct BirdList: View {
             else if species != nil {
                 NavigationLink(destination: BirdDetailContainer(bird: species!),
                                tag: currentTag,
-                               selection: self.$state.selectedNavigationLink) {
+                               selection: state.selectedNavigationLinkBinding) {
                                 Text("*** never shown ***")
                 }
                 .frame(width: 0, height: 0)

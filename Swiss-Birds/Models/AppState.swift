@@ -86,6 +86,21 @@ class AppState : ObservableObject {
 
     @Published var selectedNavigationLink: MainNavigationLinkTarget? = nil
 
+    var selectedNavigationLinkBinding: Binding<MainNavigationLinkTarget?> {
+        // Define custom bindings to avoid "duplicate assignments" (which often causes navigation hick-ups)
+        Binding<MainNavigationLinkTarget?>(
+            get: { self.selectedNavigationLink },
+            set: { (newValue) in
+                // Workaround flickering and non-visible list selection on iPad by ignoring `nil` assignment
+                if UIDevice.current.userInterfaceIdiom == .pad && newValue == nil {
+                    return
+                }
+                if self.selectedNavigationLink != newValue {
+                    self.selectedNavigationLink = newValue
+                }
+            })
+    }
+
     var previousBirdOfTheDay: Int = -1
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
     @Published var birdOfTheDayImage: UIImage?
