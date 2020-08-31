@@ -62,6 +62,7 @@ class BirdDetailViewModel: ObservableObject {
                 receiveValue: { [weak self] details in
                     guard let self = self else { return }
                     if let details = details {
+                        self.objectWillChange.send()
                         self.details = details
 
                         var imageDetails = [ImageDetails]()
