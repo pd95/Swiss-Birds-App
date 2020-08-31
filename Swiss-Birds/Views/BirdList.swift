@@ -57,18 +57,26 @@ struct BirdList: View {
                 .accessibility(identifier: "filterButton")
             )
 
-            if self.state.selectedNavigationLink != nil {
+            if requiresDynamicNavigationLink {
                 dynamicNavigationLinkTarget
             }
-
-/// 8< ----- Workaround broken SwiftUI end
-
         }
     }
 
-    // Here we handle the dynamically generated links (filter list or restored bird selection)
+    // Depending on the action (click on "Filter") or state restoration we have to
+    // "force" a navigation link being selected
+    var requiresDynamicNavigationLink: Bool {
+        switch state.selectedNavigationLink {
+            case .filterList, .programmaticBirdDetails:
+                return true
+            default:
+                return false
+        }
+    }
+
+    // Here we create the dynamically navigation link (filter list or restored bird selection)
     var dynamicNavigationLinkTarget: some View {
-        let currentTag = self.state.selectedNavigationLink!
+        let currentTag = state.selectedNavigationLink!
         let species: Species?
         if case .programmaticBirdDetails(let speciesId) = currentTag {
             species = Species.species(for: speciesId)!
@@ -76,26 +84,25 @@ struct BirdList: View {
         else {
             species = nil
         }
-        return Group {
+
+        // Create destination view
+        let destination: some View = Group {
             if currentTag == .filterList {
-                NavigationLink(destination: FilterCriteria(managedList: self.state.filters),
-                               tag: currentTag,
-                               selection: state.selectedNavigationLinkBinding) {
-                                Text("*** never shown ***")
-                }
-                .frame(width: 0, height: 0)
-                .hidden()
+                FilterCriteria(managedList: self.state.filters)
             }
             else if species != nil {
-                NavigationLink(destination: BirdDetailContainer(bird: species!),
-                               tag: currentTag,
-                               selection: state.selectedNavigationLinkBinding) {
-                                Text("*** never shown ***")
-                }
-                .frame(width: 0, height: 0)
-                .hidden()
+                BirdDetailContainer(bird: species!)
             }
         }
+
+        // Create the NavigationLink
+        return NavigationLink(destination: destination,
+                              tag: currentTag,
+                              selection: state.selectedNavigationLinkBinding) {
+                Text("*** never shown ***")
+            }
+            .frame(width: 0, height: 0)
+            .hidden()
     }
 }
 
