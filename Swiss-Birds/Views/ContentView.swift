@@ -13,8 +13,7 @@ struct ContentView: View {
     @EnvironmentObject private var state : AppState
 
     @State private var isPortrait : Bool = true
-    @State private var showBirdOfTheDay = false
-    
+
     var body: some View {
         ZStack {
             NavigationView {
@@ -30,10 +29,10 @@ struct ContentView: View {
             }
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
             .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
-            .accessibilityElement(children: showBirdOfTheDay ? .ignore : .contain)
-            .accessibility(hidden: showBirdOfTheDay)
+            .accessibilityElement(children: state.showBirdOfTheDay ? .ignore : .contain)
+            .accessibility(hidden: state.showBirdOfTheDay)
 
-            if showBirdOfTheDay {
+            if state.showBirdOfTheDay {
                 // Dimmed background
                 Color(.systemBackground)
                     .opacity(0.6)
@@ -41,18 +40,30 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation {
-                            self.showBirdOfTheDay = false
+                            state.showBirdOfTheDay = false
                         }
                     }
                     .accessibility(label: Text("Hintergrund"))
                     .accessibility(hint: Text("Antippen zum schliessen."))
                     .zIndex(10)
                     .accessibility(sortPriority: 990)
+                    .onAppear() {
+                        if state.birdOfTheDayImage == nil {
+                            state.getBirdOfTheDay()
+                        }
+                    }
 
-                BirdOfTheDay(isPresented: $showBirdOfTheDay.animation(), url: self.state.birdOfTheDay!.url, speciesId: self.state.birdOfTheDay!.speciesID)
-                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-                    .zIndex(20)
-                    .accessibility(sortPriority: 1000)
+                if let birdOfTheDay = state.birdOfTheDay,
+                   let species = Species.species(for: birdOfTheDay.speciesID),
+                   let image = state.birdOfTheDayImage
+                {
+                    BirdOfTheDay(isPresented: $state.showBirdOfTheDay.animation(), image: image, species: species)
+                        .animation(.easeOut)
+                        .transition(AnyTransition.move(edge: .bottom)
+                                        .combined(with: AnyTransition.opacity.animation(.easeInOut(duration: 0.5))))
+                        .zIndex(20)
+                        .accessibility(sortPriority: 1000)
+                }
             }
         }
         .alert(item: self.$state.alertItem, content: { (alertItem) -> Alert in
@@ -61,11 +72,6 @@ struct ContentView: View {
         .onAppear() {
             if SettingsStore.shared.startupCheckBirdOfTheDay {
                 self.state.checkBirdOfTheDay()
-            }
-        }
-        .onReceive(state.$showBirdOfTheDay.debounce(for: .seconds(1), scheduler: RunLoop.main)) { value in
-            withAnimation {
-                self.showBirdOfTheDay = value
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in

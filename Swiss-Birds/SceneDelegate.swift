@@ -115,7 +115,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             state.showBird(birdID)
         }
         else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
-            state.showBirdOfTheDay = true
+            print("handleUserActivity: showing bird of the day \(state.birdOfTheDay.debugDescription)")
+            withAnimation {
+                state.showBirdOfTheDay = true
+            }
         }
         else {
             print("Skipping unsupported \(userActivity.activityType)")
