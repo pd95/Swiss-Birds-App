@@ -100,17 +100,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func handleUserActivity(_ userActivity: NSUserActivity) {
         print("handleUserActivity(\(userActivity.activityType))")
-        guard userActivity.activityType == NSUserActivity.showBirdActivityType,
-            let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
-        else {
-                print("Skipping unsupported \(userActivity.activityType)")
-                return
-        }
+
         let state = AppState.shared
         print("current state: ", state)
 
-        print("handleUserActivity: birdID=\(birdID)")
-        state.showBird(birdID)
+        if userActivity.activityType == NSUserActivity.showBirdActivityType {
+            guard let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
+            else {
+                print("Missing parameter birdID for \(userActivity.activityType)")
+                return
+            }
+
+            print("handleUserActivity: birdID=\(birdID)")
+            state.showBird(birdID)
+        }
+        else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
+            state.showBirdOfTheDay = true
+        }
+        else {
+            print("Skipping unsupported \(userActivity.activityType)")
+            return
+        }
     }
 
     @discardableResult

@@ -67,4 +67,5 @@ extension NSUserActivity {
     }
 
     public static let showBirdActivityType = "swiss-birds.ShowBirdActivity"
+    public static let showBirdTheDayActivityType = "ConfigurationIntent"
 }

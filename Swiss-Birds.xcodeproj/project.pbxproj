@@ -26,6 +26,19 @@
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
+		17B1B43B2546C0E200B422B6 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B43A2546C0E200B422B6 /* WidgetKit.framework */; };
+		17B1B43D2546C0E200B422B6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B43C2546C0E200B422B6 /* SwiftUI.framework */; };
+		17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */; };
+		17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B1B4422546C0E600B422B6 /* Assets.xcassets */; };
+		17B1B4452546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */; };
+		17B1B4462546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */; };
+		17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17B1B4522546C3E300B422B6 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
+		17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
+		17B1B4592546C41D00B422B6 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4582546C41D00B422B6 /* Languages.swift */; };
+		17B1B45E2546C42E00B422B6 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4582546C41D00B422B6 /* Languages.swift */; };
+		17B1B4632546C44900B422B6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
+		17B1B476254710D800B422B6 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B46C25470CC100B422B6 /* DataFetcher.swift */; };
 		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
 		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
@@ -45,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		17B1B4472546C0E600B422B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17B1B4382546C0E200B422B6;
+			remoteInfo = BirdOfTheDayWidgetExtension;
+		};
 		17B9610423699375003AA802 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17B960E223699370003AA802 /* Project object */;
@@ -60,6 +80,20 @@
 			remoteInfo = "schweizer-voegel";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		17B1B44A2546C0E600B422B6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1703131B2382C76A007E2EE3 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -92,6 +126,15 @@
 		17B0F424238F1F6B00A2F989 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F425238F32B700A2F989 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B0F426238F32B700A2F989 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BirdOfTheDayWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		17B1B43A2546C0E200B422B6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		17B1B43C2546C0E200B422B6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDayWidget.swift; sourceTree = "<group>"; };
+		17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = BirdOfTheDayWidget.intentdefinition; sourceTree = "<group>"; };
+		17B1B4422546C0E600B422B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		17B1B4442546C0E600B422B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17B1B4582546C41D00B422B6 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
+		17B1B46C25470CC100B422B6 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		17B2701223AC132000B7846A /* MarketingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingTests.swift; sourceTree = "<group>"; };
 		17B960EA23699370003AA802 /* Swiss-Birds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiss-Birds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +167,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		17B1B4362546C0E200B422B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B1B43D2546C0E200B422B6 /* SwiftUI.framework in Frameworks */,
+				17B1B43B2546C0E200B422B6 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E723699370003AA802 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +203,8 @@
 		171BE48424B06AB900CDF93D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				17B1B43A2546C0E200B422B6 /* WidgetKit.framework */,
+				17B1B43C2546C0E200B422B6 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,6 +218,18 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		17B1B43E2546C0E200B422B6 /* BirdOfTheDayWidget */ = {
+			isa = PBXGroup;
+			children = (
+				17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */,
+				17B1B46C25470CC100B422B6 /* DataFetcher.swift */,
+				17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */,
+				17B1B4422546C0E600B422B6 /* Assets.xcassets */,
+				17B1B4442546C0E600B422B6 /* Info.plist */,
+			);
+			path = BirdOfTheDayWidget;
+			sourceTree = "<group>";
+		};
 		17B960E123699370003AA802 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +241,7 @@
 				17B9610623699375003AA802 /* Swiss-BirdsTests */,
 				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
 				17BED0E623ADAECF000D389C /* xcresult-parser */,
+				17B1B43E2546C0E200B422B6 /* BirdOfTheDayWidget */,
 				171BE48424B06AB900CDF93D /* Frameworks */,
 				17B960EB23699370003AA802 /* Products */,
 			);
@@ -186,6 +253,7 @@
 				17B960EA23699370003AA802 /* Swiss-Birds.app */,
 				17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */,
 				17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */,
+				17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,6 +328,7 @@
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
+				17B1B4582546C41D00B422B6 /* Languages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +367,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17B1B44D2546C0E600B422B6 /* Build configuration list for PBXNativeTarget "BirdOfTheDayWidgetExtension" */;
+			buildPhases = (
+				17B1B4352546C0E200B422B6 /* Sources */,
+				17B1B4362546C0E200B422B6 /* Frameworks */,
+				17B1B4372546C0E200B422B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BirdOfTheDayWidgetExtension;
+			productName = BirdOfTheDayWidgetExtension;
+			productReference = 17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		17B960E923699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17B9611723699375003AA802 /* Build configuration list for PBXNativeTarget "Swiss-Birds" */;
@@ -305,10 +391,12 @@
 				17B960E623699370003AA802 /* Sources */,
 				17B960E723699370003AA802 /* Frameworks */,
 				17B960E823699370003AA802 /* Resources */,
+				17B1B44A2546C0E600B422B6 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				17B1B4482546C0E600B422B6 /* PBXTargetDependency */,
 			);
 			name = "Swiss-Birds";
 			productName = "schweizer-voegel";
@@ -357,10 +445,13 @@
 		17B960E223699370003AA802 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1150;
+				LastSwiftUpdateCheck = 1210;
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Philipp;
 				TargetAttributes = {
+					17B1B4382546C0E200B422B6 = {
+						CreatedOnToolsVersion = 12.1;
+					};
 					17B960E923699370003AA802 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -393,11 +484,20 @@
 				17B960E923699370003AA802 /* Swiss-Birds */,
 				17B9610223699375003AA802 /* Swiss-BirdsTests */,
 				17B9610D23699375003AA802 /* Swiss-BirdsUITests */,
+				17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		17B1B4372546C0E200B422B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E823699370003AA802 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,6 +528,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		17B1B4352546C0E200B422B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B1B4522546C3E300B422B6 /* VdsDataTypes.swift in Sources */,
+				17B1B476254710D800B422B6 /* DataFetcher.swift in Sources */,
+				17B1B4632546C44900B422B6 /* Extensions.swift in Sources */,
+				17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */,
+				17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */,
+				17B1B4452546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */,
+				17B1B45E2546C42E00B422B6 /* Languages.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17B960E623699370003AA802 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -441,6 +555,7 @@
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
+				17B1B4462546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */,
 				175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */,
 				17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */,
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
@@ -457,6 +572,7 @@
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,
 				1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */,
+				17B1B4592546C41D00B422B6 /* Languages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +597,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		17B1B4482546C0E600B422B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */;
+			targetProxy = 17B1B4472546C0E600B422B6 /* PBXContainerItemProxy */;
+		};
 		17B9610523699375003AA802 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17B960E923699370003AA802 /* Swiss-Birds */;
@@ -527,6 +648,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		17B1B44B2546C0E600B422B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				INFOPLIST_FILE = BirdOfTheDayWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).BirdOfTheDayWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		17B1B44C2546C0E600B422B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 12;
+				INFOPLIST_FILE = BirdOfTheDayWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).BirdOfTheDayWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		17B9611523699375003AA802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
@@ -650,6 +817,7 @@
 		17B9611823699375003AA802 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 12;
 				ENABLE_PREVIEWS = YES;
@@ -667,6 +835,7 @@
 		17B9611923699375003AA802 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 12;
 				ENABLE_PREVIEWS = YES;
@@ -758,6 +927,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		17B1B44D2546C0E600B422B6 /* Build configuration list for PBXNativeTarget "BirdOfTheDayWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17B1B44B2546C0E600B422B6 /* Debug */,
+				17B1B44C2546C0E600B422B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		17B960E523699370003AA802 /* Build configuration list for PBXProject "Swiss-Birds" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

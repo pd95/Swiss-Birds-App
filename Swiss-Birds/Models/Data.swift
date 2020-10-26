@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-let availableLanguages = ["de","fr","it","en"]
-let language = Bundle.preferredLocalizations(from: availableLanguages).first!
-
 
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
