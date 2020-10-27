@@ -102,7 +102,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("handleUserActivity(\(userActivity.activityType))")
 
         let state = AppState.shared
-        print("current state: ", state)
 
         if userActivity.activityType == NSUserActivity.showBirdActivityType {
             guard let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
@@ -116,14 +115,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
             print("handleUserActivity: showing bird of the day \(state.birdOfTheDay.debugDescription)")
-            withAnimation {
-                state.showBirdOfTheDay = true
-            }
+            state.checkBirdOfTheDay(showAlways: true)
         }
         else {
             print("Skipping unsupported \(userActivity.activityType)")
             return
         }
+        print("current state: ", state)
     }
 
     @discardableResult

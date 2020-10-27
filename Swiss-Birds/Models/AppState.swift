@@ -9,6 +9,7 @@
 import os.log
 import SwiftUI
 import Combine
+import WidgetKit
 
 // Enumeration of all possible cases of the current selected NavigationLink
 enum MainNavigationLinkTarget: Hashable, Codable {
@@ -102,6 +103,7 @@ class AppState : ObservableObject {
     }
 
     var previousBirdOfTheDay: Int = -1
+    var birdOfTheDayCheckDate: Date?
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
     @Published var birdOfTheDayImage: UIImage?
     @Published var showBirdOfTheDay: Bool = false
@@ -211,6 +213,19 @@ class AppState : ObservableObject {
 
     func checkBirdOfTheDay(showAlways: Bool = false) {
         os_log("checkBirdOfTheDay(showAlways: %d)", showAlways)
+
+        // No need to refetch the data if we already checked today...
+        if let lastCheckDate = birdOfTheDayCheckDate,
+           Calendar.current.startOfDay(for: Date()) <= lastCheckDate {
+            os_log("  already checked on %{Public}@", lastCheckDate.description)
+            if showAlways {
+                withAnimation {
+                    showBirdOfTheDay = true
+                }
+            }
+            return
+        }
+
         // Fetch the bird of the day
         VdsAPI
             .getBirdOfTheDaySpeciesIDandURL()
@@ -226,12 +241,26 @@ class AppState : ObservableObject {
                 },
                 receiveValue: { [weak self] (birdOfTheDay) in
                     self?.birdOfTheDay = birdOfTheDay
+                    self?.birdOfTheDayCheckDate = Date()
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
-                        self?.showBirdOfTheDay = showAlways || (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
+                        let isNewBirdOfTheDay = (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
+                        withAnimation {
+                            self?.showBirdOfTheDay = showAlways || isNewBirdOfTheDay
+                        }
+                        if isNewBirdOfTheDay {
+                            self?.refreshWidget()
+                        }
                     }
                 })
             .store(in: &cancellables)
+    }
+
+    private func refreshWidget() {
+        if #available(iOS 14.0, *) {
+            os_log("refreshWidget")
+            WidgetCenter.shared.reloadTimelines(ofKind: "BirdOfTheDayWidget")
+        }
     }
 
     func getBirdOfTheDay() {
@@ -284,7 +313,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay)"
+        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay))"
     }
 }
 
