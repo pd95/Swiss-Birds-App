@@ -31,12 +31,12 @@ struct SearchField: View {
                     .accessibility(label: Text("Search"))
                     .accessibility(addTraits: .isSearchField)
                     .onTapGesture {
-                        self.isEditing = true
+                        isEditing = true
                     }
                     .animation(.easeInOut)
 
                 if isEditing && !searchText.isEmpty {
-                    Button(action: { withAnimation { self.searchText = "" }}) {
+                    Button(action: { withAnimation { searchText = "" }}) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
                             .padding(.horizontal, 8)
@@ -45,7 +45,6 @@ struct SearchField: View {
                     .hoverEffect()
                     .accessibility(label: Text("Clear"))
                     .accessibility(identifier: "clearButton")
-                    //.frame(maxWidth: .infinity, alignment: .trailing)
                     .animation(Animation.easeInOut)
                 }
             }
@@ -54,8 +53,8 @@ struct SearchField: View {
 
             if isEditing {
                 Button(action: {
-                    self.isEditing = false
-                    self.searchText = ""
+                    isEditing = false
+                    searchText = ""
                     UIApplication.shared.endEditing()
                 }) {
                     Text("Cancel")
@@ -94,8 +93,8 @@ struct SearchField_Preview_Helper: View {
                 .padding()
 
             Button(action: {
-                self.edit.toggle()
-                if !self.edit {
+                edit.toggle()
+                if !edit {
                     UIApplication.shared.endEditing()
                 }
             }) {

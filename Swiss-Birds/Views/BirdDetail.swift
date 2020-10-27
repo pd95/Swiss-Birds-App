@@ -112,7 +112,7 @@ struct BirdDetail: View {
         .navigationBarTitle(Text(bird.name), displayMode: .inline)
         .navigationBarItems(trailing: shareButton)
         .onDisappear() {
-            self.stopSound()
+            stopSound()
         }
     }
 
@@ -129,19 +129,19 @@ struct BirdDetail: View {
     }
 
     var shareButton: some View {
-        Button(action: self.shareDetails, label: {
+        Button(action: shareDetails, label: {
             Image(systemName: "square.and.arrow.up")
                 .imageScale(.large)
                 .padding([.horizontal], 4)
                 .padding([.vertical], 8)
         })
         .hoverEffect()
-        .disabled(self.model.details == nil || shareItem != nil)
+        .disabled(model.details == nil || shareItem != nil)
         .accessibility(label: Text("Teilen"))
     }
 
     private func shareDetails() {
-        shareItem = ShareSheet.Item(subject: self.model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(self.model.details?.uri ?? "")])
+        shareItem = ShareSheet.Item(subject: model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(model.details?.uri ?? "")])
     }
 
     private func playVoice() {
@@ -180,13 +180,13 @@ struct BirdDetailContainer: View {
 
     var body: some View {
         Group {
-            if self.model.details != nil {
+            if model.details != nil {
                 BirdDetail(model: model)
             }
             else {
                 ActivityIndicatorView(style: .large)
                 .onAppear {
-                    self.model.fetchData()
+                    model.fetchData()
                 }
             }
         }
@@ -194,7 +194,7 @@ struct BirdDetailContainer: View {
     }
 
     var showAlert: Binding<Bool> {
-        return Binding<Bool>(get: {self.model.error != nil}, set: { _ in self.model.error = nil })
+        return Binding<Bool>(get: {model.error != nil}, set: { _ in model.error = nil })
     }
 }
 
@@ -209,9 +209,7 @@ struct BirdDetail_Previews: PreviewProvider {
                 Text(bird.name)
             }
             BirdDetailContainer(bird: bird)
-                //.environment(\.sizeCategory, .large)
         }
-//        .padding(.leading, 1)
         .environmentObject(appState)
         .previewLayout(.fixed(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width))
     }
@@ -322,28 +320,26 @@ struct CharacteristicView: View {
                     .font(.title)
                     .padding(.top)
             }
-            else {
-                if characteristic.isSeparator {
+            else if characteristic.isSeparator {
                     Spacer()
-                }
-                else {
-                    if characteristic.label != "" {
-                        Text(LocalizedStringKey(characteristic.label))
-                            .font(.headline)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.leading)
-
-                        Spacer(minLength: 30.0)
-                    }
-                    if characteristic.symbol != "" {
-                        SymbolView(symbolName: characteristic.symbol, pointSize: 24)
-                            .accessibility(hidden: true)
-                    }
-                    Text(characteristic.text)
-                        .font(.body)
+            }
+            else {
+                if !characteristic.label.isEmpty {
+                    Text(LocalizedStringKey(characteristic.label))
+                        .font(.headline)
                         .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(characteristic.label != "" ? TextAlignment.trailing : TextAlignment.leading)
+                        .multilineTextAlignment(.leading)
+
+                    Spacer(minLength: 30.0)
                 }
+                if !characteristic.symbol.isEmpty {
+                    SymbolView(symbolName: characteristic.symbol, pointSize: 24)
+                        .accessibility(hidden: true)
+                }
+                Text(characteristic.text)
+                    .font(.body)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(!characteristic.label.isEmpty ? TextAlignment.trailing : TextAlignment.leading)
             }
         }
         .accessibilityElement(children: .combine)
@@ -355,7 +351,7 @@ struct CharacteristicsView : View {
     let characteristics : [Characteristic]
     
     var body: some View {
-        ForEach(self.characteristics.filter {!$0.isEmpty}, id:\.self) { characteristic in
+        ForEach(characteristics.filter {!$0.isEmpty}, id:\.self) { characteristic in
             Group {
                 CharacteristicView(characteristic: characteristic)
                 if characteristic.isHeader {

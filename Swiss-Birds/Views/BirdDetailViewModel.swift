@@ -82,9 +82,9 @@ class BirdDetailViewModel: ObservableObject {
         getImageDetailsCancellable = $details
             .compactMap {$0}
             .receive(on: DispatchQueue.main)
-            .map { [unowned self] in _ = $0 ; return self.imageDetails }
+            .map { _ = $0 ; return self.imageDetails }
             .setFailureType(to: Error.self)
-            .flatMap {[unowned self] (imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Error> in
+            .flatMap {(imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Error> in
                 // Generate publisher for each missing image
                 let publishers = imageDetails
                     .filter{ $0.image == nil }
@@ -127,9 +127,7 @@ class BirdDetailViewModel: ObservableObject {
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
             }
-            //.replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            //.assign(to: \.voiceData, on: self)
             .sink(
                 receiveCompletion: { completion in
                     if case .failure(let error) = completion {

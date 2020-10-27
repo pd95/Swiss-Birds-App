@@ -66,17 +66,17 @@ struct ContentView: View {
                 }
             }
         }
-        .alert(item: self.$state.alertItem, content: { (alertItem) -> Alert in
+        .alert(item: $state.alertItem, content: { (alertItem) -> Alert in
             alertItem.alert
         })
         .onAppear() {
             if SettingsStore.shared.startupCheckBirdOfTheDay {
-                self.state.checkBirdOfTheDay()
+                state.checkBirdOfTheDay()
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in
             if SettingsStore.shared.startupCheckBirdOfTheDay {
-                self.state.checkBirdOfTheDay()
+                state.checkBirdOfTheDay()
             }
         })
         .onReceive(
@@ -84,7 +84,7 @@ struct ContentView: View {
                 guard let device = notification.object as? UIDevice else {
                     return
                 }
-                self.isPortrait = device.orientation == .unknown ||
+                isPortrait = device.orientation == .unknown ||
                     device.orientation.isPortrait && (
                         device.orientation != .faceUp ||
                         device.orientation != .faceDown

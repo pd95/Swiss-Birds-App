@@ -25,7 +25,7 @@ struct BirdList: View {
                     ForEach(state.matchingSpecies) { bird in
                         NavigationLink(destination: BirdDetailContainer(bird: bird),
                                        tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                       selection: self.state.selectedNavigationLinkBinding) {
+                                       selection: state.selectedNavigationLinkBinding) {
                             BirdRow(bird: bird)
                         }
                         .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -34,27 +34,27 @@ struct BirdList: View {
             }
             .listStyle(PlainListStyle())
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
-                if self.state.isEditingSearchField {
+                if state.isEditingSearchField {
                     print("Searching was enabled, but drag occurred => endEditing")
-                    self.state.isEditingSearchField = false
+                    state.isEditingSearchField = false
                     UIApplication.shared.endEditing()
                 }
             }))
             .navigationBarTitle(Text("Vögel der Schweiz"))
             .navigationBarItems(
                 trailing:
-                Button(action: self.state.showFilter) {
-                    HStack {
-                        Text("Filter")
-                        Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
-                            .imageScale(.large)
+                    Button(action: state.showFilter) {
+                        HStack {
+                            Text("Filter")
+                            Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
+                                .imageScale(.large)
+                        }
+                        .padding(4)
+                        .accessibilityElement(children: .combine)
                     }
-                    .padding(4)
-                    .accessibilityElement(children: .combine)
-                }
-                .hoverEffect()
-                .disabled(Filter.allFiltersGrouped.isEmpty)
-                .accessibility(identifier: "filterButton")
+                    .hoverEffect()
+                    .disabled(Filter.allFiltersGrouped.isEmpty)
+                    .accessibility(identifier: "filterButton")
             )
 
             if requiresDynamicNavigationLink {
@@ -88,10 +88,10 @@ struct BirdList: View {
         // Create destination view
         let destination: some View = Group {
             if currentTag == .filterList {
-                FilterCriteria(managedList: self.state.filters)
+                FilterCriteria(managedList: state.filters)
             }
-            else if species != nil {
-                BirdDetailContainer(bird: species!)
+            else if let species = species {
+                BirdDetailContainer(bird: species)
             }
         }
 

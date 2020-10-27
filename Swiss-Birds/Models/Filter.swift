@@ -26,7 +26,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     }
 
     var description: String {
-        return "FilterType(\(self.rawValue))"
+        return "FilterType(\(rawValue))"
     }
 }
 

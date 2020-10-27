@@ -21,8 +21,8 @@ struct BirdOfTheDay: View {
                 .font(.title)
 
             Button(action: {
-                self.isPresented = false
-                self.state.showBird(species.speciesId)
+                isPresented = false
+                state.showBird(species.speciesId)
             }) {
                 VStack {
                     Rectangle()
@@ -65,7 +65,7 @@ struct BirdOfTheDay: View {
 
     var dismissButton: some View {
         Button(action: {
-            self.isPresented = false
+            isPresented = false
         }) {
             Image(systemName: "xmark")
                 .imageScale(.large)

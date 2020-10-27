@@ -13,7 +13,7 @@ struct BirdRow: View {
 
     @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject private var state : AppState
-    @State var image: UIImage? = UIImage(named: "placeholder-headshot")
+    @State var image: UIImage = UIImage(named: "placeholder-headshot")!
     
     func hasEntwicklungsAtlasSymbol() -> Bool {
         return bird.filterSymbolName(.entwicklungatlas).count > 0
@@ -25,16 +25,14 @@ struct BirdRow: View {
     
     var body: some View {
         HStack {
-            if self.image != nil {
-                Image(uiImage: self.image!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: dynamicImageSize, height: dynamicImageSize)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
-                    .shadow(radius: 4)
-                    .accessibility(hidden: true)
-            }
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: dynamicImageSize, height: dynamicImageSize)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
+                .shadow(radius: 4)
+                .accessibility(hidden: true)
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
@@ -49,7 +47,9 @@ struct BirdRow: View {
         }
         .accessibilityElement(children: .combine)
         .onReceive(state.getHeadShot(for: bird)) { (image) in
-            self.image = image
+            if let image = image {
+                self.image = image
+            }
         }
     }
 }

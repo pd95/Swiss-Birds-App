@@ -52,12 +52,7 @@ func loadFilterData(vdsFilternames : [VdsFilter]) -> [FilterType:[Filter]] {
         let filterType = FilterType(rawValue: vdsFilter.type)!
         let filter = Filter(filterId: Filter.Id(vdsFilter.filterID) ?? -999, name: vdsFilter.filterName, type: filterType)
 
-        if filterMap[filterType] == nil {
-            filterMap[filterType] = [filter]
-        }
-        else {
-            filterMap[filterType]?.append(filter)
-        }
+        filterMap[filterType, default: []].append(filter)
     }
 
     // Sort all filters according to the current language

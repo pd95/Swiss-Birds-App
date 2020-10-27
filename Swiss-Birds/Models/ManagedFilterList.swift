@@ -19,17 +19,13 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
     }
 
     private func addFilter(_ filter: Filter) {
-        if _list[filter.type] == nil {
-            _list[filter.type] = [filter.filterId]
-        }
-        else {
-            _list[filter.type]!.append(filter.filterId)
-        }
+        _list[filter.type, default: []].append(filter.filterId)
     }
 
     private func removeFilter(_ filter: Filter) {
-        if let index = _list[filter.type]?.firstIndex(of: filter.filterId)
-            ,index >= 0 {
+        if let index = _list[filter.type]?.firstIndex(of: filter.filterId),
+           index >= 0
+        {
             _list[filter.type]!.remove(at:index)
             if _list[filter.type]!.isEmpty {
                 _list.removeValue(forKey: filter.type)

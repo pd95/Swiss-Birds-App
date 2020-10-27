@@ -72,7 +72,7 @@ class AppState : ObservableObject {
     @Published var alertItem: AlertItem?
     var error: Error? {
         willSet {
-            self.objectWillChange.send()
+            objectWillChange.send()
         }
         didSet {
             if let error = error {
@@ -217,18 +217,18 @@ class AppState : ObservableObject {
             .map {Optional.some($0)}
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [unowned self] result in
+                receiveCompletion: { [weak self] result in
                     if case .failure(let error) = result {
-                        self.error = error
+                        self?.error = error
                         os_log("getBirdOfTheDaySpeciesIDandURL error: %{Public}@", error.localizedDescription)
-                        self.birdOfTheDay = nil
+                        self?.birdOfTheDay = nil
                     }
                 },
-                receiveValue: { [unowned self] (birdOfTheDay) in
-                    self.birdOfTheDay = birdOfTheDay
+                receiveValue: { [weak self] (birdOfTheDay) in
+                    self?.birdOfTheDay = birdOfTheDay
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
-                        self.showBirdOfTheDay = showAlways || (currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay)
+                        self?.showBirdOfTheDay = showAlways || (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
                     }
                 })
             .store(in: &cancellables)
@@ -240,22 +240,22 @@ class AppState : ObservableObject {
         }
         VdsAPI
             .getBirdOfTheDay(for: speciesId)
-            .map { [unowned self] data in
+            .map { [weak self] data in
                 let image = UIImage(data: data)
-                self.headShotsCache[-speciesId] = image
+                self?.headShotsCache[-speciesId] = image
                 return image
             }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [unowned self] (result) in
+                receiveCompletion: { [weak self] (result) in
                     if case .failure(let error) = result {
-                        self.error = error
+                        self?.error = error
                         os_log("getBirdOfTheDay error: %{Public}@", error.localizedDescription)
-                        self.birdOfTheDayImage = nil
+                        self?.birdOfTheDayImage = nil
                     }
                 },
-                receiveValue: { [unowned self] (image) in
-                    self.birdOfTheDayImage = image
+                receiveValue: { [weak self] (image) in
+                    self?.birdOfTheDayImage = image
                 })
             .store(in: &cancellables)
     }
