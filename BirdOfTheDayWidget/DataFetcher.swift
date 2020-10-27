@@ -44,8 +44,11 @@ class DataFetcher: ObservableObject {
         let now = Date()
         if finishedLoading {
             let tomorrow = Calendar.current.date(byAdding: DateComponents(day: 1), to: lastLoadingDate) ?? now.addingTimeInterval(24*60*60)
-            return tomorrow
+            let reloadDate = Calendar.current.startOfDay(for: tomorrow)
+            logger.log("🔴 reloadDate = \(reloadDate) (tomorrow)")
+            return reloadDate
         }
+        logger.log("🔴 reloadDate = \(now) (now)")
         return now
     }
 
@@ -54,6 +57,12 @@ class DataFetcher: ObservableObject {
     }
 
     private var getBirdOfTheDayCompletionHandlers = [(BirdOfTheDay)->Void]()
+
+    private var fakeBackdatedLoad: Bool = false /*{
+        fakeItUntilDate > Date()
+    }
+    private var fakeItUntilDate = Date().addingTimeInterval(60)
+*/
 
     func fetchBirdOfTheDay() {
         logger.info("fetchBirdOfTheDay")
@@ -66,6 +75,12 @@ class DataFetcher: ObservableObject {
         name = nil
         image = nil
         birdOfTheDaySubscriber = VdsAPI.getBirdOfTheDaySpeciesIDandURL()
+            .map { (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
+                if self.fakeBackdatedLoad {
+                    return (url: VdsAPI.base, speciesID: 1200)
+                }
+                return birdOfTheDayData
+            }
             .handleEvents(receiveOutput: { [weak self] (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
                 self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID)")
                 self?.speciesID = birdOfTheDayData.speciesID
@@ -100,8 +115,9 @@ class DataFetcher: ObservableObject {
                 }
                 self?.birdOfTheDaySubscriber = nil
             } receiveValue: { [weak self] (_) in
-                self?.lastLoadingDate = Date()
-                self?.logger.debug("fetchBirdOfTheDay: finished now")
+                guard let self = self else { return }
+                self.lastLoadingDate = self.fakeBackdatedLoad ? Date().addingTimeInterval(60-24*60*60) : Date()
+                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(self.lastLoadingDate)")
             }
     }
 
@@ -111,10 +127,12 @@ class DataFetcher: ObservableObject {
               let image = image,
               reloadDate > Date()
         else {
+            logger.info("getBirdOfTheDay: fetching new data")
             getBirdOfTheDayCompletionHandlers.append(completion)
             fetchBirdOfTheDay()
             return
         }
+        logger.info("getBirdOfTheDay: returning existing data \(speciesID)")
         completion((speciesID, name, image, reloadDate))
     }
 }
