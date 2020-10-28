@@ -118,9 +118,11 @@ class BirdDetailViewModel: ObservableObject {
                 })
 
         // Fetch voice data 1s after details have been load
-        getVoiceCancellable = $imageDetails
-            .compactMap({ $0.first })
-            .filter({ $0.image != nil})
+        getVoiceCancellable = $details
+            .filter({$0?.videosBilderStimmen == "1"})
+            .combineLatest($imageDetails)
+            .compactMap({ $0.1.first })
+            .filter({ $0.image != nil })
             .setFailureType(to: Error.self)
             .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
                 VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess)
