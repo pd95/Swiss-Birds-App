@@ -102,21 +102,3 @@ struct FilterCheckButton: View {
         .accessibility(addTraits: accessibilityTraits)
     }
 }
-
-
-struct Checkmark: View {
-    var checked = true
-    
-    let checkmark = Image(systemName: "checkmark")
-    
-    var body: some View {
-        Group {
-            if checked {
-                checkmark
-            }
-            else {
-                checkmark.hidden()
-            }
-        }
-    }
-}

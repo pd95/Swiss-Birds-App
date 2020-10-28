@@ -13,6 +13,9 @@ struct BirdList: View {
     
     @EnvironmentObject private var state : AppState
 
+    @State private var birds = [Species]()
+    @State private var listID = UUID()
+
     var body: some View {
         return VStack(spacing: 0) {
             List {
@@ -22,7 +25,7 @@ struct BirdList: View {
                 }
 
                 Section {
-                    ForEach(state.matchingSpecies) { bird in
+                    ForEach(birds) { bird in
                         NavigationLink(destination: BirdDetailContainer(bird: bird),
                                        tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
                                        selection: state.selectedNavigationLinkBinding) {
@@ -32,6 +35,19 @@ struct BirdList: View {
                     }
                 }
             }
+            .id(listID)
+            .overlay(Group {
+                if state.isUpdating {
+                    ActivityIndicatorView(style: .large)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(.systemBackground).opacity(0.4))
+                }
+            })
+            .onReceive(state.$matchingSpecies, perform: { matchingSpecies in
+                birds = matchingSpecies
+                listID = UUID()
+                print("Sort options updated... resetting list \(listID)")
+            })
             .listStyle(PlainListStyle())
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if state.isEditingSearchField {
@@ -40,22 +56,6 @@ struct BirdList: View {
                     UIApplication.shared.endEditing()
                 }
             }))
-            .navigationBarTitle(Text("Vögel der Schweiz"))
-            .navigationBarItems(
-                trailing:
-                    Button(action: state.showFilter) {
-                        HStack {
-                            Text("Filter")
-                            Image(systemName: state.filters.isEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
-                                .imageScale(.large)
-                        }
-                        .padding(4)
-                        .accessibilityElement(children: .combine)
-                    }
-                    .hoverEffect()
-                    .disabled(Filter.allFiltersGrouped.isEmpty)
-                    .accessibility(identifier: "filterButton")
-            )
 
             if requiresDynamicNavigationLink {
                 dynamicNavigationLinkTarget
@@ -67,10 +67,10 @@ struct BirdList: View {
     // "force" a navigation link being selected
     var requiresDynamicNavigationLink: Bool {
         switch state.selectedNavigationLink {
-            case .filterList, .programmaticBirdDetails:
-                return true
-            default:
+            case .none, .birdDetails:
                 return false
+            default:
+                return true
         }
     }
 
@@ -92,6 +92,9 @@ struct BirdList: View {
             }
             else if let species = species {
                 BirdDetailContainer(bird: species)
+            }
+            else if currentTag == .sortOptions {
+                SelectSortOptions(sorting: $state.sortOptions)
             }
         }
 

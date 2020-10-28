@@ -57,7 +57,9 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
     /// Returns the number of enabled filters
     var count: Int {
-        list.count
+        list.reduce(0) { (current, item) -> Int in
+            current + item.value.count
+        }
     }
 
     /// Remove all filters which have been set

@@ -16,6 +16,7 @@ enum MainNavigationLinkTarget: Hashable, Codable {
     case filterList
     case birdDetails(Int)
     case programmaticBirdDetails(Int)
+    case sortOptions
 
 
     // MARK: Codable protocol
@@ -40,6 +41,8 @@ enum MainNavigationLinkTarget: Hashable, Codable {
         case 2:
             let speciesId = try container.decode(Int.self, forKey: .associatedValue)
             self = .programmaticBirdDetails(speciesId)
+        case 3:
+            self = .sortOptions
         default:
             throw CodingError.unknownValue
         }
@@ -56,6 +59,8 @@ enum MainNavigationLinkTarget: Hashable, Codable {
         case .programmaticBirdDetails(let speciesId):
             try container.encode(2, forKey: .rawValue)
             try container.encode(speciesId, forKey: .associatedValue)
+        case .sortOptions:
+            try container.encode(3, forKey: .rawValue)
         }
     }
 }
@@ -66,9 +71,11 @@ class AppState : ObservableObject {
     @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
+    @Published var sortOptions = SortOptions(column: .speciesName, direction: .ascending)
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var matchingSpecies = [Species]()
+    @Published var isUpdating = false
 
     @Published var alertItem: AlertItem?
     var error: Error? {
@@ -176,18 +183,35 @@ class AppState : ObservableObject {
             .store(in: &cancellables)
 
         // Combine the 3 data sources to restrict the bird list:
-        Publishers.CombineLatest3($allSpecies, $searchText, filters.objectWillChange)
-            .subscribe(on: DispatchQueue.global())
-            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.global())
-            .map { [weak self] (input: ([Species], String, Void)) -> [Species] in
+        let backgroundQueue = DispatchQueue(label: "list-sort-queue")
+        Publishers.CombineLatest4($allSpecies, $searchText, filters.objectWillChange, $sortOptions)
+            .handleEvents(receiveOutput: { os_log("list-sort-queue receiveValue %{Public}@", $0.3.description)
+                self.isUpdating = true
+            })
+            .subscribe(on: backgroundQueue)
+            .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
+            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> [Species] in
                 guard let self = self else { return [] }
-                let (allSpecies, searchText, _) = input
+
+                os_log("start filtering bird list: %ld", allSpecies.count)
+
+                // Filter species
                 let filtered = allSpecies
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
-                return filtered
+                os_log("filtering bird list done: %ld", filtered.count)
+
+                // Sort result
+                let sorted = filtered.sorted { (lhs, rhs) -> Bool in
+                    lhs.compare(with: rhs, using: sortOptions)
+                }
+                os_log("sorted bird list ready: %ld", sorted.count)
+                return sorted
             }
             .receive(on: DispatchQueue.main)
-            .assign(to: \.matchingSpecies, on: self)
+            .sink(receiveValue: { [weak self] (birds) in
+                self?.matchingSpecies = birds
+                self?.isUpdating = false
+            })
             .store(in: &cancellables)
     }
 
@@ -305,6 +329,14 @@ class AppState : ObservableObject {
         selectedNavigationLink = .filterList
     }
 
+    func showSortOptions() {
+        if isEditingSearchField {
+            UIApplication.shared.endEditing()
+        }
+
+        selectedNavigationLink = .sortOptions
+    }
+
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
         return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
@@ -313,7 +345,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay))"
+        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay), sortOptions=\(sortOptions))"
     }
 }
 
@@ -347,6 +379,17 @@ extension AppState {
             }
         }
 
+        if let sortByColumn = stateArray[Key.sortByColumn] as? SortOptions.SortColumn.RawValue,
+           let columnOption = SortOptions.SortColumn(rawValue: sortByColumn)
+        {
+            self.sortOptions.column = columnOption
+        }
+        if let sortByDirection = stateArray[Key.sortByDirection] as? SortOptions.SortDirection.RawValue,
+           let directionOption = SortOptions.SortDirection(rawValue: sortByDirection)
+        {
+            self.sortOptions.direction = directionOption
+        }
+
         os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
     }
     
@@ -363,6 +406,8 @@ extension AppState {
             Key.activeFilters: storableList,
             Key.selectedNavigationLink: selectedNavigationLinkData,
             Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
+            Key.sortByColumn: sortOptions.column.rawValue,
+            Key.sortByDirection: sortOptions.direction.rawValue,
         ]
         activity.addUserInfoEntries(from: stateArray)
 
@@ -374,5 +419,7 @@ extension AppState {
         static let activeFilters = "activeFilters"
         static let previousBirdOfTheDay = "previousBirdOfTheDay"
         static let selectedNavigationLink = "selectedNavigationLink"
+        static let sortByColumn = "sortByColumn"
+        static let sortByDirection = "sortByDirection"
     }
 }

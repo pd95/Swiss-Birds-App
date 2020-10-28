@@ -49,6 +49,9 @@
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		17E6B34F25497DE500691729 /* SelectSortOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B34E25497DE500691729 /* SelectSortOptions.swift */; };
+		17E6B35925497F9900691729 /* SortOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B35825497F9900691729 /* SortOptions.swift */; };
+		17E6B35F2549974900691729 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B35E2549974900691729 /* Checkmark.swift */; };
 		17E9BB0824D2111B00A87DF4 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */; };
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
 		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
@@ -158,6 +161,9 @@
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
+		17E6B34E25497DE500691729 /* SelectSortOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSortOptions.swift; sourceTree = "<group>"; };
+		17E6B35825497F9900691729 /* SortOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptions.swift; sourceTree = "<group>"; };
+		17E6B35E2549974900691729 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
 		17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
 		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
@@ -326,6 +332,7 @@
 				176E89E324AA725C00D38E6B /* SettingsStore.swift */,
 				17206830236B5A920008905F /* Filter.swift */,
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
+				17E6B35825497F9900691729 /* SortOptions.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
 				17B1B4582546C41D00B422B6 /* Languages.swift */,
@@ -344,6 +351,8 @@
 				17ECD39D24A72D1800226BF4 /* BirdImageView.swift */,
 				17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */,
 				175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */,
+				17E6B34E25497DE500691729 /* SelectSortOptions.swift */,
+				17E6B35E2549974900691729 /* Checkmark.swift */,
 				1715B36624372FD800413FBF /* SearchField.swift */,
 				1720682E236AD0F40008905F /* SymbolView.swift */,
 				172D564D24A1077F00C8419E /* ShareSheet.swift */,
@@ -550,6 +559,7 @@
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
 				17206831236B5A920008905F /* Filter.swift in Sources */,
 				1746B50124DE0054001E7357 /* AlertItem.swift in Sources */,
+				17E6B34F25497DE500691729 /* SelectSortOptions.swift in Sources */,
 				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
@@ -564,7 +574,9 @@
 				172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */,
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
+				17E6B35925497F9900691729 /* SortOptions.swift in Sources */,
 				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
+				17E6B35F2549974900691729 /* Checkmark.swift in Sources */,
 				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
 				176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,

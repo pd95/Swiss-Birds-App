@@ -60,6 +60,20 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         
         return matchesAll
     }
+
+    func compare(with species: Species, using sortOptions: SortOptions) -> Bool {
+        let result: Bool
+        switch sortOptions.column {
+            case .speciesName:
+                result = name < species.name
+            case .groupName:
+                result = (filterValue(.vogelgruppe)?.name ?? "A") < (species.filterValue(.vogelgruppe)?.name ?? "B")
+        }
+        if sortOptions.direction == .descending {
+            return !result
+        }
+        return result
+    }
     
     var description: String {
         return "Species(speciesId=\(speciesId), name=\(name), filterMap=\(filterMap))"

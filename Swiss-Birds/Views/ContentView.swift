@@ -24,6 +24,9 @@ struct ContentView: View {
                 else {
                     BirdList()
                         .edgesIgnoringSafeArea(.bottom)
+                        .navigationBarTitle(Text("Vögel der Schweiz"))
+                        .navigationBarItems(trailing: filterButton)
+                        .navigationBarItems(leading: sortButton, trailing: filterButton)
                         .zIndex(2)
                 }
             }
@@ -90,6 +93,37 @@ struct ContentView: View {
                         device.orientation != .faceDown
                     )
         }
+    }
+
+    var sortButton: some View {
+        Button(action: state.showSortOptions) {
+            HStack {
+                Image(systemName: "arrow.up.arrow.down.circle")
+                    .imageScale(.large)
+            }
+            .padding(4)
+        }
+        .hoverEffect()
+        .accessibility(identifier: "sortButton")
+    }
+
+    var filterButton: some View {
+        Button(action: state.showFilter) {
+            Text("Filter")
+                .padding(4)
+                .overlay(Group {
+                    if !state.filters.isEmpty {
+                        Image(systemName: "\(state.filters.count).circle.fill")
+                            .imageScale(.medium)
+                            .offset(x: 9, y: -3)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    }
+                })
+                .accessibilityElement(children: .combine)
+        }
+        .hoverEffect()
+        .disabled(Filter.allFiltersGrouped.isEmpty)
+        .accessibility(identifier: "filterButton")
     }
 }
 
