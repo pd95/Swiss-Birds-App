@@ -160,14 +160,14 @@ class AppState : ObservableObject {
                     self.filters.objectWillChange.send()
 
                     // restore filter settings
-                    self.filters.clearFilters()
+                    self.filters.removeAll()
                     self.restorableFilters.forEach { (key: String, value: [Filter.Id]) in
                         if let filterType = FilterType(rawValue: key) {
                             value.compactMap {
                                     Filter.filter(forId: $0, ofType: filterType)
                                 }
                                 .forEach {
-                                    self.filters.toggleFilter($0)
+                                    self.filters.toggle(filter: $0)
                                 }
                         }
                     }

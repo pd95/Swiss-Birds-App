@@ -46,7 +46,7 @@ struct BirdList: View {
                     Button(action: state.showFilter) {
                         HStack {
                             Text("Filter")
-                            Image(systemName: state.filters.hasFilter() ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
+                            Image(systemName: state.filters.isEmpty ? "line.horizontal.3.decrease.circle" : "line.horizontal.3.decrease.circle.fill")
                                 .imageScale(.large)
                         }
                         .padding(4)

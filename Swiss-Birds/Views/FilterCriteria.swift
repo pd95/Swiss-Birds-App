@@ -51,14 +51,14 @@ struct NoFilterCheckButton: View {
     let text: String
 
     var body: some View {
-        Button(action: { managedList.clearFilters() }) {
+        Button(action: { managedList.removeAll() }) {
             HStack {
-                Checkmark(checked: managedList.hasFilter())
+                Checkmark(checked: managedList.isEmpty)
                 Text(LocalizedStringKey(text))
             }
         }
         .accessibility(identifier: identifier)
-        .accessibility(addTraits: AccessibilityTraits(managedList.hasFilter() ? [.isSelected] : []))
+        .accessibility(addTraits: AccessibilityTraits(managedList.isEmpty ? [.isSelected] : []))
     }
 }
 
@@ -85,13 +85,13 @@ struct FilterCheckButton: View {
     }
 
     var accessibilityTraits : AccessibilityTraits {
-        managedList.hasFilter(filter) ? [.isSelected] : []
+        managedList.contains(filter: filter) ? [.isSelected] : []
     }
 
     var body: some View {
-        Button(action: { managedList.toggleFilter(filter)}) {
+        Button(action: { managedList.toggle(filter: filter)}) {
             HStack {
-                Checkmark(checked: managedList.hasFilter(filter))
+                Checkmark(checked: managedList.contains(filter: filter))
                 if let symbolName = symbolName {
                     SymbolView(symbolName: symbolName)
                 }
