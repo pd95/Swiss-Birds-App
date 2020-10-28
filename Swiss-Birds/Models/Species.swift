@@ -22,6 +22,8 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     func filterSymbolName(_ filterType : FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
             return "\(filterType.rawValue)-\(array[0])"
+                // FIXME Hack API name change
+                .replacingOccurrences(of: "vogelgruppe", with: "vogelguppe")
         }
         return ""
     }
@@ -79,13 +81,13 @@ func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {
         let species = Species(
             speciesId: speciesID,
             name: item.artname,
-            alternateName: item.alternativName,
+            alternateName: item.synonyme,
             filterMap: [
-                .lebensraum : item.filterlebensraum.split(separator: ",").map({ (s) -> Filter.Id in
+                .lebensraum : item.filterlebensraum.split(separator: ";").map({ (s) -> Filter.Id in
                     return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
                 }),
                 .vogelgruppe : [Filter.Id(item.filtervogelgruppe)!],
-                .nahrung : item.filternahrung.split(separator: ",").map({ (s) -> Filter.Id in
+                .nahrung : item.filternahrung.split(separator: ";").map({ (s) -> Filter.Id in
                     return Filter.Id(String(s.trimmingCharacters(in: .whitespaces)))!
                 }),
                 .haeufigeart : [Filter.Id(item.filterhaeufigeart)!],

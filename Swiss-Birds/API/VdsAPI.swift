@@ -36,7 +36,7 @@ enum VdsAPI {
     static let decoder: JSONDecoder = JSONDecoder()
     static let base = URL(string: "https://www.vogelwarte.ch/")!
 
-    static let jsonDataPath = "elements/snippets/vds/static/assets/data"
+    static let jsonDataPath = "elements/snippets/vds/static/assets/data_new"
     static let imageAssetPath = "assets/images/voegel/vds"
     static let voiceAssetPath = "assets/media/voices"
 
@@ -64,24 +64,32 @@ enum VdsAPI {
     private static func fetchJSON<T: Decodable>(_ request: URLRequest) -> AnyPublisher<T, Error> {
         return fetchData(request)
             .decode(type: T.self, decoder: decoder)
+            .handleEvents(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    os_log("Error: '%{Public}@' for %{Public}@", error.localizedDescription, request.url?.path ?? "n/a")
+                    os_log("%{Public}@", error as NSError)
+                }
+            })
             .eraseToAnyPublisher()
     }
 
     static func getBirds() -> AnyPublisher<[VdsListElement], Error> {
-        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/vds-list-\(language).json")))
+        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/list_\(language).json")))
     }
 
     static func getFilters() -> AnyPublisher<[VdsFilter], Error> {
-        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/vds-filternames-\(language).json")))
+        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/filters_\(language).json")))
     }
 
     static func getLabels() -> AnyPublisher<[VdsLabel], Error> {
-        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/vds-labels-\(language).json")))
+        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/labels_\(language).json")))
     }
 
     static func getSpecie(for id: Int) -> AnyPublisher<VdsSpecieDetail, Error> {
-        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/species/\(id)-\(language).json")))
-            .tryMap { (d: [VdsSpecieDetail]) -> VdsSpecieDetail in d.first!}
+        return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/species/\(id)_\(language).json")))
+            .map { (specie: VdsSpecieDetail_new)-> VdsSpecieDetail in
+                VdsSpecieDetail(from: specie)
+            }
             .eraseToAnyPublisher()
     }
 

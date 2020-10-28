@@ -141,6 +141,8 @@ struct BirdDetail: View {
     }
 
     private func shareDetails() {
+        // FIXME Due to API change, the URI is not valid anymore...
+        // sharing only vogelwarte.ch
         shareItem = ShareSheet.Item(subject: model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(model.details?.uri ?? "")])
     }
 

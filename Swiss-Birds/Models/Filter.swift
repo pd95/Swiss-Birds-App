@@ -14,7 +14,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     case nahrung = "filternahrung"
     case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
-    case vogelgruppe = "filtervogelguppe"
+    case vogelgruppe = "filtervogelgruppe"
 
     var shouldSortForDisplay : Bool {
         switch self {
