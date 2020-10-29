@@ -10,6 +10,7 @@
 "Filterkriterien (%lld)" = "Criteri di filtro (%lld specie)";
 "Keine Filter" = "Senza filtri";
 "Nur häufige Vögel" = "Solo specie comuni";
+"filterhaeufigeart" = "Ordinarietà";
 "filterlebensraum" = "Habitat";
 "filtervogelgruppe" = "Gruppo";
 "filternahrung" = "Nutrimento";
@@ -54,3 +55,9 @@
 "Vogel des Tages anzeigen" = "Mostra l'uccello del giorno";
 "Hintergrund" = "Fondo";
 "Antippen zum schliessen." = "Toccare per chiudere.";
+"Anordnung" = "Arrangement";
+"Gruppierung" = "Raggruppamento";
+"alphabetisch (name)" = "Alfabetico (nome)";
+"Häufig" = "Frequente";
+"Selten" = "Raro";
+"Undefiniert" = "#";

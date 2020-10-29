@@ -10,6 +10,7 @@
 "Filterkriterien (%lld)" = "Critères de filtrage (%lld espèces)";
 "Keine Filter" = "No filtrage";
 "Nur häufige Vögel" = "Que les espèces communes";
+"filterhaeufigeart" = "Ordinarité";
 "filterlebensraum" = "Habitat";
 "filtervogelgruppe" = "Groupe d'oiseaux";
 "filternahrung" = "Nourriture";
@@ -54,3 +55,9 @@
 "Vogel des Tages anzeigen" = "Montre l'oiseau du jour";
 "Hintergrund" = "Fond";
 "Antippen zum schliessen." = "Tapez pour fermer.";
+"Anordnung" = "Arrangement";
+"Gruppierung" = "Groupement";
+"alphabetisch (name)" = "Alphabétique des noms";
+"Häufig" = "Fréquentes";
+"Selten" = "Rares";
+"Undefiniert" = "#";
