@@ -69,9 +69,6 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
             case .groupName:
                 result = (filterValue(.vogelgruppe)?.name ?? "A") < (species.filterValue(.vogelgruppe)?.name ?? "B")
         }
-        if sortOptions.direction == .descending {
-            return !result
-        }
         return result
     }
     

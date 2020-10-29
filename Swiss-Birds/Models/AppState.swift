@@ -71,11 +71,11 @@ class AppState : ObservableObject {
     @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
-    @Published var sortOptions = SortOptions(column: .speciesName, direction: .ascending)
+    @Published var sortOptions = SortOptions(column: .speciesName)
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
-    @Published var matchingSpecies = [Species]()
-    @Published var isUpdating = false
+    @Published var groupedBirds = [String: [Species]]()
+    var listID = UUID()
 
     @Published var alertItem: AlertItem?
     var error: Error? {
@@ -183,15 +183,27 @@ class AppState : ObservableObject {
             .store(in: &cancellables)
 
         // Combine the 3 data sources to restrict the bird list:
-        let backgroundQueue = DispatchQueue(label: "list-sort-queue")
-        Publishers.CombineLatest4($allSpecies, $searchText, filters.objectWillChange, $sortOptions)
-            .handleEvents(receiveOutput: { os_log("list-sort-queue receiveValue %{Public}@", $0.3.description)
-                self.isUpdating = true
+        let backgroundQueue = DispatchQueue(label: "Bird-List-Prepare")
+        let cleanSearchTextPublisher = $searchText
+            .debounce(for: .seconds(0.5), scheduler: backgroundQueue)
+            .removeDuplicates()
+
+        let cleanSortOptions = $sortOptions
+            .debounce(for: .seconds(0.3), scheduler: backgroundQueue)
+            .removeDuplicates()
+            .handleEvents(receiveOutput: { [weak self] sortOptions in
+                os_log("sortOptions changed receiveValue %{Public}@", sortOptions.description)
+                let newID = UUID()
+                self?.listID = newID
+                os_log("Resetting list %{Public}@", newID.description)
             })
-            .subscribe(on: backgroundQueue)
+
+        Publishers.CombineLatest4($allSpecies, cleanSearchTextPublisher, filters.objectWillChange, cleanSortOptions)
+            .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
+            .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
-            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> [Species] in
-                guard let self = self else { return [] }
+            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> [String:[Species]] in
+                guard let self = self else { return [:] }
 
                 os_log("start filtering bird list: %ld", allSpecies.count)
 
@@ -200,17 +212,33 @@ class AppState : ObservableObject {
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 os_log("filtering bird list done: %ld", filtered.count)
 
-                // Sort result
-                let sorted = filtered.sorted { (lhs, rhs) -> Bool in
-                    lhs.compare(with: rhs, using: sortOptions)
+                let groupedBirds: [String:[Species]]
+                let groupOption = sortOptions.column
+                os_log("group according to %{Public}@", groupOption.rawValue)
+                if groupOption == .groupName {
+                    groupedBirds = Dictionary(
+                        grouping: filtered,
+                        by: { (species: Species) -> String in
+                            species.filterValue(.vogelgruppe)?.name ?? "#"
+                        }
+                    )
                 }
-                os_log("sorted bird list ready: %ld", sorted.count)
-                return sorted
+                else {
+                    groupedBirds = Dictionary(
+                        grouping: filtered,
+                        by: { (species: Species) -> String in
+                            String(species.name.first ?? "#")
+                        }
+                    )
+                }
+                os_log("grouping done: %ld groups", groupedBirds.keys.count)
+
+                return groupedBirds
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (birds) in
-                self?.matchingSpecies = birds
-                self?.isUpdating = false
+                os_log("Storing bird list and triggering redraw")
+                self?.groupedBirds = birds
             })
             .store(in: &cancellables)
     }
@@ -384,11 +412,6 @@ extension AppState {
         {
             self.sortOptions.column = columnOption
         }
-        if let sortByDirection = stateArray[Key.sortByDirection] as? SortOptions.SortDirection.RawValue,
-           let directionOption = SortOptions.SortDirection(rawValue: sortByDirection)
-        {
-            self.sortOptions.direction = directionOption
-        }
 
         os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
     }
@@ -407,7 +430,6 @@ extension AppState {
             Key.selectedNavigationLink: selectedNavigationLinkData,
             Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
             Key.sortByColumn: sortOptions.column.rawValue,
-            Key.sortByDirection: sortOptions.direction.rawValue,
         ]
         activity.addUserInfoEntries(from: stateArray)
 
@@ -420,6 +442,5 @@ extension AppState {
         static let previousBirdOfTheDay = "previousBirdOfTheDay"
         static let selectedNavigationLink = "selectedNavigationLink"
         static let sortByColumn = "sortByColumn"
-        static let sortByDirection = "sortByDirection"
     }
 }

@@ -8,13 +8,9 @@
 
 import SwiftUI
 
-
 struct BirdList: View {
     
     @EnvironmentObject private var state : AppState
-
-    @State private var birds = [Species]()
-    @State private var listID = UUID()
 
     var body: some View {
         return VStack(spacing: 0) {
@@ -24,30 +20,20 @@ struct BirdList: View {
                         .autocapitalization(.words)
                 }
 
-                Section {
-                    ForEach(birds) { bird in
-                        NavigationLink(destination: BirdDetailContainer(bird: bird),
-                                       tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                       selection: state.selectedNavigationLinkBinding) {
-                            BirdRow(bird: bird)
+                ForEach(state.groupedBirds.keys.sorted(), id: \.self) { key in
+                    Section(header: Text("\(key)")) {
+                        ForEach(state.groupedBirds[key]!) { bird in
+                            NavigationLink(destination: BirdDetailContainer(bird: bird),
+                                           tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
+                                           selection: state.selectedNavigationLinkBinding) {
+                                BirdRow(bird: bird)
+                            }
+                            .accessibility(identifier: "birdRow_\(bird.speciesId)")
                         }
-                        .accessibility(identifier: "birdRow_\(bird.speciesId)")
                     }
                 }
+                .id(state.listID)
             }
-            .id(listID)
-            .overlay(Group {
-                if state.isUpdating {
-                    ActivityIndicatorView(style: .large)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color(.systemBackground).opacity(0.4))
-                }
-            })
-            .onReceive(state.$matchingSpecies, perform: { matchingSpecies in
-                birds = matchingSpecies
-                listID = UUID()
-                print("Sort options updated... resetting list \(listID)")
-            })
             .listStyle(PlainListStyle())
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if state.isEditingSearchField {
