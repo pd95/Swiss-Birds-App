@@ -4,10 +4,10 @@
 mkdir -p data svg/download
 
 # Fetching main JSON data
-for r in filternames ; do
+for r in filters ; do
     for l in de ; do
-        echo Fetching vds-$r-$l.json
-        curl -#fo data/vds-$r-$l.json https://www.vogelwarte.ch/elements/snippets/vds/static/assets/data/vds-$r-$l.json
+        echo Fetching ${r}_$l.json
+        curl -#fo data/${r}_$l.json https://www.vogelwarte.ch/elements/snippets/vds/static/assets/data_new/${r}_$l.json
     done
 done
 

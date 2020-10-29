@@ -28,7 +28,7 @@ if [ "x$CUSTOMIZE_SVG" == xtrue ]; then
         -e '/<circle/d' \
         > "../temp.xml"
 
-      if [ "$f" == "filtervogelguppe-67.svg" ]; then 
+      if [ "$f" == "filtervogelgruppe-67.svg" ]; then 
         sed -i "" 's/a9490626802501180 9490626802501180/a0.1 0.1/' ../temp.xml
       fi
 

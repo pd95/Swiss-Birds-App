@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-let types = ['filternames'];
+let types = ['filters'];
 let languages = ['de'];
 
 types.forEach(element => {
@@ -10,13 +10,13 @@ types.forEach(element => {
         console.log(element, language)
         let result = []
         let signatures = new Set()
-        let data = require(`./data/vds-${element}-${language}.json`);
+        let data = require(`./data/${element}_${language}.json`);
         if (data instanceof Array) {
             // get rid of duplicate entries
             data.forEach(obj => {
-                let signature = obj['ArtId'] || obj['labelID'] || obj['type'] + obj['filterID'];
+                let signature = obj['artid'] || obj['type'] + obj['filter_id'];
                 if (!signature) {
-                    console.log('ArtId not available', obj)
+                    console.log('Signature not available', obj)
                 }
                 if (!signatures.has(signature)) {
                     signatures.add(signature)
@@ -27,7 +27,7 @@ types.forEach(element => {
                 }
             })
             let jsonContent = JSON.stringify(result);
-            let filename = `./data/vds-${element}-${language}.json`
+            let filename = `./data/${element}_${language}.json`
             fs.writeFile(filename, jsonContent, 'utf8', function (err) {
                 if (err) {
                     console.log(`An error occurred while writing JSON Object to File ${filename}`);

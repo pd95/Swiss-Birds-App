@@ -160,6 +160,7 @@ class Swiss_BirdsUITests: XCTestCase {
         app.tables.buttons.element(boundBy: selectIndex).tap()
 
         var scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
+        _ = scrollViewsQuery.waitForExistence(timeout: wait4existenceTimeout)
         scrollViewsQuery.swipeUp()
 
         // Tap "Back"
@@ -181,7 +182,7 @@ class Swiss_BirdsUITests: XCTestCase {
         filterContainer.swipeUp()
         filterContainer.swipeUp()
         filterContainer.swipeUp()
-        filterContainer.buttons["filtervogelguppe-11"].tap()
+        filterContainer.buttons["filtervogelgruppe-11"].tap()
         
         // Tap "Back"
         if app.windows.firstMatch.horizontalSizeClass == .compact {

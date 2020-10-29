@@ -22,8 +22,6 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     func filterSymbolName(_ filterType : FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
             return "\(filterType.rawValue)-\(array[0])"
-                // FIXME Hack API name change
-                .replacingOccurrences(of: "vogelgruppe", with: "vogelguppe")
         }
         return ""
     }
