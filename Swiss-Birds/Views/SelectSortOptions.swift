@@ -15,7 +15,7 @@ struct SelectSortOptions: View {
     var body: some View {
         Form {
             List {
-                Section(header: Text("Sortiere nach")) {
+                Section(header: Text("Gruppierung")) {
                     ForEach(SortOptions.SortColumn.allCases, id: \.self) { column in
                         Button(action: { sorting.column = column }) {
                             HStack {
@@ -27,7 +27,7 @@ struct SelectSortOptions: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Sortierung"), displayMode: .inline)
+        .navigationBarTitle(Text("Anordnung"), displayMode: .inline)
     }
 }
 

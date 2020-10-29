@@ -17,7 +17,7 @@ struct FilterCriteria: View {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
             FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: Filter.commonBirds)
 
-            ForEach(FilterType.allCases.filter { $0 != .haeufigeart}, id: \.self) { filterType in
+            ForEach(FilterType.allCases.filter { $0.isSelectable && $0 != .haeufigeart}, id: \.self) { filterType in
                 Section(header:
                     Text(LocalizedStringKey(filterType.rawValue), comment: "FilterType description")
                         .accessibility(label: Text("Filtergruppe"))

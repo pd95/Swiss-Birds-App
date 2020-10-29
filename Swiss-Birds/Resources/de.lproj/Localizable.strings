@@ -10,8 +10,9 @@
 "Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
 "Keine Filter" = "Keine Filter";
 "Nur häufige Vögel" = "Nur häufige Arten";
+"filterhaeufigeart" = "Häufigkeit";
 "filterlebensraum" = "Lebensraum";
-"filtervogelgruppe" = "Vogel Gruppe";
+"filtervogelgruppe" = "Vogelgruppe";
 "filternahrung" = "Nahrung";
 "filterrotelistech" = "Rote Liste";
 "filterentwicklungatlas" = "Entwicklung";
@@ -54,3 +55,9 @@
 "Vogel des Tages anzeigen" = "Vogel des Tages anzeigen";
 "Hintergrund" = "Hintergrund";
 "Antippen zum schliessen." = "Antippen zum schliessen.";
+"Anordnung" = "Anordnung";
+"Gruppierung" = "Gruppierung";
+"Alphabetisch (name)" = "Alphabetisch (Artname)";
+"Häufig" = "Häufig";
+"Selten" = "Selten";
+"Undefiniert" = "#";

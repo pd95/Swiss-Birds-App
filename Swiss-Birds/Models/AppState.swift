@@ -75,6 +75,7 @@ class AppState : ObservableObject {
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var groupedBirds = [String: [Species]]()
+    @Published var groups = [String]()
     var listID = UUID()
 
     @Published var alertItem: AlertItem?
@@ -202,8 +203,8 @@ class AppState : ObservableObject {
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
             .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
-            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> [String:[Species]] in
-                guard let self = self else { return [:] }
+            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> ([String:[Species]], [String]) in
+                guard let self = self else { return ([:], []) }
 
                 os_log("start filtering bird list: %ld", allSpecies.count)
 
@@ -213,15 +214,23 @@ class AppState : ObservableObject {
                 os_log("filtering bird list done: %ld", filtered.count)
 
                 let groupedBirds: [String:[Species]]
+                let sortedGroups: [String]
                 let groupOption = sortOptions.column
                 os_log("group according to %{Public}@", groupOption.rawValue)
-                if groupOption == .groupName {
-                    groupedBirds = Dictionary(
+                if case .filterType(let type) = groupOption {
+                    let groupedBirdsByFilter = Dictionary(
                         grouping: filtered,
-                        by: { (species: Species) -> String in
-                            species.filterValue(.vogelgruppe)?.name ?? "#"
+                        by: { (species: Species) -> Filter in
+                            species.filterValue(type) ?? Filter.undefined
                         }
                     )
+                    let filterGroups = groupedBirdsByFilter.keys
+                    sortedGroups = filterGroups.sorted().map(\.name)
+                    let uniqueKeysWithValues = groupedBirdsByFilter.map { entry -> (key: String, value: [Species]) in
+                        let (filter, value) = entry
+                        return (key: filter.name, value: value)
+                    }
+                    groupedBirds = Dictionary(uniqueKeysWithValues: uniqueKeysWithValues)
                 }
                 else {
                     groupedBirds = Dictionary(
@@ -230,15 +239,17 @@ class AppState : ObservableObject {
                             String(species.name.first ?? "#")
                         }
                     )
+                    sortedGroups = groupedBirds.keys.sorted()
                 }
                 os_log("grouping done: %ld groups", groupedBirds.keys.count)
 
-                return groupedBirds
+                return (groupedBirds, sortedGroups)
             }
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] (birds) in
+            .sink(receiveValue: { [weak self] (groupedBirds, groups) in
                 os_log("Storing bird list and triggering redraw")
-                self?.groupedBirds = birds
+                self?.groupedBirds = groupedBirds
+                self?.groups = groups
             })
             .store(in: &cancellables)
     }

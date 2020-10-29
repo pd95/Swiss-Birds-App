@@ -20,8 +20,8 @@ struct BirdList: View {
                         .autocapitalization(.words)
                 }
 
-                ForEach(state.groupedBirds.keys.sorted(), id: \.self) { key in
-                    Section(header: Text("\(key)")) {
+                ForEach(state.groups, id: \.self) { key in
+                    Section(header: sectionHeader(for: key)) {
                         ForEach(state.groupedBirds[key]!) { bird in
                             NavigationLink(destination: BirdDetailContainer(bird: bird),
                                            tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
@@ -60,6 +60,18 @@ struct BirdList: View {
         }
     }
 
+    func sectionHeader(for key: String) -> some View {
+        Group {
+            if #available(iOS 14.0, *) {
+                Text(LocalizedStringKey(key))
+                    .textCase(nil)
+
+            } else {
+                Text(LocalizedStringKey(key))
+            }
+        }
+    }
+
     // Here we create the dynamically navigation link (filter list or restored bird selection)
     var dynamicNavigationLinkTarget: some View {
         let currentTag = state.selectedNavigationLink!
@@ -88,10 +100,10 @@ struct BirdList: View {
         return NavigationLink(destination: destination,
                               tag: currentTag,
                               selection: state.selectedNavigationLinkBinding) {
-                Text("*** never shown ***")
-            }
-            .frame(width: 0, height: 0)
-            .hidden()
+            Text("*** never shown ***")
+        }
+        .frame(width: 0, height: 0)
+        .hidden()
     }
 }
 
