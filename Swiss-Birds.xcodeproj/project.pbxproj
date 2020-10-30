@@ -17,6 +17,7 @@
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		172DF95D24AE6A12009F430C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 172DF95C24AE6A12009F430C /* Settings.bundle */; };
 		1746B50124DE0054001E7357 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1746B50024DE0054001E7357 /* AlertItem.swift */; };
+		174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174D696C254C5C09000CCCC8 /* Localizable.strings */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
 		176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
@@ -30,8 +31,6 @@
 		17B1B43D2546C0E200B422B6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B43C2546C0E200B422B6 /* SwiftUI.framework */; };
 		17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */; };
 		17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B1B4422546C0E600B422B6 /* Assets.xcassets */; };
-		17B1B4452546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */; };
-		17B1B4462546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */; };
 		17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		17B1B4522546C3E300B422B6 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
@@ -115,6 +114,10 @@
 		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		172DF95C24AE6A12009F430C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1746B50024DE0054001E7357 /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
+		174D696B254C5C09000CCCC8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		174D6971254C5C0C000CCCC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		174D6976254C5E4E000CCCC8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		174D6977254C5E4F000CCCC8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
@@ -133,7 +136,6 @@
 		17B1B43A2546C0E200B422B6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		17B1B43C2546C0E200B422B6 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDayWidget.swift; sourceTree = "<group>"; };
-		17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = BirdOfTheDayWidget.intentdefinition; sourceTree = "<group>"; };
 		17B1B4422546C0E600B422B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17B1B4442546C0E600B422B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B1B4582546C41D00B422B6 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
@@ -228,8 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */,
+				174D696C254C5C09000CCCC8 /* Localizable.strings */,
 				17B1B46C25470CC100B422B6 /* DataFetcher.swift */,
-				17B1B4412546C0E200B422B6 /* BirdOfTheDayWidget.intentdefinition */,
 				17B1B4422546C0E600B422B6 /* Assets.xcassets */,
 				17B1B4442546C0E600B422B6 /* Info.plist */,
 			);
@@ -504,6 +506,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */,
+				174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +549,6 @@
 				17B1B4632546C44900B422B6 /* Extensions.swift in Sources */,
 				17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */,
 				17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */,
-				17B1B4452546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */,
 				17B1B45E2546C42E00B422B6 /* Languages.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,7 +567,6 @@
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
-				17B1B4462546C0E600B422B6 /* BirdOfTheDayWidget.intentdefinition in Sources */,
 				175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */,
 				17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */,
 				1715B36724372FD800413FBF /* SearchField.swift in Sources */,
@@ -636,6 +637,17 @@
 				171BE4CC24B4A66200CDF93D /* it */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		174D696C254C5C09000CCCC8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				174D696B254C5C09000CCCC8 /* de */,
+				174D6971254C5C0C000CCCC8 /* en */,
+				174D6976254C5E4E000CCCC8 /* fr */,
+				174D6977254C5E4F000CCCC8 /* it */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		17B0F423238F1F6200A2F989 /* Localizable.strings */ = {

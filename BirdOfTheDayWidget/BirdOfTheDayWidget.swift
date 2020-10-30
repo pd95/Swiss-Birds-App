@@ -11,7 +11,7 @@ import SwiftUI
 import Intents
 
 
-struct Provider: IntentTimelineProvider {
+struct Provider: TimelineProvider {
 
     static let placeholderImage = UIImage(named: "Placeholder")!
 
@@ -23,21 +23,21 @@ struct Provider: IntentTimelineProvider {
         let image = Self.placeholderImage
         let date = Date()
 
-        return SimpleEntry(speciesID: speciesID, name: name, image: image, date: date, configuration: ConfigurationIntent())
+        return SimpleEntry(speciesID: speciesID, name: name, image: image, date: date)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let speciesID = -1
         let name = "Blaumeise"
         let image = Self.placeholderImage
         let reloadDate = Date()
-        let entry = SimpleEntry(speciesID: speciesID, name: name, image: image, date: reloadDate, configuration: configuration)
+        let entry = SimpleEntry(speciesID: speciesID, name: name, image: image, date: reloadDate)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         dataFetcher.getBirdOfTheDay { (speciesID, name, image, reloadDate) in
-            let entry = SimpleEntry(speciesID: speciesID, name: name, image: image, date: reloadDate, configuration: configuration)
+            let entry = SimpleEntry(speciesID: speciesID, name: name, image: image, date: reloadDate)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
             completion(timeline)
         }
@@ -49,17 +49,48 @@ struct SimpleEntry: TimelineEntry {
     let name: String
     let image: UIImage
     let date: Date
-    let configuration: ConfigurationIntent
+
+    static let example = SimpleEntry(speciesID: 3800, name: "Blaumeise", image: Provider.placeholderImage, date: Date())
+    static let exampleReal1 = SimpleEntry(speciesID: 3800, name: "Blaumeise", image: UIImage(named: "RealPlaceholder")!, date: Date())
+    static let exampleReal2 = SimpleEntry(speciesID: 710, name: "Common Shelduck", image: UIImage(named: "RealPlaceholder2")!, date: Date())
 }
 
 struct BirdOfTheDayWidgetEntryView : View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var family: WidgetFamily
 
     var body: some View {
-        Image(uiImage: entry.image)
-            .renderingMode(.original)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
+        VStack(spacing: 0) {
+            if family != .systemMedium {
+                Text("Bird of the Day")
+                    .font(family == .systemSmall ? .headline : .title)
+                    .bold()
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, family == .systemSmall ? 4 : 8)
+            }
+
+            Color.clear
+                .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
+                .background(
+                    Image(uiImage: entry.image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                )
+
+            Text(entry.name)
+                .font(family == .systemLarge ? .title : Font.title3.bold())
+                .padding(.horizontal, 8)
+                .padding(.top, family == .systemSmall ? 4 : 0)
+                .padding(.bottom, 4)
+        }
+        .foregroundColor(.white)
+        .lineLimit(1)
+        .minimumScaleFactor(0.7)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            Image(uiImage: entry.image)
+                .resizable(capInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), resizingMode: .tile)
+        )
     }
 }
 
@@ -68,17 +99,27 @@ struct BirdOfTheDayWidget: Widget {
     let kind: String = "BirdOfTheDayWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             BirdOfTheDayWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Bird Of The Day Widget")
+        .configurationDisplayName("Bird of the Day")
         .description("This widget shows the curated bird of the day.")
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
 struct BirdOfTheDayWidget_Previews: PreviewProvider {
+
     static var previews: some View {
-        BirdOfTheDayWidgetEntryView(entry: SimpleEntry(speciesID: -1, name: "Blaumeise", image: Provider.placeholderImage, date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        let example = SimpleEntry.example
+
+        return Group {
+            BirdOfTheDayWidgetEntryView(entry: example)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            BirdOfTheDayWidgetEntryView(entry: example)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            BirdOfTheDayWidgetEntryView(entry: example)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+        }
     }
 }
