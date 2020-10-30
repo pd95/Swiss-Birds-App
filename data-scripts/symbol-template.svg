@@ -3,8 +3,8 @@
 <!DOCTYPE svg
 PUBLIC "-//W3C//DTD SVG 1.1//EN"
        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" 
-    xmlns="http://www.w3.org/2000/svg" 
+<svg version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink" width="3300" height="2200">
     <!--glyph: "uni100000.medium", point size: 100.000000, font version: "Version 15.0d7e11", template writer version: "5"-->
     <g id="Notes">
@@ -78,7 +78,9 @@ PUBLIC "-//W3C//DTD SVG 1.1//EN"
     </g>
     <g id="Symbols">
         <g id="Regular-M" transform="matrix(1 0 0 1 1391.3 1126)">
-            <g transform="matrix(4.5 0 0 4.5 9 -85)">
+            <!-- <g id="Regular-M" transform="translate(1400 1040)"> -->
+            <g transform="matrix(4.5 0 0 4.5 0 -95)" fill="none">
+                <rect width="26" height = "26" style="fill:none;stroke:#0000ff;stroke-width:0;" />
                 <!-- HERE IS YOUR PATH -->
             </g>
         </g>
