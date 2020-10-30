@@ -282,9 +282,7 @@ class AppState : ObservableObject {
            Calendar.current.startOfDay(for: Date()) <= lastCheckDate {
             os_log("  already checked on %{Public}@", lastCheckDate.description)
             if showAlways {
-                withAnimation {
-                    showBirdOfTheDay = true
-                }
+                self.showBirdOfTheDayNow()
             }
             return
         }
@@ -308,8 +306,8 @@ class AppState : ObservableObject {
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
                         let isNewBirdOfTheDay = (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
-                        withAnimation {
-                            self?.showBirdOfTheDay = showAlways || isNewBirdOfTheDay
+                        if showAlways || isNewBirdOfTheDay {
+                            self?.showBirdOfTheDayNow()
                         }
                         if isNewBirdOfTheDay {
                             self?.refreshWidget()
@@ -374,6 +372,17 @@ class AppState : ObservableObject {
         }
 
         selectedNavigationLink = .sortOptions
+    }
+
+    func showBirdOfTheDayNow() {
+        if isEditingSearchField {
+            UIApplication.shared.endEditing()
+        }
+
+        withAnimation {
+            selectedNavigationLink = nil
+            showBirdOfTheDay = true
+        }
     }
 
     /// Returns the number of all species which would currently match the active filters
