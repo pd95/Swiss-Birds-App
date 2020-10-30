@@ -25,12 +25,10 @@ struct BirdOfTheDay: View {
                 state.showBird(species.speciesId)
             }) {
                 VStack {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(maxWidth: 320, maxHeight: 220)
+                    Color.clear
+                        .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
                         .background(
                             Image(uiImage: image)
-                                .renderingMode(.original)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         )
@@ -79,8 +77,18 @@ struct BirdOfTheDay: View {
 }
 
 struct BirdOfTheDay_Previews: PreviewProvider {
+    static var state = AppState.shared
+
     static var previews: some View {
-        BirdOfTheDay(isPresented: .constant(true), image: UIImage(named: "Logo")!, species: Species.species(for: 3640)!)
-            .environmentObject(AppState.shared)
+        if let species = Species.species(for: 3640) {
+            BirdOfTheDay(isPresented: .constant(true), image: UIImage(named: "Logo")!, species: species)
+                .environmentObject(state)
+        }
+        else {
+            ActivityIndicatorView()
+                .onAppear() {
+                    state.checkBirdOfTheDay(showAlways: true)
+                }
+        }
     }
 }

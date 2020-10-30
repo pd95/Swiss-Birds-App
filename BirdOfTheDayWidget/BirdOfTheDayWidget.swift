@@ -89,7 +89,7 @@ struct BirdOfTheDayWidgetEntryView : View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
             Image(uiImage: entry.image)
-                .resizable(capInsets: EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0), resizingMode: .tile)
+                .resizable(resizingMode: .tile)
         )
     }
 }
