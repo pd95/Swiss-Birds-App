@@ -25,7 +25,6 @@ struct ContentView: View {
                     BirdList()
                         .edgesIgnoringSafeArea(.bottom)
                         .navigationBarTitle(Text("Vögel der Schweiz"))
-                        .navigationBarItems(trailing: filterButton)
                         .navigationBarItems(leading: sortButton, trailing: filterButton)
                         .zIndex(2)
                 }
