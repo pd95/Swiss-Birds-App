@@ -122,7 +122,7 @@ struct BirdDetail: View {
                 BirdImageView(image: imageDetails.image,
                               author: imageDetails.author,
                               description: imageDetails.description)
-                    .frame(maxWidth: imageDetails.image == nil ? .infinity : imageDetails.image!.size.width / 1.5)
+                    .frame(maxWidth: imageDetails.image == nil ? 700 / 1.5 : imageDetails.image!.size.width / 1.5)
                     .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
             }
         }
@@ -335,7 +335,7 @@ struct CharacteristicView: View {
                     Spacer(minLength: 30.0)
                 }
                 if !characteristic.symbol.isEmpty {
-                    SymbolView(symbolName: characteristic.symbol, pointSize: 24)
+                    SymbolView(symbolName: characteristic.symbol, pointSize: 20)
                         .accessibility(hidden: true)
                 }
                 Text(characteristic.text)

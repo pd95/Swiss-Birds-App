@@ -12,8 +12,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var state : AppState
 
-    @State private var isPortrait : Bool = true
-
     var body: some View {
         ZStack {
             NavigationView {
@@ -27,10 +25,11 @@ struct ContentView: View {
                         .navigationBarTitle(Text("Vögel der Schweiz"))
                         .navigationBarItems(leading: sortButton, trailing: filterButton)
                         .zIndex(2)
+
+                    OnboardingView()
                 }
             }
             .navigationViewStyle(DoubleColumnNavigationViewStyle())
-            .padding([.trailing], isPortrait ? 1 : 0)  // This is an ugly hack: by adding non-zero padding we force the side-by-side view
             .accessibilityElement(children: state.showBirdOfTheDay ? .ignore : .contain)
             .accessibility(hidden: state.showBirdOfTheDay)
 
@@ -81,17 +80,6 @@ struct ContentView: View {
                 state.checkBirdOfTheDay()
             }
         })
-        .onReceive(
-            NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification, object: nil)) { notification in
-                guard let device = notification.object as? UIDevice else {
-                    return
-                }
-                isPortrait = device.orientation == .unknown ||
-                    device.orientation.isPortrait && (
-                        device.orientation != .faceUp ||
-                        device.orientation != .faceDown
-                    )
-        }
     }
 
     var sortButton: some View {
