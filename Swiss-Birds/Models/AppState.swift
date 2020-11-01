@@ -74,8 +74,8 @@ class AppState : ObservableObject {
     @Published var sortOptions = SortOptions(column: .speciesName)
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
-    @Published var groupedBirds = [String: [Species]]()
-    @Published var groups = [String]()
+    @Published var groupedBirds = [SectionGroup: [Species]]()
+    @Published var groups = [SectionGroup]()
     var listID = UUID()
 
     @Published var alertItem: AlertItem?
@@ -203,7 +203,7 @@ class AppState : ObservableObject {
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
             .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
-            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> ([String:[Species]], [String]) in
+            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> ([SectionGroup:[Species]], [SectionGroup]) in
                 guard let self = self else { return ([:], []) }
 
                 os_log("start filtering bird list: %ld", allSpecies.count)
@@ -213,8 +213,8 @@ class AppState : ObservableObject {
                     .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 os_log("filtering bird list done: %ld", filtered.count)
 
-                let groupedBirds: [String:[Species]]
-                let sortedGroups: [String]
+                let groupedBirds: [SectionGroup:[Species]]
+                let sortedGroups: [SectionGroup]
                 let groupOption = sortOptions.column
                 os_log("group according to %{Public}@", groupOption.rawValue)
                 if case .filterType(let type) = groupOption {
@@ -225,18 +225,19 @@ class AppState : ObservableObject {
                         }
                     )
                     let filterGroups = groupedBirdsByFilter.keys
-                    sortedGroups = filterGroups.sorted().map(\.name)
-                    let uniqueKeysWithValues = groupedBirdsByFilter.map { entry -> (key: String, value: [Species]) in
+                    sortedGroups = filterGroups.sorted().map { SectionGroup(id: $0.uniqueFilterId, name: $0.name) }
+                    let uniqueKeysWithValues = groupedBirdsByFilter.map { entry -> (key: SectionGroup, value: [Species]) in
                         let (filter, value) = entry
-                        return (key: filter.name, value: value)
+                        return (key: SectionGroup(id: filter.uniqueFilterId, name: filter.name), value: value)
                     }
                     groupedBirds = Dictionary(uniqueKeysWithValues: uniqueKeysWithValues)
                 }
                 else {
                     groupedBirds = Dictionary(
                         grouping: filtered,
-                        by: { (species: Species) -> String in
-                            String(species.name.first ?? "#")
+                        by: { (species: Species) -> SectionGroup in
+                            let name = String(species.name.first ?? "#")
+                            return SectionGroup(id: name, name: name)
                         }
                     )
                     sortedGroups = groupedBirds.keys.sorted()

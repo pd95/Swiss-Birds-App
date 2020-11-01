@@ -68,7 +68,8 @@ class Swiss_BirdsUITests: XCTestCase {
 
     enum MyUIElements: String {
         case masterNavigationBar, detailNavigationBar
-        case filterButton = "filterButton", noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton", showBirdOfTheDayButton = "showBirdOfTheDay", dismissBirdOfTheDayButton = "dismissBirdOfTheDay"
+        case filterButton, noFilteringButton = "noFiltering", onlyCommonButton = "onlyCommon", playVoiceButton = "playVoiceButton", showBirdOfTheDayButton = "showBirdOfTheDay", dismissBirdOfTheDayButton = "dismissBirdOfTheDay"
+        case sortButton, sortSpeciesName = "speciesName", sortBirdGroup = "filtervogelgruppe", sortCommon = "filterhaeufigeart", sortRedList = "filterrotelistech", sortEvolution = "filterentwicklungatlas"
         case searchTextField = "searchText"
         case searchTextClearButton, searchTextCancelButton
         case birdDetailViewScrollView
@@ -80,7 +81,8 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().navigationBars.firstMatch
                 case .detailNavigationBar:
                     return XCUIApplication().navigationBars.element(boundBy: XCUIApplication().windows.firstMatch.horizontalSizeClass == .regular ? 1 : 0)
-                case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton, .showBirdOfTheDayButton, .dismissBirdOfTheDayButton:
+                case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton, .showBirdOfTheDayButton, .dismissBirdOfTheDayButton,
+                     .sortButton, .sortSpeciesName, .sortBirdGroup, .sortCommon, .sortRedList, .sortEvolution:
                     return XCUIApplication().buttons[self.rawValue]
                 case .searchTextField:
                     return XCUIApplication().otherElements["searchBar"].searchFields.allElementsBoundByIndex.last!
@@ -135,6 +137,62 @@ class Swiss_BirdsUITests: XCTestCase {
         scrollViewsQuery.swipeUp()
     }
     
+    func testSortOptionsNavigation() {
+        // Navigate to Sort Options screen
+        let sortButton = MyUIElements.sortButton.element
+        _ = sortButton.waitForExistence(timeout: wait4existenceTimeout)
+        sortButton.tap()
+
+        // Choose "Bird groups"
+        MyUIElements.sortBirdGroup.element.tap()
+
+        // Tap "Back"
+        if app.windows.firstMatch.horizontalSizeClass == .compact {
+            MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
+        }
+
+        let expectedSectionIdentifier: String
+        let expectedBirdRowIdentifier: String
+        switch language {
+            case "de":
+                expectedBirdRowIdentifier = "birdRow_2895"
+                expectedSectionIdentifier = "section_filtervogelgruppe-1"
+            case "en", "fr":
+                expectedBirdRowIdentifier = "birdRow_4910"
+                expectedSectionIdentifier = "section_filtervogelgruppe-7"
+            case "it":
+                expectedBirdRowIdentifier = "birdRow_440"
+                expectedSectionIdentifier = "section_filtervogelgruppe-41"
+            default:
+                expectedBirdRowIdentifier = "unexpected_language"
+                expectedSectionIdentifier = "unexpected_language"
+        }
+
+        _ = app.tables.staticTexts.firstMatch.waitForExistence(timeout: wait4existenceTimeout)
+
+        // Verify first visible section is the expected one
+        XCTAssertEqual(app.tables.staticTexts.firstMatch.identifier, expectedSectionIdentifier, "Grouped by species group should bring expected section to top of table")
+
+        // Verify first visible bird is the expected one
+        XCTAssertEqual(app.tables.buttons.firstMatch.identifier, expectedBirdRowIdentifier, "Grouped by species group should bring expected bird row to first row")
+
+
+        // Navigate to Sort Options screen
+        _ = sortButton.waitForExistence(timeout: wait4existenceTimeout)
+        sortButton.tap()
+
+        // Choose "alphabetic"
+        MyUIElements.sortSpeciesName.element.tap()
+
+        // Tap "Back"
+        if app.windows.firstMatch.horizontalSizeClass == .compact {
+            MyUIElements.masterNavigationBar.element.buttons.firstMatch.tap()
+        }
+
+        // Verify first visible bird has an "A" in its label
+        XCTAssert(app.tables.buttons.firstMatch.label.hasPrefix("A"), "Sorted alphabetically should bring 'A' to first row")
+    }
+
     func testTestFullNavigation() {
         let nav = MyUIElements.masterNavigationBar.element
         _ = nav.waitForExistence(timeout: wait4existenceTimeout)

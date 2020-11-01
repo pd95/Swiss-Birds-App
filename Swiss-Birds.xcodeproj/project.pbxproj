@@ -54,6 +54,7 @@
 		17E9BB0824D2111B00A87DF4 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */; };
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
 		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
+		17EE09C0254F34BC00C600A7 /* SectionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EE09BF254F34BC00C600A7 /* SectionGroup.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -169,6 +170,7 @@
 		17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Extensions.swift"; sourceTree = "<group>"; };
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
 		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
+		17EE09BF254F34BC00C600A7 /* SectionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionGroup.swift; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				17206830236B5A920008905F /* Filter.swift */,
 				177965802453195D00A2A1B2 /* ManagedFilterList.swift */,
 				17E6B35825497F9900691729 /* SortOptions.swift */,
+				17EE09BF254F34BC00C600A7 /* SectionGroup.swift */,
 				17FB3B88236B93650059D268 /* Species.swift */,
 				17D1A504236CDA8500E8588C /* Data.swift */,
 				17B1B4582546C41D00B422B6 /* Languages.swift */,
@@ -564,6 +567,7 @@
 				17E6B34F25497DE500691729 /* SelectSortOptions.swift in Sources */,
 				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
+				17EE09C0254F34BC00C600A7 /* SectionGroup.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,

@@ -23,6 +23,7 @@ struct SelectSortOptions: View {
                                 Text(LocalizedStringKey(column.description))
                             }
                         }
+                        .accessibility(identifier: column.rawValue)
                     }
                 }
             }

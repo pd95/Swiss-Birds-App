@@ -60,16 +60,17 @@ struct BirdList: View {
         }
     }
 
-    func sectionHeader(for key: String) -> some View {
+    func sectionHeader(for group: SectionGroup) -> some View {
         Group {
             if #available(iOS 14.0, *) {
-                Text(LocalizedStringKey(key))
+                Text(LocalizedStringKey(group.name))
                     .textCase(nil)
-
-            } else {
-                Text(LocalizedStringKey(key))
+            }
+            else {
+                Text(LocalizedStringKey(group.name))
             }
         }
+        .accessibility(identifier: "section_\(group.id)")
     }
 
     // Here we create the dynamically navigation link (filter list or restored bird selection)
