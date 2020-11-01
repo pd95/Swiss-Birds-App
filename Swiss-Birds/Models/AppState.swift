@@ -307,6 +307,11 @@ class AppState : ObservableObject {
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
                         let isNewBirdOfTheDay = (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
+
+                        // Make sure we fetch the image
+                        if isNewBirdOfTheDay {
+                            self?.birdOfTheDayImage = nil
+                        }
                         if showAlways || isNewBirdOfTheDay {
                             self?.showBirdOfTheDayNow()
                         }
