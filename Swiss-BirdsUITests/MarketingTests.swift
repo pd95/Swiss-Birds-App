@@ -101,7 +101,7 @@ class MarketingTests: XCTestCase {
         XCTContext.runActivity(named: "Show detail view and scroll down") { (_) in
             app.tables.buttons.element(boundBy: selectIndex).tap()
             let birdImage = app.otherElements["bird_image_1"]
-            _ = birdImage.waitForExistence(timeout: 4.0)
+            _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
             takeScreenShot(app, name: "03_Detail_Top")
 
             let voiceButton = app.buttons["playVoiceButton"]
@@ -146,6 +146,23 @@ class MarketingTests: XCTestCase {
             if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }
+
+            // Navigate to Sort Options screen
+            let sortButton = app.buttons["sortButton"]
+            _ = sortButton.waitForExistence(timeout: wait4existenceTimeout)
+            sortButton.tap()
+
+            // Choose "Bird groups"
+            app.buttons["filtervogelgruppe"].tap()
+
+            takeScreenShot(app, name: "06_Sortoptions")
+
+            // Tap "Back"
+            if app.windows.firstMatch.horizontalSizeClass == .compact {
+                app.navigationBars.buttons.firstMatch.tap()
+            }
+
+            takeScreenShot(app, name: "07_GroupedBirdList")
         }
 
     }
