@@ -16,7 +16,7 @@ struct BirdRow: View {
     @State var image: UIImage = UIImage(named: "placeholder-headshot")!
     
     func hasEntwicklungsAtlasSymbol() -> Bool {
-        return bird.filterSymbolName(.entwicklungatlas).count > 0
+        return !bird.filterSymbolName(.entwicklungatlas).isEmpty
     }
 
     var dynamicImageSize: CGFloat {
@@ -37,12 +37,14 @@ struct BirdRow: View {
                 .foregroundColor(.primary)
             Spacer()
             if !sizeCategory.isAccessibilityCategory {
-                if hasEntwicklungsAtlasSymbol() {
+                if state.sortOptions.column != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol()  {
                     SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
                         .accessibility(hidden: true)
                 }
-                SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
-                    .accessibility(hidden: true)
+                if state.sortOptions.column != .filterType(.vogelgruppe) {
+                    SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
+                        .accessibility(hidden: true)
+                }
             }
         }
         .accessibilityElement(children: .combine)

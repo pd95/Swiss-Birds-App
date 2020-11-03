@@ -61,7 +61,11 @@ struct BirdList: View {
     }
 
     func sectionHeader(for group: SectionGroup) -> some View {
-        Group {
+        HStack {
+            if group.id.hasPrefix("filter") {
+                SymbolView(symbolName: group.id, pointSize: 24)
+                    .padding(4)
+            }
             if #available(iOS 14.0, *) {
                 Text(LocalizedStringKey(group.name))
                     .textCase(nil)

@@ -36,12 +36,11 @@ struct SymbolView: View {
     }
 
     var body: some View {
-        Image(uiImage:
-            UIImage(named: symbolName, in: nil, with: symbolConfiguration)
-                ?? UIImage(systemName: "questionmark.circle", withConfiguration: symbolConfiguration)!
-        )
-            .renderingMode(Image.TemplateRenderingMode.template)
-            .foregroundColor(color ?? symbolColors[symbolName] ?? .primary)
+        if let image = UIImage(named: symbolName, in: nil, with: symbolConfiguration) {
+            Image(uiImage: image)
+                .renderingMode(Image.TemplateRenderingMode.template)
+                .foregroundColor(color ?? symbolColors[symbolName] ?? .primary)
+        }
     }
 }
 
