@@ -30,6 +30,7 @@ struct BirdOfTheDay: View {
                         .background(
                             Image(uiImage: image)
                                 .resizable()
+                                .renderingMode(.original)
                                 .aspectRatio(contentMode: .fill)
                         )
                         .clipShape(RoundedRectangle(cornerRadius: 8))
