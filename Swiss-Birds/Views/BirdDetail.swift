@@ -141,9 +141,34 @@ struct BirdDetail: View {
     }
 
     private func shareDetails() {
-        // FIXME Due to API change, the URI is not valid anymore...
-        // sharing only vogelwarte.ch
-        shareItem = ShareSheet.Item(subject: model.details?.artname ?? "", activityItems: [VdsAPI.base.appendingPathComponent(model.details?.uri ?? "")])
+        guard let artname = model.details?.artname else { return }
+
+        // Transform species name into URL compatible way: get rid of cases, diacritics and replace spaces with dashes
+        let name = artname
+            .lowercased()
+            .replacingOccurrences(of: "ä", with: "ae")
+            .replacingOccurrences(of: "ö", with: "oe")
+            .replacingOccurrences(of: "ü", with: "ue")
+            .folding(options: [.diacriticInsensitive], locale: nil)
+            .replacingOccurrences(of: " ", with: "-")
+
+        // Language dependent entry path
+        let path: String
+        switch language {
+            case "de":
+                path = "de/voegel/voegel-der-schweiz/\(name)"
+            case "fr":
+                path = "fr/oiseaux/les-oiseaux-de-suisse/\(name)"
+            case "it":
+                path = "it/uccelli/uccelli-della-svizzera/\(name)"
+            case "en":
+                path = "en/birds/birds-of-switzerland/\(name)"
+            default:
+                path = language
+        }
+
+        let url = VdsAPI.base.appendingPathComponent(path)
+        shareItem = ShareSheet.Item(subject: artname, activityItems: [url])
     }
 
     private func playVoice() {
