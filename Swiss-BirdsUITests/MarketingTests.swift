@@ -135,6 +135,7 @@ class MarketingTests: XCTestCase {
             filterButton.tap()
 
             let commonBirdsButton = app.tables.buttons["onlyCommon"]
+            _ = commonBirdsButton.waitForExistence(timeout: wait4existenceTimeout)
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
 
@@ -153,7 +154,9 @@ class MarketingTests: XCTestCase {
             sortButton.tap()
 
             // Choose "Bird groups"
-            app.buttons["filtervogelgruppe"].tap()
+            let birdGroupsButton = app.buttons["filtervogelgruppe"]
+            _ = birdGroupsButton.waitForExistence(timeout: wait4existenceTimeout)
+            birdGroupsButton.tap()
 
             takeScreenShot(app, name: "06_Sortoptions")
 
