@@ -99,4 +99,4 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
 
 ### Bildschirmaufzeichnungen
 
-<img src="assets/images/iPhoneSE_Latest_State_de.gif" alt="Swiss Birds App" width="49%">
+<img src="../assets/images/iPhoneSE_Latest_State_de.gif" alt="Swiss Birds App" width="49%">
