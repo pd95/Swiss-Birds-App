@@ -31,8 +31,8 @@ class Swiss_BirdsUITests: XCTestCase {
         // Rotate iPad
         if UIDevice.current.userInterfaceIdiom == .pad {
             // Change orientation twice to ensure double column navigation bar works
-            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
             XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
+            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
         }
 
         // Check if a specific language has been passed on for testing

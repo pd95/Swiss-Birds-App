@@ -14,8 +14,8 @@ class MarketingTests: XCTestCase {
     private var language = "de"
     private let wait4existenceTimeout: TimeInterval = 4
 
-    func takeScreenShot(_ element: XCUIElement, name: String = "Screenshot") {
-        let screenshot = element.screenshot()
+    func takeScreenShot(name: String = "Screenshot") {
+        let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = name
         attachment.lifetime = .keepAlways
@@ -37,8 +37,8 @@ class MarketingTests: XCTestCase {
         // Rotate iPad
         if UIDevice.current.userInterfaceIdiom == .pad {
             // Change orientation twice to ensure double column navigation bar works
-            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
-            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
+            XCUIDevice.shared.orientation = .portrait
+            XCUIDevice.shared.orientation = .landscapeLeft
         }
 
         // Check if a specific language has been passed on for testing
@@ -74,14 +74,14 @@ class MarketingTests: XCTestCase {
         XCTContext.runActivity(named: "Bird of the day is shown") { (_) in
             let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
             XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
-            takeScreenShot(app, name: "00_BirdOfTheDay")
+            takeScreenShot(name: "00_BirdOfTheDay")
             dismissButton.tap()
         }
 
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
-            takeScreenShot(app, name: "01_Main")
+            takeScreenShot(name: "01_Main")
         }
         
         // Search
@@ -93,7 +93,7 @@ class MarketingTests: XCTestCase {
             let searchText = app.searchFields.allElementsBoundByIndex.last!
             searchText.tap()
             typeText(search)
-            takeScreenShot(app, name: "02_Search")
+            takeScreenShot(name: "02_Search")
             searchText.typeText("\n")
         }
 
@@ -102,7 +102,7 @@ class MarketingTests: XCTestCase {
             app.tables.buttons.element(boundBy: selectIndex).tap()
             let birdImage = app.otherElements["bird_image_1"]
             _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
-            takeScreenShot(app, name: "03_Detail_Top")
+            takeScreenShot(name: "03_Detail_Top")
 
             let voiceButton = app.buttons["playVoiceButton"]
             voiceButton.tap()
@@ -111,8 +111,12 @@ class MarketingTests: XCTestCase {
 
             let scrollViewsQuery = app.scrollViews
             scrollViewsQuery.otherElements["bird_image_2"].swipeUp()
-            scrollViewsQuery.staticTexts["header_Eigenschaften"].swipeUp()
-            takeScreenShot(app, name: "04_Detail_Middle")
+            var swipeElement = scrollViewsQuery.staticTexts["header_Eigenschaften"]
+            if swipeElement.exists && !swipeElement.isHittable {
+                swipeElement = scrollViewsQuery.staticTexts["text_Nahrung"]
+            }
+            swipeElement.swipeUp()
+            takeScreenShot(name: "04_Detail_Middle")
         }
 
         XCTContext.runActivity(named: "Cancel search and enter filter criteria") { (_) in
@@ -139,7 +143,7 @@ class MarketingTests: XCTestCase {
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
 
-            takeScreenShot(app, name: "05_Filtercriteria")
+            takeScreenShot(name: "05_Filtercriteria")
         }
 
         XCTContext.runActivity(named: "Go back to main view") { (_) in
@@ -158,14 +162,14 @@ class MarketingTests: XCTestCase {
             _ = birdGroupsButton.waitForExistence(timeout: wait4existenceTimeout)
             birdGroupsButton.tap()
 
-            takeScreenShot(app, name: "06_Sortoptions")
+            takeScreenShot(name: "06_Sortoptions")
 
             // Tap "Back"
             if app.windows.firstMatch.horizontalSizeClass == .compact {
                 app.navigationBars.buttons.firstMatch.tap()
             }
 
-            takeScreenShot(app, name: "07_GroupedBirdList")
+            takeScreenShot(name: "07_GroupedBirdList")
         }
 
     }
