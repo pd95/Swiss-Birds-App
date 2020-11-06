@@ -67,7 +67,7 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
       <th>Detail (oben)</th>
       <th>Detail (mitte)</th>
       <th>Filter&shy;kriterien</th>
-      <th>Sortieroptionen</th>
+      <th>Sortier&shy;optionen</th>
       <th>Nach Vogelart</th>
     </tr>
   </thead>

@@ -4,6 +4,10 @@
 @import "{{ site.theme }}";
 
 table.screenshots {
+    width: 150%;
+    position: relative;
+    left: -25%;
+
     td { 
         padding: 1px
     }
