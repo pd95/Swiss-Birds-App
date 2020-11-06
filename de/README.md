@@ -93,4 +93,4 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
 
 ### Bildschirmaufzeichnungen
 
-<img src="/Swiss-Birds-App/assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Vogelarten Suche" width="49%"><img src="/Swiss-Birds-App/assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filterkriterien" width="49%">
+<img src="assets/images/iPhoneSE_Latest_State_de.gif" alt="Swiss Birds App" width="49%">

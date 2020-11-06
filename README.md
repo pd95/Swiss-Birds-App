@@ -93,4 +93,4 @@ You can read the privacy policy [here](privacy.md).
 
 ### Screencasts
 
-<img src="assets/images/iPhoneX_01_Bird_Search_de.gif" alt="iPhone Bird Search" width="49%"><img src="assets/images/iPhoneX_02_Filter_Search_de.gif" alt="iPhone Filter Search" width="49%">
+<img src="assets/images/iPhoneSE_Latest_State_de.gif" alt="Swiss Birds App" width="49%">
