@@ -67,6 +67,8 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
       <th>Detail (oben)</th>
       <th>Detail (mitte)</th>
       <th>Filter&shy;kriterien</th>
+      <th>Sortieroptionen</th>
+      <th>Nach Vogelart</th>
     </tr>
   </thead>
   <tbody>
@@ -78,6 +80,8 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_03_Detail_Top.jpeg" width="100%" alt="Detail (Oben)"></a></td>
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_04_Detail_Middle.jpeg" width="100%" alt="Detail (Mitte)"></a></td>
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_05_Filtercriteria.jpeg" width="100%" alt="Filterkriterien"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/German_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_06_Sortoptions.jpeg" width="100%" alt="Sortieroptionen"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/German_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/German_07_GroupedBirdList.jpeg" width="100%" alt="Nach Vogelart"></a></td>
     </tr>
     <tr>
       <td style="vertical-align:top; padding: 10px">iPad</td>
@@ -87,6 +91,8 @@ Lesen Sie [hier](privacy.md) die Datenschutzerklärung.
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/German_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_03_Detail_Top.jpeg" width="100%" alt="Detail (Oben)"></a></td>
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/German_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_04_Detail_Middle.jpeg" width="100%" alt="Detail (Mitte)"></a></td>
       <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/German_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_05_Filtercriteria.jpeg" width="100%" alt="Filterkriterien"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/German_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_06_Sortoptions.jpeg" width="100%" alt="Sortieroptionen"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/German_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/German_07_GroupedBirdList.jpeg" width="100%" alt="Nach Vogelart"></a></td>
     </tr>
   </tbody>
 </table>
