@@ -135,6 +135,7 @@ class MarketingTests: XCTestCase {
 
             // Enter filter criteria
             let filterButton = nav.buttons["filterButton"]
+            _ = filterButton.waitForExistence(timeout: wait4existenceTimeout)
             XCTAssert(filterButton.exists, "filter button exists")
             filterButton.tap()
 
