@@ -40,6 +40,7 @@ struct SymbolView: View {
             Image(uiImage: image)
                 .renderingMode(Image.TemplateRenderingMode.template)
                 .foregroundColor(color ?? symbolColors[symbolName] ?? .primary)
+                .alignmentGuide(VerticalAlignment.firstTextBaseline) { $0[VerticalAlignment.center] + pointSize * 0.375 }
         }
     }
 }
@@ -49,18 +50,24 @@ struct SymbolView_Previews: PreviewProvider {
         Group {
             HStack {
                 SymbolView(symbolName: "filterentwicklungatlas-1")
+                Text("L Align")
                 SymbolView(symbolName: "filterlebensraum-9")
+                Text("Byjq")
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
+            .font(.title)
             .padding()
-            .previewLayout(.fixed(width: 140, height: 70))
+            .previewLayout(.fixed(width: 300, height: 70))
 
             HStack {
                 SymbolView(symbolName: "filterentwicklungatlas-1")
+                Text("L Align")
                 SymbolView(symbolName: "filterlebensraum-9")
+                Text("Byjq")
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
-            .previewLayout(.fixed(width: 140, height: 70))
+            .font(.title)
+            .previewLayout(.fixed(width: 300, height: 70))
             .padding()
             .background(Color(.systemBackground))
             .environment(\.colorScheme, .dark)

@@ -231,7 +231,7 @@ struct BirdDetail_Previews: PreviewProvider {
         AppState.shared.allSpecies[14]
     }()
     static var previews: some View {
-        NavigationView {
+        AppState_PreviewWrapper() {
             BirdDetailContainer(bird: bird)
         }
         .environmentObject(appState)
