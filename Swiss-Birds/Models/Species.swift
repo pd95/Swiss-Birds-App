@@ -91,6 +91,7 @@ func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {
                 .haeufigeart : [Filter.Id(item.filterhaeufigeart)!],
                 .roteListe : (item.filterrotelistech.count > 0 ? [Filter.Id(item.filterrotelistech)!]:[]),
                 .entwicklungatlas : (item.filterentwicklungatlas?.count ?? 0 > 0 ? [Filter.Id(item.filterentwicklungatlas!)!]:[]),
+                .vogelstimme : [Filter.Id(item.voice ?? "0")!],
         ])
         speciesMap[speciesID] = species
     }

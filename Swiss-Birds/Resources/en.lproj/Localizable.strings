@@ -10,6 +10,7 @@
 "Filterkriterien (%lld)" = "Filtering criteria (%lld species)";
 "Keine Filter" = "No filtering";
 "Nur häufige Vögel" = "Only common species";
+"Mit Vogelstimmdaten" = "Bird call data available";
 "filterhaeufigeart" = "Commonness";
 "filterlebensraum" = "Habitat";
 "filtervogelgruppe" = "Bird Group";

@@ -15,6 +15,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     case roteListe = "filterrotelistech"
     case entwicklungatlas = "filterentwicklungatlas"
     case vogelgruppe = "filtervogelgruppe"
+    case vogelstimme = "voice"
     case undefined
 
     var shouldSortForDisplay : Bool {
@@ -76,6 +77,10 @@ struct Filter: Identifiable, Equatable, Hashable, Comparable {
 
     static var commonBirds : Filter = {
         allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
+    }()
+
+    static var hasVoice : Filter = {
+        allFiltersGrouped[.vogelstimme]!.filter{ $0.filterId == 1 }.first!
     }()
 
     // MARK: Comparable

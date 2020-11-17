@@ -10,6 +10,7 @@
 "Filterkriterien (%lld)" = "Filterkriterien (%lld Arten)";
 "Keine Filter" = "Keine Filter";
 "Nur häufige Vögel" = "Nur häufige Arten";
+"Mit Vogelstimmdaten" = "Vogelstimmdaten verfügbar";
 "filterhaeufigeart" = "Häufigkeit";
 "filterlebensraum" = "Lebensraum";
 "filtervogelgruppe" = "Vogelgruppe";

@@ -16,8 +16,11 @@ struct FilterCriteria: View {
         List {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
             FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: Filter.commonBirds)
+            FilterCheckButton(identifier: "hasVoice", text: "Mit Vogelstimmdaten", filter: Filter.hasVoice)
 
-            ForEach(FilterType.allCases.filter { $0.isSelectable && $0 != .haeufigeart}, id: \.self) { filterType in
+            ForEach(FilterType.allCases.filter {
+                        $0.isSelectable && !([.haeufigeart, .vogelstimme].contains($0))
+            }, id: \.self) { filterType in
                 Section(header:
                     Text(LocalizedStringKey(filterType.rawValue), comment: "FilterType description")
                         .accessibility(label: Text("Filtergruppe"))

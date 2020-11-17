@@ -48,6 +48,11 @@ func loadFilterData(vdsFilternames : [VdsFilter]) -> [FilterType:[Filter]] {
         Filter(filterId: 1, name: "Häufig", type: .haeufigeart)
     ]
 
+    filterMap[.vogelstimme] = [
+        Filter(filterId: 0, name: "Fehlt", type: .vogelstimme),
+        Filter(filterId: 1, name: "Vorhanden", type: .vogelstimme)
+    ]
+
     vdsFilternames.forEach { (vdsFilter) in
         let filterType = FilterType(rawValue: vdsFilter.type)!
         let filter = Filter(filterId: Filter.Id(vdsFilter.filterID) ?? -999, name: vdsFilter.filterName, type: filterType)

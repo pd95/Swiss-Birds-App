@@ -10,6 +10,7 @@
 "Filterkriterien (%lld)" = "Critères de filtrage (%lld espèces)";
 "Keine Filter" = "No filtrage";
 "Nur häufige Vögel" = "Que les espèces communes";
+"Mit Vogelstimmdaten" = "Données disponibles sur le chant des oiseaux";
 "filterhaeufigeart" = "Ordinarité";
 "filterlebensraum" = "Habitat";
 "filtervogelgruppe" = "Groupe d'oiseaux";
