@@ -57,6 +57,9 @@ struct ShareSheet: UIViewControllerRepresentable {
 
 struct ShareSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ShareSheet(item: .init(subject: "Schweizerische Vogelwarte", activityItems: [VdsAPI.base]))
+        Color(.systemBackground)
+            .sheet(isPresented: .constant(true), content: {
+                ShareSheet(item: .init(subject: "Schweizerische Vogelwarte", activityItems: [VdsAPI.base]))
+            })
     }
 }

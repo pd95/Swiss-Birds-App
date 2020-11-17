@@ -58,8 +58,10 @@ struct BirdRow: View {
 
 struct BirdRow_Previews: PreviewProvider {
     static var previews: some View {
-        List(AppState.shared.allSpecies[0..<3]) { bird in
-            BirdRow(bird: bird)
+        AppState_PreviewWrapper() {
+            List(AppState.shared.allSpecies[0..<3]) { bird in
+                BirdRow(bird: bird)
+            }
         }
         .environmentObject(AppState.shared)
     }

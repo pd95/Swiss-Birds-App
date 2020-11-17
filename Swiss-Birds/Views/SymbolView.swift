@@ -53,16 +53,16 @@ struct SymbolView_Previews: PreviewProvider {
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
             .padding()
-            .previewLayout(.fixed(width: 100, height: 70))
+            .previewLayout(.fixed(width: 140, height: 70))
 
             HStack {
                 SymbolView(symbolName: "filterentwicklungatlas-1")
                 SymbolView(symbolName: "filterlebensraum-9")
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
-            .previewLayout(.fixed(width: 100, height: 70))
+            .previewLayout(.fixed(width: 140, height: 70))
             .padding()
-            .background(Color.black)
+            .background(Color(.systemBackground))
             .environment(\.colorScheme, .dark)
         }
     }

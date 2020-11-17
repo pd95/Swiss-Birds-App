@@ -232,13 +232,9 @@ struct BirdDetail_Previews: PreviewProvider {
     }()
     static var previews: some View {
         NavigationView {
-            List {
-                Text(bird.name)
-            }
             BirdDetailContainer(bird: bird)
         }
         .environmentObject(appState)
-        .previewLayout(.fixed(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.width))
     }
 }
 

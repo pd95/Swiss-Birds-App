@@ -40,7 +40,7 @@ struct FilterCriteria: View {
 
 struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        AppState_PreviewWrapper() {
             FilterCriteria(managedList: ManagedFilterList())
         }
         .environmentObject(AppState.shared)
