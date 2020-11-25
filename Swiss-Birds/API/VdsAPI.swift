@@ -36,7 +36,7 @@ enum VdsAPI {
     static let decoder: JSONDecoder = JSONDecoder()
     static let base = URL(string: "https://www.vogelwarte.ch/")!
 
-    static let jsonDataPath = "elements/snippets/vds/static/assets/data_new"
+    static let jsonDataPath = "elements/snippets/vds/static/assets/data"
     static let imageAssetPath = "assets/images/voegel/vds"
     static let voiceAssetPath = "assets/media/voices"
 
