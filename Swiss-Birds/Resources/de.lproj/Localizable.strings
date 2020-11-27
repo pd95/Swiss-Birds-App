@@ -17,6 +17,7 @@
 "filternahrung" = "Nahrung";
 "filterrotelistech" = "Rote Liste";
 "filterentwicklungatlas" = "Entwicklung";
+"voice" = "Vogelstimme";
 "Stimme" = "Stimme";
 "Merkmale" = "Merkmale";
 "Eigenschaften" = "Eigenschaften";
@@ -61,4 +62,6 @@
 "Alphabetisch (name)" = "Alphabetisch (Artname)";
 "Häufig" = "Häufig";
 "Selten" = "Selten";
+"Fehlt" = "Fehlt";
+"Vorhanden" = "Vorhanden";
 "Undefiniert" = "#";

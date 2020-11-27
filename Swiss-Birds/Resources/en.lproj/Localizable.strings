@@ -17,6 +17,7 @@
 "filternahrung" = "Food";
 "filterrotelistech" = "Red List CH";
 "filterentwicklungatlas" = "Evolution";
+"voice" = "Bird call";
 "Stimme" = "Bird call";
 "Merkmale" = "Identification criteria";
 "Eigenschaften" = "Characteristics";
@@ -61,4 +62,6 @@
 "alphabetisch (name)" = "Alphabetically (Name)";
 "Häufig" = "Common";
 "Selten" = "Rare";
+"Fehlt" = "Missing";
+"Vorhanden" = "Available";
 "Undefiniert" = "#";

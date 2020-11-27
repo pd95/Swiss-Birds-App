@@ -17,6 +17,7 @@
 "filternahrung" = "Nourriture";
 "filterrotelistech" = "Liste rouge CH";
 "filterentwicklungatlas" = "Évolution";
+"voice" = "Chant d'oiseaux";
 "Stimme" = "Chant";
 "Merkmale" = "Critères d'identification";
 "Eigenschaften" = "Caractéristiques";
@@ -61,4 +62,6 @@
 "alphabetisch (name)" = "Alphabétique des noms";
 "Häufig" = "Fréquentes";
 "Selten" = "Rares";
+"Fehlt" = "Mancante";
+"Vorhanden" = "Disponible";
 "Undefiniert" = "#";

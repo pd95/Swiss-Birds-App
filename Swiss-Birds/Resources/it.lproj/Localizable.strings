@@ -17,6 +17,7 @@
 "filternahrung" = "Nutrimento";
 "filterrotelistech" = "Lista rossa CH";
 "filterentwicklungatlas" = "Evoluzione";
+"voice" = "Richiamo dell'uccello";
 "Stimme" = "Voce";
 "Merkmale" = "Criterie de identificazione";
 "Eigenschaften" = "Caratteristiche";
@@ -61,4 +62,6 @@
 "alphabetisch (name)" = "Alfabetico (nome)";
 "Häufig" = "Frequente";
 "Selten" = "Raro";
+"Fehlt" = "Fehlt";
+"Vorhanden" = "Disponibile";
 "Undefiniert" = "#";
