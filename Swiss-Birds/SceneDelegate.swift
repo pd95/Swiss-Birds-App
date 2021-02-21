@@ -21,18 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         os_log("scene(_, willConnectTo:,options:) => activities %ld", connectionOptions.userActivities.count)
 
-        // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
-        // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
-        let appState = AppState.shared
-        let contentView = ContentView()
-            .environmentObject(appState)
-
         if CommandLine.arguments.contains("enable-testing") {
             SettingsStore.shared.setupForTesting()
         }
         else {
             if let activity = session.stateRestorationActivity {
-                appState.restore(from: activity)
+                AppState.shared.restore(from: activity)
             }
         }
 
@@ -43,6 +37,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         for activity in connectionOptions.userActivities {
             handleUserActivity(activity)
         }
+
+        let contentView = ContentView()
+            .environmentObject(AppState.shared)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

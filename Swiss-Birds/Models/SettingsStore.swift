@@ -42,9 +42,7 @@ class SettingsStore: ObservableObject {
     var groupColumn: String
 
     func setupForTesting() {
-        if CommandLine.arguments.contains("no-settings") {
-            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-        }
+        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 
         if CommandLine.arguments.contains("no-birdoftheday") {
             startupCheckBirdOfTheDay = false
