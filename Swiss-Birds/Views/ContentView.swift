@@ -101,9 +101,10 @@ struct ContentView: View {
                 .overlay(Group {
                     if !state.filters.isEmpty {
                         Image(systemName: "\(state.filters.count).circle.fill")
-                            .imageScale(.medium)
+                            .imageScale(.small)
                             .offset(x: 9, y: -3)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                            .foregroundColor(.secondary)
                     }
                 })
                 .accessibilityElement(children: .combine)
