@@ -120,7 +120,7 @@ class Swiss_BirdsUITests: XCTestCase {
 
         let birdDetailNav = MyUIElements.detailNavigationBar.element
         _ = birdDetailNav.waitForExistence(timeout: wait4existenceTimeout)
-        XCTAssert(birdDetailNav.identifier.contains("(425 "), "No filtering should result in 425 species")
+        XCTAssert(birdDetailNav.identifier.contains("(426 "), "No filtering should result in 426 species")
 
         MyUIElements.onlyCommonButton.element.tap()
         XCTAssert(birdDetailNav.identifier.contains("(94 "), "Common filter should reduce to 94 species")
