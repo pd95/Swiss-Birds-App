@@ -101,6 +101,7 @@ struct BirdDetail: View {
                     .font(.body)
                     .padding(.top)
                     .accessibility(identifier: "description")
+                    .layoutPriority(1)
 
                 CharacteristicsView(characteristics: characteristics)
             }
