@@ -71,7 +71,14 @@ class AppState : ObservableObject {
     @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
-    @Published var sortOptions = SortOptions(column: .speciesName)
+
+    @Published var sortOptions = SortOptions(column: .speciesName) {
+        didSet {
+            // Sync value with UserDefaults
+            SettingsStore.shared.groupColumn = sortOptions.column.rawValue
+        }
+    }
+
     var restorableFilters: [String : [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var groupedBirds = [SectionGroup: [Species]]()
@@ -124,6 +131,11 @@ class AppState : ObservableObject {
     static var shared = AppState()
 
     private init() {
+
+        // Init sort options with value stored in UserDefaults
+        if let sortColumn = SortOptions.SortColumn(rawValue: SettingsStore.shared.groupColumn) {
+            sortOptions = SortOptions(column: sortColumn)
+        }
 
         // Fetch the birds data
         VdsAPI
@@ -433,11 +445,11 @@ extension AppState {
             }
         }
 
-        if let sortByColumn = stateArray[Key.sortByColumn] as? SortOptions.SortColumn.RawValue,
-           let columnOption = SortOptions.SortColumn(rawValue: sortByColumn)
-        {
-            self.sortOptions.column = columnOption
-        }
+//        if let sortByColumn = stateArray[Key.sortByColumn] as? SortOptions.SortColumn.RawValue,
+//           let columnOption = SortOptions.SortColumn(rawValue: sortByColumn)
+//        {
+//            self.sortOptions.column = columnOption
+//        }
 
         os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
     }
@@ -455,7 +467,6 @@ extension AppState {
             Key.activeFilters: storableList,
             Key.selectedNavigationLink: selectedNavigationLinkData,
             Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
-            Key.sortByColumn: sortOptions.column.rawValue,
         ]
         activity.addUserInfoEntries(from: stateArray)
 

@@ -38,6 +38,9 @@ class SettingsStore: ObservableObject {
     @UserDefault(key: UserDefaults.Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
     var voiceDataOverConstrainedNetworkAccess: Bool
 
+    @UserDefault(key: "groupColumn", defaultValue: "")
+    var groupColumn: String
+
     func setupForTesting() {
         if CommandLine.arguments.contains("no-settings") {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
