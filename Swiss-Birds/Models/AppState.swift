@@ -211,11 +211,14 @@ class AppState : ObservableObject {
                 os_log("Resetting list %{Public}@", newID.description)
             })
 
-        Publishers.CombineLatest4($allSpecies, cleanSearchTextPublisher, filters.objectWillChange, cleanSortOptions)
+        Publishers.CombineLatest($allSpecies, filters.objectWillChange)
+            .combineLatest(cleanSearchTextPublisher, cleanSortOptions, $favorites) {
+                ($0.0, $1, $2, $3)
+            }
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
             .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
-            .map { [weak self] (allSpecies: [Species], searchText: String, unused: Void, sortOptions: SortOptions) -> ([SectionGroup:[Species]], [SectionGroup]) in
+            .map { [weak self] (allSpecies: [Species], searchText: String, sortOptions: SortOptions, favorites: Set<Species.Id>) -> ([SectionGroup:[Species]], [SectionGroup]) in
                 guard let self = self else { return ([:], []) }
 
                 os_log("start filtering bird list: %ld", allSpecies.count)
@@ -223,8 +226,8 @@ class AppState : ObservableObject {
                 // Filter species
                 let favoriteFilter: (Species) -> Bool
                 if self.filters.list.keys.contains(.favorites) {
-                    favoriteFilter = { [weak self] bird in
-                        self?.favorites.contains(bird.speciesId) ?? false
+                    favoriteFilter = { bird in
+                        favorites.contains(bird.speciesId)
                     }
                 }
                 else {
