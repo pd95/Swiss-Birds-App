@@ -53,7 +53,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         
         var matchesAll = true
         for (type, relevantIds) in filters {
-            matchesAll = matchesAll && (filterMap[type] ?? []).reduce(false, { $0 || relevantIds.contains($1)})
+            matchesAll = matchesAll && (!type.isFilterCategory || (filterMap[type] ?? []).reduce(false, { $0 || relevantIds.contains($1)}))
         }
         
         return matchesAll

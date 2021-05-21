@@ -15,11 +15,12 @@ struct FilterCriteria: View {
     var body: some View {
         List {
             NoFilterCheckButton(identifier: "noFiltering", text: "Keine Filter")
+            FilterCheckButton(identifier: "favorites", text: "Nur Favoriten", filter: Filter.favorites)
             FilterCheckButton(identifier: "onlyCommon", text: "Nur häufige Vögel", filter: Filter.commonBirds)
             FilterCheckButton(identifier: "hasVoice", text: "Mit Vogelstimmdaten", filter: Filter.hasVoice)
 
             ForEach(FilterType.allCases.filter {
-                        $0.isSelectable && !([.haeufigeart, .vogelstimme].contains($0))
+                $0.isSelectable && !([.haeufigeart, .vogelstimme, .favorites].contains($0))
             }, id: \.self) { filterType in
                 Section(header:
                     Text(LocalizedStringKey(filterType.rawValue), comment: "FilterType description")

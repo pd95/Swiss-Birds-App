@@ -41,6 +41,9 @@ class SettingsStore: ObservableObject {
     @UserDefault(key: "groupColumn", defaultValue: "")
     var groupColumn: String
 
+    @UserDefault(key: UserDefaults.Keys.favoriteSpecies, defaultValue: [])
+    var favoriteSpecies: [Int]
+
     func setupForTesting() {
         UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 
@@ -71,5 +74,6 @@ extension UserDefaults {
         static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
         static let reset = "reset"
         static let appVersion = "appVersion"
+        static let favoriteSpecies = "favoriteSpecies"
     }
 }

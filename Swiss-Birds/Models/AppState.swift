@@ -221,8 +221,17 @@ class AppState : ObservableObject {
                 os_log("start filtering bird list: %ld", allSpecies.count)
 
                 // Filter species
-                let filtered = allSpecies
-                    .filter({$0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
+                let favoriteFilter: (Species) -> Bool
+                if self.filters.list.keys.contains(.favorites) {
+                    favoriteFilter = { [weak self] bird in
+                        self?.favorites.contains(bird.speciesId) ?? false
+                    }
+                }
+                else {
+                    favoriteFilter = { _ in true }
+                }
+                let filtered: [Species] = allSpecies
+                    .filter({ favoriteFilter($0) && $0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 os_log("filtering bird list done: %ld", filtered.count)
 
                 let groupedBirds: [SectionGroup:[Species]]
@@ -405,7 +414,36 @@ class AppState : ObservableObject {
 
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
-        return allSpecies.filter {$0.categoryMatches(filters: filters.list)}.count
+        let favoriteFilter: (Species) -> Bool
+        if self.filters.list.keys.contains(.favorites) {
+            favoriteFilter = { [weak self] bird in
+                self?.favorites.contains(bird.speciesId) ?? false
+            }
+        }
+        else {
+            favoriteFilter = { _ in true }
+        }
+        return allSpecies.filter { favoriteFilter($0) && $0.categoryMatches(filters: filters.list)}.count
+    }
+    
+    // Mark: - Favorites Management
+    @Published private(set) var favorites: Set<Species.Id> = Set(SettingsStore.shared.favoriteSpecies)
+
+    func toggleFavorite(_ species: Species) {
+        objectWillChange.send()
+
+        if favorites.contains(species.speciesId) {
+            favorites.remove(species.speciesId)
+        }
+        else {
+            favorites.insert(species.speciesId)
+        }
+        
+        SettingsStore.shared.favoriteSpecies = favorites.sorted()
+    }
+    
+    func isFavorite(species: Species) -> Bool {
+        favorites.contains(species.speciesId)
     }
 }
 

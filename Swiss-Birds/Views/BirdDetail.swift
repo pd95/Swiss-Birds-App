@@ -111,7 +111,10 @@ struct BirdDetail: View {
             ShareSheet(item: item)
         }
         .navigationBarTitle(Text(bird.name), displayMode: .inline)
-        .navigationBarItems(trailing: shareButton)
+        .navigationBarItems(trailing: HStack {
+            favoriteButton
+            shareButton
+        })
         .onDisappear() {
             stopSound()
         }
@@ -129,10 +132,26 @@ struct BirdDetail: View {
         }
     }
 
+    var favoriteButton: some View {
+        let appState = AppState.shared
+        let isFavorite = appState.isFavorite(species: bird)
+        return Button(action: {
+            appState.toggleFavorite(bird)
+        }, label: {
+            Image(systemName: isFavorite ? "star.fill" : "star")
+                .imageScale(.medium)
+                .padding([.horizontal], 4)
+                .padding([.vertical], 8)
+                .foregroundColor( isFavorite ? .yellow : .accentColor)
+        })
+        .hoverEffect()
+        .accessibility(label: Text(isFavorite ? "Favorit entfernen" : "Favorit setzen"))
+    }
+
     var shareButton: some View {
         Button(action: shareDetails, label: {
             Image(systemName: "square.and.arrow.up")
-                .imageScale(.large)
+                .imageScale(.medium)
                 .padding([.horizontal], 4)
                 .padding([.vertical], 8)
         })

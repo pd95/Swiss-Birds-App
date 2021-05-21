@@ -16,6 +16,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     case entwicklungatlas = "filterentwicklungatlas"
     case vogelgruppe = "filtervogelgruppe"
     case vogelstimme = "voice"
+    case favorites = "favorites"
     case undefined
 
     var shouldSortForDisplay : Bool {
@@ -42,6 +43,15 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
 
     var isSelectable: Bool {
         self != .undefined
+    }
+    
+    var isFilterCategory: Bool {
+        switch self {
+        case .undefined, .favorites:
+            return false
+        default:
+            return true
+        }
     }
 }
 
@@ -74,6 +84,8 @@ struct Filter: Identifiable, Equatable, Hashable, Comparable {
     }
 
     static let undefined = Filter(filterId: 0, name: "Undefiniert", type: .undefined)
+
+    static let favorites = Filter(filterId: 1, name: "Favoriten", type: .favorites)
 
     static var commonBirds : Filter = {
         allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!

@@ -56,7 +56,7 @@ struct SortOptions: CustomStringConvertible, Equatable {
             allCases.append(.filterType(.vogelgruppe))
             FilterType.allCases.forEach { (type) in
                 // Include only the filter types for which all birds have only a single value
-                if ![.undefined, .lebensraum, .nahrung].contains(type) {
+                if ![.undefined, .lebensraum, .nahrung, .favorites].contains(type) {
                     let sortColumn = SortColumn.filterType(type)
                     if !allCases.contains(sortColumn) {
                         allCases.append(sortColumn)

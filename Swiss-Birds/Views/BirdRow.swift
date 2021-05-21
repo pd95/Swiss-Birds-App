@@ -33,9 +33,23 @@ struct BirdRow: View {
                 .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
                 .shadow(radius: 4)
                 .accessibility(hidden: true)
+                .overlay(
+                    Group {
+                        if state.isFavorite(species: bird) {
+                            Image(systemName:  "star.fill")
+                                .imageScale(.medium)
+                                .foregroundColor(.yellow)
+                                .shadow(color: Color.black, radius: 1)
+                                .offset(x: 8.0, y: -7.0)
+                        }
+                    },
+                    alignment: .topTrailing
+                )
+
             Text(bird.name)
                 .foregroundColor(.primary)
             Spacer()
+
             if !sizeCategory.isAccessibilityCategory {
                 if state.sortOptions.column != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol()  {
                     SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
