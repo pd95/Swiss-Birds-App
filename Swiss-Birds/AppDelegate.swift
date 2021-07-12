@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         #endif
 
+        // Enable cloud synched UserDefaults
+        CloudDefaults.shared.start()
+
         return true
     }
 

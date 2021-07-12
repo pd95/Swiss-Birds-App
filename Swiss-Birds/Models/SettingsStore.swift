@@ -61,6 +61,14 @@ class SettingsStore: ObservableObject {
         let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         let currentVersion = "\(version) (\(build))"
+
+        // Migrate old favorites to Cloud-syncing favorites key
+        if let oldFavorites = UserDefaults.standard.array(forKey: UserDefaults.Keys.favoriteSpeciesOld) as? [Int] {
+            os_log("Migrating old favorites to cloud-synched favorites %{public}@", oldFavorites)
+            favoriteSpecies = oldFavorites
+            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.favoriteSpeciesOld)
+        }
+
         if appVersion != currentVersion {
             appVersion = currentVersion
         }
@@ -69,11 +77,12 @@ class SettingsStore: ObservableObject {
 
 extension UserDefaults {
 
-    fileprivate struct Keys {
+    struct Keys {
         static let startupCheckBirdOfTheDay = "startupCheckBirdOfTheDay"
         static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
         static let reset = "reset"
         static let appVersion = "appVersion"
-        static let favoriteSpecies = "favoriteSpecies"
+        static let favoriteSpeciesOld = "favoriteSpecies"
+        static let favoriteSpecies = "sync-favoriteSpecies"
     }
 }
