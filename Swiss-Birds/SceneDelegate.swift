@@ -40,6 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let contentView = ContentView()
             .environmentObject(AppState.shared)
+            .environmentObject(FavoritesManager.shared)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

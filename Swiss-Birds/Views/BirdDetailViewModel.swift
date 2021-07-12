@@ -14,7 +14,7 @@ class BirdDetailViewModel: ObservableObject {
 
     typealias UIImagePublisher = AnyPublisher<(Int, UIImage?), Error>
 
-    let bird: Species
+    var bird: Species = .placeholder
 
     @Published var details : VdsSpecieDetail?
     @Published var imageDetails = [ImageDetails]()
@@ -37,8 +37,17 @@ class BirdDetailViewModel: ObservableObject {
         let description: String
     }
 
-    init(bird: Species) {
-        self.bird = bird
+    func setBird(_ bird: Species) {
+        if self.bird.id != bird.id {
+            self.bird = bird
+            details = nil
+            imageDetails = []
+            fetchData()
+        }
+    }
+    
+    deinit {
+        print("BirdDetailViewModel.\(#function)")
     }
 
     var getSpecieCancellable: AnyCancellable?

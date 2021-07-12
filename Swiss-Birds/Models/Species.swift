@@ -68,6 +68,8 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     static func species(for speciesId: Species.Id) -> Species? {
         speciesMap[speciesId]
     }
+    
+    static let placeholder = Species(speciesId: -1, name: "Placeholder", alternateName: "", filterMap: FilterList())
 }
 
 func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {

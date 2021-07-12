@@ -13,6 +13,8 @@ import AVKit
 struct BirdDetail: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.sizeCategory) var sizeCategory
+    @EnvironmentObject var favoritesManager: FavoritesManager
+    
     @ObservedObject var model: BirdDetailViewModel
 
     private let bird: Species
@@ -133,10 +135,9 @@ struct BirdDetail: View {
     }
 
     var favoriteButton: some View {
-        let appState = AppState.shared
-        let isFavorite = appState.isFavorite(species: bird)
+        let isFavorite = favoritesManager.isFavorite(species: bird)
         return Button(action: {
-            appState.toggleFavorite(bird)
+            favoritesManager.toggleFavorite(bird)
         }, label: {
             Image(systemName: isFavorite ? "star.fill" : "star")
                 .imageScale(.medium)
@@ -220,24 +221,21 @@ struct BirdDetail: View {
 struct BirdDetailContainer: View {
 
     @ObservedObject var model: BirdDetailViewModel
-
-    init(bird: Species) {
-        model = BirdDetailViewModel(bird: bird)
-    }
+    
+    let bird: Species
 
     var body: some View {
-        Group {
-            if model.details != nil {
-                BirdDetail(model: model)
-            }
-            else {
-                ActivityIndicatorView(style: .large)
-                .onAppear {
-                    model.fetchData()
-                }
+        if model.bird.speciesId == bird.speciesId && model.details != nil {
+            BirdDetail(model: model)
+                .navigationBarTitle(Text(bird.name), displayMode: .inline)
+        }
+        else {
+            ActivityIndicatorView(style: .large)
+                .navigationBarTitle(Text(bird.name), displayMode: .inline)
+            .onAppear {
+                model.setBird(bird)
             }
         }
-        .navigationBarTitle(Text(model.bird.name), displayMode: .inline)
     }
 
     var showAlert: Binding<Bool> {
@@ -252,9 +250,10 @@ struct BirdDetail_Previews: PreviewProvider {
     }()
     static var previews: some View {
         AppState_PreviewWrapper() {
-            BirdDetailContainer(bird: bird)
+            BirdDetailContainer(model: appState.currentBirdDetails, bird: bird)
         }
         .environmentObject(appState)
+        .environmentObject(FavoritesManager.shared)
     }
 }
 

@@ -12,7 +12,8 @@ struct BirdRow: View {
     var bird: Species
 
     @Environment(\.sizeCategory) var sizeCategory
-    @EnvironmentObject private var state : AppState
+    @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var favoritesManager: FavoritesManager
     @State var image: UIImage = UIImage(named: "placeholder-headshot")!
     
     func hasEntwicklungsAtlasSymbol() -> Bool {
@@ -35,7 +36,7 @@ struct BirdRow: View {
                 .accessibility(hidden: true)
                 .overlay(
                     Group {
-                        if state.isFavorite(species: bird) {
+                        if favoritesManager.isFavorite(species: bird) {
                             Image(systemName:  "star.fill")
                                 .imageScale(.medium)
                                 .foregroundColor(.yellow)
@@ -78,5 +79,6 @@ struct BirdRow_Previews: PreviewProvider {
             }
         }
         .environmentObject(AppState.shared)
+        .environmentObject(FavoritesManager.shared)
     }
 }

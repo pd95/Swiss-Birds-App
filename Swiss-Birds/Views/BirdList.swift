@@ -23,9 +23,11 @@ struct BirdList: View {
                 ForEach(state.groups, id: \.self) { key in
                     Section(header: sectionHeader(for: key)) {
                         ForEach(state.groupedBirds[key]!) { bird in
-                            NavigationLink(destination: BirdDetailContainer(bird: bird),
-                                           tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                           selection: state.selectedNavigationLinkBinding) {
+                            NavigationLink(
+                                destination: BirdDetailContainer(model: state.currentBirdDetails, bird: bird),
+                                tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
+                                selection: state.selectedNavigationLinkBinding
+                            ) {
                                 BirdRow(bird: bird)
                             }
                             .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -94,7 +96,7 @@ struct BirdList: View {
                 FilterCriteria(managedList: state.filters)
             }
             else if let species = species {
-                BirdDetailContainer(bird: species)
+                BirdDetailContainer(model: state.currentBirdDetails, bird: species)
             }
             else if currentTag == .sortOptions {
                 SelectSortOptions(sorting: $state.sortOptions)
@@ -122,5 +124,6 @@ struct BirdList_Previews: PreviewProvider {
                 .environment(\.colorScheme, .dark)
         }
         .environmentObject(AppState.shared)
+        .environmentObject(FavoritesManager.shared)
     }
 }

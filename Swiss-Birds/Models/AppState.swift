@@ -117,6 +117,9 @@ class AppState : ObservableObject {
             })
     }
 
+    // Single view model used in BirdDetailView, updated when selected bird changes
+    let currentBirdDetails = BirdDetailViewModel()
+    
     var previousBirdOfTheDay: Int = -1
     var birdOfTheDayCheckDate: Date?
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
@@ -212,7 +215,7 @@ class AppState : ObservableObject {
             })
 
         Publishers.CombineLatest($allSpecies, filters.objectWillChange)
-            .combineLatest(cleanSearchTextPublisher, cleanSortOptions, $favorites) {
+            .combineLatest(cleanSearchTextPublisher, cleanSortOptions, FavoritesManager.shared.$favorites) {
                 ($0.0, $1, $2, $3)
             }
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
@@ -420,33 +423,13 @@ class AppState : ObservableObject {
         let favoriteFilter: (Species) -> Bool
         if self.filters.list.keys.contains(.favorites) {
             favoriteFilter = { [weak self] bird in
-                self?.favorites.contains(bird.speciesId) ?? false
+                FavoritesManager.shared.favorites.contains(bird.speciesId) ?? false
             }
         }
         else {
             favoriteFilter = { _ in true }
         }
         return allSpecies.filter { favoriteFilter($0) && $0.categoryMatches(filters: filters.list)}.count
-    }
-    
-    // Mark: - Favorites Management
-    @Published private(set) var favorites: Set<Species.Id> = Set(SettingsStore.shared.favoriteSpecies)
-
-    func toggleFavorite(_ species: Species) {
-        objectWillChange.send()
-
-        if favorites.contains(species.speciesId) {
-            favorites.remove(species.speciesId)
-        }
-        else {
-            favorites.insert(species.speciesId)
-        }
-        
-        SettingsStore.shared.favoriteSpecies = favorites.sorted()
-    }
-    
-    func isFavorite(species: Species) -> Bool {
-        favorites.contains(species.speciesId)
     }
 }
 
