@@ -422,9 +422,7 @@ class AppState : ObservableObject {
     func countFilterMatches() -> Int {
         let favoriteFilter: (Species) -> Bool
         if self.filters.list.keys.contains(.favorites) {
-            favoriteFilter = { [weak self] bird in
-                FavoritesManager.shared.favorites.contains(bird.speciesId) ?? false
-            }
+            favoriteFilter = FavoritesManager.shared.isFavorite
         }
         else {
             favoriteFilter = { _ in true }
