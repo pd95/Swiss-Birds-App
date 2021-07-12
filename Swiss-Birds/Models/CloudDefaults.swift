@@ -12,7 +12,7 @@ import os.log
 /// Only UserDefaults keys starting with the `CloudDefaults.syncPrefix` are monitored and automatically synched to the cloud.
 final class CloudDefaults: NSObject {
     static let shared = CloudDefaults()
-    static let syncPrefix = "sync-"
+    static let syncPrefix = "sync_"
     
     private var ignoreLocalChanges = false
     

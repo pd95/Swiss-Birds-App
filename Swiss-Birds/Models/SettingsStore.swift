@@ -83,6 +83,15 @@ extension UserDefaults {
         static let reset = "reset"
         static let appVersion = "appVersion"
         static let favoriteSpeciesOld = "favoriteSpecies"
-        static let favoriteSpecies = "sync-favoriteSpecies"
+        static let favoriteSpecies = "sync_favoriteSpecies"
+    }
+    
+    @objc dynamic var sync_favoriteSpecies: [Int] {
+        get {
+            array(forKey: Keys.favoriteSpecies) as? [Int] ?? []
+        }
+        set {
+            setValue(newValue, forKey: Keys.favoriteSpecies)
+        }
     }
 }

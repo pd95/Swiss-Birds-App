@@ -9,24 +9,29 @@
 import Foundation
 import Combine
 
-class FavoritesManager: NSObject, ObservableObject {
+class FavoritesManager: ObservableObject {
     
     static let shared = FavoritesManager()
     
-    private override init() {
-        super.init()
-        // Register ourself as UserDefaults observer to update the favorites synched from iCloud
-        UserDefaults.standard.addObserver(
-            self,
-            forKeyPath: UserDefaults.Keys.favoriteSpecies,
-            options: [.old,.new],
-            context: nil
-        )
-    }
+    private var cancellables = Set<AnyCancellable>()
     
-    deinit {
-        // Be a good citizen and clean-up behind yourself
-        UserDefaults.standard.removeObserver(self, forKeyPath: UserDefaults.Keys.favoriteSpecies)
+    private init() {
+        // Register as UserDefaults observer to update the favorites synched from iCloud
+        UserDefaults.standard
+            .publisher(for: \.sync_favoriteSpecies)
+            .removeDuplicates()
+            .map({ Set($0) })
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] newValue in
+                guard let self = self,
+                      self.changingFavorites == false,
+                      self.favorites != newValue
+                else {
+                    return
+                }
+                self.favorites = newValue
+            })
+            .store(in: &cancellables)
     }
     
     @Published private(set) var favorites: Set<Species.Id> = Set(SettingsStore.shared.favoriteSpecies)
@@ -49,15 +54,5 @@ class FavoritesManager: NSObject, ObservableObject {
     
     func isFavorite(species: Species) -> Bool {
         favorites.contains(species.speciesId)
-    }
-
-    /// KVO function triggered whenever a change is observed.
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard changingFavorites == false else {
-            return
-        }
-        if let newValue = change?[.newKey] as? [Int] {
-            favorites = Set(newValue)
-        }
     }
 }
