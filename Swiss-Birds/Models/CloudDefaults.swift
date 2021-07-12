@@ -44,15 +44,16 @@ final class CloudDefaults: NSObject {
         )
 
         // register for notifications of all external changes
+        let store = NSUbiquitousKeyValueStore.default
         NotificationCenter.default.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: NSUbiquitousKeyValueStore.default,
+            object: store,
             queue: .main,
             using: updateLocal
         )
 
         // Force iCloud sync to ensure a fresh copy
-        if NSUbiquitousKeyValueStore.default.synchronize() == false {
+        if store.synchronize() == false {
             fatalError("App was not built with the proper iCloud entitlement requests?")
         }
         os_log("CloudDefaults.start: synchronized successfully")
@@ -60,6 +61,11 @@ final class CloudDefaults: NSObject {
     
     /// Called whenever the application enters foreground state, to ensure the store is up-to-date
     func synchronize() {
+        #if DEBUG
+        let store = NSUbiquitousKeyValueStore.default
+        let bit = store.bool(forKey: "fakeSyncBit")
+        store.set(!bit, forKey: "fakeSyncBit")
+        #endif
         if NSUbiquitousKeyValueStore.default.synchronize() {
             os_log("CloudDefaults.synchronize: success")
         }
