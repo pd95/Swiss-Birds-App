@@ -6,24 +6,27 @@
 //  Copyright © 2020 Philipp. All rights reserved.
 //
 
-enum Characteristic : Hashable {
+enum Characteristic: Identifiable {
 
     indirect case header(text: String, children: [Characteristic])
-    case separator
+    case separator(Int? = nil)
     case text(label: String = "", text: String?, symbol: String = "")
 
-    var identifier: String {
+    var id: String {
+        let identifier: String
         switch self {
-            case .header(text: let text, _):
-                return "header_\(text)"
-            case .separator:
-                return "separator_\(hashValue)"
-            case .text(label: let label, text: let text, _):
-                if let text = text {
-                    return "text_\(label.isEmpty ? text : label)"
-                }
-                return "text_\(label)"
+        case .header(text: let text, _):
+            identifier = "header_\(text)"
+        case .separator(let num):
+            identifier = "separator_\(num ?? 1)"
+        case .text(label: let label, text: let text, _):
+            if let text = text {
+                identifier = "text_\(label.isEmpty ? text : label)"
+            } else {
+                identifier = "text_\(label)"
+            }
         }
+        return identifier
     }
 
     var isEmpty: Bool {
@@ -104,17 +107,17 @@ enum Characteristic : Hashable {
             .text(label: "Laenge_cm", text: "10"),
             .text(label: "Spannweite_cm", text: "20"),
             .text(label: "Gewicht_g", text: "30"),
-            .separator,
+            .separator(1),
             .text(label: "Nahrung", text: "Insekten und würmer"),
             .text(label: "Lebensraum", text: "Wiese"),
             .text(label: "Zugverhalten", text: "Hausvogel"),
-            .separator,
+            .separator(2),
             .text(label: "Brutort", text: "Nest auf dem Baum"),
             .text(label: "Brutdauer_Tage", text: "10"),
             .text(label: "Jahresbruten", text: "1"),
             .text(label: "Gelegegroesse", text: "3-5"),
             .text(label: "Nestlingsdauer_Flugfaehigkeit_Tage", text: "11-13"),
-            .separator,
+            .separator(3),
             .text(label: "Hoechstalter_CH", text: "Unsterblich"),
             .text(label: "Hoechstalter_EURING", text: "13"),
         ]),

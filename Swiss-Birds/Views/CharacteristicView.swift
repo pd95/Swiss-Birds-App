@@ -42,7 +42,7 @@ struct CharacteristicView: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibility(identifier: characteristic.identifier)
+        .accessibility(identifier: characteristic.id)
     }
 }
 
@@ -50,7 +50,7 @@ struct CharacteristicsView : View {
     let characteristics : [Characteristic]
 
     var body: some View {
-        ForEach(characteristics.filter {!$0.isEmpty}, id:\.self) { characteristic in
+        ForEach(characteristics.filter {!$0.isEmpty}) { characteristic in
             Group {
                 CharacteristicView(characteristic: characteristic)
                 if characteristic.isHeader {
