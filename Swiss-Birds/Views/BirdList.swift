@@ -45,20 +45,7 @@ struct BirdList: View {
                 }
             }))
 
-            if requiresDynamicNavigationLink {
-                dynamicNavigationLinkTarget
-            }
-        }
-    }
-
-    // Depending on the action (click on "Filter") or state restoration we have to
-    // "force" a navigation link being selected
-    var requiresDynamicNavigationLink: Bool {
-        switch state.selectedNavigationLink {
-            case .none, .birdDetails:
-                return false
-            default:
-                return true
+            dynamicNavigationLinkTarget
         }
     }
 
@@ -81,25 +68,27 @@ struct BirdList: View {
 
     // Here we create the dynamically navigation link (filter list or restored bird selection)
     var dynamicNavigationLinkTarget: some View {
-        let currentTag = state.selectedNavigationLink!
-        let species: Species?
-        if case .programmaticBirdDetails(let speciesId) = currentTag {
-            species = Species.species(for: speciesId)!
-        }
-        else {
-            species = nil
+        var currentTag = state.selectedNavigationLink ?? .nothing
+        switch currentTag {
+        case .filterList, .sortOptions, .programmaticBirdDetails:
+            break
+        default:
+            currentTag = .nothing
         }
 
         // Create destination view
         let destination: some View = Group {
-            if currentTag == .filterList {
+            switch currentTag {
+            case .filterList:
                 FilterCriteria(managedList: state.filters)
-            }
-            else if let species = species {
-                BirdDetailContainer(model: state.currentBirdDetails, bird: species)
-            }
-            else if currentTag == .sortOptions {
+            case .programmaticBirdDetails(let speciesId):
+                if let species = Species.species(for: speciesId) {
+                    BirdDetailContainer(model: state.currentBirdDetails, bird: species)
+                }
+            case .sortOptions:
                 SelectSortOptions(sorting: $state.sortOptions)
+            default:
+                EmptyView()
             }
         }
 

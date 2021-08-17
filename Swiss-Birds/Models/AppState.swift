@@ -13,6 +13,7 @@ import WidgetKit
 
 // Enumeration of all possible cases of the current selected NavigationLink
 enum MainNavigationLinkTarget: Hashable, Codable {
+    case nothing
     case filterList
     case birdDetails(Int)
     case programmaticBirdDetails(Int)
@@ -51,6 +52,8 @@ enum MainNavigationLinkTarget: Hashable, Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Key.self)
         switch self {
+        case .nothing:
+            try container.encode(-1, forKey: .rawValue)
         case .filterList:
             try container.encode(0, forKey: .rawValue)
         case .birdDetails(let speciesId):
@@ -388,7 +391,9 @@ class AppState : ObservableObject {
             UIApplication.shared.endEditing()
         }
 
-        selectedNavigationLink = .programmaticBirdDetails(speciesId)
+        withAnimation {
+            selectedNavigationLink = .programmaticBirdDetails(speciesId)
+        }
     }
 
     func showFilter() {
@@ -396,7 +401,9 @@ class AppState : ObservableObject {
             UIApplication.shared.endEditing()
         }
 
-        selectedNavigationLink = .filterList
+        withAnimation {
+            selectedNavigationLink = .filterList
+        }
     }
 
     func showSortOptions() {
@@ -404,7 +411,9 @@ class AppState : ObservableObject {
             UIApplication.shared.endEditing()
         }
 
-        selectedNavigationLink = .sortOptions
+        withAnimation {
+            selectedNavigationLink = .sortOptions
+        }
     }
 
     func showBirdOfTheDayNow() {
