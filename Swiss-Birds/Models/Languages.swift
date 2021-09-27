@@ -23,4 +23,4 @@ let preferredLanguageOrder: [LanguageIdentifier] = {
     }
     return languages
 }()
-let language: LanguageIdentifier = preferredLanguageOrder.first!
+let primaryLanguage: LanguageIdentifier = preferredLanguageOrder.first!

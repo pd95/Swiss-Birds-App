@@ -73,19 +73,19 @@ enum VdsAPI {
             .eraseToAnyPublisher()
     }
 
-    static func getBirds() -> AnyPublisher<[VdsListElement], Error> {
+    static func getBirds(language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<[VdsListElement], Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/list_\(language).json")))
     }
 
-    static func getFilters() -> AnyPublisher<[VdsFilter], Error> {
+    static func getFilters(language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<[VdsFilter], Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/filters_\(language).json")))
     }
 
-    static func getLabels() -> AnyPublisher<[VdsLabel], Error> {
+    static func getLabels(language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<[VdsLabel], Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/labels_\(language).json")))
     }
 
-    static func getSpecie(for id: Int) -> AnyPublisher<VdsSpecieDetail, Error> {
+    static func getSpecie(for id: Int, language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<VdsSpecieDetail, Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/species/\(id)_\(language).json")))
             .map { (specie: VdsSpecieDetail_new)-> VdsSpecieDetail in
                 VdsSpecieDetail(from: specie)

@@ -20,7 +20,7 @@ func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
         }
         else {
             // Then try to find a localized resource or otherwise a non-localized resource
-            guard let asset = NSDataAsset(name: "\(language)/\(filename)") ?? NSDataAsset(name: filename) else {
+            guard let asset = NSDataAsset(name: "\(primaryLanguage)/\(filename)") ?? NSDataAsset(name: filename) else {
                 fatalError("Couldn't find asset \(filename) in bundle and asset catalog")
             }
             data = asset.data

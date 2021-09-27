@@ -144,14 +144,42 @@ class AppState : ObservableObject {
         }
 
         // Fetch the birds data
-        VdsAPI
-            .getBirds()
-            .map { (birds: [VdsListElement]) -> [VdsListElement] in
-                var dictionary = [String: VdsListElement]()
-                birds.forEach { dictionary[$0.artID] = $0 }
-                return Array(dictionary.values)
-            }
-            .map(loadSpeciesData)
+        preferredLanguageOrder.publisher
+            .setFailureType(to: Error.self)
+            .flatMap({ language in
+                // Fetch for each languages
+                VdsAPI.getBirds(language: language)
+                    .map { birds -> [String: VdsListElement] in
+                        var dictionary = [String: VdsListElement]()
+                        birds.forEach { dictionary[$0.artID] = $0 }
+                        return dictionary
+                    }
+                    .map({(language: language, birds: $0)})
+            })
+            .collect()
+            .map({ (allBirdData: [(language: LanguageIdentifier, birds: [String : VdsListElement])]) -> [Species] in
+
+                // Merge for easier mapping
+                var indexedBirdData = [LanguageIdentifier: [String : VdsListElement]]()
+                for birdData in allBirdData {
+                    indexedBirdData[birdData.language] = birdData.birds
+                }
+
+                // Transform data from primary language
+                let primarySpecies = loadSpeciesData(vdsList: Array(indexedBirdData[primaryLanguage]!.values))
+
+                // And enrich with other languages name
+                var allSpecies = [Species]()
+                for var species in primarySpecies {
+                    for language in preferredLanguageOrder where language != primaryLanguage {
+                        if let otherBirdData = indexedBirdData[language]![String(species.speciesId)] {
+                            species.addTranslation(for: language, vdsListElement: otherBirdData)
+                        }
+                    }
+                    allSpecies.append(species)
+                }
+                return allSpecies
+            })
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in

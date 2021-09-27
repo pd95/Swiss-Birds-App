@@ -175,7 +175,7 @@ struct BirdDetail: View {
 
         // Language dependent entry path
         let path: String
-        switch language {
+        switch primaryLanguage {
             case "de":
                 path = "de/voegel/voegel-der-schweiz/\(name)"
             case "fr":
@@ -185,7 +185,7 @@ struct BirdDetail: View {
             case "en":
                 path = "en/birds/birds-of-switzerland/\(name)"
             default:
-                path = language
+                path = primaryLanguage
         }
 
         let url = VdsAPI.base.appendingPathComponent(path)
