@@ -8,5 +8,19 @@
 
 import Foundation
 
-let availableLanguages = ["de","fr","it","en"]
-let language = Bundle.preferredLocalizations(from: availableLanguages).first!
+typealias LanguageIdentifier = String
+
+let availableLanguages: [LanguageIdentifier] = ["de","fr","it","en"]
+let preferredLanguageOrder: [LanguageIdentifier] = {
+    var languages = [LanguageIdentifier]()
+    var testLanguages = availableLanguages
+    while testLanguages.isEmpty == false {
+        let language = Bundle.preferredLocalizations(from: testLanguages).first!
+        languages.append(language)
+        if let index = testLanguages.firstIndex(of: language) {
+            testLanguages.remove(at: index)
+        }
+    }
+    return languages
+}()
+let language: LanguageIdentifier = preferredLanguageOrder.first!

@@ -14,9 +14,26 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     let id = UUID()
 
     let speciesId : Id
-    let name : String
-    let alternateName : String
-    
+
+    var name : String {
+        translatedNames[primaryLanguage, default: "name"]
+    }
+    var alternateName : String {
+        translatedAlternateNames[primaryLanguage, default: "alternateName"]
+    }
+
+    var translatedNames: [LanguageIdentifier: String]
+    var translatedAlternateNames: [LanguageIdentifier: String]
+
+    mutating func addTranslation(for language: LanguageIdentifier, name: String, alternateName: String) {
+        translatedNames[language] = name
+        translatedAlternateNames[language] = alternateName
+    }
+
+    mutating func addTranslation(for language: LanguageIdentifier, vdsListElement: VdsListElement) {
+        addTranslation(for: language, name: vdsListElement.artname, alternateName: vdsListElement.synonyme)
+    }
+
     let filterMap : FilterList  // For each FilterType an array of related IDs
 
     func filterSymbolName(_ filterType : FilterType) -> String {
@@ -37,10 +54,12 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         if text.isEmpty {
             return true
         }
-        let lowercaseName = name.lowercased() + " " + alternateName.lowercased()
-        for word in text.lowercased().split(separator: " ") {
-            if lowercaseName.contains(word) {
-                return true
+        for (language, name) in translatedNames {
+            let lowercaseName = name.lowercased() + " " + translatedAlternateNames[language, default: ""].lowercased()
+            for word in text.lowercased().split(separator: " ") {
+                if lowercaseName.contains(word) {
+                    return true
+                }
             }
         }
         return false
@@ -70,6 +89,15 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     }
     
     static let placeholder = Species(speciesId: -1, name: "Placeholder", alternateName: "", filterMap: FilterList())
+}
+
+extension Species {
+    init(speciesId: Species.Id, name: String, alternateName: String, filterMap: FilterList) {
+        self.speciesId = speciesId
+        self.translatedNames = [primaryLanguage: name]
+        self.translatedAlternateNames = [primaryLanguage: alternateName]
+        self.filterMap = filterMap
+    }
 }
 
 func loadSpeciesData(vdsList : [VdsListElement]) -> [Species] {
