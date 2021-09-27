@@ -33,7 +33,6 @@ struct SearchField: View {
                     .onTapGesture {
                         isEditing = true
                     }
-                    .animation(.easeInOut)
 
                 if isEditing && !searchText.isEmpty {
                     Button(action: { withAnimation { searchText = "" }}) {
@@ -45,7 +44,6 @@ struct SearchField: View {
                     .hoverEffect()
                     .accessibility(label: Text("Clear"))
                     .accessibility(identifier: "clearButton")
-                    .animation(Animation.easeInOut)
                 }
             }
             .background(Color(.secondarySystemBackground))
@@ -53,8 +51,10 @@ struct SearchField: View {
 
             if isEditing {
                 Button(action: {
-                    isEditing = false
-                    searchText = ""
+                    withAnimation {
+                        isEditing = false
+                        searchText = ""
+                    }
                     UIApplication.shared.endEditing()
                 }) {
                     Text("Cancel")
@@ -64,12 +64,10 @@ struct SearchField: View {
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(.leading, 8)
                 .transition(.move(edge: .trailing))
-                .animation(.easeInOut)
             }
 
         }
         .transition(.move(edge: .trailing))
-        .animation(.easeInOut)
         .buttonStyle(PlainButtonStyle())
         .accessibilityElement(children: .contain)
         .accessibility(identifier: "searchBar")

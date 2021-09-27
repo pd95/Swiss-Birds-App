@@ -16,7 +16,7 @@ struct BirdList: View {
         return VStack(spacing: 0) {
             List {
                 Section {
-                    SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField)
+                    SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField.animation())
                         .autocapitalization(.words)
                 }
 
@@ -40,8 +40,10 @@ struct BirdList: View {
             .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
                 if state.isEditingSearchField {
                     print("Searching was enabled, but drag occurred => endEditing")
-                    state.isEditingSearchField = false
-                    UIApplication.shared.endEditing()
+                    withAnimation {
+                        state.isEditingSearchField = false
+                        UIApplication.shared.endEditing()
+                    }
                 }
             }))
 
