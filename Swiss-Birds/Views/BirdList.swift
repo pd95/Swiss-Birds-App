@@ -48,6 +48,7 @@ struct BirdList: View {
             }))
 
             dynamicNavigationLinkTarget
+            Text(" ")
         }
     }
 
@@ -68,7 +69,7 @@ struct BirdList: View {
         .accessibility(identifier: "section_\(group.id)")
     }
 
-    // Here we create the dynamically navigation link (filter list or restored bird selection)
+    // Here we create the dynamic navigation link (filter list or restored bird selection)
     var dynamicNavigationLinkTarget: some View {
         var currentTag = state.selectedNavigationLink ?? .nothing
         switch currentTag {
