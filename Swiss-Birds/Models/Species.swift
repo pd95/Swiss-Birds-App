@@ -22,12 +22,19 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         translatedAlternateNames[primaryLanguage, default: "alternateName"]
     }
 
-    var translatedNames: [LanguageIdentifier: String]
-    var translatedAlternateNames: [LanguageIdentifier: String]
+    var translatedNames = [LanguageIdentifier: String]()
+    var translatedAlternateNames = [LanguageIdentifier: String]()
+    var searchableNames = [LanguageIdentifier: String]()
 
     mutating func addTranslation(for language: LanguageIdentifier, name: String, alternateName: String) {
+        var alternateName = " \(alternateName) "
+        if let range = alternateName.range(of: " \(name) ") {
+            alternateName = alternateName.replacingCharacters(in: range, with: "")
+            alternateName = alternateName.trimmingCharacters(in: .whitespaces)
+        }
         translatedNames[language] = name
         translatedAlternateNames[language] = alternateName
+        searchableNames[language] = name.lowercased() + " " + alternateName.lowercased()
     }
 
     mutating func addTranslation(for language: LanguageIdentifier, vdsListElement: VdsListElement) {
@@ -54,10 +61,10 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         if text.isEmpty {
             return true
         }
-        for (language, name) in translatedNames {
-            let lowercaseName = name.lowercased() + " " + translatedAlternateNames[language, default: ""].lowercased()
-            for word in text.lowercased().split(separator: " ") {
-                if lowercaseName.contains(word) {
+        let lowercasedWords = text.lowercased().split(separator: " ")
+        for (_, lowercaseNames) in searchableNames {
+            for word in lowercasedWords {
+                if lowercaseNames.contains(word) {
                     return true
                 }
             }
@@ -94,9 +101,8 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
 extension Species {
     init(speciesId: Species.Id, name: String, alternateName: String, filterMap: FilterList) {
         self.speciesId = speciesId
-        self.translatedNames = [primaryLanguage: name]
-        self.translatedAlternateNames = [primaryLanguage: alternateName]
         self.filterMap = filterMap
+        addTranslation(for: primaryLanguage, name: name, alternateName: alternateName)
     }
 }
 
