@@ -9,7 +9,8 @@
 import SwiftUI
 
 struct BirdRow: View {
-    var bird: Species
+    let bird: Species
+    let searchText: String
 
     @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject private var state: AppState
@@ -47,8 +48,35 @@ struct BirdRow: View {
                     alignment: .topTrailing
                 )
 
-            Text(bird.name)
-                .foregroundColor(.primary)
+            VStack(alignment: .leading) {
+                Text(bird.name)
+                    .foregroundColor(.primary)
+
+                if searchText.isEmpty == false {
+                    let nameMatches = bird.allNameMatches(searchText)
+                    ForEach(preferredLanguageOrder, id: \.self) { language in
+                        let match = nameMatches[language, default: (nil, nil)]
+                        if match.name != nil || match.alternateName != nil {
+                            Group {
+                                if language == primaryLanguage {
+                                    if let alternateName = match.alternateName {
+                                        Text(alternateName)
+                                            .font(.footnote)
+                                    }
+                                }
+                                else {
+                                    Text("\(language): ")
+                                        .font(.footnote.italic())
+                                    + Text("\(match.name ?? "") \(match.alternateName ?? "")".trimmingCharacters(in: .whitespaces))
+                                        .font(.footnote)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .transition(.opacity)
+            .animation(.easeIn(duration: 0.2))
             Spacer()
 
             if !sizeCategory.isAccessibilityCategory {
@@ -75,7 +103,7 @@ struct BirdRow_Previews: PreviewProvider {
     static var previews: some View {
         AppState_PreviewWrapper() {
             List(AppState.shared.allSpecies[0..<3]) { bird in
-                BirdRow(bird: bird)
+                BirdRow(bird: bird, searchText: "")
             }
         }
         .environmentObject(AppState.shared)

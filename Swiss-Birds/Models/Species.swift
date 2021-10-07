@@ -30,10 +30,9 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         var alternateName = " \(alternateName) "
         if let range = alternateName.range(of: " \(name) ") {
             alternateName = alternateName.replacingCharacters(in: range, with: "")
-            alternateName = alternateName.trimmingCharacters(in: .whitespaces)
         }
         translatedNames[language] = name
-        translatedAlternateNames[language] = alternateName
+        translatedAlternateNames[language] = alternateName.trimmingCharacters(in: .whitespaces)
         searchableNames[language] = name.lowercased() + " " + alternateName.lowercased()
     }
 
@@ -71,7 +70,34 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         }
         return false
     }
-    
+
+    // Returns a dictionary with all names and alternate names matching the query text
+    // duplicating parts of `nameMatches`
+    func allNameMatches(_ text: String) -> [LanguageIdentifier: (name: String?, alternateName: String?)] {
+        if text.isEmpty {
+            return [:]
+        }
+        let lowercasedWords = text.lowercased().split(separator: " ")
+        var matches = [LanguageIdentifier: (name: String?, alternateName: String?)]()
+        for (language, name) in translatedNames {
+            let alternateName = translatedAlternateNames[language, default: ""]
+
+            let lowercaseName = name.lowercased()
+            let lowercaseAlternateName = alternateName.lowercased()
+
+            var nameMatch = false
+            var alternateNameMatch = false
+            for word in lowercasedWords {
+                nameMatch = nameMatch || lowercaseName.contains(word)
+                alternateNameMatch = alternateNameMatch || lowercaseAlternateName.contains(word)
+            }
+            if nameMatch || alternateNameMatch {
+                matches[language] = (nameMatch ? name : nil, alternateNameMatch ? alternateName : nil)
+            }
+        }
+        return matches
+    }
+
     func categoryMatches(filters: FilterList) -> Bool {
         if filters.isEmpty {
             return true

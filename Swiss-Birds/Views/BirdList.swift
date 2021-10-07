@@ -28,7 +28,7 @@ struct BirdList: View {
                                 tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
                                 selection: state.selectedNavigationLinkBinding
                             ) {
-                                BirdRow(bird: bird)
+                                BirdRow(bird: bird, searchText: state.searchText)
                             }
                             .accessibility(identifier: "birdRow_\(bird.speciesId)")
                         }
