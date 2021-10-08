@@ -84,7 +84,6 @@ class MarketingTests: XCTestCase {
         }
         
         // Search
-        let selectIndex = language == "fr" ? 2 : 0
         XCTContext.runActivity(named: "Search for a bird") { (_) in
             let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
             let search = searchTerms[language]!
@@ -98,7 +97,10 @@ class MarketingTests: XCTestCase {
 
         // Show Detail
         XCTContext.runActivity(named: "Show detail view and scroll down") { (_) in
-            app.tables.buttons.element(boundBy: selectIndex).tap()
+            let birdButton = app.tables.buttons["birdRow_4240"]
+            _ = birdButton.waitForExistence(timeout: wait4existenceTimeout)
+            birdButton.tap()
+
             let birdImage = app.otherElements["bird_image_1"]
             _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
             takeScreenShot(name: "03_Detail_Top")
