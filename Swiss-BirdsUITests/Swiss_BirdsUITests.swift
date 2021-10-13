@@ -208,7 +208,6 @@ class Swiss_BirdsUITests: XCTestCase {
         clearButton.tap()
 
         // Search a real bird
-        let selectIndex = language == "fr" ? 2 : 0
         let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
         let search = searchTerms[language]!
         typeText(search)
