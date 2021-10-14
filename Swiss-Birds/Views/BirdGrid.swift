@@ -25,11 +25,12 @@ struct BirdGrid: View {
                     ForEach(state.groups, id: \.self) { key in
                         Section(header: sectionHeader(for: key)) {
                             ForEach(state.groupedBirds[key]!) { bird in
-                                BirdCell(bird: bird, searchText: state.searchText)
-                                    .onTapGesture {
-                                        state.selectedNavigationLinkBinding.wrappedValue = MainNavigationLinkTarget.birdDetails(bird.speciesId)
-                                    }
-                                    .accessibility(identifier: "birdRow_\(bird.speciesId)")
+                                Button {
+                                    state.selectedNavigationLinkBinding.wrappedValue = MainNavigationLinkTarget.birdDetails(bird.speciesId)
+                                } label: {
+                                    BirdCell(bird: bird, searchText: state.searchText)
+                                }
+                                .accessibility(identifier: "birdRow_\(bird.speciesId)")
                             }
                         }
                     }
