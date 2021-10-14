@@ -11,6 +11,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var state : AppState
+    @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
         ZStack {
@@ -20,16 +21,23 @@ struct ContentView: View {
                         .zIndex(1)
                 }
                 else {
-                    BirdList()
-                        .edgesIgnoringSafeArea(.bottom)
-                        .navigationBarTitle(Text("Vögel der Schweiz"))
-                        .navigationBarItems(leading: sortButton, trailing: filterButton)
-                        .zIndex(2)
+                    if #available(iOS 14, *), sizeClass == .regular {
+                        BirdGrid()
+                            .edgesIgnoringSafeArea(.bottom)
+                            .navigationBarTitle(Text("Vögel der Schweiz"))
+                            .navigationBarItems(leading: sortButton, trailing: filterButton)
+                            .zIndex(2)
 
-                    OnboardingView()
+                    } else {
+                        BirdList()
+                            .edgesIgnoringSafeArea(.bottom)
+                            .navigationBarTitle(Text("Vögel der Schweiz"))
+                            .navigationBarItems(leading: sortButton, trailing: filterButton)
+                            .zIndex(2)
+                    }
                 }
             }
-            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+            .navigationViewStyle(.stack)
             .accessibilityElement(children: state.showBirdOfTheDay ? .ignore : .contain)
             .accessibility(hidden: state.showBirdOfTheDay)
 

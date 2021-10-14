@@ -1,54 +1,54 @@
 //
-//  BirdList.swift
+//  BirdGrid.swift
 //  Swiss-Birds
 //
-//  Created by Philipp on 31.10.19.
-//  Copyright © 2019 Philipp. All rights reserved.
+//  Created by Philipp on 13.10.21.
+//  Copyright © 2021 Philipp. All rights reserved.
 //
 
 import SwiftUI
 
-struct BirdList: View {
+struct BirdGrid: View {
     
     @EnvironmentObject private var state : AppState
 
     var body: some View {
-        VStack(spacing: 0) {
-            List {
+        ScrollView {
+            if #available(iOS 14.0, *) {
                 Section {
                     SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField.animation())
                         .autocapitalization(.words)
                 }
+                .padding()
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: 200), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
 
-                ForEach(state.groups, id: \.self) { key in
-                    Section(header: sectionHeader(for: key)) {
-                        ForEach(state.groupedBirds[key]!) { bird in
-                            NavigationLink(
-                                destination: BirdDetailContainer(model: state.currentBirdDetails, bird: bird),
-                                tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                selection: state.selectedNavigationLinkBinding
-                            ) {
-                                BirdRow(bird: bird, searchText: state.searchText)
+                    ForEach(state.groups, id: \.self) { key in
+                        Section(header: sectionHeader(for: key)) {
+                            ForEach(state.groupedBirds[key]!) { bird in
+                                BirdCell(bird: bird, searchText: state.searchText)
+                                    .onTapGesture {
+                                        state.selectedNavigationLinkBinding.wrappedValue = MainNavigationLinkTarget.birdDetails(bird.speciesId)
+                                    }
+                                    .accessibility(identifier: "birdRow_\(bird.speciesId)")
                             }
-                            .accessibility(identifier: "birdRow_\(bird.speciesId)")
                         }
                     }
                 }
-                .id(state.listID)
-            }
-            .listStyle(PlainListStyle())
-            .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
-                if state.isEditingSearchField {
-                    print("Searching was enabled, but drag occurred => endEditing")
-                    withAnimation {
-                        state.isEditingSearchField = false
-                        UIApplication.shared.endEditing()
+                .padding(.horizontal)
+                .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
+                    let _ = print("simultaneousGesture DragGesture")
+                    if state.isEditingSearchField {
+                        print("Searching was enabled, but drag occurred => endEditing")
+                        withAnimation {
+                            state.isEditingSearchField = false
+                            UIApplication.shared.endEditing()
+                        }
                     }
-                }
-            }))
+                }))
 
-            dynamicNavigationLinkTarget
-            Text(" ")
+                dynamicNavigationLinkTarget
+                Text(" ")
+            }
         }
     }
 
@@ -65,7 +65,16 @@ struct BirdList: View {
             else {
                 Text(LocalizedStringKey(group.name))
             }
+            Spacer()
         }
+        .font(.headline)
+        .padding(16)
+        .background(
+            Color(.tertiarySystemBackground)
+                .opacity(0.8)
+                .cornerRadius(8)
+                .padding(.vertical, 4)
+        )
         .accessibility(identifier: "section_\(group.id)")
     }
 
@@ -73,7 +82,7 @@ struct BirdList: View {
     var dynamicNavigationLinkTarget: some View {
         var currentTag = state.selectedNavigationLink ?? .nothing
         switch currentTag {
-        case .filterList, .sortOptions, .programmaticBirdDetails:
+        case .filterList, .sortOptions, .programmaticBirdDetails, .birdDetails:
             break
         default:
             currentTag = .nothing
@@ -84,7 +93,7 @@ struct BirdList: View {
             switch currentTag {
             case .filterList:
                 FilterCriteria(managedList: state.filters)
-            case .programmaticBirdDetails(let speciesId):
+            case .programmaticBirdDetails(let speciesId), .birdDetails(let speciesId):
                 if let species = Species.species(for: speciesId) {
                     BirdDetailContainer(model: state.currentBirdDetails, bird: species)
                 }
@@ -106,16 +115,10 @@ struct BirdList: View {
     }
 }
 
-struct BirdList_Previews: PreviewProvider {
+struct BirdGrid_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
-            NavigationView {
-                BirdList()
-            }
-            ContentView()
-                .environment(\.colorScheme, .dark)
-        }
-        .environmentObject(AppState.shared)
-        .environmentObject(FavoritesManager.shared)
+        BirdGrid()
+            .environmentObject(AppState.shared)
+            .environmentObject(FavoritesManager.shared)
     }
 }

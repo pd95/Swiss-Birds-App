@@ -20,11 +20,12 @@
 		1746B50124DE0054001E7357 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1746B50024DE0054001E7357 /* AlertItem.swift */; };
 		17493752269C3813001DB8B5 /* CloudDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17493751269C3813001DB8B5 /* CloudDefaults.swift */; };
 		174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174D696C254C5C09000CCCC8 /* Localizable.strings */; };
-		1756945E254F6DE600321F41 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1756945D254F6DE600321F41 /* OnboardingView.swift */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
 		176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
 		176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E324AA725C00D38E6B /* SettingsStore.swift */; };
+		176FA85527173EA200D9F734 /* BirdGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FA85427173EA200D9F734 /* BirdGrid.swift */; };
+		176FA85727174BBD00D9F734 /* BirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FA85627174BBD00D9F734 /* BirdCell.swift */; };
 		1779657F2453184D00A2A1B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
@@ -128,13 +129,14 @@
 		174D6971254C5C0C000CCCC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		174D6976254C5E4E000CCCC8 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		174D6977254C5E4F000CCCC8 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1756945D254F6DE600321F41 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
 		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		176FA85427173EA200D9F734 /* BirdGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdGrid.swift; sourceTree = "<group>"; };
+		176FA85627174BBD00D9F734 /* BirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdCell.swift; sourceTree = "<group>"; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		177965802453195D00A2A1B2 /* ManagedFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFilterList.swift; sourceTree = "<group>"; };
 		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
@@ -367,10 +369,11 @@
 			children = (
 				17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */,
 				17B960F423699370003AA802 /* ContentView.swift */,
-				1756945D254F6DE600321F41 /* OnboardingView.swift */,
 				17FB3B8A236B96A20059D268 /* FilterCriteria.swift */,
 				17FB3B8C236B9ABC0059D268 /* BirdList.swift */,
 				1715B3682437305100413FBF /* BirdRow.swift */,
+				176FA85427173EA200D9F734 /* BirdGrid.swift */,
+				176FA85627174BBD00D9F734 /* BirdCell.swift */,
 				17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */,
 				17ECD39D24A72D1800226BF4 /* BirdImageView.swift */,
 				17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */,
@@ -585,10 +588,12 @@
 				17206831236B5A920008905F /* Filter.swift in Sources */,
 				1746B50124DE0054001E7357 /* AlertItem.swift in Sources */,
 				17E6B34F25497DE500691729 /* SelectSortOptions.swift in Sources */,
+				176FA85727174BBD00D9F734 /* BirdCell.swift in Sources */,
 				17493752269C3813001DB8B5 /* CloudDefaults.swift in Sources */,
 				176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */,
 				1720682F236AD0F40008905F /* SymbolView.swift in Sources */,
 				17EE09C0254F34BC00C600A7 /* SectionGroup.swift in Sources */,
+				176FA85527173EA200D9F734 /* BirdGrid.swift in Sources */,
 				17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */,
 				177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */,
 				17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */,
@@ -603,7 +608,6 @@
 				17D1A505236CDA8500E8588C /* Data.swift in Sources */,
 				1715B3692437305100413FBF /* BirdRow.swift in Sources */,
 				17E6B35925497F9900691729 /* SortOptions.swift in Sources */,
-				1756945E254F6DE600321F41 /* OnboardingView.swift in Sources */,
 				17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */,
 				17E6B35F2549974900691729 /* Checkmark.swift in Sources */,
 				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
