@@ -97,7 +97,7 @@ class MarketingTests: XCTestCase {
 
         // Show Detail
         XCTContext.runActivity(named: "Show detail view and scroll down") { (_) in
-            let birdButton = app.tables.buttons["birdRow_4240"]
+            let birdButton = app.buttons["birdRow_4240"]
             _ = birdButton.waitForExistence(timeout: wait4existenceTimeout)
             birdButton.tap()
 
@@ -122,9 +122,7 @@ class MarketingTests: XCTestCase {
 
         XCTContext.runActivity(named: "Cancel search and enter filter criteria") { (_) in
             // Tap "Back"
-            if app.windows.firstMatch.horizontalSizeClass == .compact {
-                app.navigationBars.buttons.firstMatch.tap()
-            }
+            app.navigationBars.buttons.firstMatch.tap()
 
             // Cancel search
             let cancelButton = app.otherElements["searchBar"].buttons["cancelButton"]
@@ -140,7 +138,7 @@ class MarketingTests: XCTestCase {
             XCTAssert(filterButton.exists, "filter button exists")
             filterButton.tap()
 
-            let commonBirdsButton = app.tables.buttons["onlyCommon"]
+            let commonBirdsButton = app.buttons["onlyCommon"]
             _ = commonBirdsButton.waitForExistence(timeout: wait4existenceTimeout)
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
@@ -150,9 +148,7 @@ class MarketingTests: XCTestCase {
 
         XCTContext.runActivity(named: "Go back to main view") { (_) in
             // Tap "Back"
-            if app.windows.firstMatch.horizontalSizeClass == .compact {
-                app.navigationBars.buttons.firstMatch.tap()
-            }
+            app.navigationBars.buttons.firstMatch.tap()
 
             // Navigate to Sort Options screen
             let sortButton = app.buttons["sortButton"]
@@ -167,9 +163,7 @@ class MarketingTests: XCTestCase {
             takeScreenShot(name: "06_Sortoptions")
 
             // Tap "Back"
-            if app.windows.firstMatch.horizontalSizeClass == .compact {
-                app.navigationBars.buttons.firstMatch.tap()
-            }
+            app.navigationBars.buttons.firstMatch.tap()
 
             takeScreenShot(name: "07_GroupedBirdList")
         }
