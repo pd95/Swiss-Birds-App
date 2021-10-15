@@ -114,8 +114,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
 
             print("handleUserActivity: birdID=\(birdID)")
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
-                state.showBird(birdID)
+            if let bird = Species.species(for: birdID) {
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
+                    state.showBird(bird)
+                }
             }
         }
         else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {

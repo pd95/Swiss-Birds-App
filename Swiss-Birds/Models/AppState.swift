@@ -11,63 +11,6 @@ import SwiftUI
 import Combine
 import WidgetKit
 
-// Enumeration of all possible cases of the current selected NavigationLink
-enum MainNavigationLinkTarget: Hashable, Codable {
-    case nothing
-    case filterList
-    case birdDetails(Int)
-    case programmaticBirdDetails(Int)
-    case sortOptions
-
-
-    // MARK: Codable protocol
-    enum Key: CodingKey {
-        case rawValue
-        case associatedValue
-    }
-
-    enum CodingError: Error {
-        case unknownValue
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: Key.self)
-        let rawValue = try container.decode(Int.self, forKey: .rawValue)
-        switch rawValue {
-        case 0:
-            self = .filterList
-        case 1:
-            let speciesId = try container.decode(Int.self, forKey: .associatedValue)
-            self = .birdDetails(speciesId)
-        case 2:
-            let speciesId = try container.decode(Int.self, forKey: .associatedValue)
-            self = .programmaticBirdDetails(speciesId)
-        case 3:
-            self = .sortOptions
-        default:
-            throw CodingError.unknownValue
-        }
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: Key.self)
-        switch self {
-        case .nothing:
-            try container.encode(-1, forKey: .rawValue)
-        case .filterList:
-            try container.encode(0, forKey: .rawValue)
-        case .birdDetails(let speciesId):
-            try container.encode(1, forKey: .rawValue)
-            try container.encode(speciesId, forKey: .associatedValue)
-        case .programmaticBirdDetails(let speciesId):
-            try container.encode(2, forKey: .rawValue)
-            try container.encode(speciesId, forKey: .associatedValue)
-        case .sortOptions:
-            try container.encode(3, forKey: .rawValue)
-        }
-    }
-}
-
 class AppState : ObservableObject {
 
     @Published var searchText : String = ""
@@ -102,19 +45,7 @@ class AppState : ObservableObject {
         }
     }
 
-
-    @Published var selectedNavigationLink: MainNavigationLinkTarget? = nil
-
-    var selectedNavigationLinkBinding: Binding<MainNavigationLinkTarget?> {
-        // Define custom bindings to avoid "duplicate assignments" (which often causes navigation hick-ups)
-        Binding<MainNavigationLinkTarget?>(
-            get: { self.selectedNavigationLink },
-            set: { (newValue) in
-                if self.selectedNavigationLink != newValue {
-                    self.selectedNavigationLink = newValue
-                }
-            })
-    }
+    var navigationState = NavigationState()
 
     // Single view model used in BirdDetailView, updated when selected bird changes
     let currentBirdDetails = BirdDetailViewModel()
@@ -410,13 +341,13 @@ class AppState : ObservableObject {
             .store(in: &cancellables)
     }
 
-    func showBird(_ speciesId: Int) {
+    func showBird(_ species: Species) {
         if isEditingSearchField {
             UIApplication.shared.endEditing()
         }
 
         withAnimation {
-            selectedNavigationLink = .programmaticBirdDetails(speciesId)
+            navigationState.mainNavigation = .birdDetails(species)
         }
     }
 
@@ -426,7 +357,7 @@ class AppState : ObservableObject {
         }
 
         withAnimation {
-            selectedNavigationLink = .filterList
+            navigationState.mainNavigation = .filterList
         }
     }
 
@@ -436,7 +367,7 @@ class AppState : ObservableObject {
         }
 
         withAnimation {
-            selectedNavigationLink = .sortOptions
+            navigationState.mainNavigation = .sortOptions
         }
     }
 
@@ -446,7 +377,7 @@ class AppState : ObservableObject {
         }
 
         withAnimation {
-            selectedNavigationLink = nil
+            navigationState.mainNavigation = nil
             showBirdOfTheDay = true
         }
     }
@@ -466,7 +397,7 @@ class AppState : ObservableObject {
 
 extension AppState : CustomStringConvertible {
     var description: String {
-        return "ApplicationState(searchText=\(searchText), selectedNavigationLink=\(String(describing: selectedNavigationLink)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay), sortOptions=\(sortOptions))"
+        return "ApplicationState(searchText=\(searchText), navigationState=\(String(describing: navigationState)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay), sortOptions=\(sortOptions))"
     }
 }
 
@@ -491,13 +422,8 @@ extension AppState {
 
         // Restore latest navigation
         if let selectedNavigationLinkData = stateArray[Key.selectedNavigationLink] as? Data,
-            let selectedNavigationLink = try? JSONDecoder().decode(MainNavigationLinkTarget.self, from: selectedNavigationLinkData) {
-            if case .birdDetails(let speciesId) = selectedNavigationLink {
-                self.selectedNavigationLink = .programmaticBirdDetails(speciesId)
-            }
-            else {
-                self.selectedNavigationLink = selectedNavigationLink
-            }
+           let selectedNavigationLink = try? JSONDecoder().decode(NavigationState.MainNavigationLinkTarget.self, from: selectedNavigationLinkData) {
+            self.navigationState.mainNavigation = selectedNavigationLink
         }
 
 //        if let sortByColumn = stateArray[Key.sortByColumn] as? SortOptions.SortColumn.RawValue,
@@ -515,7 +441,7 @@ extension AppState {
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
         }
-        let selectedNavigationLinkData = (try? JSONEncoder().encode(selectedNavigationLink)) ?? Data()
+        let selectedNavigationLinkData = (try? JSONEncoder().encode(navigationState.mainNavigation)) ?? Data()
 
         let stateArray : [String:Any] = [
             Key.searchText: searchText,

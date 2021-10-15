@@ -29,6 +29,7 @@ struct BirdRow: View {
         HStack {
             Image(uiImage: image)
                 .resizable()
+                .renderingMode(.original)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: dynamicImageSize, height: dynamicImageSize)
                 .clipShape(Circle())
@@ -89,6 +90,11 @@ struct BirdRow: View {
                         .accessibility(hidden: true)
                 }
             }
+
+            Image(systemName: "chevron.right")
+                .imageScale(.small)
+                .font(.headline)
+                .foregroundColor(Color(.tertiaryLabel))
         }
         .accessibilityElement(children: .combine)
         .onReceive(state.getHeadShot(for: bird)) { (image) in

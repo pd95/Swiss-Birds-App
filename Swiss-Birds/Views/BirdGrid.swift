@@ -26,7 +26,7 @@ struct BirdGrid: View {
                         Section(header: sectionHeader(for: key)) {
                             ForEach(state.groupedBirds[key]!) { bird in
                                 Button {
-                                    state.selectedNavigationLinkBinding.wrappedValue = MainNavigationLinkTarget.birdDetails(bird.speciesId)
+                                    state.showBird(bird)
                                 } label: {
                                     BirdCell(bird: bird, searchText: state.searchText)
                                 }
@@ -46,8 +46,6 @@ struct BirdGrid: View {
                         }
                     }
                 }))
-
-                dynamicNavigationLinkTarget
                 Text(" ")
             }
         }
@@ -77,42 +75,6 @@ struct BirdGrid: View {
                 .padding(.vertical, 4)
         )
         .accessibility(identifier: "section_\(group.id)")
-    }
-
-    // Here we create the dynamic navigation link (filter list or restored bird selection)
-    var dynamicNavigationLinkTarget: some View {
-        var currentTag = state.selectedNavigationLink ?? .nothing
-        switch currentTag {
-        case .filterList, .sortOptions, .programmaticBirdDetails, .birdDetails:
-            break
-        default:
-            currentTag = .nothing
-        }
-
-        // Create destination view
-        let destination: some View = Group {
-            switch currentTag {
-            case .filterList:
-                FilterCriteria(managedList: state.filters)
-            case .programmaticBirdDetails(let speciesId), .birdDetails(let speciesId):
-                if let species = Species.species(for: speciesId) {
-                    BirdDetailContainer(model: state.currentBirdDetails, bird: species)
-                }
-            case .sortOptions:
-                SelectSortOptions(sorting: $state.sortOptions)
-            default:
-                EmptyView()
-            }
-        }
-
-        // Create the NavigationLink
-        return NavigationLink(destination: destination,
-                              tag: currentTag,
-                              selection: state.selectedNavigationLinkBinding) {
-            Text("*** never shown ***")
-        }
-        .frame(width: 0, height: 0)
-        .hidden()
     }
 }
 

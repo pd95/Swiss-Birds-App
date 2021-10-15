@@ -22,7 +22,7 @@ struct BirdOfTheDay: View {
 
             Button(action: {
                 isPresented = false
-                state.showBird(species.speciesId)
+                state.showBird(species)
             }) {
                 VStack {
                     Color.clear

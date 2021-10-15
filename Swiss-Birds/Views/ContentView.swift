@@ -13,6 +13,8 @@ struct ContentView: View {
     @EnvironmentObject private var state : AppState
     @Environment(\.horizontalSizeClass) private var sizeClass
 
+    @ObservedObject var navigationState: NavigationState = AppState.shared.navigationState
+
     var body: some View {
         ZStack {
             NavigationView {
@@ -26,6 +28,7 @@ struct ContentView: View {
                             .edgesIgnoringSafeArea(.bottom)
                             .navigationBarTitle(Text("Vögel der Schweiz"))
                             .navigationBarItems(leading: sortButton, trailing: filterButton)
+                            .background(dynamicNavigationLink)
                             .zIndex(2)
 
                     } else {
@@ -33,6 +36,7 @@ struct ContentView: View {
                             .edgesIgnoringSafeArea(.bottom)
                             .navigationBarTitle(Text("Vögel der Schweiz"))
                             .navigationBarItems(leading: sortButton, trailing: filterButton)
+                            .background(dynamicNavigationLink)
                             .zIndex(2)
                     }
                 }
@@ -120,6 +124,36 @@ struct ContentView: View {
         .hoverEffect()
         .disabled(Filter.allFiltersGrouped.isEmpty)
         .accessibility(identifier: "filterButton")
+    }
+
+    var dynamicNavigationLink: some View {
+        NavigationLink(
+            destination: presentNavigation(destination: navigationState.mainNavigation),
+            isActive: Binding<Bool>(get: {
+                navigationState.mainNavigation != nil
+            }, set: { value in
+                if !value {
+                    navigationState.mainNavigation = nil
+                }
+            })
+        ) {
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    func presentNavigation(destination: NavigationState.MainNavigationLinkTarget?) -> some View
+    {
+        switch destination {
+        case .filterList:
+            FilterCriteria(managedList: state.filters)
+        case .birdDetails(let species):
+            BirdDetailContainer(model: state.currentBirdDetails, bird: species)
+        case .sortOptions:
+            SelectSortOptions(sorting: $state.sortOptions)
+        default:
+            EmptyView()
+        }
     }
 }
 

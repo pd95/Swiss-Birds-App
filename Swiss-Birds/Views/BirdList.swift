@@ -23,11 +23,9 @@ struct BirdList: View {
                 ForEach(state.groups, id: \.self) { key in
                     Section(header: sectionHeader(for: key)) {
                         ForEach(state.groupedBirds[key]!) { bird in
-                            NavigationLink(
-                                destination: BirdDetailContainer(model: state.currentBirdDetails, bird: bird),
-                                tag: MainNavigationLinkTarget.birdDetails(bird.speciesId),
-                                selection: state.selectedNavigationLinkBinding
-                            ) {
+                            Button {
+                                state.showBird(bird)
+                            } label: {
                                 BirdRow(bird: bird, searchText: state.searchText)
                             }
                             .accessibility(identifier: "birdRow_\(bird.speciesId)")
@@ -46,8 +44,6 @@ struct BirdList: View {
                     }
                 }
             }))
-
-            dynamicNavigationLinkTarget
             Text(" ")
         }
     }
@@ -67,42 +63,6 @@ struct BirdList: View {
             }
         }
         .accessibility(identifier: "section_\(group.id)")
-    }
-
-    // Here we create the dynamic navigation link (filter list or restored bird selection)
-    var dynamicNavigationLinkTarget: some View {
-        var currentTag = state.selectedNavigationLink ?? .nothing
-        switch currentTag {
-        case .filterList, .sortOptions, .programmaticBirdDetails:
-            break
-        default:
-            currentTag = .nothing
-        }
-
-        // Create destination view
-        let destination: some View = Group {
-            switch currentTag {
-            case .filterList:
-                FilterCriteria(managedList: state.filters)
-            case .programmaticBirdDetails(let speciesId):
-                if let species = Species.species(for: speciesId) {
-                    BirdDetailContainer(model: state.currentBirdDetails, bird: species)
-                }
-            case .sortOptions:
-                SelectSortOptions(sorting: $state.sortOptions)
-            default:
-                EmptyView()
-            }
-        }
-
-        // Create the NavigationLink
-        return NavigationLink(destination: destination,
-                              tag: currentTag,
-                              selection: state.selectedNavigationLinkBinding) {
-            Text("*** never shown ***")
-        }
-        .frame(width: 0, height: 0)
-        .hidden()
     }
 }
 
