@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var state : AppState
+    @EnvironmentObject private var state: AppState
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     @ObservedObject var navigationState: NavigationState = AppState.shared.navigationState
@@ -21,8 +21,7 @@ struct ContentView: View {
                 if state.initialLoadRunning {
                     ActivityIndicatorView()
                         .zIndex(1)
-                }
-                else {
+                } else {
                     if #available(iOS 14, *), sizeClass == .regular {
                         BirdGrid()
                             .edgesIgnoringSafeArea(.bottom)
@@ -60,7 +59,7 @@ struct ContentView: View {
                     .accessibility(hint: Text("Antippen zum schliessen."))
                     .zIndex(10)
                     .accessibility(sortPriority: 990)
-                    .onAppear() {
+                    .onAppear {
                         if state.birdOfTheDayImage == nil {
                             state.getBirdOfTheDay()
                         }
@@ -68,8 +67,7 @@ struct ContentView: View {
 
                 if let birdOfTheDay = state.birdOfTheDay,
                    let species = Species.species(for: birdOfTheDay.speciesID),
-                   let image = state.birdOfTheDayImage
-                {
+                   let image = state.birdOfTheDayImage {
                     BirdOfTheDay(isPresented: $state.showBirdOfTheDay.animation(), image: image, species: species)
                         .animation(.easeOut)
                         .transition(AnyTransition.move(edge: .bottom)
@@ -82,7 +80,7 @@ struct ContentView: View {
         .alert(item: $state.alertItem, content: { (alertItem) -> Alert in
             alertItem.alert
         })
-        .onAppear() {
+        .onAppear {
             if SettingsStore.shared.startupCheckBirdOfTheDay {
                 state.checkBirdOfTheDay()
             }
@@ -142,8 +140,7 @@ struct ContentView: View {
     }
 
     @ViewBuilder
-    func presentNavigation(destination: NavigationState.MainNavigationLinkTarget?) -> some View
-    {
+    func presentNavigation(destination: NavigationState.MainNavigationLinkTarget?) -> some View {
         switch destination {
         case .filterList:
             FilterCriteria(managedList: state.filters)

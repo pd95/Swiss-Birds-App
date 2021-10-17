@@ -87,7 +87,7 @@ enum VdsAPI {
 
     static func getSpecie(for id: Int, language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<VdsSpecieDetail, Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/species/\(id)_\(language).json")))
-            .map { (specie: VdsSpecieDetail_new)-> VdsSpecieDetail in
+            .map { (specie: VdsSpecieDetail_new) -> VdsSpecieDetail in
                 VdsSpecieDetail(from: specie)
             }
             .eraseToAnyPublisher()

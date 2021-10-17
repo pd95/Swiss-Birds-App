@@ -14,7 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -23,8 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         if CommandLine.arguments.contains("enable-testing") {
             SettingsStore.shared.setupForTesting()
-        }
-        else {
+        } else {
             if let activity = session.stateRestorationActivity {
                 AppState.shared.restore(from: activity)
             }
@@ -89,7 +87,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         print("sceneDidEnterBackground")
     }
-    
+
     func stateRestorationActivity(for scene: UIScene) -> NSUserActivity? {
         let activity = NSUserActivity(activityType: Bundle.main.activityType)
         AppState.shared.store(in: activity)
@@ -119,14 +117,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     state.showBird(bird)
                 }
             }
-        }
-        else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
+        } else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
             print("handleUserActivity: showing bird of the day \(state.birdOfTheDay.debugDescription)")
             DispatchQueue.main.asyncAfter(deadline: .now()+0.3) {
                 state.checkBirdOfTheDay(showAlways: true)
             }
-        }
-        else {
+        } else {
             print("Skipping unsupported \(userActivity.activityType)")
             return
         }

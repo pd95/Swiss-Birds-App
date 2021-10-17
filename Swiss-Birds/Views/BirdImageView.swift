@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct BirdImageView: View {
-    var image : UIImage?
-    var author : String
-    var description : String
+    var image: UIImage?
+    var author: String
+    var description: String
 
     var body: some View {
         VStack {
@@ -19,8 +19,7 @@ struct BirdImageView: View {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-            }
-            else {
+            } else {
                 Color.clear
                     .frame(maxWidth: .infinity)
                     .overlay(ActivityIndicatorView())
@@ -40,7 +39,6 @@ struct BirdImageView: View {
         .accessibility(label: Text("Vogelbild zeigt \(description)"))
     }
 }
-
 
 struct BirdImageView_Previews: PreviewProvider {
     static var previews: some View {

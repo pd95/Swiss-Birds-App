@@ -85,7 +85,7 @@ extension UserDefaults {
         static let favoriteSpeciesOld = "favoriteSpecies"
         static let favoriteSpecies = "sync_favoriteSpecies"
     }
-    
+
     @objc dynamic var sync_favoriteSpecies: [Int] {
         get {
             array(forKey: Keys.favoriteSpecies) as? [Int] ?? []

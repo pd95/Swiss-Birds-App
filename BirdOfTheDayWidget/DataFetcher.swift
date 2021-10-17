@@ -11,7 +11,6 @@ import Combine
 import UIKit
 import os.log
 
-
 class DataFetcher: ObservableObject {
     static let shared = DataFetcher()
 
@@ -21,7 +20,6 @@ class DataFetcher: ObservableObject {
 
     private var birdOfTheDaySubscriber: AnyCancellable?
     private var getSpecieSubscriber: AnyCancellable?
-
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -121,7 +119,7 @@ class DataFetcher: ObservableObject {
             }
     }
 
-    func getBirdOfTheDay(completion: @escaping (BirdOfTheDay)->Void) {
+    func getBirdOfTheDay(completion: @escaping (BirdOfTheDay) -> Void) {
         guard let speciesID = speciesID,
               let name = name,
               let image = image,
@@ -137,7 +135,7 @@ class DataFetcher: ObservableObject {
     }
 }
 
-extension Subscribers.Completion: CustomStringConvertible{
+extension Subscribers.Completion: CustomStringConvertible {
     public var description: String {
         switch self {
             case .finished:

@@ -17,14 +17,12 @@ struct Checkmark: View {
         Group {
             if checked {
                 checkmark
-            }
-            else {
+            } else {
                 checkmark.hidden()
             }
         }
     }
 }
-
 
 struct Checkmark_Previews: PreviewProvider {
     static var previews: some View {

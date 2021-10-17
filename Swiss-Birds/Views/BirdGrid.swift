@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct BirdGrid: View {
-    
-    @EnvironmentObject private var state : AppState
+
+    @EnvironmentObject private var state: AppState
 
     var body: some View {
         ScrollView {
@@ -36,8 +36,8 @@ struct BirdGrid: View {
                     }
                 }
                 .padding(.horizontal)
-                .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
-                    let _ = print("simultaneousGesture DragGesture")
+                .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
+                    _ = print("simultaneousGesture DragGesture")
                     if state.isEditingSearchField {
                         print("Searching was enabled, but drag occurred => endEditing")
                         withAnimation {
@@ -60,8 +60,7 @@ struct BirdGrid: View {
             if #available(iOS 14.0, *) {
                 Text(LocalizedStringKey(group.name))
                     .textCase(nil)
-            }
-            else {
+            } else {
                 Text(LocalizedStringKey(group.name))
             }
             Spacer()

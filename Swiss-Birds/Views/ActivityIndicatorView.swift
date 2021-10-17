@@ -11,7 +11,7 @@ import SwiftUI
 /// `ActivityIndicatorView` is a wrapper class for the UIKit `UIActivityIndicatorView`
 ///
 struct ActivityIndicatorView: UIViewRepresentable {
-    let style : UIActivityIndicatorView.Style
+    let style: UIActivityIndicatorView.Style
 
     init(style: UIActivityIndicatorView.Style = .large) {
         self.style = style

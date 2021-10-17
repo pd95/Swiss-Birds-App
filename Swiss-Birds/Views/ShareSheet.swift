@@ -18,7 +18,6 @@ struct ShareSheet: UIViewControllerRepresentable {
 
     let item: Item
 
-
     func makeUIViewController(context: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: [context.coordinator], applicationActivities: nil)
         return controller
@@ -52,8 +51,6 @@ struct ShareSheet: UIViewControllerRepresentable {
         }
     }
 }
-
-
 
 struct ShareSheet_Previews: PreviewProvider {
     static var previews: some View {

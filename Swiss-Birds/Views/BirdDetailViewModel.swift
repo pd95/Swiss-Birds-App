@@ -16,7 +16,7 @@ class BirdDetailViewModel: ObservableObject {
 
     var bird: Species = .placeholder
 
-    @Published var details : VdsSpecieDetail?
+    @Published var details: VdsSpecieDetail?
     @Published var imageDetails = [ImageDetails]()
     @Published var voiceData: Data?
     var error: Error? {
@@ -45,7 +45,7 @@ class BirdDetailViewModel: ObservableObject {
             fetchData()
         }
     }
-    
+
     deinit {
         print("BirdDetailViewModel.\(#function)")
     }
@@ -75,13 +75,13 @@ class BirdDetailViewModel: ObservableObject {
                         self.details = details
 
                         var imageDetails = [ImageDetails]()
-                        if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty{
+                        if let author = details.autor0, let description = details.bezeichnungDe0, !author.isEmpty {
                             imageDetails.append(.init(index: 0, image: nil, author: author, description: description))
                         }
-                        if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty{
+                        if let author = details.autor1, let description = details.bezeichnungDe1, !author.isEmpty {
                             imageDetails.append(.init(index: 1, image: nil, author: author, description: description))
                         }
-                        if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty{
+                        if let author = details.autor2, let description = details.bezeichnungDe2, !author.isEmpty {
                             imageDetails.append(.init(index: 2, image: nil, author: author, description: description))
                         }
                         self.imageDetails = imageDetails
@@ -96,13 +96,13 @@ class BirdDetailViewModel: ObservableObject {
             .flatMap {(imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Error> in
                 // Generate publisher for each missing image
                 let publishers = imageDetails
-                    .filter{ $0.image == nil }
+                    .filter { $0.image == nil }
                     .map({ imageDetail -> UIImagePublisher in
                         self.fetchImage(imageDetail: imageDetail)
                     })
 
                 let sequence = Publishers.Sequence<[UIImagePublisher], Error>(sequence: publishers)
-                return sequence.flatMap{ $0 }.collect()
+                return sequence.flatMap { $0 }.collect()
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
@@ -133,7 +133,7 @@ class BirdDetailViewModel: ObservableObject {
             .compactMap({ $0.1.first })
             .filter({ $0.image != nil })
             .setFailureType(to: Error.self)
-            .flatMap { imageDetails -> AnyPublisher<Data?, Error> in
+            .flatMap { _ -> AnyPublisher<Data?, Error> in
                 VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess)
                     .map { (d: Data) -> Data? in d }
                     .eraseToAnyPublisher()
@@ -157,7 +157,7 @@ class BirdDetailViewModel: ObservableObject {
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
         VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index)
             .map { UIImage(data: $0) }
-            //.replaceError(with: nil)
+            // .replaceError(with: nil)
             .map { (image: UIImage?) -> (Int, UIImage?) in
                 return (imageDetail.index, image)
             }

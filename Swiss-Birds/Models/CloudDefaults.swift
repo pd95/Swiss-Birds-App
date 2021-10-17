@@ -13,9 +13,9 @@ import os.log
 final class CloudDefaults: NSObject {
     static let shared = CloudDefaults()
     static let syncPrefix = "sync_"
-    
+
     private var ignoreLocalChanges = false
-    
+
     private var synchronizedUserDefaultKeys = [String]()
 
     private override init() {
@@ -58,7 +58,7 @@ final class CloudDefaults: NSObject {
         }
         os_log("CloudDefaults.start: synchronized successfully")
     }
-    
+
     /// Called whenever the application enters foreground state, to ensure the store is up-to-date
     func synchronize() {
         #if DEBUG
@@ -68,8 +68,7 @@ final class CloudDefaults: NSObject {
         #endif
         if NSUbiquitousKeyValueStore.default.synchronize() {
             os_log("CloudDefaults.synchronize: success")
-        }
-        else {
+        } else {
             os_log("CloudDefaults.synchronize: error!!")
         }
     }
@@ -80,7 +79,7 @@ final class CloudDefaults: NSObject {
         os_log("CloudDefaults.findNewSyncKeys: %{public}@", notification.debugDescription)
         for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
             guard key.hasPrefix(Self.syncPrefix) && synchronizedUserDefaultKeys.contains(key) == false else { continue }
-            
+
             os_log("CloudDefaults.findNewSyncKeys: New key found %{public}@, adding observer and pushing value to cloud store", key)
             synchronizedUserDefaultKeys.append(key)
             UserDefaults.standard.addObserver(self, forKeyPath: key, options: .new, context: nil) // Use KVO obervation mechanism
@@ -102,9 +101,9 @@ final class CloudDefaults: NSObject {
 
         ignoreLocalChanges = false
     }
-    
+
     /// This method is called whenever an observed UserDefaults key changes and pushes the new value to the cloud
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         guard ignoreLocalChanges == false else {
             os_log("CloudDefaults.observeValue: UserDefaults %{public}@ changed, but ignored", keyPath?.description ?? "-")
             return

@@ -46,19 +46,16 @@ class MarketingTests: XCTestCase {
             print("language argument=\(languageArgument)")
             if languageArgument == "(fr)" {
                 language = "fr"
-            }
-            else if languageArgument == "(it)" {
+            } else if languageArgument == "(it)" {
                 language = "it"
-            }
-            else if languageArgument == "(en)" {
+            } else if languageArgument == "(en)" {
                 language = "en"
             }
-        }
-        else {
+        } else {
             language = Locale.current.languageCode ?? "de"
             print("language from locale=\(language)")
         }
-        
+
         assert(["de", "fr", "it", "en"].contains(language), "Language \(language) is not supported for test execution")
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
@@ -82,7 +79,7 @@ class MarketingTests: XCTestCase {
             XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
             takeScreenShot(name: "01_Main")
         }
-        
+
         // Search
         XCTContext.runActivity(named: "Search for a bird") { (_) in
             let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]

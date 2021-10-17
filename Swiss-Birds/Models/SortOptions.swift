@@ -30,11 +30,9 @@ struct SortOptions: CustomStringConvertible, Equatable {
         init?(rawValue: String) {
             if rawValue.hasPrefix("filter"), let filterType = FilterType(rawValue: rawValue) {
                 self = .filterType(filterType)
-            }
-            else if rawValue == "speciesName" {
+            } else if rawValue == "speciesName" {
                 self = .speciesName
-            }
-            else {
+            } else {
                 return nil
             }
         }

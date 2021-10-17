@@ -10,7 +10,6 @@ import WidgetKit
 import SwiftUI
 import Intents
 
-
 struct Provider: TimelineProvider {
 
     static let placeholderImage = UIImage(named: "Placeholder")!
@@ -26,7 +25,7 @@ struct Provider: TimelineProvider {
         return SimpleEntry(speciesID: speciesID, name: name, image: image, date: date)
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let speciesID = -1
         let name = "Blaumeise"
         let image = Self.placeholderImage
@@ -35,7 +34,7 @@ struct Provider: TimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         dataFetcher.getBirdOfTheDay { (speciesID, name, image, reloadDate) in
             let entry = SimpleEntry(speciesID: speciesID, name: name, image: image, date: reloadDate)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
@@ -55,7 +54,7 @@ struct SimpleEntry: TimelineEntry {
     static let exampleReal2 = SimpleEntry(speciesID: 710, name: "Common Shelduck", image: UIImage(named: "RealPlaceholder2")!, date: Date())
 }
 
-struct BirdOfTheDayWidgetEntryView : View {
+struct BirdOfTheDayWidgetEntryView: View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family: WidgetFamily
 

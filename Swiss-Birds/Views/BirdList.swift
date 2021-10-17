@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct BirdList: View {
-    
-    @EnvironmentObject private var state : AppState
+
+    @EnvironmentObject private var state: AppState
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +35,7 @@ struct BirdList: View {
                 .id(state.listID)
             }
             .listStyle(PlainListStyle())
-            .simultaneousGesture(DragGesture().onChanged({ (value: DragGesture.Value) in
+            .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
                 if state.isEditingSearchField {
                     print("Searching was enabled, but drag occurred => endEditing")
                     withAnimation {
@@ -57,8 +57,7 @@ struct BirdList: View {
             if #available(iOS 14.0, *) {
                 Text(LocalizedStringKey(group.name))
                     .textCase(nil)
-            }
-            else {
+            } else {
                 Text(LocalizedStringKey(group.name))
             }
         }

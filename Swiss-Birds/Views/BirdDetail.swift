@@ -9,21 +9,20 @@
 import SwiftUI
 import AVKit
 
-
 struct BirdDetail: View {
     @Environment(\.horizontalSizeClass) var sizeClass
     @Environment(\.sizeCategory) var sizeCategory
     @EnvironmentObject var favoritesManager: FavoritesManager
-    
+
     @ObservedObject var model: BirdDetailViewModel
 
     private let bird: Species
 
-    private let birdDetails : VdsSpecieDetail
-    private let characteristics : [Characteristic]
+    private let birdDetails: VdsSpecieDetail
+    private let characteristics: [Characteristic]
 
-    @State var isPlaying : Bool = false
-    @State var shareItem : ShareSheet.Item?
+    @State var isPlaying: Bool = false
+    @State var shareItem: ShareSheet.Item?
 
     init(model: BirdDetailViewModel) {
         self.model = model
@@ -50,7 +49,7 @@ struct BirdDetail: View {
                 .text(label: "Nestlingsdauer_Flugfaehigkeit_Tage", text: birdDetails.nestlingsdauerFlugfaehigkeitTage),
                 .separator(3),
                 .text(label: "Hoechstalter_CH", text: birdDetails.hoechstalterCH),
-                .text(label: "Hoechstalter_EURING", text: birdDetails.hoechstalterEURING),
+                .text(label: "Hoechstalter_EURING", text: birdDetails.hoechstalterEURING)
             ]),
             .header(text: "Status_in_CH", children: [
                 .text(text: birdDetails.statusInCH)
@@ -58,11 +57,11 @@ struct BirdDetail: View {
             .header(text: "Bestand", children: [
                 .text(label: "Bestand", text: birdDetails.bestand),
                 .text(label: "Rote_Liste_CH", text: birdDetails.roteListeCH, symbol: bird.filterSymbolName(.roteListe)),
-                .text(label: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung),
-            ]),
+                .text(label: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung)
+            ])
         ]
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -89,13 +88,12 @@ struct BirdDetail: View {
                     .accessibility(label: Text("Stimme wiedergeben"))
                     .accessibility(value: Text(isPlaying ? "Spielt" : "Pausiert"))
                 }
-                if sizeClass == .regular && !sizeCategory.isAccessibilityCategory  {
+                if sizeClass == .regular && !sizeCategory.isAccessibilityCategory {
                     HStack(alignment: .center) {
                         birdImages
                     }
                     .frame(maxWidth: .infinity)
-                }
-                else {
+                } else {
                     birdImages
                         .frame(maxWidth: .infinity)
                 }
@@ -117,7 +115,7 @@ struct BirdDetail: View {
             favoriteButton
             shareButton
         })
-        .onDisappear() {
+        .onDisappear {
             stopSound()
         }
     }
@@ -206,8 +204,7 @@ struct BirdDetail: View {
                 }
 
                 isPlaying = audioPlayer?.isPlaying ?? false
-            }
-            else {
+            } else {
                 stopSound()
             }
         }
@@ -221,15 +218,14 @@ struct BirdDetail: View {
 struct BirdDetailContainer: View {
 
     @ObservedObject var model: BirdDetailViewModel
-    
+
     let bird: Species
 
     var body: some View {
         if model.bird.speciesId == bird.speciesId && model.details != nil {
             BirdDetail(model: model)
                 .navigationBarTitle(Text(bird.name), displayMode: .inline)
-        }
-        else {
+        } else {
             ActivityIndicatorView(style: .large)
                 .navigationBarTitle(Text(bird.name), displayMode: .inline)
             .onAppear {
@@ -249,7 +245,7 @@ struct BirdDetail_Previews: PreviewProvider {
         AppState.shared.allSpecies[14]
     }()
     static var previews: some View {
-        AppState_PreviewWrapper() {
+        AppState_PreviewWrapper {
             BirdDetailContainer(model: appState.currentBirdDetails, bird: bird)
         }
         .environmentObject(appState)

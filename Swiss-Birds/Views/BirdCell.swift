@@ -15,7 +15,7 @@ struct BirdCell: View {
     @EnvironmentObject private var state: AppState
     @EnvironmentObject private var favoritesManager: FavoritesManager
     @State var image: UIImage = UIImage(named: "placeholder-headshot")!
-    
+
     var body: some View {
         VStack {
             Image(uiImage: image)
@@ -28,7 +28,7 @@ struct BirdCell: View {
                 .overlay(
                     Group {
                         if favoritesManager.isFavorite(species: bird) {
-                            Image(systemName:  "star.fill")
+                            Image(systemName: "star.fill")
                                 .imageScale(.large)
                                 .foregroundColor(.yellow)
                                 .shadow(color: Color.black, radius: 1)
@@ -52,8 +52,7 @@ struct BirdCell: View {
                                         Text(alternateName)
                                             .font(.footnote)
                                     }
-                                }
-                                else {
+                                } else {
                                     Text("\(language): ")
                                         .font(.footnote.italic())
                                     + Text("\(match.name ?? "") \(match.alternateName ?? "")".trimmingCharacters(in: .whitespaces))
@@ -77,7 +76,7 @@ struct BirdCell: View {
 
 struct BirdCell_Previews: PreviewProvider {
     static var previews: some View {
-        AppState_PreviewWrapper() {
+        AppState_PreviewWrapper {
             ForEach(AppState.shared.allSpecies[0..<3]) { bird in
                 BirdCell(bird: bird, searchText: "")
             }

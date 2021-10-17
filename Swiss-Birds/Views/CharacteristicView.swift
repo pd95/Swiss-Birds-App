@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CharacteristicView: View {
 
-    let characteristic : Characteristic
+    let characteristic: Characteristic
 
     var body: some View {
         HStack(alignment: .firstTextBaseline) {
@@ -18,11 +18,9 @@ struct CharacteristicView: View {
                 Text(LocalizedStringKey(characteristic.text))
                     .font(.title)
                     .padding(.top)
-            }
-            else if characteristic.isSeparator {
+            } else if characteristic.isSeparator {
                     Spacer()
-            }
-            else {
+            } else {
                 if !characteristic.label.isEmpty {
                     Text(LocalizedStringKey(characteristic.label))
                         .font(.headline)
@@ -46,8 +44,8 @@ struct CharacteristicView: View {
     }
 }
 
-struct CharacteristicsView : View {
-    let characteristics : [Characteristic]
+struct CharacteristicsView: View {
+    let characteristics: [Characteristic]
 
     var body: some View {
         ForEach(characteristics.filter {!$0.isEmpty}) { characteristic in
@@ -61,7 +59,6 @@ struct CharacteristicsView : View {
         }
     }
 }
-
 
 struct CharacteristicsView_Previews: PreviewProvider {
     static var previews: some View {

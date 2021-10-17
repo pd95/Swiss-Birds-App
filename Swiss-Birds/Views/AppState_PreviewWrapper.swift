@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct AppState_PreviewWrapper<Content: View>: View {
-    @EnvironmentObject private var state : AppState
+    @EnvironmentObject private var state: AppState
 
     let content: () -> Content
 
@@ -17,8 +17,7 @@ struct AppState_PreviewWrapper<Content: View>: View {
         NavigationView {
             if state.initialLoadRunning {
                 ActivityIndicatorView(style: .large)
-            }
-            else {
+            } else {
                 content()
             }
         }
@@ -27,7 +26,7 @@ struct AppState_PreviewWrapper<Content: View>: View {
 
 struct AppState_PreviewWrapper_Previews: PreviewProvider {
     static var previews: some View {
-        AppState_PreviewWrapper() {
+        AppState_PreviewWrapper {
             Text("AppState loaded")
         }
         .environmentObject(AppState.shared)

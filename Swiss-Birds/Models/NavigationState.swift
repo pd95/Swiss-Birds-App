@@ -62,6 +62,5 @@ class NavigationState: ObservableObject {
         }
     }
 
-
     @Published var mainNavigation: MainNavigationLinkTarget?
 }

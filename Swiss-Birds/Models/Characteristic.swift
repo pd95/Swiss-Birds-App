@@ -98,12 +98,12 @@ enum Characteristic: Identifiable {
         }
     }
 
-    static let example : [Characteristic] = [
+    static let example: [Characteristic] = [
         .header(text: "Merkmale", children: [
             .text(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus in ornare quam viverra orci sagittis eu volutpat odio. ")
         ]),
         .header(text: "Eigenschaften", children: [
-            //.text(label: FilterType.vogelgruppe.rawValue, text: Filter.allFilters.first!, symbol: Filter.allFilters.first!),
+            // .text(label: FilterType.vogelgruppe.rawValue, text: Filter.allFilters.first!, symbol: Filter.allFilters.first!),
             .text(label: "Laenge_cm", text: "10"),
             .text(label: "Spannweite_cm", text: "20"),
             .text(label: "Gewicht_g", text: "30"),
@@ -119,7 +119,7 @@ enum Characteristic: Identifiable {
             .text(label: "Nestlingsdauer_Flugfaehigkeit_Tage", text: "11-13"),
             .separator(3),
             .text(label: "Hoechstalter_CH", text: "Unsterblich"),
-            .text(label: "Hoechstalter_EURING", text: "13"),
+            .text(label: "Hoechstalter_EURING", text: "13")
         ]),
         .header(text: "Status_in_CH", children: [
             .text(text: "In Schlössern und alten Burgen beim Zauberbrunnen")
@@ -127,9 +127,8 @@ enum Characteristic: Identifiable {
         .header(text: "Bestand", children: [
             .text(label: "Bestand", text: "1-2"),
             .text(label: "Rote_Liste_CH", text: ""),
-            .text(label: "Prioritaetsart_Artenfoerderung", text: "Nein"),
-        ]),
+            .text(label: "Prioritaetsart_Artenfoerderung", text: "Nein")
+        ])
     ]
 
 }
-

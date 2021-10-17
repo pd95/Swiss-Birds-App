@@ -22,14 +22,12 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
     private func remove(filter: Filter) {
         if let index = list[filter.type]?.firstIndex(of: filter.filterId),
-           index >= 0
-        {
-            list[filter.type]!.remove(at:index)
+           index >= 0 {
+            list[filter.type]!.remove(at: index)
             if list[filter.type]!.isEmpty {
                 list.removeValue(forKey: filter.type)
             }
-        }
-        else {
+        } else {
             print("removeFilter called without filter being selected!")
         }
     }
@@ -44,8 +42,7 @@ class ManagedFilterList: ObservableObject, CustomStringConvertible {
         objectWillChange.send()
         if contains(filter: filter) {
             remove(filter: filter)
-        }
-        else {
+        } else {
             add(filter: filter)
         }
     }

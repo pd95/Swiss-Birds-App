@@ -10,11 +10,11 @@ import Foundation
 import Combine
 
 class FavoritesManager: ObservableObject {
-    
+
     static let shared = FavoritesManager()
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     private init() {
         // Register as UserDefaults observer to update the favorites synched from iCloud
         UserDefaults.standard
@@ -33,7 +33,7 @@ class FavoritesManager: ObservableObject {
             })
             .store(in: &cancellables)
     }
-    
+
     @Published private(set) var favorites: Set<Species.Id> = Set(SettingsStore.shared.favoriteSpecies)
     private var changingFavorites = false
 
@@ -43,15 +43,14 @@ class FavoritesManager: ObservableObject {
 
         if favorites.contains(species.speciesId) {
             favorites.remove(species.speciesId)
-        }
-        else {
+        } else {
             favorites.insert(species.speciesId)
         }
-        
+
         SettingsStore.shared.favoriteSpecies = favorites.sorted()
         changingFavorites = false
     }
-    
+
     func isFavorite(species: Species) -> Bool {
         favorites.contains(species.speciesId)
     }

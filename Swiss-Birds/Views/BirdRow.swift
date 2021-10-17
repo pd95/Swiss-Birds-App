@@ -16,7 +16,7 @@ struct BirdRow: View {
     @EnvironmentObject private var state: AppState
     @EnvironmentObject private var favoritesManager: FavoritesManager
     @State var image: UIImage = UIImage(named: "placeholder-headshot")!
-    
+
     func hasEntwicklungsAtlasSymbol() -> Bool {
         return !bird.filterSymbolName(.entwicklungatlas).isEmpty
     }
@@ -24,7 +24,7 @@ struct BirdRow: View {
     var dynamicImageSize: CGFloat {
         UIFontMetrics.default.scaledValue(for: 40)
     }
-    
+
     var body: some View {
         HStack {
             Image(uiImage: image)
@@ -39,7 +39,7 @@ struct BirdRow: View {
                 .overlay(
                     Group {
                         if favoritesManager.isFavorite(species: bird) {
-                            Image(systemName:  "star.fill")
+                            Image(systemName: "star.fill")
                                 .imageScale(.medium)
                                 .foregroundColor(.yellow)
                                 .shadow(color: Color.black, radius: 1)
@@ -64,8 +64,7 @@ struct BirdRow: View {
                                         Text(alternateName)
                                             .font(.footnote)
                                     }
-                                }
-                                else {
+                                } else {
                                     Text("\(language): ")
                                         .font(.footnote.italic())
                                     + Text("\(match.name ?? "") \(match.alternateName ?? "")".trimmingCharacters(in: .whitespaces))
@@ -81,7 +80,7 @@ struct BirdRow: View {
             Spacer()
 
             if !sizeCategory.isAccessibilityCategory {
-                if state.sortOptions.column != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol()  {
+                if state.sortOptions.column != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol() {
                     SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
                         .accessibility(hidden: true)
                 }
@@ -107,7 +106,7 @@ struct BirdRow: View {
 
 struct BirdRow_Previews: PreviewProvider {
     static var previews: some View {
-        AppState_PreviewWrapper() {
+        AppState_PreviewWrapper {
             List(AppState.shared.allSpecies[0..<3]) { bird in
                 BirdRow(bird: bird, searchText: "")
             }

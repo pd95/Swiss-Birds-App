@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct FilterCriteria: View {
-    @EnvironmentObject private var state : AppState
-    @ObservedObject var managedList : ManagedFilterList
+    @EnvironmentObject private var state: AppState
+    @ObservedObject var managedList: ManagedFilterList
 
     var body: some View {
         List {
@@ -41,7 +41,7 @@ struct FilterCriteria: View {
 
 struct FilterCriteria_Previews: PreviewProvider {
     static var previews: some View {
-        AppState_PreviewWrapper() {
+        AppState_PreviewWrapper {
             FilterCriteria(managedList: ManagedFilterList())
         }
         .environmentObject(AppState.shared)
@@ -88,7 +88,7 @@ struct FilterCheckButton: View {
         self.filter = filter
     }
 
-    var accessibilityTraits : AccessibilityTraits {
+    var accessibilityTraits: AccessibilityTraits {
         managedList.contains(filter: filter) ? [.isSelected] : []
     }
 

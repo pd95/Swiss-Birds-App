@@ -19,7 +19,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     case favorites = "favorites"
     case undefined
 
-    var shouldSortForDisplay : Bool {
+    var shouldSortForDisplay: Bool {
         switch self {
             case .lebensraum, .nahrung, .vogelgruppe:
                 return true
@@ -44,7 +44,7 @@ enum FilterType: String, CaseIterable, CustomStringConvertible {
     var isSelectable: Bool {
         self != .undefined
     }
-    
+
     var isFilterCategory: Bool {
         switch self {
         case .undefined, .favorites:
@@ -61,10 +61,10 @@ struct Filter: Identifiable, Equatable, Hashable, Comparable {
     let id = UUID()
 
     let filterId: Id
-    let name : String
-    let type : FilterType
+    let name: String
+    let type: FilterType
 
-    var uniqueFilterId : String {
+    var uniqueFilterId: String {
         get {
             return "\(type.rawValue)-\(filterId)"
         }
@@ -80,19 +80,19 @@ struct Filter: Identifiable, Equatable, Hashable, Comparable {
     }
 
     static func filter(forId filterId: Id, ofType filterType: FilterType) -> Filter? {
-        allFiltersGrouped[filterType]?.filter{$0.filterId == filterId}.first
+        allFiltersGrouped[filterType]?.filter {$0.filterId == filterId}.first
     }
 
     static let undefined = Filter(filterId: 0, name: "Undefiniert", type: .undefined)
 
     static let favorites = Filter(filterId: 1, name: "Favoriten", type: .favorites)
 
-    static var commonBirds : Filter = {
-        allFiltersGrouped[.haeufigeart]!.filter{ $0.filterId == 1 }.first!
+    static var commonBirds: Filter = {
+        allFiltersGrouped[.haeufigeart]!.filter { $0.filterId == 1 }.first!
     }()
 
-    static var hasVoice : Filter = {
-        allFiltersGrouped[.vogelstimme]!.filter{ $0.filterId == 1 }.first!
+    static var hasVoice: Filter = {
+        allFiltersGrouped[.vogelstimme]!.filter { $0.filterId == 1 }.first!
     }()
 
     // MARK: Comparable
@@ -102,8 +102,7 @@ struct Filter: Identifiable, Equatable, Hashable, Comparable {
                 return lhs.uniqueFilterId < rhs.uniqueFilterId
             }
             return lhs.name < rhs.name
-        }
-        else {
+        } else {
             return rhs.type == .undefined
         }
     }

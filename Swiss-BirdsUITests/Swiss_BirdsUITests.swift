@@ -31,8 +31,8 @@ class Swiss_BirdsUITests: XCTestCase {
         // Rotate iPad
         if UIDevice.current.userInterfaceIdiom == .pad {
             // Change orientation twice to ensure double column navigation bar works
-            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait;
-            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft;
+            XCUIDevice.shared.orientation = UIDeviceOrientation.portrait
+            XCUIDevice.shared.orientation = UIDeviceOrientation.landscapeLeft
         }
 
         // Check if a specific language has been passed on for testing
@@ -41,19 +41,16 @@ class Swiss_BirdsUITests: XCTestCase {
             print("language argument=\(languageArgument)")
             if languageArgument == "(fr)" {
                 language = "fr"
-            }
-            else if languageArgument == "(it)" {
+            } else if languageArgument == "(it)" {
                 language = "it"
-            }
-            else if languageArgument == "(en)" {
+            } else if languageArgument == "(en)" {
                 language = "en"
             }
-        }
-        else {
+        } else {
             language = Locale.current.languageCode ?? "de"
             print("language from locale=\(language)")
         }
-        
+
         assert(["de", "fr", "it", "en"].contains(language), "Language \(language) is not supported for test execution")
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
@@ -64,7 +61,6 @@ class Swiss_BirdsUITests: XCTestCase {
 
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
 
     enum MyUIElements: String {
         case navigationBar
@@ -74,7 +70,7 @@ class Swiss_BirdsUITests: XCTestCase {
         case searchTextClearButton, searchTextCancelButton
         case birdDetailViewScrollView
         case filterContainerView
-        
+
         var element: XCUIElement {
             switch self {
                 case .navigationBar:
@@ -102,9 +98,9 @@ class Swiss_BirdsUITests: XCTestCase {
 
         let filterButton = MyUIElements.filterButton.element
         XCTAssert(filterButton.exists, "The main navigation bar exists and contains the filter button")
-        
+
         filterButton.tap()
-        
+
         let detail = MyUIElements.navigationBar.element
         XCTAssert(detail.exists, "The detail navigation bar exists")
     }
@@ -135,7 +131,7 @@ class Swiss_BirdsUITests: XCTestCase {
         scrollViewsQuery.swipeUp()
         scrollViewsQuery.swipeUp()
     }
-    
+
     func testSortOptionsNavigation() {
         // Navigate to Sort Options screen
         let sortButton = MyUIElements.sortButton.element
@@ -174,7 +170,6 @@ class Swiss_BirdsUITests: XCTestCase {
         // Verify first visible bird is the expected one
         let firstBird = app.buttons.containing(NSPredicate(format: "identifier BEGINSWITH 'birdRow'")).firstMatch
         XCTAssertEqual(firstBird.identifier, expectedBirdRowIdentifier, "Grouped by species group should bring expected bird row to first row")
-
 
         // Navigate to Sort Options screen
         _ = sortButton.waitForExistence(timeout: wait4existenceTimeout)
@@ -241,7 +236,7 @@ class Swiss_BirdsUITests: XCTestCase {
             filterContainer.swipeUp()
         }
         filterContainer.buttons["filtervogelgruppe-11"].tap()
-        
+
         // Tap "Back"
         MyUIElements.navigationBar.element.buttons.firstMatch.tap()
 
@@ -255,7 +250,7 @@ class Swiss_BirdsUITests: XCTestCase {
         scrollViewsQuery = MyUIElements.birdDetailViewScrollView.element
         scrollViewsQuery.swipeUp()
         scrollViewsQuery.swipeDown()
-        
+
         let voiceButton = MyUIElements.playVoiceButton.element
         voiceButton.tap()
         sleep(5)
@@ -265,7 +260,6 @@ class Swiss_BirdsUITests: XCTestCase {
         MyUIElements.navigationBar.element.buttons.firstMatch.tap()
     }
 
-    
     func testLaunchPerformance() {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.

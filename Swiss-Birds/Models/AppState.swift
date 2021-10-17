@@ -11,9 +11,9 @@ import SwiftUI
 import Combine
 import WidgetKit
 
-class AppState : ObservableObject {
+class AppState: ObservableObject {
 
-    @Published var searchText : String = ""
+    @Published var searchText: String = ""
     @Published var isEditingSearchField: Bool = false
 
     var filters = ManagedFilterList()
@@ -25,7 +25,7 @@ class AppState : ObservableObject {
         }
     }
 
-    var restorableFilters: [String : [Filter.Id]] = [:]
+    var restorableFilters: [String: [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
     @Published var groupedBirds = [SectionGroup: [Species]]()
     @Published var groups = [SectionGroup]()
@@ -49,7 +49,7 @@ class AppState : ObservableObject {
 
     // Single view model used in BirdDetailView, updated when selected bird changes
     let currentBirdDetails = BirdDetailViewModel()
-    
+
     var previousBirdOfTheDay: Int = -1
     var birdOfTheDayCheckDate: Date?
     @Published var birdOfTheDay: VdsAPI.BirdOfTheDayData?
@@ -58,7 +58,7 @@ class AppState : ObservableObject {
 
     var cancellables = Set<AnyCancellable>()
 
-    var headShotsCache: [Species.Id:UIImage] = [:]
+    var headShotsCache: [Species.Id: UIImage] = [:]
 
     // Singleton
     static var shared = AppState()
@@ -84,10 +84,10 @@ class AppState : ObservableObject {
                     .map({(language: language, birds: $0)})
             })
             .collect()
-            .map({ (allBirdData: [(language: LanguageIdentifier, birds: [String : VdsListElement])]) -> [Species] in
+            .map({ (allBirdData: [(language: LanguageIdentifier, birds: [String: VdsListElement])]) -> [Species] in
 
                 // Merge for easier mapping
-                var indexedBirdData = [LanguageIdentifier: [String : VdsListElement]]()
+                var indexedBirdData = [LanguageIdentifier: [String: VdsListElement]]()
                 for birdData in allBirdData {
                     indexedBirdData[birdData.language] = birdData.birds
                 }
@@ -179,7 +179,7 @@ class AppState : ObservableObject {
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
             .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
-            .map { [weak self] (allSpecies: [Species], searchText: String, sortOptions: SortOptions, favorites: Set<Species.Id>) -> ([SectionGroup:[Species]], [SectionGroup]) in
+            .map { [weak self] (allSpecies: [Species], searchText: String, sortOptions: SortOptions, favorites: Set<Species.Id>) -> ([SectionGroup: [Species]], [SectionGroup]) in
                 guard let self = self else { return ([:], []) }
 
                 os_log("start filtering bird list: %ld", allSpecies.count)
@@ -190,15 +190,14 @@ class AppState : ObservableObject {
                     favoriteFilter = { bird in
                         favorites.contains(bird.speciesId)
                     }
-                }
-                else {
+                } else {
                     favoriteFilter = { _ in true }
                 }
                 let filtered: [Species] = allSpecies
                     .filter({ favoriteFilter($0) && $0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
                 os_log("filtering bird list done: %ld", filtered.count)
 
-                let groupedBirds: [SectionGroup:[Species]]
+                let groupedBirds: [SectionGroup: [Species]]
                 let sortedGroups: [SectionGroup]
                 let groupOption = sortOptions.column
                 os_log("group according to %{Public}@", groupOption.rawValue)
@@ -216,8 +215,7 @@ class AppState : ObservableObject {
                         return (key: SectionGroup(id: filter.uniqueFilterId, name: filter.name), value: value)
                     }
                     groupedBirds = Dictionary(uniqueKeysWithValues: uniqueKeysWithValues)
-                }
-                else {
+                } else {
                     groupedBirds = Dictionary(
                         grouping: filtered,
                         by: { (species: Species) -> SectionGroup in
@@ -387,15 +385,14 @@ class AppState : ObservableObject {
         let favoriteFilter: (Species) -> Bool
         if self.filters.list.keys.contains(.favorites) {
             favoriteFilter = FavoritesManager.shared.isFavorite
-        }
-        else {
+        } else {
             favoriteFilter = { _ in true }
         }
         return allSpecies.filter { favoriteFilter($0) && $0.categoryMatches(filters: filters.list)}.count
     }
 }
 
-extension AppState : CustomStringConvertible {
+extension AppState: CustomStringConvertible {
     var description: String {
         return "ApplicationState(searchText=\(searchText), navigationState=\(String(describing: navigationState)), activeFilters=\(filters), restorableFilters=\(String(describing: restorableFilters)), previousBirdOfTheDay=\(previousBirdOfTheDay), showBirdOfTheDay=\(showBirdOfTheDay), sortOptions=\(sortOptions))"
     }
@@ -407,16 +404,16 @@ extension AppState {
     func restore(from activity: NSUserActivity) {
         os_log("restore(from: %{public}@%)", activity.activityType)
         guard activity.activityType == Bundle.main.activityType,
-            let stateArray : [String:Any] = activity.userInfo as? [String:Any]
+            let stateArray: [String: Any] = activity.userInfo as? [String: Any]
             else { return }
 
         if let searchText = stateArray[Key.searchText] as? String {
             self.searchText = searchText
         }
-        if let restoredFilters = stateArray[Key.activeFilters] as? [String : [Filter.Id]] {
+        if let restoredFilters = stateArray[Key.activeFilters] as? [String: [Filter.Id]] {
             self.restorableFilters = restoredFilters
         }
-        if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int  {
+        if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int {
             self.previousBirdOfTheDay = previousBirdOfTheDay
         }
 
@@ -434,26 +431,26 @@ extension AppState {
 
         os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
     }
-    
+
     func store(in activity: NSUserActivity) {
         os_log("store(in: %{public}@)", activity.activityType)
-        var storableList = [String : [Filter.Id]]()
+        var storableList = [String: [Filter.Id]]()
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
         }
         let selectedNavigationLinkData = (try? JSONEncoder().encode(navigationState.mainNavigation)) ?? Data()
 
-        let stateArray : [String:Any] = [
+        let stateArray: [String: Any] = [
             Key.searchText: searchText,
             Key.activeFilters: storableList,
             Key.selectedNavigationLink: selectedNavigationLinkData,
-            Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id,
+            Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id
         ]
         activity.addUserInfoEntries(from: stateArray)
 
         os_log("store(in: %{public}@): %{public}@", activity.activityType, self.description)
     }
-    
+
     private enum Key {
         static let searchText = "searchText"
         static let activeFilters = "activeFilters"

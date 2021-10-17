@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct BirdOfTheDay: View {
-    @EnvironmentObject private var state : AppState
+    @EnvironmentObject private var state: AppState
     @Binding var isPresented: Bool
 
-    let image : UIImage
+    let image: UIImage
     let species: Species
 
     var body: some View {
@@ -50,7 +50,7 @@ struct BirdOfTheDay: View {
         .accessibility(label: Text("Vogel des Tages: \(species.name)"))
         .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
         .overlay(dismissButton, alignment: .topLeading)
-        .onDisappear() {
+        .onDisappear {
             state.previousBirdOfTheDay = species.speciesId
         }
         .padding()
@@ -84,10 +84,9 @@ struct BirdOfTheDay_Previews: PreviewProvider {
         if let species = Species.species(for: 3640) {
             BirdOfTheDay(isPresented: .constant(true), image: UIImage(named: "Logo")!, species: species)
                 .environmentObject(state)
-        }
-        else {
+        } else {
             ActivityIndicatorView()
-                .onAppear() {
+                .onAppear {
                     state.checkBirdOfTheDay(showAlways: true)
                 }
         }

@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct SearchField: View {
-    @Binding public var searchText : String
+    @Binding public var searchText: String
 
-    @Binding public var isEditing : Bool
+    @Binding public var isEditing: Bool
 
     var body: some View {
         HStack(spacing: 0) {
@@ -73,7 +73,6 @@ struct SearchField: View {
         .accessibility(identifier: "searchBar")
     }
 }
-
 
 struct SearchField_Preview_Helper: View {
     @State var query: String

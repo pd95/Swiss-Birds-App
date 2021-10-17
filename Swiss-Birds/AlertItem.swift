@@ -17,10 +17,9 @@ struct AlertItem: Identifiable {
     var secondaryButton: Alert.Button?
 
     var alert: Alert {
-        guard let primaryButton = primaryButton, let secondaryButton = secondaryButton else{
+        guard let primaryButton = primaryButton, let secondaryButton = secondaryButton else {
             return Alert(title: title, message: message, dismissButton: dismissButton)
         }
         return Alert(title: title, message: message, primaryButton: primaryButton, secondaryButton: secondaryButton)
     }
 }
-

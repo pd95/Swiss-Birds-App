@@ -9,16 +9,14 @@
 import Foundation
 import UIKit
 
-
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
-    
+
     do {
         // Try first to fetch file from main bundle
         if let file = Bundle.main.url(forResource: filename, withExtension: nil) {
             data = try Data(contentsOf: file)
-        }
-        else {
+        } else {
             // Then try to find a localized resource or otherwise a non-localized resource
             guard let asset = NSDataAsset(name: "\(primaryLanguage)/\(filename)") ?? NSDataAsset(name: filename) else {
                 fatalError("Couldn't find asset \(filename) in bundle and asset catalog")
@@ -28,7 +26,7 @@ func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     } catch {
         fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
     }
-    
+
     do {
         let decoder = JSONDecoder()
         return try decoder.decode(T.self, from: data)
@@ -37,10 +35,9 @@ func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     }
 }
 
+func loadFilterData(vdsFilternames: [VdsFilter]) -> [FilterType: [Filter]] {
 
-func loadFilterData(vdsFilternames : [VdsFilter]) -> [FilterType:[Filter]] {
-
-    var filterMap = [FilterType:[Filter]]()
+    var filterMap = [FilterType: [Filter]]()
 
     // Initialize "häufige Art" which is missing in the vds-filternames.json data
     filterMap[.haeufigeart] = [

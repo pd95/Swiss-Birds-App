@@ -10,7 +10,7 @@ import Foundation
 
 typealias LanguageIdentifier = String
 
-let availableLanguages: [LanguageIdentifier] = ["de","fr","it","en"]
+let availableLanguages: [LanguageIdentifier] = ["de", "fr", "it", "en"]
 let preferredLanguageOrder: [LanguageIdentifier] = {
     var languages = [LanguageIdentifier]()
     var testLanguages = availableLanguages
