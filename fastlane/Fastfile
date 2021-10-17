@@ -1,0 +1,23 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+
+# Uncomment the line if you want fastlane to automatically update itself
+update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+
+  lane :build_AppStore do
+    gym(
+      output_directory: "build_AppStore",
+      export_method: "app-store"
+    )
+  end
+
+  lane :beta do
+    build_AppStore
+    upload_to_testflight
+  end
+end

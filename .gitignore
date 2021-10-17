@@ -21,3 +21,16 @@ data-scripts/voices
 
 # Overriden config files
 LocalConfig.xcconfig
+
+# fastlane specific
+**/fastlane/*.xml
+**/fastlane/*.html
+**/fastlane/screenshots
+**/fastlane/test_output
+**/fastlane/swiftlintOutput.txt
+
+# Ignore my Apple Store related info
+**/fastlane/Appfile
+
+# build directories
+build*

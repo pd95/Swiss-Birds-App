@@ -1,0 +1,4 @@
+clean true
+scheme "Swiss-Birds"
+
+output_directory "./build"
