@@ -16,6 +16,15 @@ platform :ios do
     )
   end
 
+  lane :lint do
+    swiftlint(
+      mode: :autocorrect,
+      config_file: ".swiftlint.yml",
+      output_file: "./fastlane/swiftlintOutput.txt",
+      ignore_exit_status: false
+    )
+  end
+
   lane :beta do
     build_AppStore
     upload_to_testflight
