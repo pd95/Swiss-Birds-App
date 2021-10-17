@@ -16,21 +16,21 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios build_AppStore
+### ios build_appstore
 ```
-fastlane ios build_AppStore
+fastlane ios build_appstore
 ```
-Push a new beta build to TestFlight
+Build for AppStore submission
 ### ios lint
 ```
 fastlane ios lint
 ```
-
+Use swiftlint to check source quality and apply small fixes (`autocorrect` mode)
 ### ios beta
 ```
 fastlane ios beta
 ```
-
+Push a new beta build to TestFlight
 
 ----
 

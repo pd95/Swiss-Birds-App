@@ -7,15 +7,16 @@ update_fastlane
 default_platform(:ios)
 
 platform :ios do
-  desc "Push a new beta build to TestFlight"
 
-  lane :build_AppStore do
+  desc "Build for AppStore submission"
+  lane :build_appstore do
     gym(
       output_directory: "build_AppStore",
       export_method: "app-store"
     )
   end
 
+  desc "Use swiftlint to check source quality and apply small fixes (`autocorrect` mode)"
   lane :lint do
     swiftlint(
       mode: :autocorrect,
@@ -25,8 +26,12 @@ platform :ios do
     )
   end
 
+  desc "Push a new beta build to TestFlight"
   lane :beta do
-    build_AppStore
+    lint # run swiftlint
+    scan # run tests
+
+    build_appstore
     upload_to_testflight
   end
 end
