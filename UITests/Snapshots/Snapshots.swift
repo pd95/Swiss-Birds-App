@@ -72,7 +72,7 @@ class Snapshots: XCTestCase {
 
         // Search
         XCTContext.runActivity(named: "Search for a bird") { (_) in
-            let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackbird"]
+            let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Black"]
             let search = searchTerms[language]!
 
             let searchText = app.searchFields.allElementsBoundByIndex.last!
@@ -92,18 +92,12 @@ class Snapshots: XCTestCase {
             _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
             snapshot("03_Detail_Top")
 
-            let voiceButton = app.buttons["playVoiceButton"]
-            voiceButton.tap()
-            sleep(5)
-            voiceButton.tap()
-
             let scrollViewsQuery = app.scrollViews
             scrollViewsQuery.otherElements["bird_image_2"].swipeUp()
-            var swipeElement = scrollViewsQuery.staticTexts["header_Eigenschaften"]
-            if swipeElement.exists && !swipeElement.isHittable {
-                swipeElement = scrollViewsQuery.staticTexts["text_Nahrung"]
+            while scrollViewsQuery.staticTexts["text_Nahrung"].isHittable == false {
+                app.swipeUp()
             }
-            swipeElement.swipeUp()
+            app.swipeUp()
             snapshot("04_Detail_Middle")
         }
 
