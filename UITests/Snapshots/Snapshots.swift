@@ -105,6 +105,10 @@ class Snapshots: XCTestCase {
             // Tap "Back"
             app.navigationBars.buttons.firstMatch.tap()
 
+            // Make sure searchField is visible and selected again
+            let searchField = app.searchFields.element
+            searchField.tap()
+
             // Cancel search
             let cancelButton = app.otherElements["searchBar"].buttons["cancelButton"]
             _ = cancelButton.waitForExistence(timeout: wait4existenceTimeout)
