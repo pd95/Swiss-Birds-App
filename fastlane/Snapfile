@@ -1,0 +1,40 @@
+# Uncomment the lines below you want to change by removing the # in the beginning
+
+# A list of devices you want to take the screenshots from
+devices([
+  #"iPhone 12 Pro Max", # 6.68"
+  "iPhone Xs", # 5.85"
+  #"iPhone 8 Plus", # 5.5"
+  #"iPhone SE (2nd generation)", # 4.7"
+  #"iPhone SE (1st generation)", # 4"
+  #"iPhone 4s", # 3.5"
+  "iPad Pro (12.9-inch) (4th generation)", # 12.9"
+  #"iPad Pro (2nd Generation)", # 12.9"
+])
+
+languages([
+  "en",
+  "de",
+  "fr",
+  "it",
+])
+
+# The name of the scheme which contains the UI Tests
+scheme("Snapshots")
+
+override_status_bar true
+dark_mode false
+
+skip_open_summary true
+#erase_simulator true
+disable_slide_to_type true
+localize_simulator true
+#clear_previous_screenshots true
+reinstall_app true
+
+# while debugging tests:
+headless false
+stop_after_first_error true
+output_simulator_logs true
+number_of_retries 0
+result_bundle true

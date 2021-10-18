@@ -34,4 +34,25 @@ platform :ios do
     build_appstore
     upload_to_testflight
   end
+
+  desc "Build the app for screenshots creation and multiple installations from the same `build_Testing` location."
+  lane :prepare_testing_build do
+    scan(
+      scheme: "Snapshots",
+      derived_data_path: "build_Testing",
+      build_for_testing: true,
+      clean: true,
+      device: "iPhone Xs"
+    )
+  end
+
+  desc "Create screenshots for all configured languages and devices (based on `prepare_testing_build` lane) and frame them using a silver frame (if available)"
+  lane :take_screenshots do
+    snapshot(
+      scheme: "Snapshots",
+      test_without_building: true,
+      derived_data_path: "build_Testing",
+    )
+    frameit(silver: true) 
+  end
 end
