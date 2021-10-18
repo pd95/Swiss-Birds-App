@@ -1,35 +1,24 @@
 //
-//  MarketingTests.swift
-//  Swiss-BirdsUITests
+//  Snapshots.swift
+//  Snapshots
 //
-//  Created by Philipp on 19.12.19.
-//  Copyright © 2019 Philipp. All rights reserved.
+//  Created by Philipp on 17.10.21.
+//  Copyright © 2021 Philipp. All rights reserved.
 //
 
 import XCTest
 
-class MarketingTests: XCTestCase {
+class Snapshots: XCTestCase {
 
     private var app: XCUIApplication!
     private var language = "de"
     private let wait4existenceTimeout: TimeInterval = 4
 
-    func takeScreenShot(name: String = "Screenshot") {
-        let screenshot = XCUIScreen.main.screenshot()
-        let attachment = XCTAttachment(screenshot: screenshot)
-        attachment.name = name
-        attachment.lifetime = .keepAlways
-        add(attachment)
-    }
-
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         app = XCUIApplication()
+        setupSnapshot(app)
         app.launchArguments.append("enable-testing")
         app.launch()
 
@@ -40,9 +29,10 @@ class MarketingTests: XCTestCase {
             XCUIDevice.shared.orientation = .landscapeLeft
         }
 
+        print("app.launchArguments", app.launchArguments)
         // Check if a specific language has been passed on for testing
-        if let langArgIndex = CommandLine.arguments.firstIndex(of: "-AppleLanguages") {
-            let languageArgument = CommandLine.arguments[langArgIndex+1]
+        if let langArgIndex = app.launchArguments.firstIndex(of: "-AppleLanguages") {
+            let languageArgument = app.launchArguments[langArgIndex+1]
             print("language argument=\(languageArgument)")
             if languageArgument == "(fr)" {
                 language = "fr"
@@ -61,23 +51,23 @@ class MarketingTests: XCTestCase {
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
-    func testMainNavigation() {
+    func testSnapshot() throws {
+        if app == nil {
+            setUp()
+        }
 
         XCTContext.runActivity(named: "Bird of the day is shown") { (_) in
             let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
             XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
-            takeScreenShot(name: "00_BirdOfTheDay")
+            snapshot("00_BirdOfTheDay")
             dismissButton.tap()
         }
 
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
-            takeScreenShot(name: "01_Main")
+            snapshot("01_Main")
         }
 
         // Search
@@ -88,7 +78,7 @@ class MarketingTests: XCTestCase {
             let searchText = app.searchFields.allElementsBoundByIndex.last!
             searchText.tap()
             typeText(search)
-            takeScreenShot(name: "02_Search")
+            snapshot("02_Search")
             searchText.typeText("\n")
         }
 
@@ -100,7 +90,7 @@ class MarketingTests: XCTestCase {
 
             let birdImage = app.otherElements["bird_image_1"]
             _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
-            takeScreenShot(name: "03_Detail_Top")
+            snapshot("03_Detail_Top")
 
             let voiceButton = app.buttons["playVoiceButton"]
             voiceButton.tap()
@@ -114,7 +104,7 @@ class MarketingTests: XCTestCase {
                 swipeElement = scrollViewsQuery.staticTexts["text_Nahrung"]
             }
             swipeElement.swipeUp()
-            takeScreenShot(name: "04_Detail_Middle")
+            snapshot("04_Detail_Middle")
         }
 
         XCTContext.runActivity(named: "Cancel search and enter filter criteria") { (_) in
@@ -140,7 +130,7 @@ class MarketingTests: XCTestCase {
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
 
-            takeScreenShot(name: "05_Filtercriteria")
+            snapshot("05_Filtercriteria")
         }
 
         XCTContext.runActivity(named: "Go back to main view") { (_) in
@@ -157,14 +147,14 @@ class MarketingTests: XCTestCase {
             _ = birdGroupsButton.waitForExistence(timeout: wait4existenceTimeout)
             birdGroupsButton.tap()
 
-            takeScreenShot(name: "06_Sortoptions")
+            snapshot("06_Sortoptions")
 
             // Tap "Back"
             app.navigationBars.buttons.firstMatch.tap()
 
-            takeScreenShot(name: "07_GroupedBirdList")
+            snapshot("07_GroupedBirdList")
         }
 
-    }
 
+    }
 }

@@ -44,7 +44,6 @@
 		17B1B45E2546C42E00B422B6 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4582546C41D00B422B6 /* Languages.swift */; };
 		17B1B4632546C44900B422B6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779657E2453184D00A2A1B2 /* Extensions.swift */; };
 		17B1B476254710D800B422B6 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B46C25470CC100B422B6 /* DataFetcher.swift */; };
-		17B2701323AC132000B7846A /* MarketingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B2701223AC132000B7846A /* MarketingTests.swift */; };
 		17B7200B2551FE9D002087FC /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7200A2551FE9D002087FC /* Characteristic.swift */; };
 		17B720112551FEB9002087FC /* CharacteristicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B720102551FEB9002087FC /* CharacteristicView.swift */; };
 		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
@@ -56,6 +55,9 @@
 		17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */; };
 		17D1A500236CBEFF00E8588C /* BirdDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */; };
 		17D1A505236CDA8500E8588C /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D1A504236CDA8500E8588C /* Data.swift */; };
+		17DFEE27271CBC80005D1AA9 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFEE26271CBC80005D1AA9 /* Snapshots.swift */; };
+		17DFEE30271CBC96005D1AA9 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DFEE2F271CBC96005D1AA9 /* SnapshotHelper.swift */; };
+		17DFEE33271DFDC7005D1AA9 /* XCTestCase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */; };
 		17E6B34F25497DE500691729 /* SelectSortOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B34E25497DE500691729 /* SelectSortOptions.swift */; };
 		17E6B35925497F9900691729 /* SortOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B35825497F9900691729 /* SortOptions.swift */; };
 		17E6B35F2549974900691729 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E6B35E2549974900691729 /* Checkmark.swift */; };
@@ -89,6 +91,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 17B960E923699370003AA802;
 			remoteInfo = "schweizer-voegel";
+		};
+		17DFEE2A271CBC80005D1AA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17B960E923699370003AA802;
+			remoteInfo = "Swiss-Birds";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -133,7 +142,6 @@
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
-		175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Marketing.xctestplan; path = "Swiss-BirdsUITests/Marketing.xctestplan"; sourceTree = SOURCE_ROOT; };
 		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		176FA85427173EA200D9F734 /* BirdGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdGrid.swift; sourceTree = "<group>"; };
@@ -156,7 +164,6 @@
 		17B1B4442546C0E600B422B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B1B4582546C41D00B422B6 /* Languages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Languages.swift; sourceTree = "<group>"; };
 		17B1B46C25470CC100B422B6 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
-		17B2701223AC132000B7846A /* MarketingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketingTests.swift; sourceTree = "<group>"; };
 		17B7200A2551FE9D002087FC /* Characteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
 		17B720102551FEB9002087FC /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
 		17B960EA23699370003AA802 /* Swiss-Birds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiss-Birds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,10 +175,8 @@
 		17B960FE23699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9610723699375003AA802 /* Swiss_BirdsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiss_BirdsTests.swift; sourceTree = "<group>"; };
-		17B9610923699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swiss-BirdsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiss_BirdsUITests.swift; sourceTree = "<group>"; };
-		17B9611423699375003AA802 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17BED0E723ADAECF000D389C /* extract.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = extract.js; sourceTree = "<group>"; };
 		17D1A4FF236CBEFF00E8588C /* BirdDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetail.swift; sourceTree = "<group>"; };
 		17D1A504236CDA8500E8588C /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -181,6 +186,9 @@
 		17DDB735243690C100ACE032 /* symbol-template.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "symbol-template.svg"; sourceTree = "<group>"; };
 		17DDB736243690C100ACE032 /* prepare_Filter.xcassets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = prepare_Filter.xcassets.sh; sourceTree = "<group>"; };
 		17DDB737243690C100ACE032 /* fetch_data.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = fetch_data.sh; sourceTree = "<group>"; };
+		17DFEE24271CBC80005D1AA9 /* Snapshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Snapshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17DFEE26271CBC80005D1AA9 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
+		17DFEE2F271CBC96005D1AA9 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		17E6B34E25497DE500691729 /* SelectSortOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSortOptions.swift; sourceTree = "<group>"; };
 		17E6B35825497F9900691729 /* SortOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptions.swift; sourceTree = "<group>"; };
 		17E6B35E2549974900691729 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
@@ -218,6 +226,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		17B9610B23699375003AA802 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DFEE21271CBC80005D1AA9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -266,7 +281,7 @@
 				17DDB731243690C100ACE032 /* data-scripts */,
 				17B960EC23699370003AA802 /* Swiss-Birds */,
 				17B9610623699375003AA802 /* Swiss-BirdsTests */,
-				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
+				17DFEE32271DFD17005D1AA9 /* UITests */,
 				17BED0E623ADAECF000D389C /* xcresult-parser */,
 				17B1B43E2546C0E200B422B6 /* BirdOfTheDayWidget */,
 				171BE48424B06AB900CDF93D /* Frameworks */,
@@ -281,6 +296,7 @@
 				17B9610323699375003AA802 /* Swiss-BirdsTests.xctest */,
 				17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */,
 				17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */,
+				17DFEE24271CBC80005D1AA9 /* Snapshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -310,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				17B9610723699375003AA802 /* Swiss_BirdsTests.swift */,
-				17B9610923699375003AA802 /* Info.plist */,
 			);
 			path = "Swiss-BirdsTests";
 			sourceTree = "<group>";
@@ -318,13 +333,7 @@
 		17B9611123699375003AA802 /* Swiss-BirdsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				1715651223AD7FDA00B8CC13 /* README.md */,
-				17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */,
-				1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */,
 				17B9611223699375003AA802 /* Swiss_BirdsUITests.swift */,
-				175F7E7C23A92CBF0052F42C /* Marketing.xctestplan */,
-				17B2701223AC132000B7846A /* MarketingTests.swift */,
-				17B9611423699375003AA802 /* Info.plist */,
 			);
 			path = "Swiss-BirdsUITests";
 			sourceTree = "<group>";
@@ -332,6 +341,7 @@
 		17BED0E623ADAECF000D389C /* xcresult-parser */ = {
 			isa = PBXGroup;
 			children = (
+				1715651223AD7FDA00B8CC13 /* README.md */,
 				17BED0E723ADAECF000D389C /* extract.js */,
 			);
 			path = "xcresult-parser";
@@ -402,6 +412,26 @@
 				17DDB735243690C100ACE032 /* symbol-template.svg */,
 			);
 			path = "data-scripts";
+			sourceTree = "<group>";
+		};
+		17DFEE25271CBC80005D1AA9 /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				17DFEE26271CBC80005D1AA9 /* Snapshots.swift */,
+				17DFEE2F271CBC96005D1AA9 /* SnapshotHelper.swift */,
+			);
+			path = Snapshots;
+			sourceTree = "<group>";
+		};
+		17DFEE32271DFD17005D1AA9 /* UITests */ = {
+			isa = PBXGroup;
+			children = (
+				1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */,
+				17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */,
+				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
+				17DFEE25271CBC80005D1AA9 /* Snapshots */,
+			);
+			path = UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,13 +509,31 @@
 			productReference = 17B9610E23699375003AA802 /* Swiss-BirdsUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		17DFEE23271CBC80005D1AA9 /* Snapshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17DFEE2E271CBC80005D1AA9 /* Build configuration list for PBXNativeTarget "Snapshots" */;
+			buildPhases = (
+				17DFEE20271CBC80005D1AA9 /* Sources */,
+				17DFEE21271CBC80005D1AA9 /* Frameworks */,
+				17DFEE22271CBC80005D1AA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17DFEE2B271CBC80005D1AA9 /* PBXTargetDependency */,
+			);
+			name = Snapshots;
+			productName = Snapshots;
+			productReference = 17DFEE24271CBC80005D1AA9 /* Snapshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		17B960E223699370003AA802 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1210;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = Philipp;
 				TargetAttributes = {
@@ -501,6 +549,10 @@
 					};
 					17B9610D23699375003AA802 = {
 						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 17B960E923699370003AA802;
+					};
+					17DFEE23271CBC80005D1AA9 = {
+						CreatedOnToolsVersion = 13.0;
 						TestTargetID = 17B960E923699370003AA802;
 					};
 				};
@@ -525,6 +577,7 @@
 				17B9610223699375003AA802 /* Swiss-BirdsTests */,
 				17B9610D23699375003AA802 /* Swiss-BirdsUITests */,
 				17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */,
+				17DFEE23271CBC80005D1AA9 /* Snapshots */,
 			);
 		};
 /* End PBXProject section */
@@ -560,6 +613,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		17B9610C23699375003AA802 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DFEE22271CBC80005D1AA9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -639,9 +699,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17B2701323AC132000B7846A /* MarketingTests.swift in Sources */,
 				17E9BB0824D2111B00A87DF4 /* XCTestCase+Extensions.swift in Sources */,
 				17B9611323699375003AA802 /* Swiss_BirdsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17DFEE20271CBC80005D1AA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DFEE27271CBC80005D1AA9 /* Snapshots.swift in Sources */,
+				17DFEE33271DFDC7005D1AA9 /* XCTestCase+Extensions.swift in Sources */,
+				17DFEE30271CBC96005D1AA9 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +731,11 @@
 			isa = PBXTargetDependency;
 			target = 17B960E923699370003AA802 /* Swiss-Birds */;
 			targetProxy = 17B9610F23699375003AA802 /* PBXContainerItemProxy */;
+		};
+		17DFEE2B271CBC80005D1AA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17B960E923699370003AA802 /* Swiss-Birds */;
+			targetProxy = 17DFEE2A271CBC80005D1AA9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -917,7 +991,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Swiss-BirdsTests/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -936,7 +1010,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Swiss-BirdsTests/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -954,7 +1028,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = "Swiss-BirdsUITests/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -972,7 +1046,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = "Swiss-BirdsUITests/Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -980,6 +1054,52 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited)-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Swiss-Birds";
+			};
+			name = Release;
+		};
+		17DFEE2C271CBC80005D1AA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.Snapshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Swiss-Birds";
+			};
+			name = Debug;
+		};
+		17DFEE2D271CBC80005D1AA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.Snapshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Swiss-Birds";
@@ -1030,6 +1150,15 @@
 			buildConfigurations = (
 				17B9611E23699375003AA802 /* Debug */,
 				17B9611F23699375003AA802 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17DFEE2E271CBC80005D1AA9 /* Build configuration list for PBXNativeTarget "Snapshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17DFEE2C271CBC80005D1AA9 /* Debug */,
+				17DFEE2D271CBC80005D1AA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

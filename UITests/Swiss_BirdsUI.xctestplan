@@ -13,13 +13,18 @@
   },
   "testTargets" : [
     {
-      "skippedTests" : [
-        "MarketingTests"
-      ],
       "target" : {
         "containerPath" : "container:Swiss-Birds.xcodeproj",
         "identifier" : "17B9610D23699375003AA802",
         "name" : "Swiss-BirdsUITests"
+      }
+    },
+    {
+      "enabled" : false,
+      "target" : {
+        "containerPath" : "container:Swiss-Birds.xcodeproj",
+        "identifier" : "17DFEE23271CBC80005D1AA9",
+        "name" : "Snapshots"
       }
     }
   ],
