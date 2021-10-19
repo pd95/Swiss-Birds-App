@@ -74,25 +74,25 @@ You can read the privacy policy [here](privacy.md).
   <tbody>
     <tr>
       <td style="vertical-align:top; padding: 10px">iPhone</td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_00_BirdOfTheDay.jpeg" width="100%" alt="Bird of the day"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_01_Main.jpeg" width="100%" alt="Main screen"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_02_Search.jpeg" width="100%" alt="Search"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_03_Detail_Top.jpeg" width="100%" alt="Detail (top)"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_04_Detail_Middle.jpeg" width="100%" alt="Detail (middle)"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_05_Filtercriteria.jpeg" width="100%" alt="Filter criteria"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_06_Sortoptions.jpeg" width="100%" alt="Sort options"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPhone/English_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/iPhone/English_07_GroupedBirdList.jpeg" width="100%" alt="By bird group"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_00_BirdOfTheDay.jpeg" width="100%" alt="Bird of the day"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_01_Main.jpeg" width="100%" alt="Main screen"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_02_Search.jpeg" width="100%" alt="Search"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_03_Detail_Top.jpeg" width="100%" alt="Detail (top)"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_04_Detail_Middle.jpeg" width="100%" alt="Detail (middle)"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_05_Filtercriteria.jpeg" width="100%" alt="Filter criteria"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_06_Sortoptions.jpeg" width="100%" alt="Sort options"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPhone_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPhone_07_GroupedBirdList.jpeg" width="100%" alt="By bird group"></a></td>
     </tr>
     <tr>
       <td style="vertical-align:top; padding: 10px">iPad</td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_00_BirdOfTheDay.jpeg" width="100%" alt="Bird of the day"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_01_Main.jpeg" width="100%" alt="Main screen"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_02_Search.jpeg" width="100%" alt="Search"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_03_Detail_Top.jpeg" width="100%" alt="Detail (top)"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_04_Detail_Middle.jpeg" width="100%" alt="Detail (middle)"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_05_Filtercriteria.jpeg" width="100%" alt="Filter criteria"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_06_Sortoptions.jpeg" width="100%" alt="Sort options"></a></td>
-      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/iPad/English_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/iPad/English_07_GroupedBirdList.jpeg" width="100%" alt="By bird group"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_00_BirdOfTheDay.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_00_BirdOfTheDay.jpeg" width="100%" alt="Bird of the day"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_01_Main.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_01_Main.jpeg" width="100%" alt="Main screen"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_02_Search.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_02_Search.jpeg" width="100%" alt="Search"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_03_Detail_Top.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_03_Detail_Top.jpeg" width="100%" alt="Detail (top)"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_04_Detail_Middle.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_04_Detail_Middle.jpeg" width="100%" alt="Detail (middle)"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_05_Filtercriteria.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_05_Filtercriteria.jpeg" width="100%" alt="Filter criteria"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_06_Sortoptions.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_06_Sortoptions.jpeg" width="100%" alt="Sort options"></a></td>
+      <td><a target="_blank" href="/Swiss-Birds-App/screenshots/en/iPad_07_GroupedBirdList.jpeg"><img src="/Swiss-Birds-App/screenshots/en/iPad_07_GroupedBirdList.jpeg" width="100%" alt="By bird group"></a></td>
     </tr>
   </tbody>
 </table>
