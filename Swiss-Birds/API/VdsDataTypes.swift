@@ -255,7 +255,7 @@ struct VdsSpecieDetail: Codable {
             artnameSpan: species.artnamen.artnameSpan, artnameHoll: species.artnamen.artnameHoll, familieWiss: species.artnamen.familieWiss, familieDt: species.artnamen.artnameDe,
             spannweiteCM: species.eigenschaften.spannweiteCM, hoechstalterEURING: species.eigenschaften.hoechstalterEURING, hoechstalterCH: species.eigenschaften.hoechstalterCH,
             jahresbruten: species.eigenschaften.jahresbruten, statusInCH: species.statusInCH, prioritaetsartArtenfoerderung: species.bestand.prioritaetsartArtenfoerderung,
-            videosBilderStimmen: species.voice, federnbestimmung: nil, globaleSituationBirdLifeInternational: nil, synonyme: nil, chBestandPeriode: nil, merkmale: nil,
+            videosBilderStimmen: species.voice, federnbestimmung: nil, globaleSituationBirdLifeInternational: nil, synonyme: nil, chBestandPeriode: nil, merkmale: species.merkmale,
             autor0: species.artbilder.count > 0 ? species.artbilder[0].autor : nil,
             bezeichnungDe0: species.artbilder.count > 0 ? species.artbilder[0].bezeichnung : nil,
             autor1: species.artbilder.count > 1 ? species.artbilder[1].autor : nil,
