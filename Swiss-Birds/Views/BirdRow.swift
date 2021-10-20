@@ -27,27 +27,32 @@ struct BirdRow: View {
 
     var body: some View {
         HStack {
-            Image(uiImage: image)
-                .resizable()
-                .renderingMode(.original)
-                .aspectRatio(contentMode: .fit)
-                .frame(width: dynamicImageSize, height: dynamicImageSize)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
-                .shadow(radius: 4)
-                .accessibility(hidden: true)
-                .overlay(
-                    Group {
-                        if favoritesManager.isFavorite(species: bird) {
-                            Image(systemName: "star.fill")
-                                .imageScale(.medium)
-                                .foregroundColor(.yellow)
-                                .shadow(color: Color.black, radius: 1)
-                                .offset(x: 8.0, y: -7.0)
-                        }
-                    },
-                    alignment: .topTrailing
-                )
+            ZStack {
+                let circle = Circle()
+                circle.shadow(radius: 5)
+
+                Image(uiImage: image)
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(circle)
+
+                circle.stroke(Color.primary, lineWidth: 0.5)
+            }
+            .overlay(
+                Group {
+                    if favoritesManager.isFavorite(species: bird) {
+                        Image(systemName: "star.fill")
+                            .imageScale(.medium)
+                            .foregroundColor(.yellow)
+                            .shadow(color: Color.black, radius: 1)
+                            .offset(x: 8.0, y: -7.0)
+                    }
+                },
+                alignment: .topTrailing
+            )
+            .frame(width: dynamicImageSize, height: dynamicImageSize)
+            .accessibility(hidden: true)
 
             VStack(alignment: .leading) {
                 Text(bird.name)

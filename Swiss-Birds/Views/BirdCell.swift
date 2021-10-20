@@ -18,25 +18,31 @@ struct BirdCell: View {
 
     var body: some View {
         VStack {
-            Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.primary, lineWidth: 0.5))
-                .shadow(radius: 4)
-                .accessibility(hidden: true)
-                .overlay(
-                    Group {
-                        if favoritesManager.isFavorite(species: bird) {
-                            Image(systemName: "star.fill")
-                                .imageScale(.large)
-                                .foregroundColor(.yellow)
-                                .shadow(color: Color.black, radius: 1)
-                                .offset(x: 4.0, y: -4.0)
-                        }
-                    },
-                    alignment: .topTrailing
-                )
+            ZStack {
+                let circle = Circle()
+                circle.shadow(radius: 5)
+
+                Image(uiImage: image)
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(circle)
+
+                circle.stroke(Color.primary, lineWidth: 0.5)
+            }
+            .overlay(
+                Group {
+                    if favoritesManager.isFavorite(species: bird) {
+                        Image(systemName: "star.fill")
+                            .imageScale(.medium)
+                            .foregroundColor(.yellow)
+                            .shadow(color: Color.black, radius: 1)
+                            .offset(x: 8.0, y: -7.0)
+                    }
+                },
+                alignment: .topTrailing
+            )
+            .accessibility(hidden: true)
 
             VStack(alignment: .leading) {
                 Text(bird.name)
