@@ -11,7 +11,22 @@ import SwiftUI
 struct SymbolView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
-    let symbolColors: [String: Color] = [
+    private static var symbolImageCache = [String: (pointSize: CGFloat, image: UIImage)]()
+
+    private static func symbol(for symbolName: String, with pointSize: CGFloat) -> UIImage {
+        if let cachedImage = symbolImageCache[symbolName],
+           cachedImage.pointSize == pointSize {
+            return cachedImage.image
+        }
+        let symbolConfiguration = UIImage.SymbolConfiguration(
+            pointSize: UIFontMetrics.default.scaledValue(for: pointSize)
+        )
+        let image = UIImage(named: symbolName, in: nil, with: symbolConfiguration) ?? UIImage()
+        symbolImageCache[symbolName] = (pointSize, image)
+        return image
+    }
+
+    private static let symbolColors: [String: Color] = [
         "filterentwicklungatlas-1": Color(#colorLiteral(red: 0.2941176471, green: 0.537254902, blue: 0.01568627451, alpha: 1)),
         "filterentwicklungatlas-2": Color(#colorLiteral(red: 0.4823529412, green: 0.631372549, blue: 0.2980392157, alpha: 1)),
         "filterentwicklungatlas-3": Color(#colorLiteral(red: 1, green: 0.8509803922, blue: 0.2980392157, alpha: 1)),
@@ -29,18 +44,11 @@ struct SymbolView: View {
     var pointSize: CGFloat = 24
     var color: Color?
 
-    var symbolConfiguration: UIImage.SymbolConfiguration {
-        UIImage.SymbolConfiguration(pointSize:
-            UIFontMetrics.default.scaledValue(for: pointSize))
-    }
-
     var body: some View {
-        if let image = UIImage(named: symbolName, in: nil, with: symbolConfiguration) {
-            Image(uiImage: image)
-                .renderingMode(Image.TemplateRenderingMode.template)
-                .foregroundColor(color ?? symbolColors[symbolName] ?? .primary)
-                .alignmentGuide(VerticalAlignment.firstTextBaseline) { $0[VerticalAlignment.center] + pointSize * 0.375 }
-        }
+        Image(uiImage: Self.symbol(for: symbolName, with: pointSize))
+            .renderingMode(Image.TemplateRenderingMode.template)
+            .foregroundColor(color ?? Self.symbolColors[symbolName] ?? .primary)
+            .alignmentGuide(VerticalAlignment.firstTextBaseline) { $0[VerticalAlignment.center] + pointSize * 0.375 }
     }
 }
 
