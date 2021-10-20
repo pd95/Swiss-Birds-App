@@ -29,7 +29,10 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     lint # run swiftlint
-    scan # run tests
+    # run tests
+    scan(
+      scheme: "Swiss-Birds"
+    )
 
     build_appstore
     upload_to_testflight
