@@ -7,7 +7,7 @@ mkdir -p data svg/download
 for r in filters ; do
     for l in de ; do
         echo Fetching ${r}_$l.json
-        curl -#fo data/${r}_$l.json https://www.vogelwarte.ch/elements/snippets/vds/static/assets/data_new/${r}_$l.json
+        curl -#fo data/${r}_$l.json https://www.vogelwarte.ch/elements/snippets/vds/static/assets/data/${r}_$l.json
     done
 done
 
