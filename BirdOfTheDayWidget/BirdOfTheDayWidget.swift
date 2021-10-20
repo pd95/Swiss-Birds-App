@@ -103,7 +103,15 @@ struct BirdOfTheDayWidget: Widget {
         }
         .configurationDisplayName("Bird of the Day")
         .description("This widget shows the curated bird of the day.")
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies(families)
+    }
+
+    var families: [WidgetFamily] {
+        if #available(iOSApplicationExtension 15.0, *) {
+            return [.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge]
+        } else {
+            return [.systemSmall, .systemMedium, .systemLarge]
+        }
     }
 }
 
