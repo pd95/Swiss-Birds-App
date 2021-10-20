@@ -14,6 +14,16 @@ class Snapshots: XCTestCase {
     private var language = "de"
     private let wait4existenceTimeout: TimeInterval = 4
 
+    private func takeScreenShot(_ name: String = "Screenshot") {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+
+        snapshot(name)
+    }
+
     override func setUp() {
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
@@ -59,14 +69,14 @@ class Snapshots: XCTestCase {
         XCTContext.runActivity(named: "Bird of the day is shown") { (_) in
             let dismissButton = app.buttons["dismissBirdOfTheDay"].firstMatch
             XCTAssert(dismissButton.waitForExistence(timeout: wait4existenceTimeout), "The bird of the day dismiss button exists")
-            snapshot("00_BirdOfTheDay")
+            takeScreenShot("00_BirdOfTheDay")
             dismissButton.tap()
         }
 
         XCTContext.runActivity(named: "Identify main view") { (_) in
             let nav = app.navigationBars.containing(.button, identifier: "filterButton").element
             XCTAssert(nav.waitForExistence(timeout: wait4existenceTimeout), "The main navigation bar exists")
-            snapshot("01_Main")
+            takeScreenShot("01_Main")
         }
 
         // Search
@@ -77,7 +87,7 @@ class Snapshots: XCTestCase {
             let searchText = app.searchFields.allElementsBoundByIndex.last!
             searchText.tap()
             typeText(search)
-            snapshot("02_Search")
+            takeScreenShot("02_Search")
             searchText.typeText("\n")
         }
 
@@ -89,7 +99,7 @@ class Snapshots: XCTestCase {
 
             let birdImage = app.otherElements["bird_image_1"]
             _ = birdImage.waitForExistence(timeout: wait4existenceTimeout)
-            snapshot("03_Detail_Top")
+            takeScreenShot("03_Detail_Top")
 
             let scrollViewsQuery = app.scrollViews
             scrollViewsQuery.otherElements["bird_image_2"].swipeUp()
@@ -97,7 +107,7 @@ class Snapshots: XCTestCase {
                 app.swipeUp()
             }
             app.swipeUp()
-            snapshot("04_Detail_Middle")
+            takeScreenShot("04_Detail_Middle")
         }
 
         XCTContext.runActivity(named: "Cancel search and enter filter criteria") { (_) in
@@ -127,7 +137,7 @@ class Snapshots: XCTestCase {
             XCTAssert(commonBirdsButton.exists, "'only common birds' button exists")
             commonBirdsButton.tap()
 
-            snapshot("05_Filtercriteria")
+            takeScreenShot("05_Filtercriteria")
         }
 
         XCTContext.runActivity(named: "Go back to main view") { (_) in
@@ -144,12 +154,12 @@ class Snapshots: XCTestCase {
             _ = birdGroupsButton.waitForExistence(timeout: wait4existenceTimeout)
             birdGroupsButton.tap()
 
-            snapshot("06_Sortoptions")
+            takeScreenShot("06_Sortoptions")
 
             // Tap "Back"
             app.navigationBars.buttons.firstMatch.tap()
 
-            snapshot("07_GroupedBirdList")
+            takeScreenShot("07_GroupedBirdList")
         }
 
     }

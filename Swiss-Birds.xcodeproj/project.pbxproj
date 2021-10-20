@@ -144,6 +144,7 @@
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
 		1761694027204E0C0056C08A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1761694327205FFB0056C08A /* Snapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapshots.xctestplan; sourceTree = "<group>"; };
 		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		176FA85427173EA200D9F734 /* BirdGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdGrid.swift; sourceTree = "<group>"; };
@@ -438,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				1715651123AD742F00B8CC13 /* Swiss_BirdsUI.xctestplan */,
+				1761694327205FFB0056C08A /* Snapshots.xctestplan */,
 				17E9BB0724D2111B00A87DF4 /* XCTestCase+Extensions.swift */,
 				17B9611123699375003AA802 /* Swiss-BirdsUITests */,
 				17DFEE25271CBC80005D1AA9 /* Snapshots */,
