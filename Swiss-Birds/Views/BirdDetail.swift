@@ -160,33 +160,12 @@ struct BirdDetail: View {
     }
 
     private func shareDetails() {
-        guard let artname = model.details?.artname else { return }
-
-        // Transform species name into URL compatible way: get rid of cases, diacritics and replace spaces with dashes
-        let name = artname
-            .lowercased()
-            .replacingOccurrences(of: "ä", with: "ae")
-            .replacingOccurrences(of: "ö", with: "oe")
-            .replacingOccurrences(of: "ü", with: "ue")
-            .folding(options: [.diacriticInsensitive], locale: nil)
-            .replacingOccurrences(of: " ", with: "-")
-
-        // Language dependent entry path
-        let path: String
-        switch primaryLanguage {
-            case "de":
-                path = "de/voegel/voegel-der-schweiz/\(name)"
-            case "fr":
-                path = "fr/oiseaux/les-oiseaux-de-suisse/\(name)"
-            case "it":
-                path = "it/uccelli/uccelli-della-svizzera/\(name)"
-            case "en":
-                path = "en/birds/birds-of-switzerland/\(name)"
-            default:
-                path = primaryLanguage
+        guard let artname = model.details?.artname,
+              let alias = model.details?.alias
+        else {
+            return
         }
-
-        let url = VdsAPI.base.appendingPathComponent(path)
+        let url = VdsAPI.homepage.appendingPathComponent(alias)
         shareItem = ShareSheet.Item(subject: artname, activityItems: [url])
     }
 

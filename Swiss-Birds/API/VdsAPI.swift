@@ -36,6 +36,22 @@ enum VdsAPI {
     static let decoder: JSONDecoder = JSONDecoder()
     static let base = URL(string: "https://www.vogelwarte.ch/")!
 
+    static var homepage: URL {
+        let path: String
+        switch primaryLanguage {
+            case "de":
+                path = "de/voegel/voegel-der-schweiz/"
+            case "fr":
+                path = "fr/oiseaux/les-oiseaux-de-suisse/"
+            case "it":
+                path = "it/uccelli/uccelli-della-svizzera/"
+            default:
+                path = "en/birds/birds-of-switzerland/"
+        }
+
+        return VdsAPI.base.appendingPathComponent(path)
+    }
+
     static let jsonDataPath = "elements/snippets/vds/static/assets/data"
     static let imageAssetPath = "assets/images/voegel/vds"
     static let voiceAssetPath = "assets/media/voices"

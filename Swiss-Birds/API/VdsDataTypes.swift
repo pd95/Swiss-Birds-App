@@ -233,6 +233,18 @@ struct VdsSpecieDetail: Codable {
     }
 
     init(from species: VdsSpecieDetail_new) {
+        let alias: String
+        switch primaryLanguage {
+        case "de":
+            alias = species.aliasDe
+        case "fr":
+            alias = species.aliasFr
+        case "it":
+            alias = species.aliasIt
+        default:
+            alias = species.aliasEn
+        }
+
         self = VdsSpecieDetail(
             artID: species.artid, sysNr: "", artname: species.artname, alternativName: species.artnamen.synonyme, artnameLat: species.artnamen.artnameLat, infos: species.infos,
             roteListeCH: species.bestand.roteListeCH, zugverhalten: species.eigenschaften.zugverhalten, laengeCM: species.eigenschaften.laengeCM,
@@ -256,7 +268,7 @@ struct VdsSpecieDetail: Codable {
             bestandDatum: species.bestand.atlasBestandDatum, entwicklung: species.atlasEntwicklung,
             atlasLebensraum: nil, roteListe: nil, partner1: nil, partner2: nil, partner3: nil, partner4: nil, partner5: nil, density: nil, densityChange: nil, occupancy: nil,
             occupancyChange: nil, point: nil, pointChange: nil, distribution: nil, record: nil, migration: nil, winter: nil, water: nil, index: nil, indexMigrant: nil,
-            trendWater: nil, trendRecord: nil, phenology: nil, phenologyRecord: nil, altitude: nil, altitudeChange: nil, annualCycle: nil, alias: nil,
+            trendWater: nil, trendRecord: nil, phenology: nil, phenologyRecord: nil, altitude: nil, altitudeChange: nil, annualCycle: nil, alias: alias,
             uri: nil, uriDe: nil, uriFr: nil, uriIt: nil, uriEn: nil
         )
     }
