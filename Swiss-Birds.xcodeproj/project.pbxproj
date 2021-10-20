@@ -22,6 +22,7 @@
 		174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174D696C254C5C09000CCCC8 /* Localizable.strings */; };
 		175CC8DE24856B88006F99D3 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		175D717A248EE1E30041E4F2 /* BirdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */; };
+		1761694227204F7C0056C08A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1761694027204E0C0056C08A /* Preview Assets.xcassets */; };
 		176E89E224AA71D200D38E6B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E124AA71D200D38E6B /* UserDefault.swift */; };
 		176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176E89E324AA725C00D38E6B /* SettingsStore.swift */; };
 		176FA85527173EA200D9F734 /* BirdGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176FA85427173EA200D9F734 /* BirdGrid.swift */; };
@@ -142,6 +143,7 @@
 		175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsDataTypes.swift; sourceTree = "<group>"; };
 		175D29992445E8A200FFC603 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		175D7179248EE1E30041E4F2 /* BirdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdDetailViewModel.swift; sourceTree = "<group>"; };
+		1761694027204E0C0056C08A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		176FA85427173EA200D9F734 /* BirdGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdGrid.swift; sourceTree = "<group>"; };
@@ -260,6 +262,14 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		1761694127204E550056C08A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1761694027204E0C0056C08A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		17B1B43E2546C0E200B422B6 /* BirdOfTheDayWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +277,7 @@
 				174D696C254C5C09000CCCC8 /* Localizable.strings */,
 				17B1B46C25470CC100B422B6 /* DataFetcher.swift */,
 				17B1B4422546C0E600B422B6 /* Assets.xcassets */,
+				1761694127204E550056C08A /* Preview Content */,
 				17B1B4442546C0E600B422B6 /* Info.plist */,
 			);
 			path = BirdOfTheDayWidget;
@@ -588,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */,
+				1761694227204F7C0056C08A /* Preview Assets.xcassets in Resources */,
 				174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -791,6 +803,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"BirdOfTheDayWidget/Preview Content\"";
 				INFOPLIST_FILE = BirdOfTheDayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -813,6 +826,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"BirdOfTheDayWidget/Preview Content\"";
 				INFOPLIST_FILE = BirdOfTheDayWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (

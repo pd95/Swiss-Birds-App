@@ -50,8 +50,7 @@ struct SimpleEntry: TimelineEntry {
     let date: Date
 
     static let example = SimpleEntry(speciesID: 3800, name: "Blaumeise", image: Provider.placeholderImage, date: Date())
-    static let exampleReal1 = SimpleEntry(speciesID: 3800, name: "Blaumeise", image: UIImage(named: "RealPlaceholder")!, date: Date())
-    static let exampleReal2 = SimpleEntry(speciesID: 710, name: "Common Shelduck", image: UIImage(named: "RealPlaceholder2")!, date: Date())
+    static let exampleReal = SimpleEntry(speciesID: 2980, name: "Hohltaube", image: UIImage(named: "RealPlaceholder")!, date: Date())
 }
 
 struct BirdOfTheDayWidgetEntryView: View {
@@ -118,14 +117,14 @@ struct BirdOfTheDayWidget: Widget {
 struct BirdOfTheDayWidget_Previews: PreviewProvider {
 
     static var previews: some View {
-        let example = SimpleEntry.example
-
-        return Group {
-            BirdOfTheDayWidgetEntryView(entry: example)
+        Group {
+            BirdOfTheDayWidgetEntryView(entry: .example)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-            BirdOfTheDayWidgetEntryView(entry: example)
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            BirdOfTheDayWidgetEntryView(entry: example)
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
     }
