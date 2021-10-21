@@ -11,6 +11,7 @@ import SwiftUI
 struct BirdList: View {
 
     @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var favoritesManager: FavoritesManager
 
     var body: some View {
         VStack(spacing: 0) {
@@ -26,7 +27,12 @@ struct BirdList: View {
                             Button {
                                 state.showBird(bird)
                             } label: {
-                                BirdRow(bird: bird, searchText: state.searchText)
+                                BirdRow(
+                                    bird: bird,
+                                    isFavorite: favoritesManager.isFavorite(species: bird),
+                                    searchText: state.searchText,
+                                    sortColumn: state.sortOptions.column
+                                )
                             }
                             .accessibility(identifier: "birdRow_\(bird.speciesId)")
                         }

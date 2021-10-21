@@ -10,12 +10,14 @@ import SwiftUI
 
 struct BirdRow: View {
     let bird: Species
+    let isFavorite: Bool
     let searchText: String
+    let sortColumn: SortOptions.SortColumn
 
     @Environment(\.sizeCategory) var sizeCategory
-    @EnvironmentObject private var state: AppState
-    @EnvironmentObject private var favoritesManager: FavoritesManager
-    @State var image: UIImage = UIImage(named: "placeholder-headshot")!
+
+    static private let placeholder = UIImage(named: "placeholder-headshot")!
+    @State var image: UIImage?
 
     func hasEntwicklungsAtlasSymbol() -> Bool {
         return !bird.filterSymbolName(.entwicklungatlas).isEmpty
@@ -31,7 +33,7 @@ struct BirdRow: View {
                 let circle = Circle()
                 circle.shadow(radius: 5)
 
-                Image(uiImage: image)
+                Image(uiImage: image ?? Self.placeholder)
                     .resizable()
                     .renderingMode(.original)
                     .aspectRatio(contentMode: .fit)
@@ -40,13 +42,16 @@ struct BirdRow: View {
                 circle.stroke(Color.primary, lineWidth: 0.5)
             }
             .overlay(
-                Group {
-                    if favoritesManager.isFavorite(species: bird) {
+                GeometryReader { proxy in
+                    if isFavorite {
+                        let cellWidth = proxy.size.width
                         Image(systemName: "star.fill")
-                            .imageScale(.medium)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: cellWidth*0.2)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             .foregroundColor(.yellow)
                             .shadow(color: Color.black, radius: 1)
-                            .offset(x: 8.0, y: -7.0)
                     }
                 },
                 alignment: .topTrailing
@@ -85,11 +90,11 @@ struct BirdRow: View {
             Spacer()
 
             if !sizeCategory.isAccessibilityCategory {
-                if state.sortOptions.column != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol() {
+                if sortColumn != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol() {
                     SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
                         .accessibility(hidden: true)
                 }
-                if state.sortOptions.column != .filterType(.vogelgruppe) {
+                if sortColumn != .filterType(.vogelgruppe) {
                     SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
                         .accessibility(hidden: true)
                 }
@@ -101,7 +106,7 @@ struct BirdRow: View {
                 .foregroundColor(Color(.tertiaryLabel))
         }
         .accessibilityElement(children: .combine)
-        .onReceive(state.getHeadShot(for: bird)) { (image) in
+        .onReceive(AppState.shared.getHeadShot(for: bird)) { (image) in
             if let image = image {
                 self.image = image
             }
@@ -112,8 +117,8 @@ struct BirdRow: View {
 struct BirdRow_Previews: PreviewProvider {
     static var previews: some View {
         AppState_PreviewWrapper {
-            List(AppState.shared.allSpecies[0..<3]) { bird in
-                BirdRow(bird: bird, searchText: "")
+            List(Array(AppState.shared.allSpecies[0..<3].enumerated()), id: \.offset) { (index, bird) in
+                BirdRow(bird: bird, isFavorite: index >= 2, searchText: "", sortColumn: .speciesName)
             }
         }
         .environmentObject(AppState.shared)

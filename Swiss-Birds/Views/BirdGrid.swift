@@ -11,6 +11,7 @@ import SwiftUI
 struct BirdGrid: View {
 
     @EnvironmentObject private var state: AppState
+    @EnvironmentObject private var favoritesManager: FavoritesManager
 
     var body: some View {
         ScrollView {
@@ -28,7 +29,11 @@ struct BirdGrid: View {
                                 Button {
                                     state.showBird(bird)
                                 } label: {
-                                    BirdCell(bird: bird, searchText: state.searchText)
+                                    BirdCell(
+                                        bird: bird,
+                                        isFavorite: favoritesManager.isFavorite(species: bird),
+                                        searchText: state.searchText
+                                    )
                                 }
                                 .accessibility(identifier: "birdRow_\(bird.speciesId)")
                             }
@@ -37,7 +42,7 @@ struct BirdGrid: View {
                 }
                 .padding(.horizontal)
                 .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
-                    _ = print("simultaneousGesture DragGesture")
+                    let _ = print("simultaneousGesture DragGesture")
                     if state.isEditingSearchField {
                         print("Searching was enabled, but drag occurred => endEditing")
                         withAnimation {

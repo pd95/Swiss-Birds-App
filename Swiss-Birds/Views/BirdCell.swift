@@ -10,11 +10,11 @@ import SwiftUI
 
 struct BirdCell: View {
     let bird: Species
+    let isFavorite: Bool
     let searchText: String
 
-    @EnvironmentObject private var state: AppState
-    @EnvironmentObject private var favoritesManager: FavoritesManager
-    @State var image: UIImage = UIImage(named: "placeholder-headshot")!
+    static private let placeholder = UIImage(named: "placeholder-headshot")!
+    @State var image: UIImage?
 
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct BirdCell: View {
                 let circle = Circle()
                 circle.shadow(radius: 5)
 
-                Image(uiImage: image)
+                Image(uiImage: image ?? Self.placeholder)
                     .resizable()
                     .renderingMode(.original)
                     .aspectRatio(contentMode: .fit)
@@ -31,13 +31,16 @@ struct BirdCell: View {
                 circle.stroke(Color.primary, lineWidth: 0.5)
             }
             .overlay(
-                Group {
-                    if favoritesManager.isFavorite(species: bird) {
+                GeometryReader { proxy in
+                    if isFavorite {
+                        let cellWidth = proxy.size.width
                         Image(systemName: "star.fill")
-                            .imageScale(.medium)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: cellWidth*0.2)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                             .foregroundColor(.yellow)
                             .shadow(color: Color.black, radius: 1)
-                            .offset(x: 8.0, y: -7.0)
                     }
                 },
                 alignment: .topTrailing
@@ -72,8 +75,8 @@ struct BirdCell: View {
             .foregroundColor(.primary)
         }
         .accessibilityElement(children: .combine)
-        .onReceive(state.getHeadShot(for: bird)) { (image) in
-            if let image = image {
+        .onReceive(AppState.shared.getHeadShot(for: bird)) { (image) in
+            if let image = image, self.image == nil {
                 self.image = image
             }
         }
@@ -83,9 +86,13 @@ struct BirdCell: View {
 struct BirdCell_Previews: PreviewProvider {
     static var previews: some View {
         AppState_PreviewWrapper {
-            ForEach(AppState.shared.allSpecies[0..<3]) { bird in
-                BirdCell(bird: bird, searchText: "")
+            HStack {
+                ForEach(Array(AppState.shared.allSpecies[0..<4].enumerated()), id: \.offset) { (index, bird) in
+                    BirdCell(bird: bird, isFavorite: index >= 2, searchText: "")
+                        .aspectRatio(contentMode: .fit)
+                }
             }
+            .padding(40)
         }
         .environmentObject(AppState.shared)
         .environmentObject(FavoritesManager.shared)
