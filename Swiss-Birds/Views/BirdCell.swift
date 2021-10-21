@@ -32,18 +32,16 @@ struct BirdCell: View {
             }
             .overlay(
                 GeometryReader { proxy in
-                    if isFavorite {
-                        let cellWidth = proxy.size.width
-                        Image(systemName: "star.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: cellWidth*0.2)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                            .foregroundColor(.yellow)
-                            .shadow(color: Color.black, radius: 1)
-                    }
-                },
-                alignment: .topTrailing
+                    let width = proxy.size.width * 0.4
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundColor(.yellow)
+                        .opacity(isFavorite ? 1 : 0)
+                        .offset(x: width * 0.5, y: -width * 0.5)
+                        .scaleEffect(x: 0.4, y: 0.4, anchor: .topTrailing)
+                        .shadow(color: Color.black, radius: 2)
+                }
             )
             .accessibility(hidden: true)
 
@@ -90,11 +88,12 @@ struct BirdCell_Previews: PreviewProvider {
                 ForEach(Array(AppState.shared.allSpecies[0..<4].enumerated()), id: \.offset) { (index, bird) in
                     BirdCell(bird: bird, isFavorite: index >= 2, searchText: "")
                         .aspectRatio(contentMode: .fit)
+                        .frame(width: 150)
                 }
             }
-            .padding(40)
         }
         .environmentObject(AppState.shared)
         .environmentObject(FavoritesManager.shared)
+        .previewLayout(.fixed(width: 700, height: 280))
     }
 }
