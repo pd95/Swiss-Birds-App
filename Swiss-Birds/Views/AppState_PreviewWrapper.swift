@@ -21,6 +21,7 @@ struct AppState_PreviewWrapper<Content: View>: View {
                 content()
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
