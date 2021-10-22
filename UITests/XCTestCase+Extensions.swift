@@ -14,8 +14,12 @@ extension XCTestCase {
         let app = XCUIApplication()
         let keyboard = app.keyboards.firstMatch
         XCTAssert(keyboard.waitForExistence(timeout: 2), "Keyboard must be visible: Enable software keyboard!")
+        if keyboard.keys["A"].isHittable == false {
+            let continueButton = app.buttons["Continue"]
+            continueButton.tap()
+        }
         text.forEach {
-            app.keys[String($0)].tap()
+            keyboard.keys[String($0)].tap()
         }
     }
 }
