@@ -260,15 +260,15 @@ class Swiss_BirdsUITests: XCTestCase {
         MyUIElements.navigationBar.element.buttons.firstMatch.tap()
     }
 
-    func testLaunchPerformance() {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                app = XCUIApplication()
-                app.launchArguments.append("enable-testing")
-                app.launchArguments.append("no-birdoftheday")
-                app.launch()
-            }
-        }
-    }
+//    func testLaunchPerformance() {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
+//                app = XCUIApplication()
+//                app.launchArguments.append("enable-testing")
+//                app.launchArguments.append("no-birdoftheday")
+//                app.launch()
+//            }
+//        }
+//    }
 }
