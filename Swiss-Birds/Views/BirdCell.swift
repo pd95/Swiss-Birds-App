@@ -7,14 +7,15 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BirdCell: View {
     let bird: Species
     let isFavorite: Bool
     let searchText: String
 
-    static private let placeholder = UIImage(named: "placeholder-headshot")!
-    @State var image: UIImage?
+    @State var cancellable: AnyCancellable?
+    @State var image = UIImage(named: "placeholder-headshot")!
 
     var body: some View {
         VStack {
@@ -22,7 +23,7 @@ struct BirdCell: View {
                 let circle = Circle()
                 circle.shadow(radius: 5)
 
-                Image(uiImage: image ?? Self.placeholder)
+                Image(uiImage: image)
                     .resizable()
                     .renderingMode(.original)
                     .aspectRatio(contentMode: .fit)
@@ -73,11 +74,17 @@ struct BirdCell: View {
             .foregroundColor(.primary)
         }
         .accessibilityElement(children: .combine)
-        .onReceive(AppState.shared.getHeadShot(for: bird, at: 3)) { (image) in
-            if let image = image, self.image == nil {
-                self.image = image
+        .onAppear(perform: {
+            if cancellable == nil {
+                cancellable = AppState.shared.getHeadShot(for: bird, at: 3)
+                    .sink(receiveValue: { image in
+                        guard let image = image else { return }
+                        self.image = image
+                        cancellable?.cancel()
+                    })
+
             }
-        }
+        })
     }
 }
 
