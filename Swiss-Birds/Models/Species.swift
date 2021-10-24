@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Species: Identifiable, Hashable, CustomStringConvertible {
+final class Species: Identifiable, Hashable, CustomStringConvertible {
     typealias Id = Int
 
     let id = UUID()
@@ -26,7 +26,23 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     var translatedAlternateNames = [LanguageIdentifier: String]()
     var searchableNames = [LanguageIdentifier: String]()
 
-    mutating func addTranslation(for language: LanguageIdentifier, name: String, alternateName: String) {
+    let filterMap: FilterList  // For each FilterType an array of related IDs
+
+    init(speciesId: Species.Id, name: String, alternateName: String, filterMap: FilterList) {
+        self.speciesId = speciesId
+        self.filterMap = filterMap
+        addTranslation(for: primaryLanguage, name: name, alternateName: alternateName)
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func ==(lhs: Species, rhs: Species) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func addTranslation(for language: LanguageIdentifier, name: String, alternateName: String) {
         var alternateName = " \(alternateName) "
         if let range = alternateName.range(of: " \(name) ") {
             alternateName = alternateName.replacingCharacters(in: range, with: "")
@@ -36,11 +52,9 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
         searchableNames[language] = name.lowercased() + " " + alternateName.lowercased()
     }
 
-    mutating func addTranslation(for language: LanguageIdentifier, vdsListElement: VdsListElement) {
+    func addTranslation(for language: LanguageIdentifier, vdsListElement: VdsListElement) {
         addTranslation(for: language, name: vdsListElement.artname, alternateName: vdsListElement.synonyme)
     }
-
-    let filterMap: FilterList  // For each FilterType an array of related IDs
 
     func filterSymbolName(_ filterType: FilterType) -> String {
         if let array = filterMap[filterType], array.count > 0 {
@@ -122,14 +136,7 @@ struct Species: Identifiable, Hashable, CustomStringConvertible {
     }
 
     static let placeholder = Species(speciesId: -1, name: "Placeholder", alternateName: "", filterMap: FilterList())
-}
 
-extension Species {
-    init(speciesId: Species.Id, name: String, alternateName: String, filterMap: FilterList) {
-        self.speciesId = speciesId
-        self.filterMap = filterMap
-        addTranslation(for: primaryLanguage, name: name, alternateName: alternateName)
-    }
 }
 
 func loadSpeciesData(vdsList: [VdsListElement]) -> [Species] {
