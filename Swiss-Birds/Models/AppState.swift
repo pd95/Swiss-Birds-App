@@ -97,7 +97,7 @@ class AppState: ObservableObject {
 
                 // And enrich with other languages name
                 var allSpecies = [Species]()
-                for var species in primarySpecies {
+                for species in primarySpecies {
                     for language in preferredLanguageOrder where language != primaryLanguage {
                         if let otherBirdData = indexedBirdData[language]![String(species.speciesId)] {
                             species.addTranslation(for: language, vdsListElement: otherBirdData)
