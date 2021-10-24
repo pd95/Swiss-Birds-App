@@ -73,7 +73,7 @@ struct BirdCell: View {
             .foregroundColor(.primary)
         }
         .accessibilityElement(children: .combine)
-        .onReceive(AppState.shared.getHeadShot(for: bird)) { (image) in
+        .onReceive(AppState.shared.getHeadShot(for: bird, at: 3)) { (image) in
             if let image = image, self.image == nil {
                 self.image = image
             }

@@ -242,12 +242,12 @@ class AppState: ObservableObject {
         Filter.allFiltersGrouped.isEmpty || self.allSpecies.isEmpty
     }
 
-    func getHeadShot(for bird: Species) -> AnyPublisher<UIImage?, Never> {
+    func getHeadShot(for bird: Species, at scale: Int = 2) -> AnyPublisher<UIImage?, Never> {
         if let image = headShotsCache[bird.speciesId] {
             return Just(image).eraseToAnyPublisher()
         }
         return VdsAPI
-            .getSpecieHeadshot(for: bird.speciesId, scale: Int(UIScreen.main.scale))
+            .getSpecieHeadshot(for: bird.speciesId, scale: max(scale, Int(UIScreen.main.scale)))
             .receive(on: DispatchQueue.main)
             .map { [weak self] data in
                 let image = UIImage(data: data)
