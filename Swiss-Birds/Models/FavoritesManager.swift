@@ -39,7 +39,6 @@ class FavoritesManager: ObservableObject {
 
     func toggleFavorite(_ species: Species) {
         changingFavorites = true
-        objectWillChange.send()
 
         if favorites.contains(species.speciesId) {
             favorites.remove(species.speciesId)
