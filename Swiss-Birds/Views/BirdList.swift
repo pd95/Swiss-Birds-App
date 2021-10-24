@@ -50,7 +50,6 @@ struct BirdList: View {
                     }
                 }
             }))
-            Text(" ")
         }
     }
 

@@ -51,7 +51,6 @@ struct BirdGrid: View {
                         }
                     }
                 }))
-                Text(" ")
             }
         }
     }

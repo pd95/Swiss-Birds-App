@@ -24,7 +24,6 @@ struct ContentView: View {
                 } else {
                     if #available(iOS 14, *), sizeClass == .regular {
                         BirdGrid()
-                            .edgesIgnoringSafeArea(.bottom)
                             .navigationBarTitle(Text("Vögel der Schweiz"))
                             .navigationBarItems(leading: sortButton, trailing: filterButton)
                             .background(dynamicNavigationLink)
@@ -32,7 +31,6 @@ struct ContentView: View {
 
                     } else {
                         BirdList()
-                            .edgesIgnoringSafeArea(.bottom)
                             .navigationBarTitle(Text("Vögel der Schweiz"))
                             .navigationBarItems(leading: sortButton, trailing: filterButton)
                             .background(dynamicNavigationLink)
