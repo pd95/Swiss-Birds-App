@@ -77,17 +77,17 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().navigationBars.firstMatch
                 case .filterButton, .noFilteringButton, .onlyCommonButton, .playVoiceButton, .showBirdOfTheDayButton, .dismissBirdOfTheDayButton,
                      .sortButton, .sortSpeciesName, .sortBirdGroup, .sortCommon, .sortRedList, .sortEvolution:
-                    return XCUIApplication().buttons[self.rawValue]
+                    return XCUIApplication().buttons[self.rawValue].firstMatch
                 case .searchTextField:
-                    return XCUIApplication().otherElements["searchBar"].searchFields.allElementsBoundByIndex.last!
+                    return XCUIApplication().otherElements["searchBar"].firstMatch.searchFields.allElementsBoundByIndex.last!
                 case .searchTextClearButton:
-                    return XCUIApplication().otherElements["searchBar"].buttons["clearButton"]
+                    return XCUIApplication().otherElements["searchBar"].firstMatch.buttons["clearButton"].firstMatch
                 case .searchTextCancelButton:
-                    return XCUIApplication().otherElements["searchBar"].buttons["cancelButton"]
+                    return XCUIApplication().otherElements["searchBar"].firstMatch.buttons["cancelButton"].firstMatch
                 case .birdDetailViewScrollView:
-                    return XCUIApplication().scrollViews.containing(.staticText, identifier: "description").element
+                    return XCUIApplication().scrollViews.containing(.staticText, identifier: "description").element.firstMatch
                 case .filterContainerView:
-                    return XCUIApplication().tables.containing(.button, identifier: "noFiltering").element
+                    return XCUIApplication().tables.containing(.button, identifier: "noFiltering").element.firstMatch
             }
         }
     }
@@ -210,7 +210,7 @@ class Swiss_BirdsUITests: XCTestCase {
         searchText.typeText("\n")
 
         // Show Detail
-        let birdButton = app.buttons["birdRow_4240"]
+        let birdButton = app.buttons["birdRow_4240"].firstMatch
         _ = birdButton.waitForExistence(timeout: wait4existenceTimeout)
         birdButton.tap()
 
@@ -232,15 +232,16 @@ class Swiss_BirdsUITests: XCTestCase {
         filterButton.tap()
 
         let filterContainer = MyUIElements.filterContainerView.element
-        while filterContainer.buttons["filtervogelgruppe-11"].isHittable == false {
+        let filterGroupButton = filterContainer.buttons["filtervogelgruppe-11"].firstMatch
+        while filterGroupButton.isHittable == false {
             filterContainer.swipeUp()
         }
-        filterContainer.buttons["filtervogelgruppe-11"].tap()
+        filterGroupButton.tap()
 
         // Tap "Back"
         MyUIElements.navigationBar.element.buttons.firstMatch.tap()
 
-        let merlinBird = app.buttons["birdRow_1450"]
+        let merlinBird = app.buttons["birdRow_1450"].firstMatch
         _ = merlinBird.waitForExistence(timeout: wait4existenceTimeout)
         while merlinBird.isHittable == false {
             app.swipeUp()
