@@ -57,15 +57,19 @@ struct ContentView: View {
                     .accessibility(hint: Text("Antippen zum schliessen."))
                     .zIndex(10)
                     .accessibility(sortPriority: 990)
-                    .onAppear {
-                        if state.birdOfTheDayImage == nil {
-                            state.getBirdOfTheDay()
-                        }
-                    }
 
-                if let birdOfTheDay = state.birdOfTheDay,
-                   let species = Species.species(for: birdOfTheDay.speciesID),
-                   let image = state.birdOfTheDayImage {
+                if state.birdOfTheDayImage == nil {
+                    ActivityIndicatorView()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
+                                state.getBirdOfTheDay()
+                            }
+                        }
+                }
+                else if let birdOfTheDay = state.birdOfTheDay,
+                        let species = Species.species(for: birdOfTheDay.speciesID),
+                        let image = state.birdOfTheDayImage
+                {
                     BirdOfTheDay(isPresented: $state.showBirdOfTheDay.animation(), image: image, species: species)
                         .animation(.easeOut)
                         .transition(AnyTransition.move(edge: .bottom)

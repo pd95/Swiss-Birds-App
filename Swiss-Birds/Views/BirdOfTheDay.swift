@@ -50,7 +50,7 @@ struct BirdOfTheDay: View {
         .accessibility(label: Text("Vogel des Tages: \(species.name)"))
         .accessibility(hint: Text("Zeige Details zum Vogel des Tages an."))
         .overlay(dismissButton, alignment: .topLeading)
-        .onDisappear {
+        .onAppear {
             state.previousBirdOfTheDay = species.speciesId
         }
         .padding()

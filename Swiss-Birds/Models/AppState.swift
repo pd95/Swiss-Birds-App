@@ -285,21 +285,23 @@ class AppState: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] (birdOfTheDay) in
-                    self?.birdOfTheDay = birdOfTheDay
-                    self?.birdOfTheDayCheckDate = Date()
+                    guard let self = self else { return }
+
+                    self.birdOfTheDay = birdOfTheDay
+                    self.birdOfTheDayCheckDate = Date()
                     if let botd = birdOfTheDay {
                         let currentBirdOfTheDay = botd.speciesID
-                        let isNewBirdOfTheDay = (currentBirdOfTheDay > -1 && self?.previousBirdOfTheDay != currentBirdOfTheDay)
+                        let isNewBirdOfTheDay = (currentBirdOfTheDay > -1 && self.previousBirdOfTheDay != currentBirdOfTheDay)
 
                         // Make sure we fetch the image
                         if isNewBirdOfTheDay {
-                            self?.birdOfTheDayImage = nil
+                            self.birdOfTheDayImage = nil
                         }
                         if showAlways || isNewBirdOfTheDay {
-                            self?.showBirdOfTheDayNow()
+                            self.showBirdOfTheDayNow()
                         }
                         if isNewBirdOfTheDay {
-                            self?.refreshWidget()
+                            self.refreshWidget()
                         }
                     }
                 })
