@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "9E5BEE55-7178-4557-8EEE-ACD2EC396557",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Swiss-Birds.xcodeproj",
+        "identifier" : "17B9610223699375003AA802",
+        "name" : "Swiss-BirdsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

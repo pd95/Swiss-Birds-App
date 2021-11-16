@@ -147,6 +147,7 @@
 		1761694327205FFB0056C08A /* Snapshots.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapshots.xctestplan; sourceTree = "<group>"; };
 		176E89E124AA71D200D38E6B /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		176E89E324AA725C00D38E6B /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		176F9B562744316100AB2A1F /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		176FA85427173EA200D9F734 /* BirdGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdGrid.swift; sourceTree = "<group>"; };
 		176FA85627174BBD00D9F734 /* BirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdCell.swift; sourceTree = "<group>"; };
 		1779657E2453184D00A2A1B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -338,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				17B9610723699375003AA802 /* Swiss_BirdsTests.swift */,
+				176F9B562744316100AB2A1F /* UnitTests.xctestplan */,
 			);
 			path = "Swiss-BirdsTests";
 			sourceTree = "<group>";

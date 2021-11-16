@@ -35,6 +35,9 @@
          <TestPlanReference
             reference = "container:UITests/Snapshots.xctestplan">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:Swiss-BirdsTests/UnitTests.xctestplan">
+         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
