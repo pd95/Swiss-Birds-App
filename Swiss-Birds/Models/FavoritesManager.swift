@@ -11,13 +11,23 @@ import Combine
 
 class FavoritesManager: ObservableObject {
 
-    static let shared = FavoritesManager()
+    static var shared: FavoritesManager = {
+        let settingsStore = SettingsStore.shared
+        return FavoritesManager(settingsStore: settingsStore, userDefaults: .standard, favoriteSpecies: settingsStore.favoriteSpecies)
+    }()
 
     private var cancellables = Set<AnyCancellable>()
 
-    private init() {
+    let userDefaults: UserDefaults
+    let settingsStore: SettingsStore
+
+    init(settingsStore: SettingsStore = .shared, userDefaults: UserDefaults = .standard, favoriteSpecies: [Int]? = nil) {
+        self.settingsStore = settingsStore
+        self.userDefaults = userDefaults
+        self.favorites = Set(favoriteSpecies ?? settingsStore.favoriteSpecies)
+
         // Register as UserDefaults observer to update the favorites synched from iCloud
-        UserDefaults.standard
+        userDefaults
             .publisher(for: \.sync_favoriteSpecies)
             .removeDuplicates()
             .map({ Set($0) })
@@ -34,7 +44,7 @@ class FavoritesManager: ObservableObject {
             .store(in: &cancellables)
     }
 
-    @Published private(set) var favorites: Set<Species.Id> = Set(SettingsStore.shared.favoriteSpecies)
+    @Published private(set) var favorites: Set<Species.Id>
     private var changingFavorites = false
 
     func toggleFavorite(_ species: Species) {
@@ -46,7 +56,7 @@ class FavoritesManager: ObservableObject {
             favorites.insert(species.speciesId)
         }
 
-        SettingsStore.shared.favoriteSpecies = favorites.sorted()
+        settingsStore.favoriteSpecies = favorites.sorted()
         changingFavorites = false
     }
 
