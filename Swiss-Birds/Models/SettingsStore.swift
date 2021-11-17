@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import os.log
 
-class SettingsStore: ObservableObject {
+class SettingsStore {
 
     enum Keys {
         static let startupCheckBirdOfTheDay = "startupCheckBirdOfTheDay"
