@@ -21,7 +21,7 @@ class AppState: ObservableObject {
     @Published var sortOptions = SortOptions(column: .speciesName) {
         didSet {
             // Sync value with UserDefaults
-            SettingsStore.shared.groupColumn = sortOptions.column.rawValue
+            settingsStore.groupColumn = sortOptions.column.rawValue
         }
     }
 
@@ -60,13 +60,18 @@ class AppState: ObservableObject {
 
     var headShotsCache: [Species.Id: UIImage] = [:]
 
-    // Singleton
+    // Shared instance
     static var shared = AppState()
 
-    private init() {
+    let favoritesManager: FavoritesManager
+    let settingsStore: SettingsStore
+
+    init(favoritesManager: FavoritesManager = .shared, settingsStore: SettingsStore = .shared ) {
+        self.favoritesManager = favoritesManager
+        self.settingsStore = settingsStore
 
         // Init sort options with value stored in UserDefaults
-        if let sortColumn = SortOptions.SortColumn(rawValue: SettingsStore.shared.groupColumn) {
+        if let sortColumn = SortOptions.SortColumn(rawValue: settingsStore.groupColumn) {
             sortOptions = SortOptions(column: sortColumn)
         }
 
@@ -173,7 +178,7 @@ class AppState: ObservableObject {
             })
 
         Publishers.CombineLatest($allSpecies, filters.objectWillChange)
-            .combineLatest(cleanSearchTextPublisher, cleanSortOptions, FavoritesManager.shared.$favorites) {
+            .combineLatest(cleanSearchTextPublisher, cleanSortOptions, favoritesManager.$favorites) {
                 ($0.0, $1, $2, $3)
             }
             .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
@@ -386,7 +391,7 @@ class AppState: ObservableObject {
     func countFilterMatches() -> Int {
         let favoriteFilter: (Species) -> Bool
         if self.filters.list.keys.contains(.favorites) {
-            favoriteFilter = FavoritesManager.shared.isFavorite
+            favoriteFilter = favoritesManager.isFavorite
         } else {
             favoriteFilter = { _ in true }
         }

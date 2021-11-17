@@ -13,7 +13,7 @@ import Combine
 class Swiss_BirdsTests: XCTestCase {
 
     func test_AppState_runsInitialLoad() {
-        let appState = AppState.shared
+        let appState = AppState()
         let exp = expectation(description: "Initial load should finish")
 
         XCTAssertTrue(appState.initialLoadRunning, "Initial load should be running after creation.")
@@ -24,6 +24,23 @@ class Swiss_BirdsTests: XCTestCase {
                     exp.fulfill()
                     cancellable?.cancel()
                 }
+            }
+
+        wait(for: [exp], timeout: 10.0)  // We do not know how long it will take! :-(
+    }
+
+    func test_AppState_loadsAllSpecies() {
+        let appState = AppState()
+        let exp = expectation(description: "Initial load populates allSpecies property")
+
+        XCTAssertEqual(appState.allSpecies.count, 0, "Initial species array must be empty.")
+        var cancellable: AnyCancellable?
+        cancellable = appState.$allSpecies
+            .dropFirst()                 // HACK: there is an issue here: first update is setting an empty array!
+            .sink { species in
+                XCTAssertGreaterThan(species.count, 0)
+                exp.fulfill()
+                cancellable?.cancel()
             }
 
         wait(for: [exp], timeout: 10.0)  // We do not know how long it will take! :-(
