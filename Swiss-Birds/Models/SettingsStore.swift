@@ -65,7 +65,7 @@ class SettingsStore {
     var favoriteSpecies: [Int]
 
     func setupForTesting() {
-        userDefaults.removeAll()
+        removeAllSettings()
 
         if CommandLine.arguments.contains("no-birdoftheday") {
             startupCheckBirdOfTheDay = false
@@ -77,12 +77,13 @@ class SettingsStore {
     private var checkRunning = false
     private func checkAndSetVersionAndBuildNumber() {
         os_log("checkAndSetVersionAndBuildNumber running on %{public}@", Thread.current.description)
-        guard checkRunning == false, Thread.isMainThread == true else { return }
+        guard checkRunning == false, Thread.isMainThread == true else {
+            return
+        }
         checkRunning = true
 
         if reset {
-            os_log("Removing all settings")
-            userDefaults.removeAll()
+            removeAllSettings()
         }
         let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
@@ -96,9 +97,34 @@ class SettingsStore {
         }
 
         if appVersion != currentVersion {
+            os_log("checkAndSetVersionAndBuildNumber set appVersion")
             appVersion = currentVersion
         }
 
         checkRunning = false
+    }
+
+    /// Remove all stored settings
+    /// Ensures "reset == true" during the whole process-
+    func removeAllSettings() {
+        os_log("Removing all settings")
+        reset = true
+        for element in userDefaults.dictionaryRepresentation() {
+            if element.key == Keys.reset { continue }
+            userDefaults.removeObject(forKey: element.key)
+        }
+        userDefaults.removeObject(forKey: Keys.reset)
+    }
+}
+
+extension UserDefaults {
+
+    @objc dynamic var reset: Bool {
+        get {
+            bool(forKey: SettingsStore.Keys.reset)
+        }
+        set {
+            setValue(newValue, forKey: SettingsStore.Keys.reset)
+        }
     }
 }
