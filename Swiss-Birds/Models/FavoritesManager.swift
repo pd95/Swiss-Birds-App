@@ -13,21 +13,19 @@ class FavoritesManager: ObservableObject {
 
     static var shared: FavoritesManager = {
         let settingsStore = SettingsStore.shared
-        return FavoritesManager(settingsStore: settingsStore, userDefaults: .standard, favoriteSpecies: settingsStore.favoriteSpecies)
+        return FavoritesManager(settingsStore: settingsStore, favoriteSpecies: settingsStore.favoriteSpecies)
     }()
 
     private var cancellables = Set<AnyCancellable>()
 
-    let userDefaults: UserDefaults
     let settingsStore: SettingsStore
 
     init(settingsStore: SettingsStore = .shared, userDefaults: UserDefaults = .standard, favoriteSpecies: [Int]? = nil) {
         self.settingsStore = settingsStore
-        self.userDefaults = userDefaults
         self.favorites = Set(favoriteSpecies ?? settingsStore.favoriteSpecies)
 
         // Register as UserDefaults observer to update the favorites synched from iCloud
-        userDefaults
+        settingsStore.userDefaults
             .publisher(for: \.sync_favoriteSpecies)
             .removeDuplicates()
             .map({ Set($0) })
