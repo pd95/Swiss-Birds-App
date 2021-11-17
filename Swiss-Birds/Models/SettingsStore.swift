@@ -65,18 +65,24 @@ class SettingsStore: ObservableObject {
     var favoriteSpecies: [Int]
 
     func setupForTesting() {
-        userDefaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        userDefaults.removeAll()
 
         if CommandLine.arguments.contains("no-birdoftheday") {
             startupCheckBirdOfTheDay = false
         }
     }
 
+    // The following function should run "isolated" only once.
+    // By updating userDefaults more changes may trigger more calls to this function.
+    private var checkRunning = false
     private func checkAndSetVersionAndBuildNumber() {
+        os_log("checkAndSetVersionAndBuildNumber running on %{public}@", Thread.current.description)
+        guard checkRunning == false, Thread.isMainThread == true else { return }
+        checkRunning = true
+
         if reset {
-            let domain = Bundle.main.bundleIdentifier!
-            os_log("Resetting all settings for %{public}@", domain)
-            userDefaults.removePersistentDomain(forName: domain)
+            os_log("Removing all settings")
+            userDefaults.removeAll()
         }
         let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
@@ -92,5 +98,7 @@ class SettingsStore: ObservableObject {
         if appVersion != currentVersion {
             appVersion = currentVersion
         }
+
+        checkRunning = false
     }
 }

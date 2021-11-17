@@ -22,6 +22,15 @@ extension UIApplication {
     }
 }
 
+extension UserDefaults {
+    /// Remove all stored values from current instance
+    func removeAll() {
+        for element in dictionaryRepresentation() {
+            removeObject(forKey: element.key)
+        }
+    }
+}
+
 extension String {
 
     /// Matches string with a regular expression, returning an array of `String`
