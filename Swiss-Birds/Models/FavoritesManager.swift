@@ -64,3 +64,15 @@ class FavoritesManager: ObservableObject {
         favorites.contains(species.speciesId)
     }
 }
+
+extension UserDefaults {
+
+    @objc dynamic var sync_favoriteSpecies: [Int] {
+        get {
+            array(forKey: SettingsStore.Keys.favoriteSpecies) as? [Int] ?? []
+        }
+        set {
+            setValue(newValue, forKey: SettingsStore.Keys.favoriteSpecies)
+        }
+    }
+}
