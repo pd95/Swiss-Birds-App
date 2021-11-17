@@ -12,12 +12,32 @@ import os.log
 
 class SettingsStore: ObservableObject {
 
+    enum Keys {
+        static let startupCheckBirdOfTheDay = "startupCheckBirdOfTheDay"
+        static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
+        static let reset = "reset"
+        static let appVersion = "appVersion"
+        static let favoriteSpeciesOld = "favoriteSpecies"
+        static let favoriteSpecies = "sync_favoriteSpecies"
+    }
+
     static let shared = SettingsStore()
 
-    var anyCancellable: AnyCancellable?
+    let userDefaults: UserDefaults
 
-    private init() {
-        anyCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)
+    private var anyCancellable: AnyCancellable?
+
+    init(userDefaults: UserDefaults = .standard) {
+
+        self.userDefaults = userDefaults
+        self._reset.storage = userDefaults
+        self._appVersion.storage = userDefaults
+        self._startupCheckBirdOfTheDay.storage = userDefaults
+        self._voiceDataOverConstrainedNetworkAccess.storage = userDefaults
+        self._groupColumn.storage = userDefaults
+        self._favoriteSpecies.storage = userDefaults
+
+        anyCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification, object: userDefaults)
             .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
             .sink { [weak self](x) in
                 os_log("UserDefaults.didChangeNotification %{public}@", x.description)
@@ -26,26 +46,26 @@ class SettingsStore: ObservableObject {
         checkAndSetVersionAndBuildNumber()
     }
 
-    @UserDefault(key: UserDefaults.Keys.reset, defaultValue: false)
+    @UserDefault(key: Keys.reset, defaultValue: false)
     var reset: Bool
 
-    @UserDefault(key: UserDefaults.Keys.appVersion, defaultValue: "-")
+    @UserDefault(key: Keys.appVersion, defaultValue: "-")
     var appVersion: String
 
-    @UserDefault(key: UserDefaults.Keys.startupCheckBirdOfTheDay, defaultValue: true)
+    @UserDefault(key: Keys.startupCheckBirdOfTheDay, defaultValue: true)
     var startupCheckBirdOfTheDay: Bool
 
-    @UserDefault(key: UserDefaults.Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
+    @UserDefault(key: Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
     var voiceDataOverConstrainedNetworkAccess: Bool
 
     @UserDefault(key: "groupColumn", defaultValue: "")
     var groupColumn: String
 
-    @UserDefault(key: UserDefaults.Keys.favoriteSpecies, defaultValue: [])
+    @UserDefault(key: Keys.favoriteSpecies, defaultValue: [])
     var favoriteSpecies: [Int]
 
     func setupForTesting() {
-        UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        userDefaults.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
 
         if CommandLine.arguments.contains("no-birdoftheday") {
             startupCheckBirdOfTheDay = false
@@ -56,17 +76,17 @@ class SettingsStore: ObservableObject {
         if reset {
             let domain = Bundle.main.bundleIdentifier!
             os_log("Resetting all settings for %{public}@", domain)
-            UserDefaults.standard.removePersistentDomain(forName: domain)
+            userDefaults.removePersistentDomain(forName: domain)
         }
         let version: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
         let build: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
         let currentVersion = "\(version) (\(build))"
 
         // Migrate old favorites to Cloud-syncing favorites key
-        if let oldFavorites = UserDefaults.standard.array(forKey: UserDefaults.Keys.favoriteSpeciesOld) as? [Int] {
+        if let oldFavorites = userDefaults.array(forKey: Keys.favoriteSpeciesOld) as? [Int] {
             os_log("Migrating old favorites to cloud-synched favorites %{public}@", oldFavorites)
             favoriteSpecies = oldFavorites
-            UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.favoriteSpeciesOld)
+            userDefaults.removeObject(forKey: Keys.favoriteSpeciesOld)
         }
 
         if appVersion != currentVersion {
@@ -77,21 +97,12 @@ class SettingsStore: ObservableObject {
 
 extension UserDefaults {
 
-    struct Keys {
-        static let startupCheckBirdOfTheDay = "startupCheckBirdOfTheDay"
-        static let voiceDataOverConstrainedNetworkAccess = "voiceDataOverConstrainedNetworkAccess"
-        static let reset = "reset"
-        static let appVersion = "appVersion"
-        static let favoriteSpeciesOld = "favoriteSpecies"
-        static let favoriteSpecies = "sync_favoriteSpecies"
-    }
-
     @objc dynamic var sync_favoriteSpecies: [Int] {
         get {
-            array(forKey: Keys.favoriteSpecies) as? [Int] ?? []
+            array(forKey: SettingsStore.Keys.favoriteSpecies) as? [Int] ?? []
         }
         set {
-            setValue(newValue, forKey: Keys.favoriteSpecies)
+            setValue(newValue, forKey: SettingsStore.Keys.favoriteSpecies)
         }
     }
 }
