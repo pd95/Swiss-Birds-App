@@ -20,7 +20,7 @@ class FavoritesManager: ObservableObject {
 
     let settingsStore: SettingsStore
 
-    init(settingsStore: SettingsStore = .shared, userDefaults: UserDefaults = .standard, favoriteSpecies: [Int]? = nil) {
+    init(settingsStore: SettingsStore = .shared, favoriteSpecies: [Int]? = nil) {
         self.settingsStore = settingsStore
         self.favorites = Set(favoriteSpecies ?? settingsStore.favoriteSpecies)
 
