@@ -1,8 +1,9 @@
 //
 //  CloudDefaults.swift
-//  UserDefaultsExample
+//  Swiss-Birds
 //
 //  Created by Philipp on 05.07.21.
+//  Copyright © 2021 Philipp. All rights reserved.
 //
 
 import Foundation
@@ -15,45 +16,50 @@ final class CloudDefaults: NSObject {
     static let syncPrefix = "sync_"
 
     private var ignoreLocalChanges = false
+    private var userDefaults: UserDefaults
+    private var ubiquitousKeyValueStore: NSUbiquitousKeyValueStore
+    private var notificationCenter: NotificationCenter
 
     private var synchronizedUserDefaultKeys = [String]()
 
-    private override init() {
+    init(userDefaults: UserDefaults = .standard, ubiquitousKeyValueStore: NSUbiquitousKeyValueStore = .default, notificationCenter: NotificationCenter = .default) {
+        self.userDefaults = userDefaults
+        self.ubiquitousKeyValueStore = ubiquitousKeyValueStore
+        self.notificationCenter = notificationCenter
         super.init()
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        notificationCenter.removeObserver(self)
         for keyPathString in synchronizedUserDefaultKeys {
-            UserDefaults.standard.removeObserver(self, forKeyPath: keyPathString)
+            userDefaults.removeObserver(self, forKeyPath: keyPathString)
         }
     }
 
     /// Called upon application start, to ensure we do not miss any important iCloud update
     func start() {
         // register for UserDefault changes of known keys which need syncing
-        synchronizedUserDefaultKeys = UserDefaults.standard.dictionaryRepresentation().keys.filter({ $0.hasPrefix(Self.syncPrefix)})
+        synchronizedUserDefaultKeys = userDefaults.dictionaryRepresentation().keys.filter({ $0.hasPrefix(Self.syncPrefix)})
         for keyPathString in synchronizedUserDefaultKeys {
-            UserDefaults.standard.addObserver(self, forKeyPath: keyPathString, options: .new, context: nil) // Use KVO obervation mechanism
+            userDefaults.addObserver(self, forKeyPath: keyPathString, options: .new, context: nil) // Use KVO obervation mechanism
         }
 
         // Register for UserDefaults change notifications to keep "synchronized keys" up-to-date
-        NotificationCenter.default.addObserver(
+        notificationCenter.addObserver(
             forName: UserDefaults.didChangeNotification,
-            object: nil, queue: .main, using: findNewSyncKeys
+            object: userDefaults, queue: .main, using: findNewSyncKeys
         )
 
         // register for notifications of all external changes
-        let store = NSUbiquitousKeyValueStore.default
-        NotificationCenter.default.addObserver(
+        notificationCenter.addObserver(
             forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
-            object: store,
+            object: ubiquitousKeyValueStore,
             queue: .main,
             using: updateLocal
         )
 
         // Force iCloud sync to ensure a fresh copy
-        if store.synchronize() == false {
+        if ubiquitousKeyValueStore.synchronize() == false {
             fatalError("App was not built with the proper iCloud entitlement requests?")
         }
         os_log("CloudDefaults.start: synchronized successfully")
@@ -62,11 +68,10 @@ final class CloudDefaults: NSObject {
     /// Called whenever the application enters foreground state, to ensure the store is up-to-date
     func synchronize() {
         #if DEBUG
-        let store = NSUbiquitousKeyValueStore.default
-        let bit = store.bool(forKey: "fakeSyncBit")
-        store.set(!bit, forKey: "fakeSyncBit")
+        let bit = ubiquitousKeyValueStore.bool(forKey: "fakeSyncBit")
+        ubiquitousKeyValueStore.set(!bit, forKey: "fakeSyncBit")
         #endif
-        if NSUbiquitousKeyValueStore.default.synchronize() {
+        if ubiquitousKeyValueStore.synchronize() {
             os_log("CloudDefaults.synchronize: success")
         } else {
             os_log("CloudDefaults.synchronize: error!!")
@@ -77,26 +82,26 @@ final class CloudDefaults: NSObject {
     /// We check here whether new sync-keys are added to UserDefaults, start observing those and push the values to the cloud
     private func findNewSyncKeys(_ notification: Notification) {
         os_log("CloudDefaults.findNewSyncKeys: %{public}@", notification.debugDescription)
-        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+        for (key, value) in userDefaults.dictionaryRepresentation() {
             guard key.hasPrefix(Self.syncPrefix) && synchronizedUserDefaultKeys.contains(key) == false else { continue }
 
             os_log("CloudDefaults.findNewSyncKeys: New key found %{public}@, adding observer and pushing value to cloud store", key)
             synchronizedUserDefaultKeys.append(key)
-            UserDefaults.standard.addObserver(self, forKeyPath: key, options: .new, context: nil) // Use KVO obervation mechanism
-            NSUbiquitousKeyValueStore.default.set(value, forKey: key)
+            userDefaults.addObserver(self, forKeyPath: key, options: .new, context: nil) // Use KVO observation mechanism
+            ubiquitousKeyValueStore.set(value, forKey: key)
         }
     }
 
-    /// This method synhronizes external changes (=NSUbiquitousKeyValueStore.didChangeExternallyNotification) to the UserDefaults store
+    /// This method synchronizes external changes (=NSUbiquitousKeyValueStore.didChangeExternallyNotification) to the UserDefaults store
     /// ensuring (by setting `ignoreLocalChanges`) that those are not synched back to the cloud.
     private func updateLocal(_ notification: Notification) {
         os_log("CloudDefaults: updateLocal: %{public}@", notification.debugDescription)
         ignoreLocalChanges = true
 
-        for (key, value) in NSUbiquitousKeyValueStore.default.dictionaryRepresentation {
+        for (key, value) in ubiquitousKeyValueStore.dictionaryRepresentation {
             guard key.hasPrefix(Self.syncPrefix) else { continue }
             os_log("CloudDefaults.updateRemote: Updating local value of %{public}@", key)
-            UserDefaults.standard.set(value, forKey: key)
+            userDefaults.set(value, forKey: key)
         }
 
         ignoreLocalChanges = false
@@ -116,6 +121,6 @@ final class CloudDefaults: NSObject {
         }
 
         os_log("CloudDefaults.observeValue: UserDefaults %{public}@ changed to %{public}@", keyPath, change?.debugDescription ?? "(none)")
-        NSUbiquitousKeyValueStore.default.set(newValue, forKey: keyPath)
+        ubiquitousKeyValueStore.set(newValue, forKey: keyPath)
     }
 }
