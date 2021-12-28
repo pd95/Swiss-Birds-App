@@ -87,7 +87,7 @@ struct ContentView: View {
                 state.checkBirdOfTheDay()
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: RunLoop.main), perform: { _ in
+        .onReceive(NotificationCenter.default.publisher(for: .NSCalendarDayChanged).receive(on: DispatchQueue.main), perform: { _ in
             if SettingsStore.shared.startupCheckBirdOfTheDay {
                 state.checkBirdOfTheDay()
             }

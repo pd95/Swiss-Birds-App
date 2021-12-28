@@ -38,7 +38,7 @@ class SettingsStore {
         self._favoriteSpecies.storage = userDefaults
 
         anyCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification, object: userDefaults)
-            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
             .sink { [weak self](x) in
                 os_log("UserDefaults.didChangeNotification %{public}@", x.description)
                 self?.checkAndSetVersionAndBuildNumber()
