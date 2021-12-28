@@ -90,9 +90,11 @@ struct SearchField_Preview_Helper: View {
                 .padding()
 
             Button(action: {
-                edit.toggle()
-                if !edit {
-                    UIApplication.shared.endEditing()
+                withAnimation {
+                    edit.toggle()
+                    if !edit {
+                        UIApplication.shared.endEditing()
+                    }
                 }
             }) {
                 Text("Toggle Edit")
