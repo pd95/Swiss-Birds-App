@@ -3,3 +3,13 @@ included:
   - Swiss-BirdsTests
   - UITests
   - BirdOfTheDayWidget
+  - SpeciesCore
+  - SpeciesCoreTests
+
+identifier_name:
+  excluded:
+    - id
+
+type_name:
+  excluded:
+    - ID
