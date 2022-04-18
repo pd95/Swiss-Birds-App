@@ -63,8 +63,4 @@ class RemoteDataMapperTests: XCTestCase {
     func makeItemsJSON(_ json: [[String: Any]]) -> Data {
         return try! JSONSerialization.data(withJSONObject: json)
     }
-
-    func anyData() -> Data {
-        return Data("any data".utf8)
-    }
 }
