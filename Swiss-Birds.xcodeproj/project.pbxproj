@@ -33,6 +33,8 @@
 		1779F4C72809A63300E2506D /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779F4C62809A63300E2506D /* FilterType.swift */; };
 		1779F4CF2809AC7400E2506D /* FilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779F4CE2809AC7400E2506D /* FilterTests.swift */; };
 		1779F4D02809AC7400E2506D /* libSpeciesCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A54D58280987F700BF6224 /* libSpeciesCore.a */; };
+		1779F4DF2809C85E00E2506D /* RemoteDataMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779F4DE2809C85E00E2506D /* RemoteDataMapperTests.swift */; };
+		1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
 		17A2A45F25643C0C00388357 /* AppState_PreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */; };
@@ -176,6 +178,8 @@
 		1779F4C62809A63300E2506D /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		1779F4CC2809AC7400E2506D /* SpeciesCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeciesCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1779F4CE2809AC7400E2506D /* FilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTests.swift; sourceTree = "<group>"; };
+		1779F4DE2809C85E00E2506D /* RemoteDataMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataMapperTests.swift; sourceTree = "<group>"; };
+		1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataMapper.swift; sourceTree = "<group>"; };
 		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
 		17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState_PreviewWrapper.swift; sourceTree = "<group>"; };
@@ -316,8 +320,17 @@
 			isa = PBXGroup;
 			children = (
 				1779F4CE2809AC7400E2506D /* FilterTests.swift */,
+				1779F4DE2809C85E00E2506D /* RemoteDataMapperTests.swift */,
 			);
 			path = SpeciesCoreTests;
+			sourceTree = "<group>";
+		};
+		1779F4E2280AA6A000E2506D /* RemoteData */ = {
+			isa = PBXGroup;
+			children = (
+				1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */,
+			);
+			path = RemoteData;
 			sourceTree = "<group>";
 		};
 		17A54D59280987F700BF6224 /* SpeciesCore */ = {
@@ -325,6 +338,7 @@
 			children = (
 				1779F4C62809A63300E2506D /* FilterType.swift */,
 				1779F4BE28099BAE00E2506D /* Filter.swift */,
+				1779F4E2280AA6A000E2506D /* RemoteData */,
 			);
 			path = SpeciesCore;
 			sourceTree = "<group>";
@@ -761,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1779F4CF2809AC7400E2506D /* FilterTests.swift in Sources */,
+				1779F4DF2809C85E00E2506D /* RemoteDataMapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +783,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */,
 				1779F4BF28099BAE00E2506D /* Filter.swift in Sources */,
 				1779F4C72809A63300E2506D /* FilterType.swift in Sources */,
 			);
