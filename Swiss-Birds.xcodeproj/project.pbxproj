@@ -72,6 +72,11 @@
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
 		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17EE09C0254F34BC00C600A7 /* SectionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EE09BF254F34BC00C600A7 /* SectionGroup.swift */; };
+		17EFBC0D280DAC74006C3D7D /* SharedTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC0B280DAC74006C3D7D /* SharedTestHelpers.swift */; };
+		17EFBC0E280DAC74006C3D7D /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC0C280DAC74006C3D7D /* MockURLProtocol.swift */; };
+		17EFBC10280DACCB006C3D7D /* RemoteDataClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC0F280DACCB006C3D7D /* RemoteDataClientTests.swift */; };
+		17EFBC16280DACED006C3D7D /* RemoteDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC12280DACED006C3D7D /* RemoteDataClient.swift */; };
+		17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -229,6 +234,11 @@
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
 		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17EE09BF254F34BC00C600A7 /* SectionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionGroup.swift; sourceTree = "<group>"; };
+		17EFBC0B280DAC74006C3D7D /* SharedTestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedTestHelpers.swift; sourceTree = "<group>"; };
+		17EFBC0C280DAC74006C3D7D /* MockURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		17EFBC0F280DACCB006C3D7D /* RemoteDataClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataClientTests.swift; sourceTree = "<group>"; };
+		17EFBC12280DACED006C3D7D /* RemoteDataClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataClient.swift; sourceTree = "<group>"; };
+		17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse-StatusCode.swift"; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -319,8 +329,10 @@
 		1779F4CD2809AC7400E2506D /* SpeciesCoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				17EFBC0A280DAC74006C3D7D /* Helper */,
 				1779F4CE2809AC7400E2506D /* FilterTests.swift */,
 				1779F4DE2809C85E00E2506D /* RemoteDataMapperTests.swift */,
+				17EFBC0F280DACCB006C3D7D /* RemoteDataClientTests.swift */,
 			);
 			path = SpeciesCoreTests;
 			sourceTree = "<group>";
@@ -328,6 +340,8 @@
 		1779F4E2280AA6A000E2506D /* RemoteData */ = {
 			isa = PBXGroup;
 			children = (
+				17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */,
+				17EFBC12280DACED006C3D7D /* RemoteDataClient.swift */,
 				1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */,
 			);
 			path = RemoteData;
@@ -522,6 +536,15 @@
 				17DFEE25271CBC80005D1AA9 /* Snapshots */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		17EFBC0A280DAC74006C3D7D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				17EFBC0B280DAC74006C3D7D /* SharedTestHelpers.swift */,
+				17EFBC0C280DAC74006C3D7D /* MockURLProtocol.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -774,8 +797,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EFBC10280DACCB006C3D7D /* RemoteDataClientTests.swift in Sources */,
 				1779F4CF2809AC7400E2506D /* FilterTests.swift in Sources */,
 				1779F4DF2809C85E00E2506D /* RemoteDataMapperTests.swift in Sources */,
+				17EFBC0D280DAC74006C3D7D /* SharedTestHelpers.swift in Sources */,
+				17EFBC0E280DAC74006C3D7D /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,8 +809,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */,
 				1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */,
 				1779F4BF28099BAE00E2506D /* Filter.swift in Sources */,
+				17EFBC16280DACED006C3D7D /* RemoteDataClient.swift in Sources */,
 				1779F4C72809A63300E2506D /* FilterType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
