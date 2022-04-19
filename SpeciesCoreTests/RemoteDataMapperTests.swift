@@ -11,7 +11,7 @@ import SpeciesCore
 
 class RemoteDataMapperTests: XCTestCase {
 
-    func test_map_throwsOnInvalidData() throws {
+    func test_mapFilter_throwsOnInvalidData() throws {
         let data = anyData()
 
         XCTAssertThrowsError(
@@ -19,7 +19,7 @@ class RemoteDataMapperTests: XCTestCase {
          )
     }
 
-    func test_map_deliversNoItemsOnEmptyJSONList() throws {
+    func test_mapFilter_deliversNoItemsOnEmptyJSONList() throws {
         let data = makeItemsJSON([])
 
         let filters = try RemoteDataMapper.mapFilter(data)
@@ -27,8 +27,8 @@ class RemoteDataMapperTests: XCTestCase {
         XCTAssertEqual(filters, [])
     }
 
-    func test_map_throwsOnInvalidFilterID() throws {
-        var (_, json) = makeItem(typeName: "greatness", id: 1, name: "true")
+    func test_mapFilter_throwsOnInvalidFilterID() throws {
+        var (_, json) = makeFilter(typeName: "greatness", id: 1, name: "true")
         json["filter_id"] = "bla"
         let data = makeItemsJSON([json])
 
@@ -37,9 +37,9 @@ class RemoteDataMapperTests: XCTestCase {
          )
     }
 
-    func test_map_deliversItemsOnJSONItems() throws {
-        let (item1, json1) = makeItem(typeName: "greatness", id: 1, name: "true")
-        let (item2, json2) = makeItem(typeName: "greatness", id: 0, name: "false")
+    func test_mapFilter_deliversItemsOnJSONItems() throws {
+        let (item1, json1) = makeFilter(typeName: "greatness", id: 1, name: "true")
+        let (item2, json2) = makeFilter(typeName: "greatness", id: 0, name: "false")
         let data = makeItemsJSON([json1, json2])
 
         let filters = try RemoteDataMapper.mapFilter(data)
@@ -48,7 +48,7 @@ class RemoteDataMapperTests: XCTestCase {
 
 
     // MARK: - Helper
-    func makeItem(typeName: String, id: Int, name: String) -> (Filter, json: [String: Any]) {
+    func makeFilter(typeName: String, id: Int, name: String) -> (Filter, json: [String: Any]) {
         let item = Filter(type: .filterType(for: typeName), id: id, name: name)
 
         let json = [
