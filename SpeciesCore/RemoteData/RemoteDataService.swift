@@ -28,11 +28,19 @@ public struct RemoteDataService {
 
     // MARK: - Services
 
-    /// Fetch `Filter`s from the corresponding `fetchFilters` endpoint
+    /// Fetch `Filter`s from the corresponding filters endpoint
     public func fetchFilters() async throws -> [Filter] {
         let url = baseURL.appendingPathComponent("/elements/snippets/vds/static/assets/data/filters_\(language).json")
         let (data, _) = try await dataClient.data(from: url)
         let filters: [Filter] = try RemoteDataMapper.mapFilter(data)
         return filters
+    }
+
+    /// Fetch `Species`s from the corresponding list endpoint
+    public func fetchSpecies() async throws -> [Species] {
+        let url = baseURL.appendingPathComponent("/elements/snippets/vds/static/assets/data/list_\(language).json")
+        let (data, _) = try await dataClient.data(from: url)
+        let species: [Species] = try RemoteDataMapper.mapSpecies(data)
+        return species
     }
 }
