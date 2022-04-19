@@ -30,3 +30,10 @@ extension Filter: Equatable, Hashable {
         hasher.combine(id)
     }
 }
+
+extension Filter: CustomStringConvertible {
+    public var description: String {
+        "\(type.description): \(name)"
+    }
+}
+
