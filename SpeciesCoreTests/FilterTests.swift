@@ -1,5 +1,5 @@
 //
-//  SpeciesCoreTests.swift
+//  FilterTests.swift
 //  SpeciesCoreTests
 //
 //  Created by Philipp on 15.04.22.
@@ -9,7 +9,7 @@
 import XCTest
 import SpeciesCore
 
-class SpeciesCoreTests: XCTestCase {
+class FilterTests: XCTestCase {
 
     func test_FilterType_typesHaveDifferentID() {
         let type1 = FilterType.filterType(for: "Type1")

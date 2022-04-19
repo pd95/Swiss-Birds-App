@@ -1,5 +1,5 @@
 //
-//  RemoteDataTests.swift
+//  RemoteDataClientTests.swift
 //  SpeciesCoreTests
 //
 //  Created by Philipp on 15.04.22.
