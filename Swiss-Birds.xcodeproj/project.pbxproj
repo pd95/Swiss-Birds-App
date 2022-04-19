@@ -79,6 +79,8 @@
 		17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */; };
 		17EFBC1E280DB33D006C3D7D /* RemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC1D280DB33D006C3D7D /* RemoteDataService.swift */; };
 		17EFBC20280DB382006C3D7D /* RemoteDataServiceE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC1F280DB382006C3D7D /* RemoteDataServiceE2ETests.swift */; };
+		17EFBC22280EFA11006C3D7D /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC21280EFA11006C3D7D /* Species.swift */; };
+		17EFBC24280EFA5D006C3D7D /* SpeciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -243,6 +245,8 @@
 		17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HTTPURLResponse-StatusCode.swift"; sourceTree = "<group>"; };
 		17EFBC1D280DB33D006C3D7D /* RemoteDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataService.swift; sourceTree = "<group>"; };
 		17EFBC1F280DB382006C3D7D /* RemoteDataServiceE2ETests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataServiceE2ETests.swift; sourceTree = "<group>"; };
+		17EFBC21280EFA11006C3D7D /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
+		17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesTests.swift; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -335,6 +339,7 @@
 			children = (
 				17EFBC0A280DAC74006C3D7D /* Helper */,
 				1779F4CE2809AC7400E2506D /* FilterTests.swift */,
+				17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */,
 				1779F4DE2809C85E00E2506D /* RemoteDataMapperTests.swift */,
 				17EFBC0F280DACCB006C3D7D /* RemoteDataClientTests.swift */,
 				17EFBC1F280DB382006C3D7D /* RemoteDataServiceE2ETests.swift */,
@@ -358,6 +363,7 @@
 			children = (
 				1779F4C62809A63300E2506D /* FilterType.swift */,
 				1779F4BE28099BAE00E2506D /* Filter.swift */,
+				17EFBC21280EFA11006C3D7D /* Species.swift */,
 				1779F4E2280AA6A000E2506D /* RemoteData */,
 			);
 			path = SpeciesCore;
@@ -807,6 +813,7 @@
 				17EFBC10280DACCB006C3D7D /* RemoteDataClientTests.swift in Sources */,
 				1779F4CF2809AC7400E2506D /* FilterTests.swift in Sources */,
 				1779F4DF2809C85E00E2506D /* RemoteDataMapperTests.swift in Sources */,
+				17EFBC24280EFA5D006C3D7D /* SpeciesTests.swift in Sources */,
 				17EFBC0D280DAC74006C3D7D /* SharedTestHelpers.swift in Sources */,
 				17EFBC0E280DAC74006C3D7D /* MockURLProtocol.swift in Sources */,
 			);
@@ -817,6 +824,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */,
+				17EFBC22280EFA11006C3D7D /* Species.swift in Sources */,
 				17EFBC1E280DB33D006C3D7D /* RemoteDataService.swift in Sources */,
 				1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */,
 				1779F4BF28099BAE00E2506D /* Filter.swift in Sources */,
