@@ -26,6 +26,24 @@ public enum RemoteDataMapper {
         }
     }
 
+    private struct SpeciesDTO: Decodable {
+        let id: String
+        let name: String
+        let synonyms: String
+        let alias: String
+        let voiceData: String
+
+        // TODO: Add support for filter values!
+
+        enum CodingKeys: String, CodingKey {
+            case id = "artid"
+            case name = "artname"
+            case synonyms = "synonyme"
+            case alias = "alias"
+            case voiceData = "voice"
+        }
+    }
+
     public static func mapFilter(_ data: Data) throws -> [Filter] {
         do {
             let filter = try JSONDecoder()
@@ -38,6 +56,22 @@ public enum RemoteDataMapper {
                 })
                 .map(Filter.init)
             return filter
+        } catch {
+            throw error
+        }
+    }
+
+    public static func mapSpecies(_ data: Data) throws -> [Species] {
+        do {
+            let species = try JSONDecoder()
+                .decode([SpeciesDTO].self, from: data)
+                .map({ raw -> Species in
+                    guard let speciesID = Int(raw.id) else {
+                        throw Errors.invalidID(raw.id)
+                    }
+                    return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1")
+                })
+            return species
         } catch {
             throw error
         }
