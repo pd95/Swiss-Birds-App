@@ -48,6 +48,11 @@
                BlueprintName = "SpeciesCoreTests"
                ReferencedContainer = "container:Swiss-Birds.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "RemoteDataServiceE2ETests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
