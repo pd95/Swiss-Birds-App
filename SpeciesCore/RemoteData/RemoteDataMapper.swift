@@ -45,35 +45,27 @@ public enum RemoteDataMapper {
     }
 
     public static func mapFilter(_ data: Data) throws -> [Filter] {
-        do {
-            let filter = try JSONDecoder()
-                .decode([FilterDTO].self, from: data)
-                .map({ rawFilter in
-                    guard let filterID = Int(rawFilter.filterId) else {
-                        throw Errors.invalidID(rawFilter.filterId)
-                    }
-                    return (FilterType.filterType(for: rawFilter.type), filterID, rawFilter.filterName)
-                })
-                .map(Filter.init)
-            return filter
-        } catch {
-            throw error
-        }
+        let filter = try JSONDecoder()
+            .decode([FilterDTO].self, from: data)
+            .map({ rawFilter in
+                guard let filterID = Int(rawFilter.filterId) else {
+                    throw Errors.invalidID(rawFilter.filterId)
+                }
+                return (FilterType.filterType(for: rawFilter.type), filterID, rawFilter.filterName)
+            })
+            .map(Filter.init)
+        return filter
     }
 
     public static func mapSpecies(_ data: Data) throws -> [Species] {
-        do {
-            let species = try JSONDecoder()
-                .decode([SpeciesDTO].self, from: data)
-                .map({ raw -> Species in
-                    guard let speciesID = Int(raw.id) else {
-                        throw Errors.invalidID(raw.id)
-                    }
-                    return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1")
-                })
-            return species
-        } catch {
-            throw error
-        }
+        let species = try JSONDecoder()
+            .decode([SpeciesDTO].self, from: data)
+            .map({ raw -> Species in
+                guard let speciesID = Int(raw.id) else {
+                    throw Errors.invalidID(raw.id)
+                }
+                return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1")
+            })
+        return species
     }
 }
