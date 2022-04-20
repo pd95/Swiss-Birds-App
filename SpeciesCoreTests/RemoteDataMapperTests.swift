@@ -85,15 +85,12 @@ class RemoteDataMapperTests: XCTestCase {
 
     func test_mapSpecies_mapsFiltersCorrectly() throws {
         let filters: Set<Filter> = [Filter(type: "greatness", id: 0, name: nil), Filter(type: "greatness", id: 1, name: nil), Filter(type: "rarity", id: 1, name: nil)]
-        let (_, json) = makeSpecies(filter: filters)
+        let (species, json) = makeSpecies(filter: filters)
         let data = makeItemsJSON([json])
 
         let mappedSpecies = try RemoteDataMapper.mapSpecies(data)
 
-        XCTAssertFalse(mappedSpecies.isEmpty)
-        let firstSpecies = mappedSpecies[0]
-        XCTAssertFalse(firstSpecies.filters.isEmpty)
-        XCTAssertEqual(firstSpecies.filters, filters)
+        XCTAssertEqual(mappedSpecies.first, species)
     }
 
     // MARK: - Helper

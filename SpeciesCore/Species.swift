@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Species: Identifiable {
+public struct Species: Identifiable, Equatable, Hashable {
     public let id: Int
 
     public let name: String
@@ -25,15 +25,5 @@ public struct Species: Identifiable {
         self.alias = alias
         self.voiceData = voiceData
         self.filters = filters
-    }
-}
-
-extension Species: Equatable, Hashable {
-    public static func == (lhs: Species, rhs: Species) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
     }
 }
