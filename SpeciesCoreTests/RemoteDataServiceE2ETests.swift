@@ -17,7 +17,7 @@ class RemoteDataServiceE2ETests: XCTestCase {
         let dataService = makeSUT()
 
         let filters = try await dataService.fetchFilters()
-        XCTAssertEqual(filters.allTypes, [])
+        XCTAssertNotEqual(filters.allTypes, [], "Should successfully fetch filters")
     }
 
     func test_fetchFilters_deliversSameForAllLanguages() async throws {
