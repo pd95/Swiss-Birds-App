@@ -12,14 +12,14 @@ public struct Filter {
     public typealias ID = Int
 
     public let id: ID
-    public let name: String
+    public let name: String?
     public let type: FilterType
 
     public var uniqueID: String {
         "\(type.id):\(id)"
     }
 
-    public init(type: FilterType, id: Int, name: String) {
+    public init(type: FilterType, id: Int, name: String?) {
         self.id = id
         self.name = name
         self.type = type
@@ -39,7 +39,7 @@ extension Filter: Equatable, Hashable {
 
 extension Filter: CustomStringConvertible {
     public var description: String {
-        "\(type): \(name)"
+        "\(type): \(name ?? String(id))"
     }
 }
 
