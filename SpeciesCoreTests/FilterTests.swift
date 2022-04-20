@@ -70,6 +70,10 @@ class FilterTests: XCTestCase {
         let filters = collection.filters(for: "Type1")
         XCTAssertEqual(filters.count, 1)
         XCTAssertEqual(filters.first, filterA)
+
+        XCTAssertEqual(collection.filter(withID: 0, for: "Type1"), filterA, "ID should find filterA")
+        XCTAssertNil(collection.filter(withID: 1, for: "Type1"), "Wrong ID should not find any filter")
+        XCTAssertNil(collection.filter(withID: 0, for: "Type2"), "ID should not find any Type2 filter")
     }
 
     func test_FilterCollection_addFilter_storesMultipleFiltersWithDifferentID() {
