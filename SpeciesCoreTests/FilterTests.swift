@@ -36,6 +36,7 @@ class FilterTests: XCTestCase {
         let filterB = Filter(type: "Type2", id: 0, name: "filter")
         XCTAssertNotEqual(filterA, filterB)
         XCTAssertNotEqual(filterA.hashValue, filterB.hashValue)
+        XCTAssertNotEqual(filterA.uniqueID, filterB.uniqueID)
     }
 
     func test_Filter_sameFilterTypeAndSameIDIsSame() {
@@ -43,6 +44,7 @@ class FilterTests: XCTestCase {
         let filterB = Filter(type: "Type1", id: 0, name: "filterB")
         XCTAssertEqual(filterA, filterB)
         XCTAssertEqual(filterA.hashValue, filterB.hashValue)
+        XCTAssertEqual(filterA.uniqueID, filterB.uniqueID)
         XCTAssertNotEqual(filterA.description, filterB.description)
     }
 }

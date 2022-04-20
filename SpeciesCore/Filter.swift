@@ -9,9 +9,15 @@
 import Foundation
 
 public struct Filter {
-    public let id: Int
+    public typealias ID = Int
+
+    public let id: ID
     public let name: String
     public let type: FilterType
+
+    public var uniqueID: String {
+        "\(type.id):\(id)"
+    }
 
     public init(type: FilterType, id: Int, name: String) {
         self.id = id
