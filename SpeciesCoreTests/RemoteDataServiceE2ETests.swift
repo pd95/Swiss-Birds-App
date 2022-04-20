@@ -17,21 +17,24 @@ class RemoteDataServiceE2ETests: XCTestCase {
         let dataService = makeSUT()
 
         let filters = try await dataService.fetchFilters()
-        XCTAssertFalse(filters.isEmpty)
+        XCTAssertEqual(filters.allTypes, [])
     }
 
     func test_fetchFilters_deliversSameForAllLanguages() async throws {
-        var allFilters = [String: [Filter]]()
+        var allFilters = [String: FilterCollection]()
         for language in RemoteDataService.supportedLanguages {
             let dataService = makeSUT(language: language)
 
             let filters = try await dataService.fetchFilters()
-            XCTAssertFalse(filters.isEmpty)
+            XCTAssertNotEqual(filters.allTypes, [])
 
             allFilters[language] = filters
         }
 
-        let counts = allFilters.mapValues(\.count)
+        let counts = allFilters.mapValues( { filters in
+            filters.allTypes.map({ filters.filters(for: $0).count })
+                .reduce(into: 0, { $0 += $1 })
+        })
         let deCount = counts["de"]!
         XCTAssertTrue(counts.values.allSatisfy({ $0 == deCount }), "All languages should have the number of filters \(deCount): \(counts)")
     }

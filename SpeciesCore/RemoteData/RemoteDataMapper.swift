@@ -44,16 +44,18 @@ public enum RemoteDataMapper {
         }
     }
 
-    public static func mapFilter(_ data: Data) throws -> [Filter] {
+    public static func mapFilter(_ data: Data) throws -> FilterCollection {
         let filter = try JSONDecoder()
             .decode([FilterDTO].self, from: data)
             .map({ rawFilter in
                 guard let filterID = Int(rawFilter.filterId) else {
                     throw Errors.invalidID(rawFilter.filterId)
                 }
-                return (FilterType(rawFilter.type), filterID, rawFilter.filterName)
+                return (type: FilterType(rawFilter.type), id: filterID, name: rawFilter.filterName)
             })
-            .map(Filter.init)
+            .reduce(into: FilterCollection(), { (filters: inout FilterCollection, filter: (type: FilterType, id: Int, name: String)) in
+                filters.addFilter(type: filter.type, id: filter.id, name: filter.name)
+            })
         return filter
     }
 

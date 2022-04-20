@@ -25,7 +25,7 @@ class RemoteDataMapperTests: XCTestCase {
 
         let filters = try RemoteDataMapper.mapFilter(data)
 
-        XCTAssertEqual(filters, [])
+        XCTAssertEqual(filters.allTypes, [])
     }
 
     func test_mapFilter_throwsOnInvalidFilterID() throws {
@@ -44,7 +44,7 @@ class RemoteDataMapperTests: XCTestCase {
         let data = makeItemsJSON([json1, json2])
 
         let filters = try RemoteDataMapper.mapFilter(data)
-        XCTAssertEqual(filters, [item1, item2])
+        XCTAssertEqual(filters.filters(for: "greatness"), [item1, item2])
     }
 
     // MARK: Test species mapping
