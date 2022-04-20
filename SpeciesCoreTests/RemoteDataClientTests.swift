@@ -137,7 +137,7 @@ class RemoteDataClientTests: XCTestCase {
 
     private func makeItem(typeName: String, id: Int, name: String) -> (Filter, json: [String: Any]) {
 
-        let item = Filter(type: .filterType(for: typeName), id: id, name: name)
+        let item = Filter(type: FilterType(typeName), id: id, name: name)
 
         let json = [
             "type": typeName,

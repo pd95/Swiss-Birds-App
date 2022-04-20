@@ -51,7 +51,7 @@ public enum RemoteDataMapper {
                 guard let filterID = Int(rawFilter.filterId) else {
                     throw Errors.invalidID(rawFilter.filterId)
                 }
-                return (FilterType.filterType(for: rawFilter.type), filterID, rawFilter.filterName)
+                return (FilterType(rawFilter.type), filterID, rawFilter.filterName)
             })
             .map(Filter.init)
         return filter

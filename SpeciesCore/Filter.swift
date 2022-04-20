@@ -33,7 +33,7 @@ extension Filter: Equatable, Hashable {
 
 extension Filter: CustomStringConvertible {
     public var description: String {
-        "\(type.description): \(name)"
+        "\(type): \(name)"
     }
 }
 
