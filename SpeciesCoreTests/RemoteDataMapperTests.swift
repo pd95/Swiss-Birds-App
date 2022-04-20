@@ -83,6 +83,18 @@ class RemoteDataMapperTests: XCTestCase {
         XCTAssertEqual(species, [item1, item2])
     }
 
+    func test_mapSpecies_mapsFiltersCorrectly() throws {
+        let filters: Set<Filter> = [Filter(type: "greatness", id: 0, name: nil), Filter(type: "greatness", id: 1, name: nil), Filter(type: "rarity", id: 1, name: nil)]
+        let (_, json) = makeSpecies(filter: filters)
+        let data = makeItemsJSON([json])
+
+        let mappedSpecies = try RemoteDataMapper.mapSpecies(data)
+
+        XCTAssertFalse(mappedSpecies.isEmpty)
+        let firstSpecies = mappedSpecies[0]
+        XCTAssertFalse(firstSpecies.filters.isEmpty)
+        XCTAssertEqual(firstSpecies.filters, filters)
+    }
 
     // MARK: - Helper
     func makeFilter(typeName: String, id: Int, name: String) -> (Filter, json: [String: Any]) {
@@ -97,17 +109,31 @@ class RemoteDataMapperTests: XCTestCase {
         return (item, json)
     }
 
-    func makeSpecies(id: Int = 123, name: String = "Globi", synonyms: String = "Papagei", alias: String? = nil, voiceData: Bool = true) -> (Species, json: [String: Any]) {
+    func makeSpecies(id: Int = 123, name: String = "Globi", synonyms: String = "Papagei", alias: String? = nil, voiceData: Bool = true, filter: Set<Filter> = []) -> (Species, json: [String: Any]) {
         let alias = alias ?? name.lowercased()
-        let item = Species(id: id, name: name, synonyms: synonyms, alias: alias, voiceData: voiceData)
+        let item = Species(id: id, name: name, synonyms: synonyms, alias: alias, voiceData: voiceData, filters: filter)
 
-        let json = [
+        // Basic species data
+        var json = [
             "artid": String(id),
             "artname": name,
             "synonyme": synonyms,
             "alias": alias,
             "voice": voiceData ? "1" : "0",
-        ].compactMapValues { $0 }
+        ]
+
+        // Transform all filters to json fields prefixed with "filter"
+        for filter in filter {
+            let fieldName = "filter"+filter.type.name
+            if let existingIDs = json[fieldName] {
+                json[fieldName] = existingIDs+",\(filter.id)"
+            } else {
+                json[fieldName] = String(filter.id)
+            }
+        }
+
+        // Remove empty values
+        json = json.compactMapValues { $0 }
 
         return (item, json)
     }

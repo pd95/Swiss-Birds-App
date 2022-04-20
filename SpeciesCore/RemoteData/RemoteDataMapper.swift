@@ -33,7 +33,7 @@ public enum RemoteDataMapper {
         let alias: String
         let voiceData: String
 
-        // TODO: Add support for filter values!
+        let filters: [(type: String, filterIDs: String)]
 
         enum CodingKeys: String, CodingKey {
             case id = "artid"
@@ -41,6 +41,44 @@ public enum RemoteDataMapper {
             case synonyms = "synonyme"
             case alias = "alias"
             case voiceData = "voice"
+        }
+
+        // CodingKeys which map all "filter" attributes
+        struct FilterCodingKeys: CodingKey {
+            var stringValue: String
+            var intValue: Int?
+
+            init?(stringValue: String) {
+                guard stringValue.starts(with: "filter") else {
+                    return nil
+                }
+                self.stringValue = stringValue
+            }
+
+            init?(intValue: Int) {
+                return nil
+            }
+        }
+
+        init(from decoder: Decoder) throws {
+            // First decode the basic "Species data"
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(String.self, forKey: .id)
+            name = try container.decode(String.self, forKey: .name)
+            synonyms = try container.decode(String.self, forKey: .synonyms)
+            alias = try container.decode(String.self, forKey: .alias)
+            voiceData = try container.decode(String.self, forKey: .voiceData)
+
+            // Then extract all the filters
+            let filterContainer = try decoder.container(keyedBy: FilterCodingKeys.self)
+            var filters = [(String,String)]()
+            for key in filterContainer.allKeys {
+                let filterIDs = try filterContainer.decode(String.self, forKey: key)
+
+                let type = String(key.stringValue.dropFirst(6))
+                filters.append((type, filterIDs))
+            }
+            self.filters = filters
         }
     }
 
@@ -66,7 +104,16 @@ public enum RemoteDataMapper {
                 guard let speciesID = Int(raw.id) else {
                     throw Errors.invalidID(raw.id)
                 }
-                return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1")
+
+                var filters = Set<Filter>()
+                for (type, filterIDsString) in raw.filters {
+                    let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
+                    for id in filterIDs {
+                        filters.insert(Filter(type: FilterType(type), id: id, name: nil))
+                    }
+                }
+
+                return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1", filters: filters)
             })
         return species
     }
