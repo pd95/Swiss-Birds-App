@@ -11,6 +11,8 @@ import SpeciesCore
 
 class FilterTests: XCTestCase {
 
+    // MARK: - test FilterType
+
     func test_FilterType_typesHaveDifferentID() {
         let type1 : FilterType = "Type1"
         let type2 : FilterType = "Type2"
@@ -31,6 +33,8 @@ class FilterTests: XCTestCase {
         XCTAssertEqual(type1.hashValue, type2.hashValue)
     }
 
+    // MARK: - test Filter
+
     func test_Filter_differentFilterTypeButSameIDIsNotSame() {
         let filterA = Filter(type: "Type1", id: 0, name: "filter")
         let filterB = Filter(type: "Type2", id: 0, name: "filter")
@@ -46,5 +50,66 @@ class FilterTests: XCTestCase {
         XCTAssertEqual(filterA.hashValue, filterB.hashValue)
         XCTAssertEqual(filterA.uniqueID, filterB.uniqueID)
         XCTAssertNotEqual(filterA.description, filterB.description)
+    }
+
+    // MARK: - test FilterCollection
+
+    func test_FilterCollection_isInitiallyEmpty() {
+        let collection = FilterCollection()
+
+        XCTAssertEqual(collection.allTypes, [])
+        XCTAssertEqual(collection.filters(for: "Type1"), [])
+    }
+
+    func test_FilterCollection_addFilter_storesTypeAndFilter() {
+        var collection = FilterCollection()
+        let filterA = collection.addFilter(type: "Type1", id: 0, name: "filterA")
+
+        XCTAssertEqual(collection.allTypes, ["Type1"])
+
+        let filters = collection.filters(for: "Type1")
+        XCTAssertEqual(filters.count, 1)
+        XCTAssertEqual(filters.first, filterA)
+    }
+
+    func test_FilterCollection_addFilter_storesMultipleFiltersWithDifferentID() {
+        var collection = FilterCollection()
+        let filterA = collection.addFilter(type: "Type1", id: 0, name: "filterA")
+        let filterB = collection.addFilter(type: "Type1", id: 1, name: "filterB")
+
+        XCTAssertEqual(collection.allTypes, ["Type1"])
+
+        let filters = collection.filters(for: "Type1")
+        XCTAssertEqual(filters.count, 2)
+        XCTAssertTrue(filters.contains(filterA), "filterA found")
+        XCTAssertTrue(filters.contains(filterB), "filterB found")
+    }
+
+    func test_FilterCollection_addFilter_distinguishesDifferentTypes() {
+        var collection = FilterCollection()
+        let filterA = collection.addFilter(type: "Type1", id: 0, name: "filterA")
+        let filterB = collection.addFilter(type: "Type2", id: 0, name: "filterA")
+
+        XCTAssertEqual(collection.allTypes, ["Type1", "Type2"])
+
+        let filtersType1 = collection.filters(for: "Type1")
+        XCTAssertEqual(filtersType1.count, 1)
+        XCTAssertTrue(filtersType1.contains(filterA), "filterA found")
+        XCTAssertFalse(filtersType1.contains(filterB), "filterB not found")
+
+        let filtersType2 = collection.filters(for: "Type2")
+        XCTAssertEqual(filtersType2.count, 1)
+        XCTAssertFalse(filtersType2.contains(filterA), "filterA not found")
+        XCTAssertTrue(filtersType2.contains(filterB), "filterB found")
+    }
+
+    func test_FilterCollection_addFilterTwiceWithSameIDUpdates() {
+        var collection = FilterCollection()
+        let filterA = collection.addFilter(type: "Type1", id: 0, name: "filterA")
+        let filterB = collection.addFilter(type: "Type1", id: 0, name: "filterB")
+
+        let filters = collection.filters(for: "Type1")
+        XCTAssertTrue(filters.contains(filterA), "filterA found")
+        XCTAssertTrue(filters.contains(filterB), "filterB found")
     }
 }

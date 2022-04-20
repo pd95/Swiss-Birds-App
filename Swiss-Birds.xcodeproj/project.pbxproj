@@ -81,6 +81,7 @@
 		17EFBC20280DB382006C3D7D /* RemoteDataServiceE2ETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC1F280DB382006C3D7D /* RemoteDataServiceE2ETests.swift */; };
 		17EFBC22280EFA11006C3D7D /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC21280EFA11006C3D7D /* Species.swift */; };
 		17EFBC24280EFA5D006C3D7D /* SpeciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */; };
+		17EFBC2828100393006C3D7D /* FilterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC2728100393006C3D7D /* FilterCollection.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -247,6 +248,7 @@
 		17EFBC1F280DB382006C3D7D /* RemoteDataServiceE2ETests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteDataServiceE2ETests.swift; sourceTree = "<group>"; };
 		17EFBC21280EFA11006C3D7D /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesTests.swift; sourceTree = "<group>"; };
+		17EFBC2728100393006C3D7D /* FilterCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollection.swift; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 			children = (
 				1779F4C62809A63300E2506D /* FilterType.swift */,
 				1779F4BE28099BAE00E2506D /* Filter.swift */,
+				17EFBC2728100393006C3D7D /* FilterCollection.swift */,
 				17EFBC21280EFA11006C3D7D /* Species.swift */,
 				1779F4E2280AA6A000E2506D /* RemoteData */,
 			);
@@ -827,6 +830,7 @@
 				17EFBC22280EFA11006C3D7D /* Species.swift in Sources */,
 				17EFBC1E280DB33D006C3D7D /* RemoteDataService.swift in Sources */,
 				1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */,
+				17EFBC2828100393006C3D7D /* FilterCollection.swift in Sources */,
 				1779F4BF28099BAE00E2506D /* Filter.swift in Sources */,
 				17EFBC16280DACED006C3D7D /* RemoteDataClient.swift in Sources */,
 				1779F4C72809A63300E2506D /* FilterType.swift in Sources */,
