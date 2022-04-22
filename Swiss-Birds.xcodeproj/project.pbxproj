@@ -82,6 +82,9 @@
 		17EFBC22280EFA11006C3D7D /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC21280EFA11006C3D7D /* Species.swift */; };
 		17EFBC24280EFA5D006C3D7D /* SpeciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */; };
 		17EFBC2828100393006C3D7D /* FilterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC2728100393006C3D7D /* FilterCollection.swift */; };
+		17EFBC2C2812E580006C3D7D /* RemoteDataMapper-FilterDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC2B2812E580006C3D7D /* RemoteDataMapper-FilterDTO.swift */; };
+		17EFBC2E2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC2D2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift */; };
+		17EFBC302812E611006C3D7D /* RemoteDataMapper-FilterCodingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EFBC2F2812E611006C3D7D /* RemoteDataMapper-FilterCodingKeys.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -249,6 +252,9 @@
 		17EFBC21280EFA11006C3D7D /* Species.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17EFBC23280EFA5D006C3D7D /* SpeciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesTests.swift; sourceTree = "<group>"; };
 		17EFBC2728100393006C3D7D /* FilterCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCollection.swift; sourceTree = "<group>"; };
+		17EFBC2B2812E580006C3D7D /* RemoteDataMapper-FilterDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteDataMapper-FilterDTO.swift"; sourceTree = "<group>"; };
+		17EFBC2D2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteDataMapper-SpeciesDTO.swift"; sourceTree = "<group>"; };
+		17EFBC2F2812E611006C3D7D /* RemoteDataMapper-FilterCodingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteDataMapper-FilterCodingKeys.swift"; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -352,6 +358,7 @@
 		1779F4E2280AA6A000E2506D /* RemoteData */ = {
 			isa = PBXGroup;
 			children = (
+				17EFBC312812E910006C3D7D /* DTO-Types */,
 				17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */,
 				17EFBC12280DACED006C3D7D /* RemoteDataClient.swift */,
 				1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */,
@@ -560,6 +567,16 @@
 				17EFBC0C280DAC74006C3D7D /* MockURLProtocol.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		17EFBC312812E910006C3D7D /* DTO-Types */ = {
+			isa = PBXGroup;
+			children = (
+				17EFBC2F2812E611006C3D7D /* RemoteDataMapper-FilterCodingKeys.swift */,
+				17EFBC2B2812E580006C3D7D /* RemoteDataMapper-FilterDTO.swift */,
+				17EFBC2D2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift */,
+			);
+			path = "DTO-Types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -828,12 +845,15 @@
 			files = (
 				17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */,
 				17EFBC22280EFA11006C3D7D /* Species.swift in Sources */,
+				17EFBC2E2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift in Sources */,
 				17EFBC1E280DB33D006C3D7D /* RemoteDataService.swift in Sources */,
 				1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */,
 				17EFBC2828100393006C3D7D /* FilterCollection.swift in Sources */,
 				1779F4BF28099BAE00E2506D /* Filter.swift in Sources */,
 				17EFBC16280DACED006C3D7D /* RemoteDataClient.swift in Sources */,
+				17EFBC302812E611006C3D7D /* RemoteDataMapper-FilterCodingKeys.swift in Sources */,
 				1779F4C72809A63300E2506D /* FilterType.swift in Sources */,
+				17EFBC2C2812E580006C3D7D /* RemoteDataMapper-FilterDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
