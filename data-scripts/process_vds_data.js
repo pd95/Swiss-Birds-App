@@ -2,15 +2,25 @@
 
 const fs = require('fs');
 
-let types = ['filters'];
-let languages = ['de'];
+let types = ['filters', 'list'];
+let languages = ['de', 'en', 'fr', 'it'];
 
 types.forEach(element => {
     languages.forEach(language => {
         console.log(element, language)
         let result = []
         let signatures = new Set()
-        let data = require(`./data/${element}_${language}.json`);
+        let filename = `./data/${element}_${language}.json`
+        if (fs.existsSync(filename) == false) {
+            console.log(`File ${filename} does not exist.`)
+            return
+        }
+        let rawdata = fs.readFileSync(filename);
+        if (rawdata.length == 0) {
+            console.log(`File ${filename} is empty.`)
+            return
+        }
+        let data = JSON.parse(rawdata);
         if (data instanceof Array) {
             // get rid of duplicate entries
             data.forEach(obj => {
@@ -27,14 +37,8 @@ types.forEach(element => {
                 }
             })
             let jsonContent = JSON.stringify(result);
-            let filename = `./data/${element}_${language}.json`
-            fs.writeFile(filename, jsonContent, 'utf8', function (err) {
-                if (err) {
-                    console.log(`An error occurred while writing JSON Object to File ${filename}`);
-                    return console.log(err);
-                }
-                console.log(`File ${filename} written`)
-            });
+            fs.writeFileSync(filename, jsonContent, 'utf8')
+            console.log(`File ${filename} written`)
         }
     })
 });
