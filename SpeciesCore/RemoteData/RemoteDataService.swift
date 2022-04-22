@@ -43,4 +43,12 @@ public struct RemoteDataService {
         let species: [Species] = try RemoteDataMapper.mapSpecies(data)
         return species
     }
+
+    /// Fetch `SpeciesDetail`s from the corresponding list endpoint
+    public func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesDetail {
+        let url = baseURL.appendingPathComponent("/elements/snippets/vds/static/assets/data/species/\(speciesID)_\(language).json")
+        let (data, _) = try await dataClient.data(from: url)
+        let details: SpeciesDetail = try RemoteDataMapper.mapSpeciesDetail(data, language: language)
+        return details
+    }
 }

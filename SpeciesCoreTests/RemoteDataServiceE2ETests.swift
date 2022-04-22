@@ -64,6 +64,17 @@ class RemoteDataServiceE2ETests: XCTestCase {
         XCTAssertTrue(counts.values.allSatisfy({ $0 == deCount }), "All languages should have the number of species \(deCount): \(counts)")
     }
 
+    // MARK: Test species detail fetching
+
+    func test_fetchSpeciesDetails_succeedsFromWeb() async throws {
+        let dataService = makeSUT()
+
+        let speciesID = 3800
+        let details = try await dataService.fetchSpeciesDetail(for: speciesID)
+        XCTAssertEqual(details.id, speciesID)
+        XCTAssertEqual(details.synonyms, "Blue Tit")
+    }
+
     // MARK: - Helpers
     func makeSUT(language: String = "en") -> RemoteDataService {
         let urlSession = URLSession(configuration: .ephemeral)
