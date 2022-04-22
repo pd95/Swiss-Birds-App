@@ -38,16 +38,28 @@ function checkFields(object, prefix, postfix, templateObject) {
             if (!currentStats) {
                 currentStats = {}
                 Object.assign(currentStats, emptyStats)
+                currentStats.values = {}
             }
             currentStats.occurrence += 1
             currentStats.empty += (isEmpty ? 1 : 0)
+
+            if (prefix == "eigenschaften_" ||
+                prefix == "bestand_" ||
+                key == "maps" ||
+                key == "charts" ||
+                key == "status_in_ch" ||
+                key.substr(0,6) == "filter"
+            ) {
+                let existingValueCount = currentStats.values[value] | 0
+                currentStats.values[value] = existingValueCount + 1
+            }
     
             allKeys[statsKey] = currentStats
         }
     });
 }
 
-["en" /*, "de", "fr", "it"*/].forEach((language) => {
+["de" /*, "en", "fr", "it"*/].forEach((language) => {
     let species = require(`./data/list_de.json`);
     species.forEach((a) => {
         console.log(`${language} ${a.artid} ${a.artname}`)
@@ -62,4 +74,10 @@ console.log(allKeys)
 console.log(speciesTemplate)
 
 console.log(JSON.stringify(speciesTemplate, null, 2))
-//debugger
+Object.keys(allKeys).forEach((key) => {
+    let entry = allKeys[key]
+    if (Object.keys(entry.values).length > 0) {
+        console.log(key, entry.values)
+    }
+})
+debugger
