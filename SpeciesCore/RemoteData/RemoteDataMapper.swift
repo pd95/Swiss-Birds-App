@@ -18,8 +18,8 @@ public enum RemoteDataMapper {
         let filter = try JSONDecoder()
             .decode([FilterDTO].self, from: data)
             .map({ rawFilter in
-                guard let filterID = Int(rawFilter.filterId) else {
-                    throw Errors.invalidID(rawFilter.filterId)
+                guard let filterID = Int(rawFilter.filterID) else {
+                    throw Errors.invalidID(rawFilter.filterID)
                 }
                 return (type: FilterType(rawFilter.type), id: filterID, name: rawFilter.filterName)
             })
