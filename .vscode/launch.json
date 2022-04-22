@@ -11,5 +11,19 @@
             "program": "${workspaceFolder}/data-scripts/process_vds_data.js",
             "cwd": "${workspaceFolder}/data-scripts/"
         },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch gen_curl",
+            "program": "${workspaceFolder}/data-scripts/gen_curl.js",
+            "cwd": "${workspaceFolder}/data-scripts/"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch check_data",
+            "program": "${workspaceFolder}/data-scripts/check_data.js",
+            "cwd": "${workspaceFolder}/data-scripts/"
+        }
     ]
 }
