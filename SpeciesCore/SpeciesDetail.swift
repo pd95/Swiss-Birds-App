@@ -42,12 +42,8 @@ public struct SpeciesDetail: Identifiable {
     public let synonyms: String
     public let scientificName: String
     public let scientificFamily: String
-//    public enum NameLanguage: String {
-//        case german = "de", french = "fr", italian = "it", rhaetoRoman = "rr"
-//        case english = "en", spanish = "es", dutch = "du"
-//    }
-//    public let speciesNames: [NameLanguage : String]
-//    public let alias: [NameLanguage : String]
+    public let speciesNames: [NameLanguage: String]
+    public let alias: [NameLanguage: String]
 
     // Filters
     public let filters: Set<Filter>

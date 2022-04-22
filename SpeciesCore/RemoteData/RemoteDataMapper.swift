@@ -37,13 +37,7 @@ public enum RemoteDataMapper {
                     throw Errors.invalidID(raw.id)
                 }
 
-                var filters = Set<Filter>()
-                for (type, filterIDsString) in raw.filters {
-                    let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
-                    for id in filterIDs {
-                        filters.insert(Filter(type: FilterType(type), id: id, name: nil))
-                    }
-                }
+                let filters = mapSpeciesFilters(raw.filters)
 
                 return Species(id: speciesID, name: raw.name, synonyms: raw.synonyms, alias: raw.alias, voiceData: raw.voiceData == "1", filters: filters)
             })
@@ -59,14 +53,11 @@ public enum RemoteDataMapper {
             throw Errors.invalidID(dto.id)
         }
 
+        let speciesNames = mapSpeciesNames(dto)
+        let alias = mapSpeciesAliases(dto)
+
         let filtersDTO = try decoder.decode(SpeciesDetailDTO.SpeciesFilter.self, from: data)
-        var filters = Set<Filter>()
-        for (type, filterIDsString) in filtersDTO.filters {
-            let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
-            for id in filterIDs {
-                filters.insert(Filter(type: FilterType(type), id: id, name: nil))
-            }
-        }
+        let filters = mapSpeciesFilters(filtersDTO.filters)
 
         var priorityInRecoveryPrograms: Bool?
         if dto.population.priorityInRecoveryPrograms.isEmpty == false {
@@ -99,8 +90,46 @@ public enum RemoteDataMapper {
             synonyms: dto.speciesNames.synonyms,
             scientificName: dto.speciesNames.scientificName,
             scientificFamily: dto.speciesNames.scientificFamily,
+            speciesNames: speciesNames,
+            alias: alias,
             filters: filters
         )
         return details
+    }
+
+
+    private static func mapSpeciesFilters(_ rawFilters: [(type: String, filterIDs: String)]) -> Set<Filter> {
+        var filters = Set<Filter>()
+        for (type, filterIDsString) in rawFilters {
+            let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
+            for id in filterIDs {
+                filters.insert(Filter(type: FilterType(type), id: id, name: nil))
+            }
+        }
+        return filters
+    }
+
+    private static func mapSpeciesNames(_ details: SpeciesDetailDTO) -> [NameLanguage: String] {
+        var speciesNames = [NameLanguage: String]()
+
+        speciesNames[.german] = details.speciesNames.name_de
+        speciesNames[.french] = details.speciesNames.name_fr
+        speciesNames[.italian] = details.speciesNames.name_it
+        speciesNames[.rhaetoRoman] = details.speciesNames.name_rr
+        speciesNames[.english] = details.speciesNames.name_en
+        speciesNames[.spanish] = details.speciesNames.name_sp
+        speciesNames[.dutch] = details.speciesNames.name_ho
+
+        return speciesNames.filter({ $0.value.isEmpty == false })
+    }
+
+    private static func mapSpeciesAliases(_ details: SpeciesDetailDTO) -> [NameLanguage: String] {
+        var alias = [NameLanguage: String]()
+        alias[.german] = details.alias_de
+        alias[.french] = details.alias_fr
+        alias[.italian] = details.alias_it
+        alias[.english] = details.alias_en
+
+        return alias.filter({ $0.value.isEmpty == false })
     }
 }
