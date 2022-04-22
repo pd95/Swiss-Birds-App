@@ -18,11 +18,6 @@ extension RemoteDataMapper {
         let population: SpeciesPopulation
         let statusInCH: String
 
-        /*
-        let filternahrung, filterlebensraum, filterhaeufigeart: String
-        let filterrotelistech, filtervogelgruppe, filterentwicklungatlas: String
-         */
-
         let atlasText, atlasLiterature, atlasAuthor, atlasTrend: String
         let maps, charts: [String]
         let alias_de, alias_fr, alias_it, alias_en: String
@@ -38,15 +33,6 @@ extension RemoteDataMapper {
             case speciesImage = "artbilder"
             case population = "bestand"
             case statusInCH = "status_in_ch"
-
-            /*
-            case filternahrung = "filternahrung"
-            case filterlebensraum = "filterlebensraum"
-            case filterhaeufigeart = "filterhaeufigeart"
-            case filterrotelistech = "filterrotelistech"
-            case filtervogelgruppe = "filtervogelgruppe"
-            case filterentwicklungatlas = "filterentwicklungatlas"
-            */
 
             case atlasText = "atlastext"
             case atlasLiterature = "atlas_literatur"
@@ -134,6 +120,23 @@ extension RemoteDataMapper {
                 case nestlingStage = "nestlingsdauer_flugfaehigkeit_tage"
                 case maximumAgeEURING = "hoechstalter_euring"
                 case maximumAgeCH = "hoechstalter_ch"
+            }
+        }
+
+        // MARK: - SpeciesFilter
+        struct SpeciesFilter: Decodable {
+            let filters: [(type: String, filterIDs: String)]
+
+            init(from decoder: Decoder) throws {
+                let container = try decoder.container(keyedBy: FilterCodingKeys.self)
+                var filters = [(String,String)]()
+                for key in container.allKeys {
+                    let filterIDs = try container.decode(String.self, forKey: key)
+
+                    let type = String(key.stringValue.dropFirst(6))
+                    filters.append((type, filterIDs))
+                }
+                self.filters = filters
             }
         }
     }

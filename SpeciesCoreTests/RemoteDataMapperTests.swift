@@ -102,6 +102,7 @@ class RemoteDataMapperTests: XCTestCase {
         XCTAssertEqual(mappedDetails.id, test.id)
         XCTAssertEqual(mappedDetails.name, test.name)
         XCTAssertEqual(mappedDetails.facts, test.facts)
+        XCTAssertFalse(mappedDetails.filters.isEmpty)
     }
 
     // MARK: - Helper

@@ -59,14 +59,14 @@ public enum RemoteDataMapper {
             throw Errors.invalidID(dto.id)
         }
 
-        //let filtersDTO = try decoder.decode(SpeciesFilterDTO.self, from: data)
-        let filters = Set<Filter>()
-        //for (type, filterIDsString) in filtersDTO.filters {
-        //    let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
-        //    for id in filterIDs {
-        //        filters.insert(Filter(type: FilterType(type), id: id, name: nil))
-        //    }
-        //}
+        let filtersDTO = try decoder.decode(SpeciesDetailDTO.SpeciesFilter.self, from: data)
+        var filters = Set<Filter>()
+        for (type, filterIDsString) in filtersDTO.filters {
+            let filterIDs = filterIDsString.split(separator: ",").compactMap({ Int($0) })
+            for id in filterIDs {
+                filters.insert(Filter(type: FilterType(type), id: id, name: nil))
+            }
+        }
 
         var priorityInRecoveryPrograms: Bool?
         if dto.population.priorityInRecoveryPrograms.isEmpty == false {
@@ -101,7 +101,6 @@ public enum RemoteDataMapper {
             scientificFamily: dto.speciesNames.scientificFamily,
             filters: filters
         )
-        print(details)
         return details
     }
 }
