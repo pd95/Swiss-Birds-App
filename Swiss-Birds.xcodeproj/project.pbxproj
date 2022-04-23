@@ -376,7 +376,6 @@
 			isa = PBXGroup;
 			children = (
 				17EFBC312812E910006C3D7D /* DTO-Types */,
-				17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */,
 				17EFBC12280DACED006C3D7D /* RemoteDataClient.swift */,
 				1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */,
 				17EFBC1D280DB33D006C3D7D /* RemoteDataService.swift */,
@@ -393,7 +392,7 @@
 				17EFBC21280EFA11006C3D7D /* Species.swift */,
 				17EFBC2928103EF2006C3D7D /* SpeciesDetail.swift */,
 				17EFBC3428130AE0006C3D7D /* NameLanguage.swift */,
-				17EFBC3B2814635E006C3D7D /* URLSession-Async.swift */,
+				17ED68AC281478D900605FE2 /* Helper-Extensions */,
 				1779F4E2280AA6A000E2506D /* RemoteData */,
 			);
 			path = SpeciesCore;
@@ -578,6 +577,15 @@
 				17DFEE25271CBC80005D1AA9 /* Snapshots */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		17ED68AC281478D900605FE2 /* Helper-Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				17EFBC3B2814635E006C3D7D /* URLSession-Async.swift */,
+				17EFBC13280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift */,
+			);
+			path = "Helper-Extensions";
 			sourceTree = "<group>";
 		};
 		17EFBC0A280DAC74006C3D7D /* Helper */ = {
