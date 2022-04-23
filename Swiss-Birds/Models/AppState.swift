@@ -10,6 +10,7 @@ import os.log
 import SwiftUI
 import Combine
 import WidgetKit
+import SpeciesCore
 
 class AppState: ObservableObject {
 
@@ -69,6 +70,12 @@ class AppState: ObservableObject {
     init(favoritesManager: FavoritesManager = .shared, settingsStore: SettingsStore = .shared ) {
         self.favoritesManager = favoritesManager
         self.settingsStore = settingsStore
+
+        Task.detached {
+            let service = RemoteDataService(dataClient: RemoteDataClient())
+            let filters = try await service.fetchFilters()
+            print("Succeeded", filters)
+        }
 
         // Init sort options with value stored in UserDefaults
         if let sortColumn = SortOptions.SortColumn(rawValue: settingsStore.groupColumn) {
