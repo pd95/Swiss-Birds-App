@@ -37,6 +37,12 @@
 		1779F4E4280AA6D200E2506D /* RemoteDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
+		17A210762815B0CE003D1C10 /* SpeciesRepositoryITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A210752815B0CE003D1C10 /* SpeciesRepositoryITests.swift */; };
+		17A210772815B0CE003D1C10 /* libSpeciesUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A210682815B0AA003D1C10 /* libSpeciesUI.a */; };
+		17A210812815B114003D1C10 /* SpeciesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2107E2815B114003D1C10 /* SpeciesRepository.swift */; };
+		17A210832815B114003D1C10 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A210802815B114003D1C10 /* Logger.swift */; };
+		17A210842815C1D4003D1C10 /* libSpeciesCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A54D58280987F700BF6224 /* libSpeciesCore.a */; };
+		17A210862815C2E1003D1C10 /* XCTestCase-MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A210852815C2E1003D1C10 /* XCTestCase-MemoryLeakTracking.swift */; };
 		17A2A45F25643C0C00388357 /* AppState_PreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */; };
 		17AAEF45271896940012C22D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AAEF44271896940012C22D /* NavigationState.swift */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
@@ -103,6 +109,13 @@
 			remoteGlobalIDString = 17A54D57280987F700BF6224;
 			remoteInfo = SpeciesCore;
 		};
+		17A210782815B0CE003D1C10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17A210672815B0AA003D1C10;
+			remoteInfo = SpeciesUI;
+		};
 		17B1B4472546C0E600B422B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17B960E223699370003AA802 /* Project object */;
@@ -141,6 +154,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		17A210662815B0AA003D1C10 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		17A54D56280987F700BF6224 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,6 +229,12 @@
 		1779F4E3280AA6D200E2506D /* RemoteDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataMapper.swift; sourceTree = "<group>"; };
 		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
+		17A210682815B0AA003D1C10 /* libSpeciesUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSpeciesUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		17A210732815B0CE003D1C10 /* SpeciesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeciesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17A210752815B0CE003D1C10 /* SpeciesRepositoryITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesRepositoryITests.swift; sourceTree = "<group>"; };
+		17A2107E2815B114003D1C10 /* SpeciesRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeciesRepository.swift; sourceTree = "<group>"; };
+		17A210802815B114003D1C10 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		17A210852815C2E1003D1C10 /* XCTestCase-MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase-MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState_PreviewWrapper.swift; sourceTree = "<group>"; };
 		17A54D58280987F700BF6224 /* libSpeciesCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSpeciesCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AAEF44271896940012C22D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
@@ -282,6 +310,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1779F4D02809AC7400E2506D /* libSpeciesCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A210652815B0AA003D1C10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A210842815C1D4003D1C10 /* libSpeciesCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A210702815B0CE003D1C10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A210772815B0CE003D1C10 /* libSpeciesUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +427,32 @@
 			path = RemoteData;
 			sourceTree = "<group>";
 		};
+		17A210742815B0CE003D1C10 /* SpeciesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				17A210752815B0CE003D1C10 /* SpeciesRepositoryITests.swift */,
+				17A210872815C2FB003D1C10 /* Helpers */,
+			);
+			path = SpeciesUITests;
+			sourceTree = "<group>";
+		};
+		17A2107D2815B114003D1C10 /* SpeciesUI */ = {
+			isa = PBXGroup;
+			children = (
+				17A2107E2815B114003D1C10 /* SpeciesRepository.swift */,
+				17A210802815B114003D1C10 /* Logger.swift */,
+			);
+			path = SpeciesUI;
+			sourceTree = SOURCE_ROOT;
+		};
+		17A210872815C2FB003D1C10 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				17A210852815C2E1003D1C10 /* XCTestCase-MemoryLeakTracking.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		17A54D59280987F700BF6224 /* SpeciesCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +490,8 @@
 				17DDB731243690C100ACE032 /* data-scripts */,
 				17A54D59280987F700BF6224 /* SpeciesCore */,
 				1779F4CD2809AC7400E2506D /* SpeciesCoreTests */,
+				17A2107D2815B114003D1C10 /* SpeciesUI */,
+				17A210742815B0CE003D1C10 /* SpeciesUITests */,
 				17B960EC23699370003AA802 /* Swiss-Birds */,
 				17B9610623699375003AA802 /* Swiss-BirdsTests */,
 				17DFEE32271DFD17005D1AA9 /* UITests */,
@@ -440,6 +512,8 @@
 				17DFEE24271CBC80005D1AA9 /* Snapshots.xctest */,
 				17A54D58280987F700BF6224 /* libSpeciesCore.a */,
 				1779F4CC2809AC7400E2506D /* SpeciesCoreTests.xctest */,
+				17A210682815B0AA003D1C10 /* libSpeciesUI.a */,
+				17A210732815B0CE003D1C10 /* SpeciesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -629,6 +703,41 @@
 			productReference = 1779F4CC2809AC7400E2506D /* SpeciesCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		17A210672815B0AA003D1C10 /* SpeciesUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17A2106E2815B0AA003D1C10 /* Build configuration list for PBXNativeTarget "SpeciesUI" */;
+			buildPhases = (
+				17A210642815B0AA003D1C10 /* Sources */,
+				17A210652815B0AA003D1C10 /* Frameworks */,
+				17A210662815B0AA003D1C10 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpeciesUI;
+			productName = SpeciesUI;
+			productReference = 17A210682815B0AA003D1C10 /* libSpeciesUI.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		17A210722815B0CE003D1C10 /* SpeciesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17A2107A2815B0CE003D1C10 /* Build configuration list for PBXNativeTarget "SpeciesUITests" */;
+			buildPhases = (
+				17A2106F2815B0CE003D1C10 /* Sources */,
+				17A210702815B0CE003D1C10 /* Frameworks */,
+				17A210712815B0CE003D1C10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17A210792815B0CE003D1C10 /* PBXTargetDependency */,
+			);
+			name = SpeciesUITests;
+			productName = SpeciesUITests;
+			productReference = 17A210732815B0CE003D1C10 /* SpeciesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		17A54D57280987F700BF6224 /* SpeciesCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17A54D5E280987F700BF6224 /* Build configuration list for PBXNativeTarget "SpeciesCore" */;
@@ -750,6 +859,12 @@
 					1779F4CB2809AC7400E2506D = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
+					17A210672815B0AA003D1C10 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					17A210722815B0CE003D1C10 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
 					17A54D57280987F700BF6224 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -796,12 +911,21 @@
 				17DFEE23271CBC80005D1AA9 /* Snapshots */,
 				17A54D57280987F700BF6224 /* SpeciesCore */,
 				1779F4CB2809AC7400E2506D /* SpeciesCoreTests */,
+				17A210672815B0AA003D1C10 /* SpeciesUI */,
+				17A210722815B0CE003D1C10 /* SpeciesUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1779F4CA2809AC7400E2506D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A210712815B0CE003D1C10 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -866,6 +990,24 @@
 				17EFBC24280EFA5D006C3D7D /* SpeciesTests.swift in Sources */,
 				17EFBC0D280DAC74006C3D7D /* SharedTestHelpers.swift in Sources */,
 				17EFBC0E280DAC74006C3D7D /* MockURLProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A210642815B0AA003D1C10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A210832815B114003D1C10 /* Logger.swift in Sources */,
+				17A210812815B114003D1C10 /* SpeciesRepository.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17A2106F2815B0CE003D1C10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17A210762815B0CE003D1C10 /* SpeciesRepositoryITests.swift in Sources */,
+				17A210862815C2E1003D1C10 /* XCTestCase-MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +1126,11 @@
 			target = 17A54D57280987F700BF6224 /* SpeciesCore */;
 			targetProxy = 1779F4D12809AC7400E2506D /* PBXContainerItemProxy */;
 		};
+		17A210792815B0CE003D1C10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17A210672815B0AA003D1C10 /* SpeciesUI */;
+			targetProxy = 17A210782815B0CE003D1C10 /* PBXContainerItemProxy */;
+		};
 		17B1B4482546C0E600B422B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */;
@@ -1077,6 +1224,44 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).SpeciesCoreTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+		17A2106C2815B0AA003D1C10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		17A2106D2815B0AA003D1C10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		17A2107B2815B0CE003D1C10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).SpeciesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		17A2107C2815B0CE003D1C10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(inherited).SpeciesUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -1440,6 +1625,24 @@
 			buildConfigurations = (
 				1779F4D42809AC7400E2506D /* Debug */,
 				1779F4D52809AC7400E2506D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17A2106E2815B0AA003D1C10 /* Build configuration list for PBXNativeTarget "SpeciesUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17A2106C2815B0AA003D1C10 /* Debug */,
+				17A2106D2815B0AA003D1C10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17A2107A2815B0CE003D1C10 /* Build configuration list for PBXNativeTarget "SpeciesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17A2107B2815B0CE003D1C10 /* Debug */,
+				17A2107C2815B0CE003D1C10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
