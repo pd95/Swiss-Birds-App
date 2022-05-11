@@ -65,11 +65,9 @@ struct ContentView: View {
                                 state.getBirdOfTheDay()
                             }
                         }
-                }
-                else if let birdOfTheDay = state.birdOfTheDay,
+                } else if let birdOfTheDay = state.birdOfTheDay,
                         let species = Species.species(for: birdOfTheDay.speciesID),
-                        let image = state.birdOfTheDayImage
-                {
+                        let image = state.birdOfTheDayImage {
                     BirdOfTheDay(isPresented: $state.showBirdOfTheDay.animation(), image: image, species: species)
                         .animation(.easeOut)
                         .transition(AnyTransition.move(edge: .bottom)

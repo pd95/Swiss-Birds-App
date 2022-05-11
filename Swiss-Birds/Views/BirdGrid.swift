@@ -42,7 +42,6 @@ struct BirdGrid: View {
                 }
                 .padding(.horizontal)
                 .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
-                    let _ = print("simultaneousGesture DragGesture")
                     if state.isEditingSearchField {
                         print("Searching was enabled, but drag occurred => endEditing")
                         withAnimation {
