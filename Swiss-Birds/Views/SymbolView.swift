@@ -21,7 +21,7 @@ struct SymbolView: View {
         let symbolConfiguration = UIImage.SymbolConfiguration(
             pointSize: UIFontMetrics.default.scaledValue(for: pointSize)
         )
-        let image = UIImage(named: symbolName, in: nil, with: symbolConfiguration) ?? UIImage()
+        let image = UIImage(named: symbolName, in: nil, with: symbolConfiguration) ?? UIImage(systemName: symbolName, withConfiguration: symbolConfiguration) ?? UIImage()
         symbolImageCache[symbolName] = (pointSize, image)
         return image
     }
