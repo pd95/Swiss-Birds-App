@@ -69,3 +69,16 @@
 "Nur Favoriten" = "Only favorites";
 "Favorit setzen" = "Set favorite";
 "Favorit entfernen" = "Remove favorite";
+"Artnamen" = "Names";
+"Artname" = "Species name";
+"Artname lat." = "Scientific name";
+"Artname deu." = "German name";
+"Artname frz." = "French name";
+"Artname ital." = "Italian name";
+"Artname engl." = "English name";
+"Artname rr." = "Rom. name";
+"Artname span." = "Spanish name";
+"Artname holl." = "Dutch name";
+"Familie wiss." = "Scientific family";
+"Synonyme" = "Synonyms";
+"Art-Nr." = "Species no";

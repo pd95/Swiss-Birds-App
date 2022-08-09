@@ -28,7 +28,7 @@ struct BirdDetail: View {
         self.model = model
         self.bird = model.bird
         self.birdDetails = model.details!
-        characteristics = [
+        var characteristics: [Characteristic] = [
             .header(text: "Merkmale", children: [
                 .text(text: birdDetails.merkmale)
             ]),
@@ -60,6 +60,34 @@ struct BirdDetail: View {
                 .text(label: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung)
             ])
         ]
+
+        // Collect list of names
+        var allNames = [Characteristic]()
+        allNames.append(.text(label: "Artname", text: bird.name))
+        if let scientificName = birdDetails.familieWiss {
+            allNames.append(.text(label: "Artname lat.", text: scientificName))
+        }
+        if primaryLanguage != "de" {
+            allNames.append(.text(label: "Artname deu.", text: birdDetails.artnameDeu))
+        }
+        if primaryLanguage != "fr" {
+            allNames.append(.text(label: "Artname frz.", text: birdDetails.artnameFrz ?? "-"))
+        }
+        if primaryLanguage != "it" {
+            allNames.append(.text(label: "Artname ital.", text: birdDetails.artnameItal ?? "-"))
+        }
+        if primaryLanguage != "en" {
+            allNames.append(.text(label: "Artname engl.", text: birdDetails.artnameEngl ?? "-"))
+        }
+        allNames.append(.text(label: "Artname rr.", text: birdDetails.artnameRr ?? "-"))
+        allNames.append(.text(label: "Artname span.", text: birdDetails.artnameSpan ?? "-"))
+        allNames.append(.text(label: "Artname holl.", text: birdDetails.artnameHoll ?? "-"))
+        allNames.append(.text(label: "Familie wiss.", text: birdDetails.familieWiss ?? "-"))
+        allNames.append(.text(label: "Synonyme", text: birdDetails.synonyme ?? "-"))
+        allNames.append(.text(label: "Art-Nr.", text: String(birdDetails.artID)))
+
+        characteristics.append(Characteristic.header(text: "Artnamen", children: allNames))
+        self.characteristics = characteristics
     }
 
     var body: some View {

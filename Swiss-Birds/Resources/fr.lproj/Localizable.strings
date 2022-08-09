@@ -69,3 +69,16 @@
 "Nur Favoriten" = "Favoris uniquement";
 "Favorit setzen" = "Définir comme favori";
 "Favorit entfernen" = "Retirer comme favori";
+"Artnamen" = "Noms";
+"Artname" = "Nom";
+"Artname lat." = "Nom scientifique";
+"Artname deu." = "Nom allemand";
+"Artname frz." = "Nom français";
+"Artname ital." = "Nom italien";
+"Artname engl." = "Nom anglais";
+"Artname rr." = "Nom rom.";
+"Artname span." = "Nom espagnol";
+"Artname holl." = "Nom hollandais";
+"Familie wiss." = "Famille scientifique";
+"Synonyme" = "Synonymes";
+"Art-Nr." = "N° d'espèce";

@@ -39,7 +39,8 @@ struct VdsSpecieDetail: Codable {
     let artnameLat, infos, roteListeCH, zugverhalten: String?
     let laengeCM, gewichtG, gelegegroesse, brutort: String?
     let brutdauerTage, nestlingsdauerFlugfaehigkeitTage: String?
-    let nahrung, vogelgruppe, lebensraum, artnameFrz: String?
+    let nahrung, vogelgruppe, lebensraum: String?
+    let artnameDeu: String?, artnameFrz: String?
     let artnameItal, artnameRr, artnameEngl, artnameSpan: String?
     let artnameHoll, familieWiss, familieDt, spannweiteCM: String?
     let hoechstalterEURING, hoechstalterCH, jahresbruten, statusInCH: String?
@@ -77,6 +78,7 @@ struct VdsSpecieDetail: Codable {
         case nahrung = "Nahrung"
         case vogelgruppe = "Vogelgruppe"
         case lebensraum = "Lebensraum"
+        case artnameDeu = "Artname_deu"
         case artnameFrz = "Artname_frz"
         case artnameItal = "Artname_ital"
         case artnameRr = "Artname_rr"
@@ -141,7 +143,7 @@ struct VdsSpecieDetail: Codable {
         case uriEn = "uri_en"
     }
 
-    internal init(artID: String, sysNr: String, artname: String, alternativName: String?, artnameLat: String?, infos: String?, roteListeCH: String?, zugverhalten: String?, laengeCM: String?, gewichtG: String?, gelegegroesse: String?, brutort: String?, brutdauerTage: String?, nestlingsdauerFlugfaehigkeitTage: String?, nahrung: String?, vogelgruppe: String?, lebensraum: String?, artnameFrz: String?, artnameItal: String?, artnameRr: String?, artnameEngl: String?, artnameSpan: String?, artnameHoll: String?, familieWiss: String?, familieDt: String?, spannweiteCM: String?, hoechstalterEURING: String?, hoechstalterCH: String?, jahresbruten: String?, statusInCH: String?, prioritaetsartArtenfoerderung: String?, videosBilderStimmen: String?, federnbestimmung: String?, globaleSituationBirdLifeInternational: String?, synonyme: String?, chBestandPeriode: String?, merkmale: String?, autor0: String?, bezeichnungDe0: String?, autor1: String?, bezeichnungDe1: String?, autor2: String?, bezeichnungDe2: String?, filternahrung: String?, filterlebensraum: String?, filterhaeufigeart: String?, filterrotelistech: String?, filtervogelgruppe: String?, filterentwicklungatlas: String?, atlastext: String?, literatur: String?, atlasautor: String?, bestand: String?, bestandDatum: String?, entwicklung: String?, atlasLebensraum: String?, roteListe: String?, partner1: String?, partner2: String?, partner3: String?, partner4: String?, partner5: String?, density: String?, densityChange: String?, occupancy: String?, occupancyChange: String?, point: String?, pointChange: String?, distribution: String?, record: String?, migration: String?, winter: String?, water: String?, index: String?, indexMigrant: String?, trendWater: String?, trendRecord: String?, phenology: String?, phenologyRecord: String?, altitude: String?, altitudeChange: String?, annualCycle: String?, alias: String?, uri: String?, uriDe: String?, uriFr: String?, uriIt: String?, uriEn: String?) {
+    internal init(artID: String, sysNr: String, artname: String, alternativName: String?, artnameLat: String?, infos: String?, roteListeCH: String?, zugverhalten: String?, laengeCM: String?, gewichtG: String?, gelegegroesse: String?, brutort: String?, brutdauerTage: String?, nestlingsdauerFlugfaehigkeitTage: String?, nahrung: String?, vogelgruppe: String?, lebensraum: String?, artnameDeu: String?, artnameFrz: String?, artnameItal: String?, artnameRr: String?, artnameEngl: String?, artnameSpan: String?, artnameHoll: String?, familieWiss: String?, familieDt: String?, spannweiteCM: String?, hoechstalterEURING: String?, hoechstalterCH: String?, jahresbruten: String?, statusInCH: String?, prioritaetsartArtenfoerderung: String?, videosBilderStimmen: String?, federnbestimmung: String?, globaleSituationBirdLifeInternational: String?, synonyme: String?, chBestandPeriode: String?, merkmale: String?, autor0: String?, bezeichnungDe0: String?, autor1: String?, bezeichnungDe1: String?, autor2: String?, bezeichnungDe2: String?, filternahrung: String?, filterlebensraum: String?, filterhaeufigeart: String?, filterrotelistech: String?, filtervogelgruppe: String?, filterentwicklungatlas: String?, atlastext: String?, literatur: String?, atlasautor: String?, bestand: String?, bestandDatum: String?, entwicklung: String?, atlasLebensraum: String?, roteListe: String?, partner1: String?, partner2: String?, partner3: String?, partner4: String?, partner5: String?, density: String?, densityChange: String?, occupancy: String?, occupancyChange: String?, point: String?, pointChange: String?, distribution: String?, record: String?, migration: String?, winter: String?, water: String?, index: String?, indexMigrant: String?, trendWater: String?, trendRecord: String?, phenology: String?, phenologyRecord: String?, altitude: String?, altitudeChange: String?, annualCycle: String?, alias: String?, uri: String?, uriDe: String?, uriFr: String?, uriIt: String?, uriEn: String?) {
         self.artID = artID
         self.sysNr = sysNr
         self.artname = artname
@@ -159,6 +161,7 @@ struct VdsSpecieDetail: Codable {
         self.nahrung = nahrung
         self.vogelgruppe = vogelgruppe
         self.lebensraum = lebensraum
+        self.artnameDeu = artnameDeu
         self.artnameFrz = artnameFrz
         self.artnameItal = artnameItal
         self.artnameRr = artnameRr
@@ -251,8 +254,9 @@ struct VdsSpecieDetail: Codable {
             gewichtG: species.eigenschaften.gewichtG, gelegegroesse: species.eigenschaften.gelegegroesse, brutort: species.eigenschaften.brutort,
             brutdauerTage: species.eigenschaften.brutdauerTage, nestlingsdauerFlugfaehigkeitTage: species.eigenschaften.nestlingsdauerFlugfaehigkeitTage,
             nahrung: species.eigenschaften.nahrung, vogelgruppe: species.eigenschaften.vogelgruppe, lebensraum: species.eigenschaften.lebensraum,
+            artnameDeu: species.artnamen.artnameDe,
             artnameFrz: species.artnamen.artnameFrz, artnameItal: species.artnamen.artnameItal, artnameRr: species.artnamen.artnameRr, artnameEngl: species.artnamen.artnameEngl,
-            artnameSpan: species.artnamen.artnameSpan, artnameHoll: species.artnamen.artnameHoll, familieWiss: species.artnamen.familieWiss, familieDt: species.artnamen.artnameDe,
+            artnameSpan: species.artnamen.artnameSpan, artnameHoll: species.artnamen.artnameHoll, familieWiss: species.artnamen.familieWiss, familieDt: nil,
             spannweiteCM: species.eigenschaften.spannweiteCM, hoechstalterEURING: species.eigenschaften.hoechstalterEURING, hoechstalterCH: species.eigenschaften.hoechstalterCH,
             jahresbruten: species.eigenschaften.jahresbruten, statusInCH: species.statusInCH, prioritaetsartArtenfoerderung: species.bestand.prioritaetsartArtenfoerderung,
             videosBilderStimmen: species.voice, federnbestimmung: nil, globaleSituationBirdLifeInternational: nil, synonyme: nil, chBestandPeriode: nil, merkmale: species.merkmale,
