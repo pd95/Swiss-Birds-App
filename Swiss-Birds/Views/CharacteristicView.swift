@@ -19,7 +19,8 @@ struct CharacteristicView: View {
                     .font(.title)
                     .padding(.top)
             } else if characteristic.isSeparator {
-                    Spacer()
+                Spacer()
+                    .padding(.top)
             } else {
                 if !characteristic.label.isEmpty {
                     Text(LocalizedStringKey(characteristic.label))
@@ -49,12 +50,14 @@ struct CharacteristicsView: View {
 
     var body: some View {
         ForEach(characteristics.filter {!$0.isEmpty}) { characteristic in
-            Group {
-                CharacteristicView(characteristic: characteristic)
-                if characteristic.isHeader {
+            if characteristic.isHeader {
+                VStack(alignment: .leading, spacing: 5) {
+                    CharacteristicView(characteristic: characteristic)
                     CharacteristicsView(characteristics: characteristic.children)
-                        .padding(.top, 10.0)
                 }
+            }
+            else {
+                CharacteristicView(characteristic: characteristic)
             }
         }
     }
