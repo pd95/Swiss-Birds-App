@@ -69,6 +69,8 @@
 "Nur Favoriten" = "Favoris uniquement";
 "Favorit setzen" = "Définir comme favori";
 "Favorit entfernen" = "Retirer comme favori";
+"Prioritaet_0" = "Non";
+"Prioritaet_1" = "Oui";
 "Artnamen" = "Noms";
 "Artname" = "Nom";
 "Artname lat." = "Nom scientifique";

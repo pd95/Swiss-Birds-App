@@ -69,6 +69,8 @@
 "Nur Favoriten" = "Only favorites";
 "Favorit setzen" = "Set favorite";
 "Favorit entfernen" = "Remove favorite";
+"Prioritaet_0" = "No";
+"Prioritaet_1" = "Yes";
 "Artnamen" = "Names";
 "Artname" = "Species name";
 "Artname lat." = "Scientific name";

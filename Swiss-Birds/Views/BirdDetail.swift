@@ -28,6 +28,18 @@ struct BirdDetail: View {
         self.model = model
         self.bird = model.bird
         self.birdDetails = model.details!
+
+        let prioritySpeciesSymbol: String
+        let prioritySpeciesText: String
+
+        if let availablePrioInfo = birdDetails.prioritaetsartArtenfoerderung, !availablePrioInfo.isEmpty  {
+            prioritySpeciesSymbol = availablePrioInfo == "1" ? "star.circle" : ""
+            prioritySpeciesText = NSLocalizedString("Prioritaet_\(availablePrioInfo)", comment: "")
+        } else {
+            prioritySpeciesSymbol = ""
+            prioritySpeciesText = "-"
+        }
+
         var characteristics: [Characteristic] = [
             .header(text: "Merkmale", children: [
                 .text(text: birdDetails.merkmale)
@@ -57,7 +69,7 @@ struct BirdDetail: View {
             .header(text: "Bestand", children: [
                 .text(label: "Bestand", text: birdDetails.bestand),
                 .text(label: "Rote_Liste_CH", text: birdDetails.roteListeCH, symbol: bird.filterSymbolName(.roteListe)),
-                .text(label: "Prioritaetsart_Artenfoerderung", text: birdDetails.prioritaetsartArtenfoerderung)
+                .text(label: "Prioritaetsart_Artenfoerderung", text: prioritySpeciesText, symbol: prioritySpeciesSymbol)
             ])
         ]
 
