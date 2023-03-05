@@ -22,7 +22,7 @@ class SpeciesRepositoryTests: XCTestCase {
     func test_refreshSpecies_fetchesSpeciesAndFilters() async throws {
         var fetchFiltersCalled = false
         var fetchSpeciesCalled = false
-        let service = MockDataService(
+        let service = DataServiceStub(
             fetchFiltersHandler: { fetchFiltersCalled = true; return FilterCollection.example },
             fetchSpeciesHandler: { fetchSpeciesCalled = true; return Species.examples }
         )
@@ -40,7 +40,7 @@ class SpeciesRepositoryTests: XCTestCase {
         var fetchDetailsCalled = false
         let mockedResult = SpeciesDetail.example
         let mockedResultID = mockedResult.id
-        let service = MockDataService(fetchSpeciesDetailHandler: { _ in fetchDetailsCalled = true ; return mockedResult })
+        let service = DataServiceStub(fetchSpeciesDetailHandler: { _ in fetchDetailsCalled = true ; return mockedResult })
         let repository = makeSUT(service: service)
 
         let species = try await repository.fetchDetails(for: mockedResultID)
@@ -51,7 +51,7 @@ class SpeciesRepositoryTests: XCTestCase {
 
     // MARK: - Helper
 
-    private func makeSUT(service: MockDataService = MockDataService(), file: StaticString = #filePath, line: UInt = #line) -> SpeciesRepository {
+    private func makeSUT(service: DataServiceStub = DataServiceStub(), file: StaticString = #filePath, line: UInt = #line) -> SpeciesRepository {
         let repository = SpeciesRepository(service: service)
 
         trackForMemoryLeaks(repository, file: file, line: line)
@@ -59,7 +59,7 @@ class SpeciesRepositoryTests: XCTestCase {
         return repository
     }
 
-    private class MockDataService: DataService {
+    private class DataServiceStub: DataService {
         enum Error: Swift.Error {
             case noHandlerDefined
         }
