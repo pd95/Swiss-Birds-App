@@ -74,15 +74,15 @@ class SpeciesRepositoryTests: XCTestCase {
             self.fetchSpeciesDetailHandler = fetchSpeciesDetailHandler
         }
 
-        func fetchFilters() async throws -> SpeciesCore.FilterCollection {
+        func fetchFilters() async throws -> FilterCollection {
             try fetchFiltersHandler()
         }
 
-        func fetchSpecies() async throws -> [SpeciesCore.Species] {
+        func fetchSpecies() async throws -> [Species] {
             try fetchSpeciesHandler()
         }
 
-        func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesCore.SpeciesDetail {
+        func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesDetail {
             try fetchSpeciesDetailHandler(speciesID)
         }
     }
