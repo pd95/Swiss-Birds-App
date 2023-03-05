@@ -19,10 +19,10 @@ class SpeciesRepository: ObservableObject {
     @Published private(set) var species: [SpeciesCore.Species] = []
     @Published private(set) var filters = FilterCollection()
 
-    private let service: RemoteDataService
+    private let service: any DataService
 
-    init(dataClient: DataClient = RemoteDataClient(), language: String) {
-        service = RemoteDataService(dataClient: dataClient, language: language)
+    init(service: any DataService) {
+        self.service = service
     }
 
     func refreshSpecies() async {
