@@ -20,37 +20,57 @@ class SpeciesRepositoryTests: XCTestCase {
     }
 
     func test_refreshSpecies_fetchesSpeciesAndFilters() async throws {
-        let repository = makeSUT()
+        var fetchFiltersCalled = false
+        var fetchSpeciesCalled = false
+        let service = MockDataService(
+            fetchFiltersHandler: { fetchFiltersCalled = true; return FilterCollection.example },
+            fetchSpeciesHandler: { fetchSpeciesCalled = true; return Species.examples }
+        )
+        let repository = makeSUT(service: service)
 
         await repository.refreshSpecies()
 
+        XCTAssertTrue(fetchFiltersCalled, "fetchFilters was called")
+        XCTAssertTrue(fetchSpeciesCalled, "fetchSpecies was called")
         XCTAssertNotEqual(repository.species, [])
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
     // MARK: - Helper
 
-    func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> SpeciesRepository {
-        let service = MockDataService()
+    private func makeSUT(service: MockDataService = MockDataService(), file: StaticString = #filePath, line: UInt = #line) -> SpeciesRepository {
         let repository = SpeciesRepository(service: service)
 
-        trackForMemoryLeaks(service, file: file, line: line)
         trackForMemoryLeaks(repository, file: file, line: line)
 
         return repository
     }
 
     private class MockDataService: DataService {
-        func fetchFilters() async throws -> FilterCollection {
-            FilterCollection.example
+        enum Error: Swift.Error {
+            case noHandlerDefined
         }
 
-        func fetchSpecies() async throws -> [Species] {
-            Species.examples
+        var fetchFiltersHandler: () throws -> FilterCollection
+        var fetchSpeciesHandler: () throws -> [Species]
+        var fetchSpeciesDetailHandler: (Int) throws -> SpeciesDetail
+
+        init(fetchFiltersHandler: @escaping () throws -> FilterCollection = { throw Error.noHandlerDefined }, fetchSpeciesHandler: @escaping () throws -> [Species] = { throw Error.noHandlerDefined }, fetchSpeciesDetailHandler: @escaping (Int) throws -> SpeciesDetail = { _ in throw Error.noHandlerDefined }) {
+            self.fetchFiltersHandler = fetchFiltersHandler
+            self.fetchSpeciesHandler = fetchSpeciesHandler
+            self.fetchSpeciesDetailHandler = fetchSpeciesDetailHandler
         }
 
-        func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesDetail {
-            SpeciesDetail.example
+        func fetchFilters() async throws -> SpeciesCore.FilterCollection {
+            try fetchFiltersHandler()
+        }
+
+        func fetchSpecies() async throws -> [SpeciesCore.Species] {
+            try fetchSpeciesHandler()
+        }
+
+        func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesCore.SpeciesDetail {
+            try fetchSpeciesDetailHandler(speciesID)
         }
     }
 }
