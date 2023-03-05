@@ -42,4 +42,11 @@ class SpeciesRepository: ObservableObject {
             Self.logger.error(error.localizedDescription)
         }
     }
+
+    func fetchDetails(for speciesID: Species.ID) async throws -> SpeciesDetail {
+        Self.logger.log("fetching details for species with ID \(speciesID)")
+        let species = try await self.service.fetchSpeciesDetail(for: speciesID)
+        Self.logger.log("fetching details done")
+        return species
+    }
 }

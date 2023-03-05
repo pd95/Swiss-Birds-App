@@ -36,6 +36,19 @@ class SpeciesRepositoryTests: XCTestCase {
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
+    func test_fetchDetails_fetchesDetails() async throws {
+        var fetchDetailsCalled = false
+        let mockedResult = SpeciesDetail.example
+        let mockedResultID = mockedResult.id
+        let service = MockDataService(fetchSpeciesDetailHandler: { _ in fetchDetailsCalled = true ; return mockedResult })
+        let repository = makeSUT(service: service)
+
+        let species = try await repository.fetchDetails(for: mockedResultID)
+
+        XCTAssertTrue(fetchDetailsCalled, "fetchSpeciesDetail was called")
+        XCTAssertEqual(species.id, mockedResultID)
+    }
+
     // MARK: - Helper
 
     private func makeSUT(service: MockDataService = MockDataService(), file: StaticString = #filePath, line: UInt = #line) -> SpeciesRepository {
