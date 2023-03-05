@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct RemoteDataService {
+public struct RemoteDataService: DataService {
 
     public static let supportedLanguages: [String] = ["de", "fr", "it", "en"]
 
