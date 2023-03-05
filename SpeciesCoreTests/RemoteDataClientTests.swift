@@ -14,22 +14,22 @@ class RemoteDataClientTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
 
-        MockURLProtocol.removeStub()
+        URLProtocolStub.removeStub()
     }
 
     func test_dataFromURL_performsGETRequestWithURL() async throws {
         let url = anyURL()
         let exp = expectation(description: "Wait for request")
 
-        MockURLProtocol.observeRequests { request in
+        URLProtocolStub.observeRequests { request in
             XCTAssertEqual(request.url, url)
             XCTAssertEqual(request.httpMethod, "GET")
             exp.fulfill()
         }
 
-        let service = makeSUT()
+        let client = makeSUT()
 
-        let _ = try await service.data(from: url)
+        let _ = try await client.data(from: url)
         wait(for: [exp], timeout: 1.0)
     }
 
@@ -116,7 +116,7 @@ class RemoteDataClientTests: XCTestCase {
     }
 
     private func resultFor(_ stubValues: (data: Data?, response: URLResponse?, error: Error?)? = nil, taskHandler: (Task<(Data, URLResponse), Error>) -> Void = { _ in }, file: StaticString = #filePath, line: UInt = #line) async -> Result<(Data, URLResponse), Error> {
-        stubValues.map { MockURLProtocol.stub(data: $0, response: $1, error: $2) }
+        stubValues.map { URLProtocolStub.stub(data: $0, response: $1, error: $2) }
 
         let sut = makeSUT(file: file, line: line)
 
@@ -128,11 +128,11 @@ class RemoteDataClientTests: XCTestCase {
 
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> RemoteDataClient {
         let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [MockURLProtocol.self]
+        configuration.protocolClasses = [URLProtocolStub.self]
         let session = URLSession(configuration: configuration)
-        let service = RemoteDataClient(urlSession: session)
+        let client = RemoteDataClient(urlSession: session)
 
-        return service
+        return client
     }
 
     private func makeItem(typeName: String, id: Int, name: String) -> (Filter, json: [String: Any]) {

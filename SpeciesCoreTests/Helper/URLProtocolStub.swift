@@ -1,5 +1,5 @@
 //
-//  MockURLProtocol.swift
+//  URLProtocolStub.swift
 //  SpeciesCoreTests
 //
 //  Created by Philipp on 18.04.22.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockURLProtocol: URLProtocol {
+class URLProtocolStub: URLProtocol {
 
     // MARK: Stubbing responses
 
@@ -25,7 +25,7 @@ class MockURLProtocol: URLProtocol {
         set { queue.sync { _stub = newValue } }
     }
 
-    private static let queue = DispatchQueue(label: "MockURLProtocol.queue")
+    private static let queue = DispatchQueue(label: "URLProtocolStub.queue")
 
     static func stub(data: Data?, response: URLResponse?, error: Error? = nil) {
         assert(response != nil || error != nil, "Either response or error must be specified")
@@ -52,7 +52,7 @@ class MockURLProtocol: URLProtocol {
     }
 
     override func startLoading() {
-        guard let stub = MockURLProtocol.stub else { return }
+        guard let stub = URLProtocolStub.stub else { return }
 
         if let response = stub.response {
             client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
