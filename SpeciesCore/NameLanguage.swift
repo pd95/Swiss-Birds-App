@@ -10,3 +10,12 @@ public enum NameLanguage: String {
     case german = "de", french = "fr", italian = "it", rhaetoRoman = "rr"
     case english = "en", spanish = "es", dutch = "du"
 }
+
+extension NameLanguage: ExpressibleByStringLiteral {
+    public init(stringLiteral value: StringLiteralType) {
+        guard let language = NameLanguage(rawValue: value) else {
+            fatalError("Invalid language \(value)")
+        }
+        self = language
+    }
+}
