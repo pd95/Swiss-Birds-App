@@ -13,39 +13,45 @@ import SpeciesCore
 class SpeciesRepositoryTests: XCTestCase {
 
     func test_isEmptyOnInit() async throws {
-        let repository = makeSUT()
+        let service = DataServiceStub()
+        let repository = makeSUT(service: service)
+
+        // Does not call any service on init
+        XCTAssertEqual(service.fetchFiltersRequestCount, 0, "fetchFilters was never called")
+        XCTAssertEqual(service.fetchSpeciesRequestCount, 0, "fetchSpecies was never called")
+        XCTAssertEqual(service.fetchSpeciesDetailRequestCount, 0, "fetchSpecies was never called")
 
         XCTAssertEqual(repository.species, [])
         XCTAssertEqual(repository.filters.allTypes, [])
     }
 
     func test_refreshSpecies_fetchesSpeciesAndFilters() async throws {
-        var fetchFiltersCalled = false
-        var fetchSpeciesCalled = false
         let service = DataServiceStub(
-            fetchFiltersHandler: { fetchFiltersCalled = true; return FilterCollection.example },
-            fetchSpeciesHandler: { fetchSpeciesCalled = true; return Species.examples }
+            fetchFiltersResult: .success(.example),
+            fetchSpeciesResult: .success(Species.examples)
         )
         let repository = makeSUT(service: service)
 
         await repository.refreshSpecies()
 
-        XCTAssertTrue(fetchFiltersCalled, "fetchFilters was called")
-        XCTAssertTrue(fetchSpeciesCalled, "fetchSpecies was called")
+        XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
+        XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
+        XCTAssertEqual(service.fetchSpeciesDetailRequestCount, 0, "fetchSpecies was never called")
         XCTAssertNotEqual(repository.species, [])
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
     func test_fetchDetails_fetchesDetails() async throws {
-        var fetchDetailsCalled = false
         let mockedResult = SpeciesDetail.example
         let mockedResultID = mockedResult.id
-        let service = DataServiceStub(fetchSpeciesDetailHandler: { _ in fetchDetailsCalled = true ; return mockedResult })
+        let service = DataServiceStub(fetchSpeciesDetailResult: .success(mockedResult))
         let repository = makeSUT(service: service)
 
         let species = try await repository.fetchDetails(for: mockedResultID)
 
-        XCTAssertTrue(fetchDetailsCalled, "fetchSpeciesDetail was called")
+        XCTAssertEqual(service.fetchFiltersRequestCount, 0, "fetchFilters was never called")
+        XCTAssertEqual(service.fetchSpeciesRequestCount, 0, "fetchSpecies was never called")
+        XCTAssertEqual(service.fetchSpeciesDetailRequestCount, 1, "fetchSpecies was called once")
         XCTAssertEqual(species.id, mockedResultID)
     }
 
@@ -64,26 +70,37 @@ class SpeciesRepositoryTests: XCTestCase {
             case noHandlerDefined
         }
 
-        var fetchFiltersHandler: () throws -> FilterCollection
-        var fetchSpeciesHandler: () throws -> [Species]
-        var fetchSpeciesDetailHandler: (Int) throws -> SpeciesDetail
+        var fetchFiltersRequestCount = 0
+        var fetchFiltersResult: Result<FilterCollection, Error>
 
-        init(fetchFiltersHandler: @escaping () throws -> FilterCollection = { throw Error.noHandlerDefined }, fetchSpeciesHandler: @escaping () throws -> [Species] = { throw Error.noHandlerDefined }, fetchSpeciesDetailHandler: @escaping (Int) throws -> SpeciesDetail = { _ in throw Error.noHandlerDefined }) {
-            self.fetchFiltersHandler = fetchFiltersHandler
-            self.fetchSpeciesHandler = fetchSpeciesHandler
-            self.fetchSpeciesDetailHandler = fetchSpeciesDetailHandler
+        var fetchSpeciesRequestCount = 0
+        var fetchSpeciesResult: Result<[Species], Error>
+
+        var fetchSpeciesDetailRequestCount = 0
+        var fetchSpeciesDetailResult: Result<SpeciesDetail, Error>
+
+        init(fetchFiltersResult: Result<FilterCollection, Error> = .failure(Error.noHandlerDefined),
+             fetchSpeciesResult: Result<[Species], Error> = .failure(Error.noHandlerDefined),
+             fetchSpeciesDetailResult:  Result<SpeciesDetail, Error> = .failure(Error.noHandlerDefined)
+        ) {
+            self.fetchFiltersResult = fetchFiltersResult
+            self.fetchSpeciesResult = fetchSpeciesResult
+            self.fetchSpeciesDetailResult = fetchSpeciesDetailResult
         }
 
         func fetchFilters() async throws -> FilterCollection {
-            try fetchFiltersHandler()
+            fetchFiltersRequestCount += 1
+            return try fetchFiltersResult.get()
         }
 
         func fetchSpecies() async throws -> [Species] {
-            try fetchSpeciesHandler()
+            fetchSpeciesRequestCount += 1
+            return try fetchSpeciesResult.get()
         }
 
         func fetchSpeciesDetail(for speciesID: Int) async throws -> SpeciesDetail {
-            try fetchSpeciesDetailHandler(speciesID)
+            fetchSpeciesDetailRequestCount += 1
+            return try fetchSpeciesDetailResult.get()
         }
     }
 }
