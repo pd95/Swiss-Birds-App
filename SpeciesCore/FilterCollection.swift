@@ -41,3 +41,15 @@ public struct FilterCollection {
         allFilters[type, default: []].first(where: { $0.id == filterID })
     }
 }
+
+#if DEBUG
+extension FilterCollection {
+    public static var example: FilterCollection = {
+        var collection = FilterCollection()
+        for filter in Filter.examples {
+            collection.addFilter(type: filter.type, id: filter.id, name: filter.name ?? "(no name)")
+        }
+        return collection
+    }()
+}
+#endif
