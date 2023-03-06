@@ -110,7 +110,7 @@ class RemoteDataMapperTests: XCTestCase {
         let item = Filter(type: FilterType(typeName), id: id, name: name)
 
         let json = [
-            "type": typeName,
+            "type": "filter"+typeName,
             "filter_id": String(id),
             "filter_name": name
         ].compactMapValues { $0 }

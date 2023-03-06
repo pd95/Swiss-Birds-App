@@ -21,7 +21,8 @@ public enum RemoteDataMapper {
                 guard let filterID = Int(rawFilter.filterID) else {
                     throw Errors.invalidID(rawFilter.filterID)
                 }
-                return (type: FilterType(rawFilter.type), id: filterID, name: rawFilter.filterName)
+                let type = String(rawFilter.type.dropFirst(6))
+                return (type: FilterType(type), id: filterID, name: rawFilter.filterName)
             })
             .reduce(into: FilterCollection(), { (filters: inout FilterCollection, filter: (type: FilterType, id: Int, name: String)) in
                 filters.addFilter(type: filter.type, id: filter.id, name: filter.name)
