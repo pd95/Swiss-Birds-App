@@ -41,6 +41,38 @@ class SpeciesRepositoryTests: XCTestCase {
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
+    func test_refreshSpecies_failsIfFetchSpeciesFailsAndFiltersSucceeds() async throws {
+        let service = DataServiceStub(
+            fetchFiltersResult: .success(.example),
+            fetchSpeciesResult: .failure(URLError(URLError.badServerResponse))
+        )
+        let repository = makeSUT(service: service)
+
+        await repository.refreshSpecies()
+
+        XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
+        XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
+        XCTAssertEqual(service.fetchSpeciesDetailRequestCount, 0, "fetchSpecies was never called")
+        XCTAssertEqual(repository.species, [])
+        XCTAssertEqual(repository.filters.allTypes, [])
+    }
+
+    func test_refreshSpecies_failsIfFetchSpeciesSucceedsAndFiltersFails() async throws {
+        let service = DataServiceStub(
+            fetchFiltersResult: .failure(URLError(URLError.badServerResponse)),
+            fetchSpeciesResult: .success(Species.examples)
+        )
+        let repository = makeSUT(service: service)
+
+        await repository.refreshSpecies()
+
+        XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
+        XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
+        XCTAssertEqual(service.fetchSpeciesDetailRequestCount, 0, "fetchSpecies was never called")
+        XCTAssertEqual(repository.species, [])
+        XCTAssertEqual(repository.filters.allTypes, [])
+    }
+
     func test_fetchDetails_fetchesDetails() async throws {
         let mockedResult = SpeciesDetail.example
         let mockedResultID = mockedResult.id
