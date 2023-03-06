@@ -41,14 +41,6 @@ class SpeciesRepositoryTests: XCTestCase {
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
-    func XCTAssertThrowsError<T>(_ expression: @autoclosure () async throws -> T, _ message: @autoclosure () -> String = ""
-                                   ,file: StaticString = #filePath, line: UInt = #line) async {
-        if let _ = try? await expression() {
-            XCTFail(message(), file: file, line: line)
-            return
-        }
-    }
-
     func test_refreshSpecies_failsIfFetchSpeciesFailsAndFiltersSucceeds() async throws {
         let service = DataServiceStub(
             fetchFiltersResult: .success(.example),
