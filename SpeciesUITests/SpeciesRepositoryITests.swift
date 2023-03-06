@@ -8,7 +8,7 @@
 
 import XCTest
 import SpeciesCore
-@testable import SpeciesUI
+import SpeciesUI
 
 class SpeciesRepositoryTests: XCTestCase {
 
