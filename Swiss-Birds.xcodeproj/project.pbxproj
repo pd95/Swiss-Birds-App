@@ -16,6 +16,10 @@
 		17206831236B5A920008905F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17206830236B5A920008905F /* Filter.swift */; };
 		1721EB3F29B4C76F00A19D48 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB3E29B4C76F00A19D48 /* DataService.swift */; };
 		1721EB4329B65A5B00A19D48 /* XCTAssertThrowsError-async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB4229B65A5B00A19D48 /* XCTAssertThrowsError-async.swift */; };
+		1721EB4B29B65ADC00A19D48 /* SwissBirdsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB4A29B65ADC00A19D48 /* SwissBirdsApp.swift */; };
+		1721EB4D29B65ADC00A19D48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB4C29B65ADC00A19D48 /* ContentView.swift */; };
+		1721EB4F29B65ADD00A19D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1721EB4E29B65ADD00A19D48 /* Assets.xcassets */; };
+		1721EB5229B65ADD00A19D48 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */; };
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		172DF95D24AE6A12009F430C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 172DF95C24AE6A12009F430C /* Settings.bundle */; };
 		174557F7269C23A20069FDD0 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174557F6269C23A20069FDD0 /* FavoritesManager.swift */; };
@@ -203,6 +207,11 @@
 		17206830236B5A920008905F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		1721EB3E29B4C76F00A19D48 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		1721EB4229B65A5B00A19D48 /* XCTAssertThrowsError-async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTAssertThrowsError-async.swift"; sourceTree = "<group>"; };
+		1721EB4829B65ADC00A19D48 /* SwissBirds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwissBirds.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1721EB4A29B65ADC00A19D48 /* SwissBirdsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwissBirdsApp.swift; sourceTree = "<group>"; };
+		1721EB4C29B65ADC00A19D48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1721EB4E29B65ADD00A19D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		172DF95C24AE6A12009F430C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		174557F6269C23A20069FDD0 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
@@ -309,6 +318,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1721EB4529B65ADC00A19D48 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1779F4C92809AC7400E2506D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -388,6 +404,25 @@
 				17B1B43C2546C0E200B422B6 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1721EB4929B65ADC00A19D48 /* SwissBirds */ = {
+			isa = PBXGroup;
+			children = (
+				1721EB4A29B65ADC00A19D48 /* SwissBirdsApp.swift */,
+				1721EB4C29B65ADC00A19D48 /* ContentView.swift */,
+				1721EB4E29B65ADD00A19D48 /* Assets.xcassets */,
+				1721EB5029B65ADD00A19D48 /* Preview Content */,
+			);
+			path = SwissBirds;
+			sourceTree = "<group>";
+		};
+		1721EB5029B65ADD00A19D48 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		175CC8E124856C3C006F99D3 /* API */ = {
@@ -498,6 +533,7 @@
 				1779F4CD2809AC7400E2506D /* SpeciesCoreTests */,
 				17A2107D2815B114003D1C10 /* SpeciesUI */,
 				17A210742815B0CE003D1C10 /* SpeciesUITests */,
+				1721EB4929B65ADC00A19D48 /* SwissBirds */,
 				17B960EC23699370003AA802 /* Swiss-Birds */,
 				17B9610623699375003AA802 /* Swiss-BirdsTests */,
 				17DFEE32271DFD17005D1AA9 /* UITests */,
@@ -520,6 +556,7 @@
 				1779F4CC2809AC7400E2506D /* SpeciesCoreTests.xctest */,
 				17A210682815B0AA003D1C10 /* libSpeciesUI.a */,
 				17A210732815B0CE003D1C10 /* SpeciesUITests.xctest */,
+				1721EB4829B65ADC00A19D48 /* SwissBirds.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -691,6 +728,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1721EB4729B65ADC00A19D48 /* SwissBirds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1721EB5329B65ADD00A19D48 /* Build configuration list for PBXNativeTarget "SwissBirds" */;
+			buildPhases = (
+				1721EB4429B65ADC00A19D48 /* Sources */,
+				1721EB4529B65ADC00A19D48 /* Frameworks */,
+				1721EB4629B65ADC00A19D48 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwissBirds;
+			productName = SwissBirds;
+			productReference = 1721EB4829B65ADC00A19D48 /* SwissBirds.app */;
+			productType = "com.apple.product-type.application";
+		};
 		1779F4CB2809AC7400E2506D /* SpeciesCoreTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1779F4D32809AC7400E2506D /* Build configuration list for PBXNativeTarget "SpeciesCoreTests" */;
@@ -858,10 +912,13 @@
 		17B960E223699370003AA802 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = Philipp;
 				TargetAttributes = {
+					1721EB4729B65ADC00A19D48 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					1779F4CB2809AC7400E2506D = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -915,6 +972,7 @@
 				17B9610D23699375003AA802 /* Swiss-BirdsUITests */,
 				17B1B4382546C0E200B422B6 /* BirdOfTheDayWidgetExtension */,
 				17DFEE23271CBC80005D1AA9 /* Snapshots */,
+				1721EB4729B65ADC00A19D48 /* SwissBirds */,
 				17A54D57280987F700BF6224 /* SpeciesCore */,
 				1779F4CB2809AC7400E2506D /* SpeciesCoreTests */,
 				17A210672815B0AA003D1C10 /* SpeciesUI */,
@@ -924,6 +982,15 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1721EB4629B65ADC00A19D48 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1721EB5229B65ADD00A19D48 /* Preview Assets.xcassets in Resources */,
+				1721EB4F29B65ADD00A19D48 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1779F4CA2809AC7400E2506D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -985,6 +1052,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1721EB4429B65ADC00A19D48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1721EB4D29B65ADC00A19D48 /* ContentView.swift in Sources */,
+				1721EB4B29B65ADC00A19D48 /* SwissBirdsApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1779F4C82809AC7400E2506D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1211,6 +1287,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1721EB5429B65ADD00A19D48 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwissBirds/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.SwissBirds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1721EB5529B65ADD00A19D48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SwissBirds/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.SwissBirds;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		1779F4D42809AC7400E2506D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1628,6 +1766,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1721EB5329B65ADD00A19D48 /* Build configuration list for PBXNativeTarget "SwissBirds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1721EB5429B65ADD00A19D48 /* Debug */,
+				1721EB5529B65ADD00A19D48 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1779F4D32809AC7400E2506D /* Build configuration list for PBXNativeTarget "SpeciesCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
