@@ -66,7 +66,7 @@ class SpeciesRepositoryTests: XCTestCase {
     }
 
     private class DataServiceStub: DataService {
-        enum Error: Swift.Error {
+        enum StubError: Swift.Error {
             case noHandlerDefined
         }
 
@@ -79,9 +79,9 @@ class SpeciesRepositoryTests: XCTestCase {
         var fetchSpeciesDetailRequestCount = 0
         var fetchSpeciesDetailResult: Result<SpeciesDetail, Error>
 
-        init(fetchFiltersResult: Result<FilterCollection, Error> = .failure(Error.noHandlerDefined),
-             fetchSpeciesResult: Result<[Species], Error> = .failure(Error.noHandlerDefined),
-             fetchSpeciesDetailResult:  Result<SpeciesDetail, Error> = .failure(Error.noHandlerDefined)
+        init(fetchFiltersResult: Result<FilterCollection, Error> = .failure(StubError.noHandlerDefined),
+             fetchSpeciesResult: Result<[Species], Error> = .failure(StubError.noHandlerDefined),
+             fetchSpeciesDetailResult:  Result<SpeciesDetail, Error> = .failure(StubError.noHandlerDefined)
         ) {
             self.fetchFiltersResult = fetchFiltersResult
             self.fetchSpeciesResult = fetchSpeciesResult
