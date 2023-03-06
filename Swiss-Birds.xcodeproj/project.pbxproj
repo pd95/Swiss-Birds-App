@@ -20,6 +20,8 @@
 		1721EB4D29B65ADC00A19D48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB4C29B65ADC00A19D48 /* ContentView.swift */; };
 		1721EB4F29B65ADD00A19D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1721EB4E29B65ADD00A19D48 /* Assets.xcassets */; };
 		1721EB5229B65ADD00A19D48 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */; };
+		1721EB5629B65DAF00A19D48 /* libSpeciesCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A54D58280987F700BF6224 /* libSpeciesCore.a */; };
+		1721EB5929B65DAF00A19D48 /* libSpeciesUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A210682815B0AA003D1C10 /* libSpeciesUI.a */; };
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		172DF95D24AE6A12009F430C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 172DF95C24AE6A12009F430C /* Settings.bundle */; };
 		174557F7269C23A20069FDD0 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174557F6269C23A20069FDD0 /* FavoritesManager.swift */; };
@@ -108,6 +110,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1721EB5729B65DAF00A19D48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17A54D57280987F700BF6224;
+			remoteInfo = SpeciesCore;
+		};
+		1721EB5A29B65DAF00A19D48 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17B960E223699370003AA802 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17A210672815B0AA003D1C10;
+			remoteInfo = SpeciesUI;
+		};
 		1779F4D12809AC7400E2506D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 17B960E223699370003AA802 /* Project object */;
@@ -323,6 +339,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1721EB5929B65DAF00A19D48 /* libSpeciesUI.a in Frameworks */,
+				1721EB5629B65DAF00A19D48 /* libSpeciesCore.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,6 +759,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				1721EB5829B65DAF00A19D48 /* PBXTargetDependency */,
+				1721EB5B29B65DAF00A19D48 /* PBXTargetDependency */,
 			);
 			name = SwissBirds;
 			productName = SwissBirds;
@@ -1207,6 +1227,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1721EB5829B65DAF00A19D48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17A54D57280987F700BF6224 /* SpeciesCore */;
+			targetProxy = 1721EB5729B65DAF00A19D48 /* PBXContainerItemProxy */;
+		};
+		1721EB5B29B65DAF00A19D48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17A210672815B0AA003D1C10 /* SpeciesUI */;
+			targetProxy = 1721EB5A29B65DAF00A19D48 /* PBXContainerItemProxy */;
+		};
 		1779F4D22809AC7400E2506D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 17A54D57280987F700BF6224 /* SpeciesCore */;
