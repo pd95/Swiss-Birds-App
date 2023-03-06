@@ -27,17 +27,14 @@ class SpeciesRepository: ObservableObject {
 
     func refreshSpecies() async {
         do {
-            Self.logger.log("fetch species started")
-            let species = try await self.service.fetchSpecies()
-            Self.logger.log("fetch species done: \(species.count) fetched")
+            Self.logger.log("fetching species and filters")
+            async let species = self.service.fetchSpecies()
+            async let filters = self.service.fetchFilters()
 
-            self.species = species
+            (self.species, self.filters) = try await (species, filters)
 
-            Self.logger.log("fetch filters started")
-            let filters = try await self.service.fetchFilters()
-            Self.logger.log("fetch filters done \(filters.allTypes.count) types fetched")
-
-            self.filters = filters
+            Self.logger.log("fetch species done: \(self.species.count) fetched")
+            Self.logger.log("fetch filters done: \(self.filters.allTypes.count) types fetched")
         } catch {
             Self.logger.error(error.localizedDescription)
         }
