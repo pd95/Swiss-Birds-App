@@ -32,7 +32,7 @@ class SpeciesRepositoryTests: XCTestCase {
         )
         let repository = makeSUT(service: service)
 
-        await repository.refreshSpecies()
+        try await repository.refreshSpecies()
 
         XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
         XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
@@ -41,14 +41,25 @@ class SpeciesRepositoryTests: XCTestCase {
         XCTAssertNotEqual(repository.filters.allTypes, [])
     }
 
+    func XCTAssertThrowsError<T>(_ expression: @autoclosure () async throws -> T, _ message: @autoclosure () -> String = ""
+                                   ,file: StaticString = #filePath, line: UInt = #line) async {
+        if let _ = try? await expression() {
+            XCTFail(message(), file: file, line: line)
+            return
+        }
+    }
+
     func test_refreshSpecies_failsIfFetchSpeciesFailsAndFiltersSucceeds() async throws {
         let service = DataServiceStub(
             fetchFiltersResult: .success(.example),
-            fetchSpeciesResult: .failure(URLError(URLError.badServerResponse))
+            fetchSpeciesResult: .failure(anyError())
         )
         let repository = makeSUT(service: service)
 
-        await repository.refreshSpecies()
+        await XCTAssertThrowsError(
+            try await repository.refreshSpecies()
+            ,"refreshSpecies should have thrown an error"
+        )
 
         XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
         XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
@@ -59,12 +70,15 @@ class SpeciesRepositoryTests: XCTestCase {
 
     func test_refreshSpecies_failsIfFetchSpeciesSucceedsAndFiltersFails() async throws {
         let service = DataServiceStub(
-            fetchFiltersResult: .failure(URLError(URLError.badServerResponse)),
+            fetchFiltersResult: .failure(anyError()),
             fetchSpeciesResult: .success(Species.examples)
         )
         let repository = makeSUT(service: service)
 
-        await repository.refreshSpecies()
+        await XCTAssertThrowsError(
+            try await repository.refreshSpecies()
+            ,"refreshSpecies should have thrown an error"
+        )
 
         XCTAssertEqual(service.fetchFiltersRequestCount, 1, "fetchFilters was called once")
         XCTAssertEqual(service.fetchSpeciesRequestCount, 1, "fetchSpecies was called once")
@@ -95,6 +109,10 @@ class SpeciesRepositoryTests: XCTestCase {
         trackForMemoryLeaks(repository, file: file, line: line)
 
         return repository
+    }
+
+    private func anyError() -> Error {
+        URLError(.badServerResponse)
     }
 
     private class DataServiceStub: DataService {

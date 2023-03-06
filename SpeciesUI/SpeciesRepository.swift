@@ -25,7 +25,7 @@ class SpeciesRepository: ObservableObject {
         self.service = service
     }
 
-    func refreshSpecies() async {
+    func refreshSpecies() async throws {
         do {
             Self.logger.log("fetching species and filters")
             async let species = self.service.fetchSpecies()
@@ -37,6 +37,7 @@ class SpeciesRepository: ObservableObject {
             Self.logger.log("fetch filters done: \(self.filters.allTypes.count) types fetched")
         } catch {
             Self.logger.error(error.localizedDescription)
+            throw error
         }
     }
 
