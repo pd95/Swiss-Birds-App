@@ -34,11 +34,14 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
-    @State static private var repo = SpeciesRepository(service: RemoteDataService(dataClient: RemoteDataClient()))
+    @State static private var repo = SpeciesRepository(service: SampleDataService())
+
     static var previews: some View {
         ContentView()
             .environmentObject(repo)
             .task { try? await repo.refreshSpecies() }
     }
 }
+#endif

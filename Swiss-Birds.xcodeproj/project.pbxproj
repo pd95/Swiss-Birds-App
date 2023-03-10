@@ -22,6 +22,7 @@
 		1721EB5229B65ADD00A19D48 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */; };
 		1721EB5629B65DAF00A19D48 /* libSpeciesCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A54D58280987F700BF6224 /* libSpeciesCore.a */; };
 		1721EB5929B65DAF00A19D48 /* libSpeciesUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17A210682815B0AA003D1C10 /* libSpeciesUI.a */; };
+		1721EB5F29BB37EC00A19D48 /* SampleDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721EB5E29BB37EC00A19D48 /* SampleDataService.swift */; };
 		172D564E24A1077F00C8419E /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172D564D24A1077F00C8419E /* ShareSheet.swift */; };
 		172DF95D24AE6A12009F430C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 172DF95C24AE6A12009F430C /* Settings.bundle */; };
 		174557F7269C23A20069FDD0 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174557F6269C23A20069FDD0 /* FavoritesManager.swift */; };
@@ -229,6 +230,7 @@
 		1721EB4E29B65ADD00A19D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1721EB5129B65ADD00A19D48 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1721EB5D29B662D800A19D48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1721EB5E29BB37EC00A19D48 /* SampleDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataService.swift; sourceTree = "<group>"; };
 		172D564D24A1077F00C8419E /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		172DF95C24AE6A12009F430C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		174557F6269C23A20069FDD0 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				1721EB3E29B4C76F00A19D48 /* DataService.swift */,
 				17ED68AC281478D900605FE2 /* Helper-Extensions */,
 				1779F4E2280AA6A000E2506D /* RemoteData */,
+				1721EB5E29BB37EC00A19D48 /* SampleDataService.swift */,
 			);
 			path = SpeciesCore;
 			sourceTree = "<group>";
@@ -1123,6 +1126,7 @@
 				17EFBC3D28146392006C3D7D /* URLSession-Async.swift in Sources */,
 				17EFBC3528130AE0006C3D7D /* NameLanguage.swift in Sources */,
 				17EFBC17280DACED006C3D7D /* HTTPURLResponse-StatusCode.swift in Sources */,
+				1721EB5F29BB37EC00A19D48 /* SampleDataService.swift in Sources */,
 				17EFBC22280EFA11006C3D7D /* Species.swift in Sources */,
 				17EFBC332812EC47006C3D7D /* RemoteDataMapper-SpeciesDetailDTO.swift in Sources */,
 				17EFBC2E2812E5A1006C3D7D /* RemoteDataMapper-SpeciesDTO.swift in Sources */,
