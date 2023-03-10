@@ -7,21 +7,38 @@
 //
 
 import SwiftUI
+import SpeciesCore
+import SpeciesUI
 
 struct ContentView: View {
+    @EnvironmentObject private var repository: SpeciesRepository
+    @State private var search = ""
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                ForEach(repository.species.filter({ search.isEmpty || $0.name.localizedCaseInsensitiveContains(search)})) { species in
+                    VStack(alignment: .leading) {
+                        Text(species.name)
+                            .font(.headline)
+                        Text(Array(species.filters.map({
+                            repository.filters.displayName(for: $0)
+                        })).sorted().joined(separator: ", "))
+                    }
+                }
+            }
+            .searchable(text: $search)
+            .listStyle(.inset)
+            .navigationTitle("Swiss Birds")
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    @State static private var repo = SpeciesRepository(service: RemoteDataService(dataClient: RemoteDataClient()))
     static var previews: some View {
         ContentView()
+            .environmentObject(repo)
+            .task { try? await repo.refreshSpecies() }
     }
 }
