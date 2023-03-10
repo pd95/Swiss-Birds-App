@@ -10,9 +10,11 @@ import Foundation
 
 public struct FilterCollection {
     var allFilters: [FilterType: [Filter]]
+    var filterNames: [String: String]
 
     public init() {
         allFilters = [:]
+        filterNames = [:]
     }
 
     @discardableResult
@@ -25,6 +27,7 @@ public struct FilterCollection {
             filters.append(filter)
         }
         allFilters[type] = filters
+        filterNames[filter.uniqueID] = name
 
         return filter
     }
@@ -39,6 +42,10 @@ public struct FilterCollection {
 
     public func filter(withID filterID: Filter.ID, for type: FilterType) -> Filter? {
         allFilters[type, default: []].first(where: { $0.id == filterID })
+    }
+
+    public func displayName(for filter: Filter) -> String {
+        filterNames[filter.uniqueID, default: filter.uniqueID]
     }
 }
 
