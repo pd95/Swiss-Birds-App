@@ -18,18 +18,26 @@ struct ContentView: View {
         NavigationStack {
             List {
                 ForEach(repository.species.filter({ search.isEmpty || $0.name.localizedCaseInsensitiveContains(search)})) { species in
-                    VStack(alignment: .leading) {
-                        Text(species.name)
-                            .font(.headline)
-                        Text(Array(species.filters.map({
-                            repository.filters.displayName(for: $0)
-                        })).sorted().joined(separator: ", "))
-                    }
+                    SpeciesListRow(species: species, filters: repository.filters)
                 }
             }
             .searchable(text: $search)
             .listStyle(.inset)
             .navigationTitle("Swiss Birds")
+        }
+    }
+
+    struct SpeciesListRow: View {
+
+        let species: Species
+        let filters: FilterCollection
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(species.name)
+                    .font(.headline)
+                Text(Array(species.filters.map(\.localizedName)).sorted().joined(separator: ", "))
+            }
         }
     }
 }

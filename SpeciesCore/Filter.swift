@@ -15,14 +15,17 @@ public struct Filter {
     public let name: String?
     public let type: FilterType
 
-    public var uniqueID: String {
-        "\(type.id):\(id)"
-    }
+    public let uniqueID: String
 
     public init(type: FilterType, id: Int, name: String? = nil) {
         self.id = id
-        self.name = name
+        self.uniqueID = "\(type.id):\(id)"
+        self.name = name ?? "\(type.id):\(id)"
         self.type = type
+    }
+
+    public var localizedName: String {
+        name ?? uniqueID
     }
 }
 
