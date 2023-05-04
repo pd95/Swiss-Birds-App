@@ -16,26 +16,18 @@ class DataFetcher: ObservableObject {
 
     let logger = Logger(subsystem: "DataFetcher", category: "general")
 
-    typealias BirdOfTheDay = (speciesID: Int, name: String, image: UIImage, validDate: Date)
+    typealias BirdOfTheDay = (speciesID: Int, name: String, url: URL, validDate: Date)
 
     private var birdOfTheDaySubscriber: AnyCancellable?
     private var getSpecieSubscriber: AnyCancellable?
 
     private var cancellables = Set<AnyCancellable>()
 
-    @Published var speciesID: Int?
-    @Published var name: String?
-    @Published var image: UIImage?
-    @Published var lastLoadingDate: Date = .distantPast
-
-    init() {
-        fetchBirdOfTheDay()
-    }
+    var result: BirdOfTheDay?
+    var lastLoadingDate: Date = .distantPast
 
     var finishedLoading: Bool {
-        speciesID != nil &&
-            name != nil &&
-            image != nil
+        result != nil
     }
 
     var reloadDate: Date {
@@ -69,9 +61,7 @@ class DataFetcher: ObservableObject {
             return
         }
 
-        speciesID = nil
-        name = nil
-        image = nil
+        result = nil
         birdOfTheDaySubscriber = VdsAPI.getBirdOfTheDaySpeciesIDandURL()
             .map { (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
                 if self.fakeBackdatedLoad {
@@ -80,29 +70,18 @@ class DataFetcher: ObservableObject {
                 return birdOfTheDayData
             }
             .handleEvents(receiveOutput: { [weak self] (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
-                self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID)")
-                self?.speciesID = birdOfTheDayData.speciesID
-             })
-            .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<UIImage?, Error> in
+                self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID), url: \(birdOfTheDayData.url)")
+            })
+            .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<(speciesID: Int, url: URL), Error> in
                 VdsAPI.getBirdOfTheDay(for: birdOfTheDayData.speciesID)
-                    .map { UIImage(data: $0) }
-                    .handleEvents(receiveOutput: { [weak self] (image: UIImage?) in
-                        self?.logger.debug("image: \(image != nil)")
-                        self?.image = image
-                     })
+                    .map({ url in
+                        (birdOfTheDayData.speciesID, url)
+                    })
                     .eraseToAnyPublisher()
             })
-            .flatMap({ [weak self] _ -> AnyPublisher<String, Error> in
-                guard let speciesID = self?.speciesID else {
-                    return Fail(error: FetchError.failed as Error)
-                        .eraseToAnyPublisher()
-                }
-                return VdsAPI.getSpecie(for: speciesID)
-                    .map(\.artname)
-                    .handleEvents(receiveOutput: { [weak self] (name) in
-                        self?.logger.debug("name: \(name)")
-                        self?.name = name
-                     })
+            .flatMap({ result -> AnyPublisher<(speciesID: Int, name: String, url: URL), Error> in
+                return VdsAPI.getSpecie(for: result.speciesID)
+                    .map({ (result.speciesID, $0.artname, result.url) })
                     .eraseToAnyPublisher()
             })
             .sink { [weak self] (result) in
@@ -112,17 +91,17 @@ class DataFetcher: ObservableObject {
                     self?.getBirdOfTheDayCompletionHandlers.removeAll()
                 }
                 self?.birdOfTheDaySubscriber = nil
-            } receiveValue: { [weak self] (_) in
+            } receiveValue: { [weak self] (result) in
                 guard let self = self else { return }
-                self.lastLoadingDate = self.fakeBackdatedLoad ? Date().addingTimeInterval(60-24*60*60) : Date()
-                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(self.lastLoadingDate)")
+                let lastLoadingDate = self.fakeBackdatedLoad ? Date().addingTimeInterval(60-24*60*60) : Date()
+                self.result = (result.speciesID, result.name, result.url, lastLoadingDate)
+                self.lastLoadingDate = lastLoadingDate
+                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(lastLoadingDate)")
             }
     }
 
     func getBirdOfTheDay(completion: @escaping (BirdOfTheDay) -> Void) {
-        guard let speciesID = speciesID,
-              let name = name,
-              let image = image,
+        guard let (speciesID, name, url, _) = result,
               reloadDate > Date()
         else {
             logger.info("getBirdOfTheDay: fetching new data")
@@ -131,7 +110,7 @@ class DataFetcher: ObservableObject {
             return
         }
         logger.info("getBirdOfTheDay: returning existing data \(speciesID)")
-        completion((speciesID, name, image, reloadDate))
+        completion((speciesID, name, url, reloadDate))
     }
 }
 

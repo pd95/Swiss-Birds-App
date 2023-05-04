@@ -326,8 +326,8 @@ class AppState: ObservableObject {
         }
         VdsAPI
             .getBirdOfTheDay(for: speciesId)
-            .map { [weak self] data in
-                let image = UIImage(data: data)
+            .map { [weak self] url in
+                let image = UIImage(contentsOfFile: url.path)
                 self?.headShotsCache[-speciesId] = image
                 return image
             }

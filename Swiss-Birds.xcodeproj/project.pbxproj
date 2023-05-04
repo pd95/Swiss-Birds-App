@@ -66,6 +66,15 @@
 		17ECD39A24A655E200226BF4 /* BirdOfTheDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */; };
 		17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17ECD39D24A72D1800226BF4 /* BirdImageView.swift */; };
 		17EE09C0254F34BC00C600A7 /* SectionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EE09BF254F34BC00C600A7 /* SectionGroup.swift */; };
+		17FA869B2A03009B007C31AC /* Placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17FA869A2A03009B007C31AC /* Placeholder.jpg */; };
+		17FA869D2A0300BA007C31AC /* RealPlaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 17FA869C2A0300BA007C31AC /* RealPlaceholder.jpg */; };
+		17FA869F2A0302B5007C31AC /* Bundle-sampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA869E2A0302B5007C31AC /* Bundle-sampleData.swift */; };
+		17FA86A22A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A12A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift */; };
+		17FA86A32A030EEF007C31AC /* URLSession+DownloadTaskPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A12A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift */; };
+		17FA86A52A030F0E007C31AC /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A42A030F0E007C31AC /* UnfairLock.swift */; };
+		17FA86A62A030F0E007C31AC /* UnfairLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A42A030F0E007C31AC /* UnfairLock.swift */; };
+		17FA86A92A03AD34007C31AC /* UIImage-resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A82A03AD34007C31AC /* UIImage-resize.swift */; };
+		17FA86AA2A03AD34007C31AC /* UIImage-resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FA86A82A03AD34007C31AC /* UIImage-resize.swift */; };
 		17FB3B89236B93650059D268 /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B88236B93650059D268 /* Species.swift */; };
 		17FB3B8B236B96A20059D268 /* FilterCriteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8A236B96A20059D268 /* FilterCriteria.swift */; };
 		17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB3B8C236B9ABC0059D268 /* BirdList.swift */; };
@@ -200,6 +209,12 @@
 		17ECD39924A655E200226BF4 /* BirdOfTheDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdOfTheDay.swift; sourceTree = "<group>"; };
 		17ECD39D24A72D1800226BF4 /* BirdImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdImageView.swift; sourceTree = "<group>"; };
 		17EE09BF254F34BC00C600A7 /* SectionGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionGroup.swift; sourceTree = "<group>"; };
+		17FA869A2A03009B007C31AC /* Placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Placeholder.jpg; sourceTree = "<group>"; };
+		17FA869C2A0300BA007C31AC /* RealPlaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = RealPlaceholder.jpg; path = BirdOfTheDayWidget/RealPlaceholder.jpg; sourceTree = SOURCE_ROOT; };
+		17FA869E2A0302B5007C31AC /* Bundle-sampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle-sampleData.swift"; sourceTree = "<group>"; };
+		17FA86A12A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+DownloadTaskPublisher.swift"; sourceTree = "<group>"; };
+		17FA86A42A030F0E007C31AC /* UnfairLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfairLock.swift; sourceTree = "<group>"; };
+		17FA86A82A03AD34007C31AC /* UIImage-resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage-resize.swift"; sourceTree = "<group>"; };
 		17FB3B88236B93650059D268 /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		17FB3B8A236B96A20059D268 /* FilterCriteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCriteria.swift; sourceTree = "<group>"; };
 		17FB3B8C236B9ABC0059D268 /* BirdList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdList.swift; sourceTree = "<group>"; };
@@ -267,6 +282,7 @@
 		1761694127204E550056C08A /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				17FA869C2A0300BA007C31AC /* RealPlaceholder.jpg */,
 				1761694027204E0C0056C08A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -276,8 +292,11 @@
 			isa = PBXGroup;
 			children = (
 				17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */,
+				17FA869E2A0302B5007C31AC /* Bundle-sampleData.swift */,
+				17FA86A82A03AD34007C31AC /* UIImage-resize.swift */,
 				174D696C254C5C09000CCCC8 /* Localizable.strings */,
 				17B1B46C25470CC100B422B6 /* DataFetcher.swift */,
+				17FA869A2A03009B007C31AC /* Placeholder.jpg */,
 				17B1B4422546C0E600B422B6 /* Assets.xcassets */,
 				1761694127204E550056C08A /* Preview Content */,
 				17B1B4442546C0E600B422B6 /* Info.plist */,
@@ -317,6 +336,7 @@
 		17B960EC23699370003AA802 /* Swiss-Birds */ = {
 			isa = PBXGroup;
 			children = (
+				17FA86A72A03A844007C31AC /* Helpers */,
 				17493750269C2BE3001DB8B5 /* Swiss-Birds.entitlements */,
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
@@ -447,6 +467,15 @@
 				17DFEE25271CBC80005D1AA9 /* Snapshots */,
 			);
 			path = UITests;
+			sourceTree = "<group>";
+		};
+		17FA86A72A03A844007C31AC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				17FA86A12A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift */,
+				17FA86A42A030F0E007C31AC /* UnfairLock.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -603,6 +632,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */,
+				17FA869B2A03009B007C31AC /* Placeholder.jpg in Resources */,
+				17FA869D2A0300BA007C31AC /* RealPlaceholder.jpg in Resources */,
 				1761694227204F7C0056C08A /* Preview Assets.xcassets in Resources */,
 				174D696A254C5C09000CCCC8 /* Localizable.strings in Resources */,
 			);
@@ -649,10 +680,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17FA86A62A030F0E007C31AC /* UnfairLock.swift in Sources */,
+				17FA86AA2A03AD34007C31AC /* UIImage-resize.swift in Sources */,
 				17B1B4522546C3E300B422B6 /* VdsDataTypes.swift in Sources */,
 				17B1B476254710D800B422B6 /* DataFetcher.swift in Sources */,
 				17B1B4632546C44900B422B6 /* Extensions.swift in Sources */,
 				17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */,
+				17FA86A32A030EEF007C31AC /* URLSession+DownloadTaskPublisher.swift in Sources */,
+				17FA869F2A0302B5007C31AC /* Bundle-sampleData.swift in Sources */,
 				17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */,
 				17B1B45E2546C42E00B422B6 /* Languages.swift in Sources */,
 			);
@@ -663,6 +698,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
+				17FA86A92A03AD34007C31AC /* UIImage-resize.swift in Sources */,
 				17AAEF45271896940012C22D /* NavigationState.swift in Sources */,
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
 				17206831236B5A920008905F /* Filter.swift in Sources */,
@@ -692,8 +728,10 @@
 				17E6B35F2549974900691729 /* Checkmark.swift in Sources */,
 				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
 				17B7200B2551FE9D002087FC /* Characteristic.swift in Sources */,
+				17FA86A22A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift in Sources */,
 				176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
+				17FA86A52A030F0E007C31AC /* UnfairLock.swift in Sources */,
 				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				174557F7269C23A20069FDD0 /* FavoritesManager.swift in Sources */,
@@ -848,6 +886,7 @@
 		};
 		17B9611523699375003AA802 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -913,6 +952,7 @@
 		};
 		17B9611623699375003AA802 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

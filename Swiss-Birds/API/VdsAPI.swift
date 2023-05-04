@@ -22,8 +22,11 @@ enum VdsAPI {
 
     typealias BirdOfTheDayData = (url: URL, speciesID: Int)
 
+    static var cacheLocation: URL {
+        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("Downloaded-Data")
+    }
+
     static var urlSession: URLSession = {
-        let cacheLocation: URL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("Downloaded-Data")
         let cacheSize = 200 * 1024 * 1024
 
         var config = URLSessionConfiguration.default
@@ -89,6 +92,30 @@ enum VdsAPI {
             .eraseToAnyPublisher()
     }
 
+    private static func downloadData(_ request: URLRequest, to targetURL: URL) -> AnyPublisher<URL, Error> {
+        return urlSession
+            .downloadTaskPublisher(for: request)
+            .retry(1)
+            .tryMap { result -> URL in
+                guard let httpResponse = result.response as? HTTPURLResponse else {
+                    os_log("Invalid HTTP response: %{Public}@", result.response)
+                    throw APIError.networkError("Invalid HTTP response")
+                }
+
+                let statusCode = httpResponse.statusCode
+                guard 200 ..< 300 ~= statusCode else {
+                    let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
+                    os_log("HTTP response: %d '%{Public}@' for %{Public}@", statusCode, localizedMessage, httpResponse.url?.path ?? "n/a")
+                    throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
+                }
+
+                try? FileManager.default.removeItem(at: targetURL)
+                try FileManager.default.moveItem(at: result.url, to: targetURL)
+                return targetURL
+            }
+            .eraseToAnyPublisher()
+    }
+
     static func getBirds(language: LanguageIdentifier = primaryLanguage) -> AnyPublisher<[VdsListElement], Error> {
         return fetchJSON(URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/list_\(language).json")))
     }
@@ -139,7 +166,13 @@ enum VdsAPI {
             .eraseToAnyPublisher()
     }
 
-    static func getBirdOfTheDay(for id: Int) -> AnyPublisher<Data, Error> {
-        return fetchData(URLRequest(url: base.appendingPathComponent("assets/images/headImages/vdt/\(String(format: "%04d", id)).jpg")))
+    static func getBirdOfTheDay(for id: Int) -> AnyPublisher<URL, Error> {
+        let speciesID = String(format: "%04d", id)
+        let sourceURL = base.appendingPathComponent("assets/images/headImages/vdt/\(speciesID).jpg")
+        let targetURL = cacheLocation.appendingPathComponent("bod_\(speciesID).jpg", isDirectory: false)
+        if FileManager.default.fileExists(atPath: targetURL.path) {
+            return Just(targetURL).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+        return downloadData(URLRequest(url: sourceURL), to: targetURL)
     }
 }
