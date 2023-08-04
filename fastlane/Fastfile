@@ -45,7 +45,7 @@ platform :ios do
       derived_data_path: "build_Testing",
       build_for_testing: true,
       clean: true,
-      device: "iPhone Xs"
+      device: "iPhone 12"
     )
   end
 
@@ -56,6 +56,6 @@ platform :ios do
       test_without_building: true,
       derived_data_path: "build_Testing",
     )
-    frameit(silver: true) 
+    frameit() 
   end
 end
