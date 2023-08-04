@@ -81,7 +81,7 @@ class Snapshots: XCTestCase {
 
         // Search
         XCTContext.runActivity(named: "Search for a bird") { (_) in
-            let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Black"]
+            let searchTerms = ["de": "Amsel", "fr": "Merle", "it": "Merlo", "en": "Blackb"]
             let search = searchTerms[language]!
 
             let searchText = app.searchFields.allElementsBoundByIndex.last!
@@ -115,7 +115,7 @@ class Snapshots: XCTestCase {
             app.navigationBars.buttons.firstMatch.tap()
 
             // Make sure searchField is visible and selected again
-            let searchField = app.searchFields.element
+            let searchField = app.otherElements["searchBar"]
             searchField.tap()
 
             // Cancel search
