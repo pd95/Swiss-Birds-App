@@ -321,11 +321,11 @@ class AppState: ObservableObject {
     }
 
     func getBirdOfTheDay() {
-        guard let speciesId = birdOfTheDay?.speciesID else {
+        guard let (url, speciesId) = birdOfTheDay else {
             return
         }
         VdsAPI
-            .getBirdOfTheDay(for: speciesId)
+            .getBirdOfTheDay(for: speciesId, from: url)
             .map { [weak self] url in
                 let image = UIImage(contentsOfFile: url.path)
                 self?.headShotsCache[-speciesId] = image

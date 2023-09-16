@@ -43,21 +43,31 @@ enum VdsAPI {
         let path: String
         switch primaryLanguage {
             case "de":
-                path = "de/voegel/voegel-der-schweiz/"
+                path = "de/entdecken/voegel-der-schweiz/"
             case "fr":
-                path = "fr/oiseaux/les-oiseaux-de-suisse/"
+                path = "fr/decouvrir/les-oiseaux-de-suisse/"
             case "it":
-                path = "it/uccelli/uccelli-della-svizzera/"
+                path = "it/scoprire/uccelli-della-svizzera/"
             default:
-                path = "en/birds/birds-of-switzerland/"
+                path = "en/discover/birds-of-switzerland/"
         }
 
         return VdsAPI.base.appendingPathComponent(path)
     }
 
-    static let jsonDataPath = "elements/snippets/vds/static/assets/data"
-    static let imageAssetPath = "assets/images/voegel/vds"
-    static let voiceAssetPath = "assets/media/voices"
+    // https://www.vogelwarte.ch/wp-content/assets/json/bird/list_de.json
+    // https://www.vogelwarte.ch/wp-content/assets/json/bird/filters_de.json
+    // https://www.vogelwarte.ch/wp-content/assets/json/bird/labels_de.json
+    // https://www.vogelwarte.ch/wp-content/assets/json/bird/species/1140_de.json
+    // https://www.vogelwarte.ch/wp-content/assets/json/bird/bird_of_the_day.json
+    static let jsonDataPath = "wp-content/assets/json/bird"
+
+    // https://www.vogelwarte.ch/wp-content/assets/images/bird/headshots/80x80/1140@2x.jpg
+    // https://www.vogelwarte.ch/wp-content/assets/images/bird/artbilder/700px/1140_0.jpg
+    static let imageAssetPath = "wp-content/assets/images/bird"
+
+    // https://www.vogelwarte.ch/wp-content/assets/media/voices/1140.mp3
+    static let voiceAssetPath = "wp-content/assets/media/voices"
 
     private static func fetchData(_ request: URLRequest) -> AnyPublisher<Data, Error> {
         return urlSession
@@ -156,7 +166,8 @@ enum VdsAPI {
         return fetchData(request)
             .tryMap { (data) -> BirdOfTheDayData in
                 let html = String(data: data, encoding: .isoLatin1)!
-                let matches = html.matches(regex: "assets/images/headImages/vdt/([0-9]+).jpg")
+                // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/0750_0_9to4.jpg
+                let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_9to4.jpg")
                 if matches.count == 2, let id = Int(matches[1]) {
                     let url = base.appendingPathComponent(matches[0])
                     return (url, id)
@@ -166,13 +177,12 @@ enum VdsAPI {
             .eraseToAnyPublisher()
     }
 
-    static func getBirdOfTheDay(for id: Int) -> AnyPublisher<URL, Error> {
+    static func getBirdOfTheDay(for id: Int, from url: URL) -> AnyPublisher<URL, Error> {
         let speciesID = String(format: "%04d", id)
-        let sourceURL = base.appendingPathComponent("assets/images/headImages/vdt/\(speciesID).jpg")
         let targetURL = cacheLocation.appendingPathComponent("bod_\(speciesID).jpg", isDirectory: false)
         if FileManager.default.fileExists(atPath: targetURL.path) {
             return Just(targetURL).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
-        return downloadData(URLRequest(url: sourceURL), to: targetURL)
+        return downloadData(URLRequest(url: url), to: targetURL)
     }
 }

@@ -73,7 +73,7 @@ class DataFetcher: ObservableObject {
                 self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID), url: \(birdOfTheDayData.url)")
             })
             .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<(speciesID: Int, url: URL), Error> in
-                VdsAPI.getBirdOfTheDay(for: birdOfTheDayData.speciesID)
+                VdsAPI.getBirdOfTheDay(for: birdOfTheDayData.speciesID, from: birdOfTheDayData.url)
                     .map({ url in
                         (birdOfTheDayData.speciesID, url)
                     })
