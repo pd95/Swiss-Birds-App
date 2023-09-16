@@ -102,9 +102,26 @@ struct BirdOfTheDayWidgetEntryView: View {
         .minimumScaleFactor(0.7)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-                Image(uiImage: entry.bgImage)
-                    .resizable(resizingMode: .tile)
+            Image(uiImage: entry.bgImage)
+                .resizable(resizingMode: .tile)
         )
+    }
+}
+
+extension WidgetConfiguration
+{
+    func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration
+    {
+    #if compiler(>=5.9) // Xcode 15
+        if #available(iOSApplicationExtension 17.0, *) {
+            return self.contentMarginsDisabled()
+        }
+        else {
+            return self
+        }
+    #else
+        return self
+    #endif
     }
 }
 
@@ -119,6 +136,7 @@ struct BirdOfTheDayWidget: Widget {
         .configurationDisplayName("Bird of the Day")
         .description("This widget shows the curated bird of the day.")
         .supportedFamilies(families)
+        .contentMarginsDisabledIfAvailable()
     }
 
     var families: [WidgetFamily] {
