@@ -69,7 +69,6 @@ class Swiss_BirdsUITests: XCTestCase {
         case searchTextField = "searchText"
         case searchTextClearButton, searchTextCancelButton
         case birdDetailViewScrollView
-        case filterContainerView
 
         var element: XCUIElement {
             switch self {
@@ -86,8 +85,6 @@ class Swiss_BirdsUITests: XCTestCase {
                     return XCUIApplication().otherElements["searchBar"].firstMatch.buttons["cancelButton"].firstMatch
                 case .birdDetailViewScrollView:
                     return XCUIApplication().scrollViews.containing(.staticText, identifier: "description").element.firstMatch
-                case .filterContainerView:
-                    return XCUIApplication().tables.containing(.button, identifier: "noFiltering").element.firstMatch
             }
         }
     }
@@ -231,10 +228,9 @@ class Swiss_BirdsUITests: XCTestCase {
         _ = filterButton.waitForExistence(timeout: wait4existenceTimeout)
         filterButton.tap()
 
-        let filterContainer = MyUIElements.filterContainerView.element
-        let filterGroupButton = filterContainer.buttons["filtervogelgruppe-11"].firstMatch
+        let filterGroupButton = app.buttons["filtervogelgruppe-11"].firstMatch
         while filterGroupButton.isHittable == false {
-            filterContainer.swipeUp()
+            app.swipeUp()
         }
         filterGroupButton.tap()
 
