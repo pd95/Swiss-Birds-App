@@ -359,3 +359,17 @@ struct VdsSpecieDetail_new: Codable {
         }
     }
 }
+
+struct VdsBirdOfTheDay: Decodable {
+    struct BirdEntry: Decodable {
+        let artid: String
+    }
+
+    let artID: String
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let entries = try container.decode(BirdEntry.self)
+        self.artID = entries.artid
+    }
+}
