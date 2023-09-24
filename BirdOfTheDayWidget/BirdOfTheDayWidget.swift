@@ -69,59 +69,81 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct BirdOfTheDayWidgetEntryView: View {
+    @Environment(\.widgetFamily) private var family: WidgetFamily
+
     var entry: SimpleEntry
-    @Environment(\.widgetFamily) var family: WidgetFamily
+
+    private var textFont: Font {
+        if family == .systemLarge {
+            .title
+        }
+        else if family == .systemSmall {
+            .caption.bold()
+        }
+        else {
+            .title3.bold()
+        }
+    }
 
     var body: some View {
         let isSmall = family == .systemSmall
         VStack(spacing: 0) {
             if family != .systemMedium {
                 Text("Bird of the Day")
-                    .font(isSmall ? .headline : .title)
-                    .bold()
                     .padding(.horizontal, 8)
-                    .padding(.bottom, isSmall ? 4 : 8)
+                    .padding(.vertical, isSmall ? 4 : 8)
+                    .frame(maxHeight: .infinity)
             }
 
-            Color.clear
+            Image(uiImage: entry.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
                 .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-                .background(
-                    Image(uiImage: entry.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                )
+                .layoutPriority(1)
 
             Text(entry.name)
-                .font(family == .systemLarge ? .title : .title3.bold())
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 4)
                 .padding(.top, isSmall ? 4 : 0)
                 .padding(.bottom, 4)
+                .frame(maxHeight: .infinity)
         }
+        .font(textFont)
         .foregroundColor(.white)
         .lineLimit(1)
-        .minimumScaleFactor(0.7)
+        .truncationMode(.tail)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Image(uiImage: entry.bgImage)
-                .resizable(resizingMode: .tile)
-        )
+        .widgetBackground(entry.bgImage, family: family)
     }
 }
 
-extension WidgetConfiguration
-{
+extension View {
+    @ViewBuilder
+    func widgetBackground(_ uiImage: UIImage, family: WidgetFamily) -> some View {
+        let bgImage = Image(uiImage: uiImage)
+            .resizable(resizingMode: .tile)
+            .aspectRatio(contentMode: .fill)
+
+        if #available(iOSApplicationExtension 17.0, *) {
+            containerBackground(for: .widget) {
+                Rectangle()
+                    .fill(.ultraThinMaterial)
+                    .background(bgImage)
+            }
+        } else {
+            background(bgImage)
+        }
+    }
+}
+
+extension WidgetConfiguration {
     func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration
     {
-    #if compiler(>=5.9) // Xcode 15
         if #available(iOSApplicationExtension 17.0, *) {
             return self.contentMarginsDisabled()
         }
         else {
             return self
         }
-    #else
-        return self
-    #endif
     }
 }
 
@@ -135,16 +157,16 @@ struct BirdOfTheDayWidget: Widget {
         }
         .configurationDisplayName("Bird of the Day")
         .description("This widget shows the curated bird of the day.")
-        .supportedFamilies(families)
+        .supportedFamilies(Self.supportedFamilies)
         .contentMarginsDisabledIfAvailable()
     }
 
-    var families: [WidgetFamily] {
-        if #available(iOSApplicationExtension 15.0, *) {
-            return [.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge]
-        } else {
-            return [.systemSmall, .systemMedium, .systemLarge]
-        }
+    static var supportedFamilies: [WidgetFamily] {
+        [.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge]
+    }
+
+    static var familiesWithText: [WidgetFamily] {
+        [.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge]
     }
 }
 
@@ -153,19 +175,12 @@ struct BirdOfTheDayWidget_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             BirdOfTheDayWidgetEntryView(entry: .example)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            #if DEBUG
-            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
-            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
-            if #available(iOSApplicationExtension 15.0, *) {
-                BirdOfTheDayWidgetEntryView(entry: .exampleReal)
-                    .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
-            }
-            #endif
+//                .previewContext(WidgetPreviewContext(family: .systemLarge))
+//            if #available(iOSApplicationExtension 15.0, *) {
+//                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+//            }
         }
     }
 }
