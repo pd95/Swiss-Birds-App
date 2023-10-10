@@ -78,32 +78,32 @@ struct BirdOfTheDayWidgetEntryView: View {
     }
 
     var body: some View {
-        let isSmall = family == .systemSmall
-        VStack(spacing: 0) {
-            if family != .systemMedium {
-                Text("Bird of the Day")
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, isSmall ? 4 : 8)
+        ZStack {
+            let isSmall = family == .systemSmall
+            VStack(spacing: 0) {
+                if family != .systemMedium {
+                    Text("Bird of the Day")
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, isSmall ? 4 : 8)
+                        .frame(maxHeight: .infinity)
+                }
+
+                Image(uiImage: entry.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .layoutPriority(1)
+
+                Text(entry.name)
+                    .padding(.horizontal, 4)
+                    .padding(.top, isSmall ? 4 : 0)
+                    .padding(.bottom, 4)
                     .frame(maxHeight: .infinity)
             }
-
-            Image(uiImage: entry.image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .aspectRatio(CGSize(width: 16, height: 9), contentMode: .fit)
-                .layoutPriority(1)
-
-            Text(entry.name)
-                .padding(.horizontal, 4)
-                .padding(.top, isSmall ? 4 : 0)
-                .padding(.bottom, 4)
-                .frame(maxHeight: .infinity)
+            .font(textFont)
+            .foregroundColor(.white)
+            .lineLimit(1)
+            .truncationMode(.tail)
         }
-        .font(textFont)
-        .foregroundColor(.white)
-        .lineLimit(1)
-        .truncationMode(.tail)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .widgetBackground(entry.bgImage, family: family)
     }
 }
@@ -127,17 +127,6 @@ extension View {
     }
 }
 
-extension WidgetConfiguration {
-    func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration {
-        if #available(iOSApplicationExtension 17.0, *) {
-            return self.contentMarginsDisabled()
-        }
-        else {
-            return self
-        }
-    }
-}
-
 @main
 struct BirdOfTheDayWidget: Widget {
     let kind: String = "BirdOfTheDayWidget"
@@ -149,7 +138,7 @@ struct BirdOfTheDayWidget: Widget {
         .configurationDisplayName("Bird of the Day")
         .description("This widget shows the curated bird of the day.")
         .supportedFamilies(Self.supportedFamilies)
-        .contentMarginsDisabledIfAvailable()
+        .contentMarginsDisabled()
     }
 
     static var supportedFamilies: [WidgetFamily] {
@@ -161,17 +150,24 @@ struct BirdOfTheDayWidget: Widget {
     }
 }
 
-struct BirdOfTheDayWidget_Previews: PreviewProvider {
 
-    static var previews: some View {
-        Group {
-            BirdOfTheDayWidgetEntryView(entry: .exampleReal2)
-//                .previewContext(WidgetPreviewContext(family: .systemSmall))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
-//                .previewContext(WidgetPreviewContext(family: .systemLarge))
-//            if #available(iOSApplicationExtension 15.0, *) {
-//                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
-//            }
-        }
-    }
-}
+#Preview("Small", as: .systemSmall, widget: {
+    BirdOfTheDayWidget()
+}, timeline: {
+    SimpleEntry.exampleReal
+    SimpleEntry.exampleReal2
+})
+
+#Preview("Medium", as: .systemMedium, widget: {
+    BirdOfTheDayWidget()
+}, timeline: {
+    SimpleEntry.exampleReal
+    SimpleEntry.exampleReal2
+})
+
+#Preview("Large", as: .systemLarge, widget: {
+    BirdOfTheDayWidget()
+}, timeline: {
+    SimpleEntry.exampleReal
+    SimpleEntry.exampleReal2
+})
