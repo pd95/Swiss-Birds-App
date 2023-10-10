@@ -15,13 +15,4 @@ extension Bundle {
         }
         return url
     }
-
-#if DEBUG
-    static var realPlaceholderJpg: URL {
-        guard let url = Bundle.main.url(forResource: "RealPlaceholder.jpg", withExtension: nil) else {
-            fatalError("Unable to load RealPlaceholder.jpg data from bundle")
-        }
-        return url
-    }
-#endif
 }

@@ -16,7 +16,9 @@ struct BirdOfTheDayProvider: TimelineProvider {
         let speciesID = -1
         let name = "Blaumeise"
         let date = Date.distantFuture
-        let images = UIImage.resizedImages(from: Bundle.placeholderJpg, displaySize: context.displaySize)
+
+        let displaySize = CGSize(width: ceil(context.displaySize.height/9.0*16*1.48), height: context.displaySize.height)
+        let images = UIImage.resizedImages(from: Bundle.placeholderJpg, displaySize: displaySize)
 
         return SimpleEntry(speciesID: speciesID, name: name, date: date, image: images.image, bgImage: images.bgImage)
     }
@@ -26,21 +28,23 @@ struct BirdOfTheDayProvider: TimelineProvider {
         let name = "Blaumeise"
         let imageData = Bundle.placeholderJpg
         let reloadDate = Date.distantFuture
-        let images = UIImage.resizedImages(from: imageData, displaySize: context.displaySize)
+
+        let displaySize = CGSize(width: ceil(context.displaySize.height/9.0*16*1.48), height: context.displaySize.height)
+        let images = UIImage.resizedImages(from: imageData, displaySize: displaySize)
 
         completion(SimpleEntry(speciesID: speciesID, name: name, date: reloadDate, image: images.image, bgImage: images.bgImage))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         DataFetcher.shared.getBirdOfTheDay { (speciesID, name, url, reloadDate) in
-            print(#function, context.family)
+            print(#function, context.family, context.displaySize)
 
             // Get widget size and display scale
             let displaySize = CGSize(width: ceil(context.displaySize.height/9.0*16*1.48), height: context.displaySize.height)
-            let displayScale = context.environmentVariants.displayScale?.reduce(1, { max($0, $1) }) ?? 1
+            let displayScale = UIScreen.main.scale
 
-            let images = UIImage.resizedImages(from: url, displaySize: displaySize, displayScale: displayScale)
-            let entry = SimpleEntry(speciesID: speciesID, name: name, date: reloadDate, image: images.image, bgImage: images.bgImage)
+            let (image, bgImage) = UIImage.resizedImages(from: url, displaySize: displaySize, displayScale: displayScale)
+            let entry = SimpleEntry(speciesID: speciesID, name: name, date: reloadDate, image: image, bgImage: bgImage)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
             completion(timeline)
         }
@@ -54,18 +58,6 @@ struct SimpleEntry: TimelineEntry {
 
     let image: UIImage
     let bgImage: UIImage
-
-    static var example: SimpleEntry {
-        let images = UIImage.resizedImages(from: Bundle.placeholderJpg)
-        return SimpleEntry(speciesID: 3800, name: "Blaumeise", date: Date.distantFuture, image: images.image, bgImage: images.bgImage)
-    }
-
-#if DEBUG
-    static var exampleReal: SimpleEntry {
-        let images = UIImage.resizedImages(from: Bundle.realPlaceholderJpg)
-        return SimpleEntry(speciesID: 2980, name: "Hohltaube", date: Date.distantFuture, image: images.image, bgImage: images.bgImage)
-    }
-#endif
 }
 
 struct BirdOfTheDayWidgetEntryView: View {
@@ -136,8 +128,7 @@ extension View {
 }
 
 extension WidgetConfiguration {
-    func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration
-    {
+    func contentMarginsDisabledIfAvailable() -> some WidgetConfiguration {
         if #available(iOSApplicationExtension 17.0, *) {
             return self.contentMarginsDisabled()
         }
@@ -174,7 +165,7 @@ struct BirdOfTheDayWidget_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            BirdOfTheDayWidgetEntryView(entry: .example)
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal2)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 //                .previewContext(WidgetPreviewContext(family: .systemLarge))

@@ -11,13 +11,12 @@ import CoreImage
 
 extension UIImage {
     @available(iOS 14.0, *)
-    static func resizedImages(from url: URL, displaySize: CGSize? = nil, displayScale: CGFloat = 1) -> (image: UIImage, bgImage: UIImage) {
+    static func resizedImages(from url: URL, displaySize size: CGSize = CGSize(width: 338, height: 354), displayScale: CGFloat = 2) -> (image: UIImage, bgImage: UIImage) {
         let context = CIContext()
         guard let cgImageSource = CGImageSourceCreateWithURL(url as CFURL, nil as CFDictionary?) else {
             fatalError("🔴 unable to get input image")
         }
         let inputImage = CIImage(cgImageSource: cgImageSource, index: 0)
-        let size = displaySize ?? CGSize(width: 1414, height: 450)
 
         // Extract center of image
         guard let filter = CIFilter(name: "CIStretchCrop") else {
@@ -25,7 +24,7 @@ extension UIImage {
         }
         filter.setDefaults()
         filter.setValue(inputImage, forKey: "inputImage")
-        filter.setValue(CIVector(x: size.width, y: size.height), forKey: "inputSize")
+        filter.setValue(CIVector(x: size.width * displayScale, y: size.height * displayScale), forKey: "inputSize")
         filter.setValue(NSNumber(value: 1), forKey: "inputCropAmount")
         filter.setValue(NSNumber(value: 0), forKey: "inputCenterStretchAmount")
 
