@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -39,7 +39,7 @@
 		17B1B43D2546C0E200B422B6 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B1B43C2546C0E200B422B6 /* SwiftUI.framework */; };
 		17B1B4402546C0E200B422B6 /* BirdOfTheDayWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */; };
 		17B1B4432546C0E600B422B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B1B4422546C0E600B422B6 /* Assets.xcassets */; };
-		17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 17B1B4392546C0E200B422B6 /* BirdOfTheDayWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		17B1B4522546C3E300B422B6 /* VdsDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CC8DD24856B88006F99D3 /* VdsDataTypes.swift */; };
 		17B1B4532546C3E300B422B6 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		17B1B4592546C41D00B422B6 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B4582546C41D00B422B6 /* Languages.swift */; };
@@ -112,15 +112,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		17B1B44A2546C0E600B422B6 /* Embed App Extensions */ = {
+		17B1B44A2546C0E600B422B6 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed App Extensions */,
+				17B1B4492546C0E600B422B6 /* BirdOfTheDayWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -505,7 +505,7 @@
 				17B960E623699370003AA802 /* Sources */,
 				17B960E723699370003AA802 /* Frameworks */,
 				17B960E823699370003AA802 /* Resources */,
-				17B1B44A2546C0E600B422B6 /* Embed App Extensions */,
+				17B1B44A2546C0E600B422B6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -577,8 +577,9 @@
 		17B960E223699370003AA802 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = Philipp;
 				TargetAttributes = {
 					17B1B4382546C0E200B422B6 = {
@@ -889,6 +890,7 @@
 			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -924,6 +926,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -955,6 +958,7 @@
 			baseConfigurationReference = 175D29992445E8A200FFC603 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -990,6 +994,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
