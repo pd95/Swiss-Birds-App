@@ -161,12 +161,15 @@ enum VdsAPI {
     }
 
     static func getBirdOfTheDaySpeciesIDandURL() -> AnyPublisher<BirdOfTheDayData, Error> {
-        var request = URLRequest(url: base.appendingPathComponent("\(jsonDataPath)/bird_of_the_day.json"))
+        var request = URLRequest(url: base)
         request.cachePolicy = .reloadRevalidatingCacheData
-        return fetchJSON(request)
-            .tryMap { (bod: [VdsBirdOfTheDay]) -> BirdOfTheDayData in
-                if let first = bod.first, let id = Int(first.artID) {
-                    let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(id)_0_9to4.jpg")
+        return fetchData(request)
+            .tryMap { (data) -> BirdOfTheDayData in
+                let html = String(data: data, encoding: .isoLatin1)!
+                // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/0750_0_9to4.jpg
+                let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_9to4.jpg")
+                if matches.count == 2, let id = Int(matches[1]) {
+                    let url = base.appendingPathComponent(matches[0])
                     return (url, id)
                 }
                 throw APIError.invalidResponse
