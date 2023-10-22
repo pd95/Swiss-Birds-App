@@ -150,7 +150,7 @@ struct BirdOfTheDayWidget: Widget {
     }
 }
 
-
+#if DEBUG
 #Preview("Small", as: .systemSmall, widget: {
     BirdOfTheDayWidget()
 }, timeline: {
@@ -171,3 +171,4 @@ struct BirdOfTheDayWidget: Widget {
     SimpleEntry.exampleReal
     SimpleEntry.exampleReal2
 })
+#endif
