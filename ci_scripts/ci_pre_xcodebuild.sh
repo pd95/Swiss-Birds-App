@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOCAL_CONFIG_FILE="$CI_WORKSPACE/LocalConfig.xcconfig"
+LOCAL_CONFIG_FILE="$CI_PRIMARY_REPOSITORY_PATH/LocalConfig.xcconfig"
 
 if [ -z "$CI_BUNDLE_ID" -o -z "$CI_TEAM_ID" ]; then
     echo "ERROR: Make sure to specify the CI_BUNDLE_ID or CI_TEAM_ID arguments"
