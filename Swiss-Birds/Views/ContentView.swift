@@ -22,7 +22,7 @@ struct ContentView: View {
                     ProgressView()
                         .zIndex(1)
                 } else {
-                    if #available(iOS 14, *), sizeClass == .regular {
+                    if sizeClass == .regular {
                         BirdGrid()
                             .navigationBarTitle(Text("Vögel der Schweiz"))
                             .navigationBarItems(leading: sortButton, trailing: filterButton)

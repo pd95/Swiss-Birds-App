@@ -59,12 +59,8 @@ struct BirdList: View {
                 SymbolView(symbolName: group.id, pointSize: 24)
                     .padding(4)
             }
-            if #available(iOS 14.0, *) {
-                Text(LocalizedStringKey(group.name))
-                    .textCase(nil)
-            } else {
-                Text(LocalizedStringKey(group.name))
-            }
+            Text(LocalizedStringKey(group.name))
+                .textCase(nil)
         }
         .accessibility(identifier: "section_\(group.id)")
     }

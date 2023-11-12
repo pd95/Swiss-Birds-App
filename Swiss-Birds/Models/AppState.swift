@@ -314,10 +314,8 @@ class AppState: ObservableObject {
     }
 
     private func refreshWidget() {
-        if #available(iOS 14.0, *) {
-            os_log("refreshWidget")
-            WidgetCenter.shared.reloadTimelines(ofKind: "BirdOfTheDayWidget")
-        }
+        os_log("refreshWidget")
+        WidgetCenter.shared.reloadTimelines(ofKind: "BirdOfTheDayWidget")
     }
 
     func getBirdOfTheDay() {

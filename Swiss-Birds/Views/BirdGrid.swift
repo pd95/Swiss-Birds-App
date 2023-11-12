@@ -15,42 +15,40 @@ struct BirdGrid: View {
 
     var body: some View {
         ScrollView {
-            if #available(iOS 14.0, *) {
-                Section {
-                    SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField.animation())
-                        .autocapitalization(.words)
-                }
-                .padding()
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: 200), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
-
-                    ForEach(state.groups, id: \.self) { key in
-                        Section(header: sectionHeader(for: key)) {
-                            ForEach(state.groupedBirds[key]!) { bird in
-                                Button {
-                                    state.showBird(bird)
-                                } label: {
-                                    BirdCell(
-                                        bird: bird,
-                                        isFavorite: favoritesManager.isFavorite(species: bird),
-                                        searchText: state.searchText
-                                    )
-                                }
-                                .accessibility(identifier: "birdRow_\(bird.speciesId)")
-                            }
-                        }
-                    }
-                }
-                .padding(.horizontal)
-                .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
-                    if state.isEditingSearchField {
-                        print("Searching was enabled, but drag occurred => endEditing")
-                        withAnimation {
-                            state.isEditingSearchField = false
-                            UIApplication.shared.endEditing()
-                        }
-                    }
-                }))
+            Section {
+                SearchField(searchText: $state.searchText, isEditing: $state.isEditingSearchField.animation())
+                    .autocapitalization(.words)
             }
+            .padding()
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 120, maximum: 200), alignment: .top)], alignment: .center, spacing: 10, pinnedViews: [.sectionHeaders]) {
+
+                ForEach(state.groups, id: \.self) { key in
+                    Section(header: sectionHeader(for: key)) {
+                        ForEach(state.groupedBirds[key]!) { bird in
+                            Button {
+                                state.showBird(bird)
+                            } label: {
+                                BirdCell(
+                                    bird: bird,
+                                    isFavorite: favoritesManager.isFavorite(species: bird),
+                                    searchText: state.searchText
+                                )
+                            }
+                            .accessibility(identifier: "birdRow_\(bird.speciesId)")
+                        }
+                    }
+                }
+            }
+            .padding(.horizontal)
+            .simultaneousGesture(DragGesture().onChanged({ (_: DragGesture.Value) in
+                if state.isEditingSearchField {
+                    print("Searching was enabled, but drag occurred => endEditing")
+                    withAnimation {
+                        state.isEditingSearchField = false
+                        UIApplication.shared.endEditing()
+                    }
+                }
+            }))
         }
     }
 
@@ -60,12 +58,8 @@ struct BirdGrid: View {
                 SymbolView(symbolName: group.id, pointSize: 24)
                     .padding(4)
             }
-            if #available(iOS 14.0, *) {
-                Text(LocalizedStringKey(group.name))
-                    .textCase(nil)
-            } else {
-                Text(LocalizedStringKey(group.name))
-            }
+            Text(LocalizedStringKey(group.name))
+                .textCase(nil)
             Spacer()
         }
         .font(.headline)
