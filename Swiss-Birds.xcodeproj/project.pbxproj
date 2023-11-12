@@ -32,6 +32,7 @@
 		177965812453195D00A2A1B2 /* ManagedFilterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177965802453195D00A2A1B2 /* ManagedFilterList.swift */; };
 		17863CDF2496D340005017F9 /* VdsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17863CDE2496D340005017F9 /* VdsAPI.swift */; };
 		1790857C2431258D003A302F /* Filter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1790857B2431258D003A302F /* Filter.xcassets */; };
+		1798881C2B01720800058E3F /* SwissBirdsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1798881B2B01720800058E3F /* SwissBirdsApp.swift */; };
 		17A2A45F25643C0C00388357 /* AppState_PreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */; };
 		17AAEF45271896940012C22D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AAEF44271896940012C22D /* NavigationState.swift */; };
 		17B0F421238F1F6200A2F989 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B0F423238F1F6200A2F989 /* Localizable.strings */; };
@@ -164,6 +165,7 @@
 		177965802453195D00A2A1B2 /* ManagedFilterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFilterList.swift; sourceTree = "<group>"; };
 		17863CDE2496D340005017F9 /* VdsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VdsAPI.swift; sourceTree = "<group>"; };
 		1790857B2431258D003A302F /* Filter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Filter.xcassets; sourceTree = "<group>"; };
+		1798881B2B01720800058E3F /* SwissBirdsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwissBirdsApp.swift; sourceTree = "<group>"; };
 		17A2A45E25643C0C00388357 /* AppState_PreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState_PreviewWrapper.swift; sourceTree = "<group>"; };
 		17AAEF44271896940012C22D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
 		17B0F422238F1F6200A2F989 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			children = (
 				17FA86A72A03A844007C31AC /* Helpers */,
 				17493750269C2BE3001DB8B5 /* Swiss-Birds.entitlements */,
+				1798881B2B01720800058E3F /* SwissBirdsApp.swift */,
 				17B960ED23699370003AA802 /* AppDelegate.swift */,
 				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				1779657E2453184D00A2A1B2 /* Extensions.swift */,
@@ -730,6 +733,7 @@
 				17ECD39E24A72D1800226BF4 /* BirdImageView.swift in Sources */,
 				17B7200B2551FE9D002087FC /* Characteristic.swift in Sources */,
 				17FA86A22A030EEB007C31AC /* URLSession+DownloadTaskPublisher.swift in Sources */,
+				1798881C2B01720800058E3F /* SwissBirdsApp.swift in Sources */,
 				176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17FA86A52A030F0E007C31AC /* UnfairLock.swift in Sources */,
