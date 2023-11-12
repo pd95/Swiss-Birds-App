@@ -15,6 +15,17 @@ struct SwissBirdsApp: App {
     @StateObject private var appState = AppState.shared
     @StateObject private var favoritesManager = FavoritesManager.shared
 
+    init() {
+        #if DEBUG
+        if CommandLine.arguments.contains("enable-testing") {
+            UIView.setAnimationsEnabled(false)
+        }
+        #endif
+
+        // Enable cloud synched UserDefaults
+        CloudDefaults.shared.start()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
