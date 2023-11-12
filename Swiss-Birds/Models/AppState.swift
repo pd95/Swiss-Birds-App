@@ -466,3 +466,41 @@ extension AppState {
         static let sortByColumn = "sortByColumn"
     }
 }
+
+extension AppState {
+    func handleUserActivity(_ userActivity: NSUserActivity) {
+        print("handleUserActivity(\(userActivity.activityType))")
+
+        if userActivity.activityType == NSUserActivity.showBirdActivityType {
+            guard let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
+            else {
+                print("Missing parameter birdID for \(userActivity.activityType)")
+                return
+            }
+
+            print("handleUserActivity: birdID=\(birdID)")
+            if let bird = Species.species(for: birdID) {
+                self.showBird(bird)
+            }
+        } else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
+            print("handleUserActivity: showing bird of the day \(birdOfTheDay.debugDescription)")
+            self.checkBirdOfTheDay(showAlways: true)
+        } else {
+            print("Skipping unsupported \(userActivity.activityType)")
+            return
+        }
+        print("current state: ", self)
+    }
+
+    @discardableResult
+    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
+        os_log("handleShortcutItem(shortcutItem: %{public}@)", shortcutItem.type)
+
+        if shortcutItem.type == "BirdOfTheDay" {
+            let appState = AppState.shared
+            appState.checkBirdOfTheDay(showAlways: true)
+            return true
+        }
+        return false
+    }
+}

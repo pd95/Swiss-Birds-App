@@ -49,8 +49,6 @@
 		17B1B476254710D800B422B6 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1B46C25470CC100B422B6 /* DataFetcher.swift */; };
 		17B7200B2551FE9D002087FC /* Characteristic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B7200A2551FE9D002087FC /* Characteristic.swift */; };
 		17B720112551FEB9002087FC /* CharacteristicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B720102551FEB9002087FC /* CharacteristicView.swift */; };
-		17B960EE23699370003AA802 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960ED23699370003AA802 /* AppDelegate.swift */; };
-		17B960F023699370003AA802 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960EF23699370003AA802 /* SceneDelegate.swift */; };
 		17B960F523699370003AA802 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B960F423699370003AA802 /* ContentView.swift */; };
 		17B960F723699375003AA802 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17B960F623699375003AA802 /* Assets.xcassets */; };
 		17B960FD23699375003AA802 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17B960FB23699375003AA802 /* LaunchScreen.storyboard */; };
@@ -183,8 +181,6 @@
 		17B7200A2551FE9D002087FC /* Characteristic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characteristic.swift; sourceTree = "<group>"; };
 		17B720102551FEB9002087FC /* CharacteristicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicView.swift; sourceTree = "<group>"; };
 		17B960EA23699370003AA802 /* Swiss-Birds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiss-Birds.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17B960ED23699370003AA802 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		17B960EF23699370003AA802 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		17B960F423699370003AA802 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		17B960F623699375003AA802 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17B960FC23699375003AA802 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -341,8 +337,6 @@
 				17FA86A72A03A844007C31AC /* Helpers */,
 				17493750269C2BE3001DB8B5 /* Swiss-Birds.entitlements */,
 				1798881B2B01720800058E3F /* SwissBirdsApp.swift */,
-				17B960ED23699370003AA802 /* AppDelegate.swift */,
-				17B960EF23699370003AA802 /* SceneDelegate.swift */,
 				1779657E2453184D00A2A1B2 /* Extensions.swift */,
 				176E89E124AA71D200D38E6B /* UserDefault.swift */,
 				1746B50024DE0054001E7357 /* AlertItem.swift */,
@@ -701,7 +695,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17B960EE23699370003AA802 /* AppDelegate.swift in Sources */,
 				17FA86A92A03AD34007C31AC /* UIImage-resize.swift in Sources */,
 				17AAEF45271896940012C22D /* NavigationState.swift in Sources */,
 				17FB3B8D236B9ABC0059D268 /* BirdList.swift in Sources */,
@@ -737,7 +730,6 @@
 				176E89E424AA725C00D38E6B /* SettingsStore.swift in Sources */,
 				17B960F523699370003AA802 /* ContentView.swift in Sources */,
 				17FA86A52A030F0E007C31AC /* UnfairLock.swift in Sources */,
-				17B960F023699370003AA802 /* SceneDelegate.swift in Sources */,
 				17105A7A248570B60024F464 /* ActivityIndicatorView.swift in Sources */,
 				174557F7269C23A20069FDD0 /* FavoritesManager.swift in Sources */,
 				17FB3B89236B93650059D268 /* Species.swift in Sources */,

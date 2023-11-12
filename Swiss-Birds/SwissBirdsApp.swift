@@ -10,7 +10,7 @@ import SwiftUI
 
 @main
 struct SwissBirdsApp: App {
-    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    @Environment(\.scenePhase) private var scenePhase
 
     @StateObject private var appState = AppState.shared
     @StateObject private var favoritesManager = FavoritesManager.shared
@@ -19,6 +19,7 @@ struct SwissBirdsApp: App {
         #if DEBUG
         if CommandLine.arguments.contains("enable-testing") {
             UIView.setAnimationsEnabled(false)
+            SettingsStore.shared.setupForTesting()
         }
         #endif
 
@@ -31,6 +32,15 @@ struct SwissBirdsApp: App {
             ContentView()
                 .environmentObject(appState)
                 .environmentObject(favoritesManager)
+        }
+        .onChange(of: scenePhase) { newValue in
+            print("scenePhase", newValue)
+            switch newValue {
+            case .active:
+                CloudDefaults.shared.synchronize()
+            default:
+                break
+            }
         }
     }
 }
