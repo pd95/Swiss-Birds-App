@@ -1,6 +1,8 @@
 // Overridable settings with some defaults
 
 PRODUCT_BUNDLE_IDENTIFIER = Swiss-Birds
+MARKETING_VERSION = 1.0
+CURRENT_PROJECT_VERSION = 1
 DEVELOPMENT_TEAM = None
 CODE_SIGN_STYLE = Automatic
 
