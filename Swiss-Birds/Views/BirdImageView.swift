@@ -22,7 +22,7 @@ struct BirdImageView: View {
             } else {
                 Color.clear
                     .frame(maxWidth: .infinity)
-                    .overlay(ActivityIndicatorView())
+                    .overlay(ProgressView())
                     .aspectRatio(1.5, contentMode: .fit)
             }
             HStack {

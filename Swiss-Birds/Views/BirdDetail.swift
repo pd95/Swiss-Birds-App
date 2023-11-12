@@ -245,7 +245,8 @@ struct BirdDetailContainer: View {
             BirdDetail(model: model)
                 .navigationBarTitle(Text(bird.name), displayMode: .inline)
         } else {
-            ActivityIndicatorView(style: .large)
+            ProgressView()
+                .controlSize(.large)
                 .navigationBarTitle(Text(bird.name), displayMode: .inline)
             .onAppear {
                 model.setBird(bird)

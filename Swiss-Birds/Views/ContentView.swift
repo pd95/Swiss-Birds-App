@@ -19,7 +19,7 @@ struct ContentView: View {
         ZStack {
             NavigationView {
                 if state.initialLoadRunning {
-                    ActivityIndicatorView()
+                    ProgressView()
                         .zIndex(1)
                 } else {
                     if #available(iOS 14, *), sizeClass == .regular {
@@ -59,7 +59,7 @@ struct ContentView: View {
                     .accessibility(sortPriority: 990)
 
                 if state.birdOfTheDayImage == nil {
-                    ActivityIndicatorView()
+                    ProgressView()
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now()+0.5) {
                                 state.getBirdOfTheDay()

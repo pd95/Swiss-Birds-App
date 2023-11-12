@@ -85,7 +85,7 @@ struct BirdOfTheDay_Previews: PreviewProvider {
             BirdOfTheDay(isPresented: .constant(true), image: UIImage(named: "Logo")!, species: species)
                 .environmentObject(state)
         } else {
-            ActivityIndicatorView()
+            ProgressView()
                 .onAppear {
                     state.checkBirdOfTheDay(showAlways: true)
                 }

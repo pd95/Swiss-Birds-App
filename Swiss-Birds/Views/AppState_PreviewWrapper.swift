@@ -16,7 +16,8 @@ struct AppState_PreviewWrapper<Content: View>: View {
     var body: some View {
         NavigationView {
             if state.initialLoadRunning {
-                ActivityIndicatorView(style: .large)
+                ProgressView()
+                    .controlSize(.large)
             } else {
                 content()
             }
