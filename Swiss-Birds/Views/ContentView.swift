@@ -69,7 +69,7 @@ struct ContentView: View {
                         let species = Species.species(for: birdOfTheDay.speciesID),
                         let image = state.birdOfTheDayImage {
                     BirdOfTheDay(isPresented: $state.showBirdOfTheDay.animation(), image: image, species: species)
-                        .animation(.easeOut)
+                        .animation(.easeOut, value: state.showBirdOfTheDay)
                         .transition(AnyTransition.move(edge: .bottom)
                                         .combined(with: AnyTransition.opacity.animation(.easeInOut(duration: 0.5))))
                         .zIndex(20)
