@@ -22,9 +22,16 @@ enum VdsAPI {
 
     typealias BirdOfTheDayData = (url: URL, speciesID: Int)
 
-    static var cacheLocation: URL {
-        FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("Downloaded-Data")
-    }
+    static var cacheLocation: URL = {
+        let fileManager = FileManager.default
+        let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("Downloaded-Data")
+        do {
+            try fileManager.createDirectory(at: url, withIntermediateDirectories: true)
+        } catch {
+            fatalError("Unable to create temporary directory \(url.path): \(error)")
+        }
+        return url
+    }()
 
     static var urlSession: URLSession = {
         let cacheSize = 200 * 1024 * 1024
