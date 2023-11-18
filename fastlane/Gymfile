@@ -1,4 +1,4 @@
 clean true
-scheme "Swiss-Birds"
+scheme "SwissBirds"
 
 output_directory "./build"

@@ -31,7 +31,7 @@ platform :ios do
     lint # run swiftlint
     # run tests
     scan(
-      scheme: "Swiss-Birds"
+      scheme: "SwissBirds"
     )
 
     build_appstore

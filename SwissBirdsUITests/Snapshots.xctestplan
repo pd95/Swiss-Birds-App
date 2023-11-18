@@ -1,0 +1,51 @@
+{
+  "configurations" : [
+    {
+      "id" : "716CCA7A-720B-4651-B909-EA6B577A8A1D",
+      "name" : "German",
+      "options" : {
+        "language" : "de"
+      }
+    },
+    {
+      "id" : "F42F5F66-0B95-4A61-ACB8-867A45DCE6CB",
+      "name" : "French",
+      "options" : {
+        "language" : "fr"
+      }
+    },
+    {
+      "id" : "4D92DA82-8A37-4C87-B300-42029C28BEE7",
+      "name" : "Italian",
+      "options" : {
+        "language" : "it"
+      }
+    },
+    {
+      "id" : "076966B4-C3B6-4B83-BB7E-602E3CE2841B",
+      "name" : "English",
+      "options" : {
+        "language" : "en"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "mainThreadCheckerEnabled" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SwissBirds.xcodeproj",
+      "identifier" : "17B960E923699370003AA802",
+      "name" : "SwissBirds"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SwissBirds.xcodeproj",
+        "identifier" : "17DFEE23271CBC80005D1AA9",
+        "name" : "Snapshots"
+      }
+    }
+  ],
+  "version" : 1
+}

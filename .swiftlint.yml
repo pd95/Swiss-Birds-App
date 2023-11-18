@@ -1,5 +1,5 @@
 included:
-  - Swiss-Birds
-  - Swiss-BirdsTests
+  - SwissBirds
+  - SwissBirdsTests
   - UITests
   - BirdOfTheDayWidget

@@ -1,6 +1,6 @@
 //
 //  UIImage-resize.swift
-//  Swiss-Birds
+//  SwissBirds
 //
 //  Created by Philipp on 04.05.23.
 //  Copyright © 2023 Philipp. All rights reserved.

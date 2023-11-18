@@ -1,6 +1,6 @@
 //
 //  DataFetcher.swift
-//  Swiss-Birds
+//  SwissBirds
 //
 //  Created by Philipp on 26.10.20.
 //  Copyright © 2020 Philipp. All rights reserved.
