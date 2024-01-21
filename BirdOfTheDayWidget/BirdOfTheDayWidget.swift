@@ -126,24 +126,46 @@ struct BirdOfTheDayWidget: Widget {
 }
 
 #if DEBUG
-#Preview("Small", as: .systemSmall, widget: {
+struct BirdOfTheDayWidget_Previews: PreviewProvider {
+
+    static var previews: some View {
+        Group {
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .previewDisplayName("Small")
+
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal2)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewDisplayName("Medium")
+
+            BirdOfTheDayWidgetEntryView(entry: .exampleReal)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+                .previewDisplayName("Large")
+        }
+    }
+
+}
+
+/*
+#Preview("Small2", as: .systemSmall, widget: {
     BirdOfTheDayWidget()
 }, timeline: {
     SimpleEntry.exampleReal
     SimpleEntry.exampleReal2
 })
 
-#Preview("Medium", as: .systemMedium, widget: {
+#Preview("Medium3", as: .systemMedium, widget: {
     BirdOfTheDayWidget()
 }, timeline: {
     SimpleEntry.exampleReal
     SimpleEntry.exampleReal2
 })
 
-#Preview("Large", as: .systemLarge, widget: {
+#Preview("Large4", as: .systemLarge, widget: {
     BirdOfTheDayWidget()
 }, timeline: {
     SimpleEntry.exampleReal
     SimpleEntry.exampleReal2
 })
+*/
 #endif

@@ -11,7 +11,7 @@ import UIKit
 extension SimpleEntry {
 
     static func entry(speciesID: Int, name: String, filename: String) -> SimpleEntry {
-        guard let url = URL(resource: URLResource(name: filename)) else {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: nil) else {
             fatalError("Missing resource \(filename)!")
         }
         let image = UIImage.resizedImage(from: url, displaySize: CGSize(width: 155*3, height: 155), displayScale: 2)
