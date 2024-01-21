@@ -84,7 +84,7 @@ struct BirdRow: View {
                 }
             }
             .transition(.opacity)
-            .animation(.easeIn(duration: 0.2))
+            //.animation(.easeIn(duration: 0.2))
             Spacer()
 
             if !sizeCategory.isAccessibilityCategory {
