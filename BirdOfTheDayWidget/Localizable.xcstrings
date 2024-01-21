@@ -1,0 +1,92 @@
+{
+  "sourceLanguage" : "de",
+  "strings" : {
+    "Bird of the Day" : {
+      "comment" : "Localizable.strings\n  SwissBirds\n\n  Created by Philipp on 30.10.20.\n  Copyright © 2020 Philipp. All rights reserved.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogel des Tages"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bird of the Day"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L'oiseau du jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uccello del giorno"
+          }
+        }
+      }
+    },
+    "Blaumeise" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blaumeise"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eurasian Blue Tit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mésange bleue"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinciarella"
+          }
+        }
+      }
+    },
+    "This widget shows the curated bird of the day." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeigt dir den Vogel des Tages der Vogelwarte Sempach an."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shows you the bird of the day curated by the Sempach Ornithological Institute."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montre l'oiseau du jour de la station ornithologique de Sempach."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vi mostra l'uccello del giorno dalla stazione ornitologica di Sempach."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
