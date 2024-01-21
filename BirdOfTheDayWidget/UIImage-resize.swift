@@ -10,48 +10,24 @@ import UIKit
 import CoreImage
 
 extension UIImage {
-    @available(iOS 14.0, *)
-    static func resizedImages(from url: URL, displaySize size: CGSize = CGSize(width: 338, height: 354), displayScale: CGFloat = 2) -> (image: UIImage, bgImage: UIImage) {
-        let context = CIContext()
-        guard let cgImageSource = CGImageSourceCreateWithURL(url as CFURL, nil as CFDictionary?) else {
-            fatalError("🔴 unable to get input image")
-        }
-        let inputImage = CIImage(cgImageSource: cgImageSource, index: 0)
-
-        // Extract center of image
-        guard let filter = CIFilter(name: "CIStretchCrop") else {
-            fatalError("🔴 unable to create CICrop filter")
-        }
-        filter.setDefaults()
-        filter.setValue(inputImage, forKey: "inputImage")
-        filter.setValue(CIVector(x: size.width * displayScale, y: size.height * displayScale), forKey: "inputSize")
-        filter.setValue(NSNumber(value: 1), forKey: "inputCropAmount")
-        filter.setValue(NSNumber(value: 0), forKey: "inputCenterStretchAmount")
-
-        guard let outputImage = filter.outputImage else {
-            fatalError("🔴 unable to create outputImage")
+    static func resizedImage(from url: URL, displaySize size: CGSize, displayScale: CGFloat = 2) -> UIImage {
+        guard let imageSource = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+            // Handle the failure to create image source
+            fatalError("Failed to create image source from URL: \(url)")
         }
 
-        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else {
-            fatalError("🔴 unable to create cgImage for outputImage")
-        }
-        let image =  UIImage(cgImage: cgImage, scale: displayScale, orientation: .up)
+        let options: [CFString: Any] = [
+            kCGImageSourceThumbnailMaxPixelSize: max(size.width, size.height) * displayScale,
+            kCGImageSourceCreateThumbnailFromImageAlways: true
+        ]
 
-        // Extract background by cropping left part of image
-        guard let filter = CIFilter(name: "CICrop") else {
-            fatalError("🔴 unable to create CICrop filter")
+        guard let cgImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {
+            fatalError("🔴 Unable to create thumbnail from URL: \(url)")
         }
-        filter.setDefaults()
-        filter.setValue(inputImage, forKey: "inputImage")
-        filter.setValue(CIVector(cgRect: CGRect(origin: .zero, size: size)), forKey: "inputRectangle")
 
-        guard let outputImage = filter.outputImage else {
-            fatalError("🔴 unable to create outputImage")
-        }
-        guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else {
-            fatalError("🔴 unable to create cgImage for outputImage")
-        }
-        let bgImage = UIImage(cgImage: cgImage, scale: displayScale, orientation: .up)
-        return (image, bgImage)
+        let resizedImage = UIImage(cgImage: cgImage, scale: displayScale, orientation: .up)
+        print("generated image", resizedImage.size)
+
+        return resizedImage
     }
 }
