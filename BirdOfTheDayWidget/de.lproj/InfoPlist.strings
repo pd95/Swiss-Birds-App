@@ -1,0 +1,8 @@
+/* 
+  InfoPlist.strings
+  SwissBirds
+
+  Created by Philipp on 21.01.2024.
+  Copyright © 2024 Philipp. All rights reserved.
+*/
+"CFBundleDisplayName" = "Vogel des Tages";
