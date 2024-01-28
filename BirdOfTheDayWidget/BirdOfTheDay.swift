@@ -15,7 +15,6 @@ struct BirdOfTheDay: Codable {
     var fileURL: URL
     var loadingDate: Date
 
-    #if DEBUG
     static var example: BirdOfTheDay {
         guard let url = Bundle(for: DataFetcher.self).url(forResource: "Placeholder", withExtension: "jpg") else {
             fatalError("Placeholder.jpg is missing!")
@@ -27,5 +26,4 @@ struct BirdOfTheDay: Codable {
             loadingDate: .now
         )
     }
-    #endif
 }
