@@ -24,7 +24,9 @@ class DataFetcher: ObservableObject {
         if let data = defaults.data(forKey: "BirdOfTheDayData") {
             do {
                 let bod = try JSONDecoder().decode(BirdOfTheDay.self, from: data)
-                result = bod
+                if FileManager.default.fileExists(atPath: bod.fileURL.relativePath) {
+                    result = bod
+                }
             } catch {
                 logger.error("Decoding BirdOfTheDay data: \(error.localizedDescription)")
             }
