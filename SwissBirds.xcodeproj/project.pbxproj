@@ -288,7 +288,6 @@
 				17B1B43F2546C0E200B422B6 /* BirdOfTheDayWidget.swift */,
 				17FA869E2A0302B5007C31AC /* Bundle-sampleData.swift */,
 				17FA86A82A03AD34007C31AC /* UIImage-resize.swift */,
-				1783247B2B5D32D600CD208A /* InfoPlist.xcstrings */,
 				178324792B5D32D500CD208A /* Localizable.xcstrings */,
 				17B1B46C25470CC100B422B6 /* DataFetcher.swift */,
 				17FA869A2A03009B007C31AC /* Placeholder.jpg */,
@@ -380,6 +379,7 @@
 			children = (
 				17B960FB23699375003AA802 /* LaunchScreen.storyboard */,
 				178324772B5D32D500CD208A /* Localizable.xcstrings */,
+				1783247B2B5D32D600CD208A /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

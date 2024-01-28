@@ -8,7 +8,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vogel des Tages"
+            "value" : "Vögel"
           }
         },
         "en" : {
@@ -39,6 +39,24 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "SwissBirds"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
           }
         }
       }
@@ -74,6 +92,12 @@
     },
     "Vogel des Tages" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vogel des Tages"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
