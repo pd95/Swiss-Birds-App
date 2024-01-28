@@ -2,7 +2,7 @@
   "sourceLanguage" : "de",
   "strings" : {
     "CFBundleDisplayName" : {
-      "comment" : "InfoPlist.strings\n  SwissBirds",
+      "comment" : "Bundle display name",
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
