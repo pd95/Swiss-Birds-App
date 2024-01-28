@@ -11,33 +11,30 @@ import SwiftUI
 import Intents
 
 struct BirdOfTheDayProvider: TimelineProvider {
+    private var lastFetchedBird: BirdOfTheDay?
 
     func placeholder(in context: Context) -> SimpleEntry {
-        let speciesID = -1
-        let name = "Blaumeise"
-        let date = Date.distantFuture
-
-        let images = UIImage.resizedImage(from: Bundle.placeholderJpg, displaySize: context.displaySize)
-        return SimpleEntry(speciesID: speciesID, name: name, date: date, image: images)
+        let bird = BirdOfTheDay.example
+        let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
+        return SimpleEntry(bird: bird, image: image)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let speciesID = -1
-        let name = "Blaumeise"
-        let imageData = Bundle.placeholderJpg
-        let reloadDate = Date.distantFuture
-
-        let image = UIImage.resizedImage(from: imageData, displaySize: context.displaySize)
-        completion(SimpleEntry(speciesID: speciesID, name: name, date: reloadDate, image: image))
+        let bird = BirdOfTheDay.example
+        let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
+        completion(SimpleEntry(bird: bird, image: image))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         let displayScale = UIScreen.main.scale
 
-        DataFetcher.shared.getBirdOfTheDay { (speciesID, name, url, reloadDate) in
+        DataFetcher.shared.getBirdOfTheDay { (bird: BirdOfTheDay) in
 
-            let image = UIImage.resizedImage(from: url, displaySize: context.displaySize, displayScale: displayScale)
-            let entry = SimpleEntry(speciesID: speciesID, name: name, date: reloadDate, image: image)
+            let tomorrow = Calendar.current
+                .date(byAdding: DateComponents(day: 1), to: bird.loadingDate) ?? bird.loadingDate.addingTimeInterval(24*60*60)
+            let reloadDate = Calendar.current.startOfDay(for: tomorrow)
+            let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize, displayScale: displayScale)
+            let entry = SimpleEntry(bird: bird, image: image)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
             completion(timeline)
         }
@@ -45,9 +42,11 @@ struct BirdOfTheDayProvider: TimelineProvider {
 }
 
 struct SimpleEntry: TimelineEntry {
-    let speciesID: Int
-    let name: String
-    let date: Date
+    let bird: BirdOfTheDay
+
+    var date: Date {
+        bird.loadingDate
+    }
 
     let image: UIImage
 }
@@ -75,7 +74,7 @@ struct BirdOfTheDayWidgetEntryView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
 
-            Text(entry.name)
+            Text(entry.bird.name)
                 .frame(maxWidth: .infinity)
                 .font(textFont)
                 .foregroundColor(.white)

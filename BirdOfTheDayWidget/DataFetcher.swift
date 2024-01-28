@@ -16,15 +16,15 @@ class DataFetcher: ObservableObject {
 
     let logger = Logger(subsystem: "DataFetcher", category: "general")
 
-    typealias BirdOfTheDay = (speciesID: Int, name: String, url: URL, validDate: Date)
-
     private var birdOfTheDaySubscriber: AnyCancellable?
     private var getSpecieSubscriber: AnyCancellable?
 
     private var cancellables = Set<AnyCancellable>()
 
     var result: BirdOfTheDay?
-    var lastLoadingDate: Date = .distantPast
+    var lastLoadingDate: Date {
+        result?.loadingDate ?? .distantPast
+    }
 
     var finishedLoading: Bool {
         result != nil
@@ -72,18 +72,23 @@ class DataFetcher: ObservableObject {
             .handleEvents(receiveOutput: { [weak self] (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
                 self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID), url: \(birdOfTheDayData.url)")
             })
-            .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<(speciesID: Int, url: URL), Error> in
+            .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<(speciesID: Int, remoteURL: URL, fileURL: URL), Error> in
                 VdsAPI.getBirdOfTheDay(for: birdOfTheDayData.speciesID, from: birdOfTheDayData.url)
                     .map({ url in
-                        (birdOfTheDayData.speciesID, url)
+                        (birdOfTheDayData.speciesID, birdOfTheDayData.url, url)
                     })
                     .eraseToAnyPublisher()
             })
-            .flatMap({ result -> AnyPublisher<(speciesID: Int, name: String, url: URL), Error> in
+            .flatMap({ result -> AnyPublisher<(speciesID: Int, name: String, remoteURL: URL, fileURL: URL), Error> in
                 return VdsAPI.getSpecie(for: result.speciesID)
-                    .map({ (result.speciesID, $0.artname, result.url) })
+                    .map({ (result.speciesID, $0.artname, result.remoteURL, result.fileURL) })
                     .eraseToAnyPublisher()
             })
+            .map { result -> BirdOfTheDay in
+                let lastLoadingDate = self.fakeBackdatedLoad ? Date().addingTimeInterval(60-24*60*60) : Date()
+                return BirdOfTheDay(speciesID: result.speciesID, name: result.name, remoteURL: result.remoteURL, fileURL: result.fileURL, loadingDate: lastLoadingDate)
+            }
+            .subscribe(on: RunLoop.main)
             .sink { [weak self] (result) in
                 self?.logger.info("fetchBirdOfTheDay: \(result)")
                 if let completionHandlers = self?.getBirdOfTheDayCompletionHandlers {
@@ -93,15 +98,13 @@ class DataFetcher: ObservableObject {
                 self?.birdOfTheDaySubscriber = nil
             } receiveValue: { [weak self] (result) in
                 guard let self = self else { return }
-                let lastLoadingDate = self.fakeBackdatedLoad ? Date().addingTimeInterval(60-24*60*60) : Date()
-                self.result = (result.speciesID, result.name, result.url, lastLoadingDate)
-                self.lastLoadingDate = lastLoadingDate
-                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(lastLoadingDate)")
+                self.result = result
+                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(result.loadingDate)")
             }
     }
 
     func getBirdOfTheDay(completion: @escaping (BirdOfTheDay) -> Void) {
-        guard let (speciesID, name, url, _) = result,
+        guard let result,
               reloadDate > Date()
         else {
             logger.info("getBirdOfTheDay: fetching new data")
@@ -109,8 +112,8 @@ class DataFetcher: ObservableObject {
             fetchBirdOfTheDay()
             return
         }
-        logger.info("getBirdOfTheDay: returning existing data \(speciesID)")
-        completion((speciesID, name, url, reloadDate))
+        logger.info("getBirdOfTheDay: returning existing data \(result.speciesID)")
+        completion(result)
     }
 }
 

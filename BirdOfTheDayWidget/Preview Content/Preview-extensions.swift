@@ -14,8 +14,15 @@ extension SimpleEntry {
         guard let url = Bundle.main.url(forResource: filename, withExtension: nil) else {
             fatalError("Missing resource \(filename)!")
         }
+        let bird = BirdOfTheDay(
+            speciesID: speciesID,
+            name: name,
+            remoteURL: URL(string: "https://www.vogelwarte.ch/wp-content/assets/images/bird/species/\(speciesID)_0_9to4.jpg")!,
+            fileURL: url,
+            loadingDate: .now
+        )
         let image = UIImage.resizedImage(from: url, displaySize: CGSize(width: 155*3, height: 155), displayScale: 2)
-        return SimpleEntry(speciesID: speciesID, name: name, date: .distantFuture, image: image)
+        return SimpleEntry(bird: bird, image: image)
     }
 
     static var exampleReal: SimpleEntry {
