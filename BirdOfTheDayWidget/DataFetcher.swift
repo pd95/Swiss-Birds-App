@@ -20,8 +20,33 @@ class DataFetcher: ObservableObject {
     private var getSpecieSubscriber: AnyCancellable?
 
     private var cancellables = Set<AnyCancellable>()
+    private let defaults: UserDefaults
 
-    var result: BirdOfTheDay?
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        if let data = defaults.data(forKey: "BirdOfTheDayData") {
+            do {
+                let bod = try JSONDecoder().decode(BirdOfTheDay.self, from: data)
+                result = bod
+            } catch {
+                logger.error("Decoding BirdOfTheDay data: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    var result: BirdOfTheDay? {
+        didSet {
+            if let result {
+                do {
+                    let data = try JSONEncoder().encode(result)
+                    defaults.set(data, forKey: "BirdOfTheDayData")
+                } catch {
+                    logger.error("Storing BirdOfTheDay data: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
     var lastLoadingDate: Date {
         result?.loadingDate ?? .distantPast
     }
