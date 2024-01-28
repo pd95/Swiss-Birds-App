@@ -14,12 +14,9 @@ import os.log
 class DataFetcher: ObservableObject {
     static let shared = DataFetcher()
 
-    let logger = Logger(subsystem: "DataFetcher", category: "general")
+    private let logger = Logger(subsystem: "DataFetcher", category: "general")
 
     private var birdOfTheDaySubscriber: AnyCancellable?
-    private var getSpecieSubscriber: AnyCancellable?
-
-    private var cancellables = Set<AnyCancellable>()
     private let defaults: UserDefaults
 
     init(defaults: UserDefaults = .standard) {
@@ -46,29 +43,17 @@ class DataFetcher: ObservableObject {
             }
         }
     }
-    
-    var lastLoadingDate: Date {
-        result?.loadingDate ?? .distantPast
-    }
 
-    var finishedLoading: Bool {
-        result != nil
-    }
-
-    var reloadDate: Date {
+    private var reloadDate: Date {
         let now = Date()
-        if finishedLoading {
-            let tomorrow = Calendar.current.date(byAdding: DateComponents(day: 1), to: lastLoadingDate) ?? now.addingTimeInterval(24*60*60)
+        if let loadingDate = result?.loadingDate {
+            let tomorrow = Calendar.current.date(byAdding: DateComponents(day: 1), to: loadingDate) ?? now.addingTimeInterval(24*60*60)
             let reloadDate = Calendar.current.startOfDay(for: tomorrow)
             logger.log("🔴 reloadDate = \(reloadDate) (tomorrow)")
             return reloadDate
         }
         logger.log("🔴 reloadDate = \(now) (now)")
         return now
-    }
-
-    enum FetchError: Error {
-        case failed
     }
 
     private var getBirdOfTheDayCompletionHandlers = [(BirdOfTheDay)->Void]()
@@ -79,7 +64,7 @@ class DataFetcher: ObservableObject {
     private var fakeItUntilDate = Date().addingTimeInterval(60)
 */
 
-    func fetchBirdOfTheDay() {
+    private func fetchBirdOfTheDay() {
         logger.info("fetchBirdOfTheDay")
         guard birdOfTheDaySubscriber == nil else {
             logger.info("  fetch already running...")
