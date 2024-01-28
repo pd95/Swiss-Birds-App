@@ -14,13 +14,13 @@ struct BirdOfTheDayProvider: TimelineProvider {
     private var lastFetchedBird: BirdOfTheDay?
 
     func placeholder(in context: Context) -> SimpleEntry {
-        let bird = BirdOfTheDay.example
+        let bird = DataFetcher.shared.result ?? BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
         return SimpleEntry(bird: bird, image: image)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let bird = BirdOfTheDay.example
+        let bird = DataFetcher.shared.result ?? BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
         completion(SimpleEntry(bird: bird, image: image))
     }
