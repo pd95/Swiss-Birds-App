@@ -65,10 +65,14 @@ class AppState: ObservableObject {
 
     let favoritesManager: FavoritesManager
     let settingsStore: SettingsStore
+    let logger = Logger(subsystem: "AppState", category: "general")
 
     init(favoritesManager: FavoritesManager = .shared, settingsStore: SettingsStore = .shared ) {
         self.favoritesManager = favoritesManager
         self.settingsStore = settingsStore
+
+        let logger = self.logger
+        logger.debug(#function)
 
         // Init sort options with value stored in UserDefaults
         if let sortColumn = SortOptions.SortColumn(rawValue: settingsStore.groupColumn) {
@@ -80,8 +84,10 @@ class AppState: ObservableObject {
             .setFailureType(to: Error.self)
             .flatMap({ language in
                 // Fetch for each languages
-                VdsAPI.getBirds(language: language)
+                logger.debug("Fetch bird data for \(language)")
+                return VdsAPI.getBirds(language: language)
                     .map { birds -> [String: VdsListElement] in
+                        logger.debug("Received bird data in \(language)")
                         var dictionary = [String: VdsListElement]()
                         birds.forEach { dictionary[$0.artID] = $0 }
                         return dictionary
@@ -90,6 +96,7 @@ class AppState: ObservableObject {
             })
             .collect()
             .map({ (allBirdData: [(language: LanguageIdentifier, birds: [String: VdsListElement])]) -> [Species] in
+                logger.debug("Collected all bird data for \(allBirdData.map(\.language))")
 
                 // Merge for easier mapping
                 var indexedBirdData = [LanguageIdentifier: [String: VdsListElement]]()
@@ -118,11 +125,12 @@ class AppState: ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
-                        os_log("getBirds error: %{Public}@", error.localizedDescription)
+                        logger.error("getBirds error: \(error.localizedDescription, privacy: .public)")
                     }
                 },
                 receiveValue: { [weak self] species in
                     guard let self = self else { return }
+                    logger.debug("getBirds storing \(species.count) species")
                     self.allSpecies = species
                 })
             .store(in: &cancellables)
@@ -137,12 +145,13 @@ class AppState: ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
-                        os_log("getFilters error: %{Public}@", error.localizedDescription)
+                        logger.error("getFilters error: \(error.localizedDescription, privacy: .public)")
                     }
                 },
                 receiveValue: { [weak self] filters in
                     guard let self = self else { return }
                     Filter.allFiltersGrouped = filters
+                    logger.debug("getFilters storing \(filters.count) filters")
                     self.filters.objectWillChange.send()
 
                     // restore filter settings
@@ -157,6 +166,7 @@ class AppState: ObservableObject {
                                 }
                         }
                     }
+                    logger.debug("getFilters restored setting of \(restorableFilters.count) filters")
                     self.restorableFilters.removeAll()
                 })
             .store(in: &cancellables)
@@ -171,23 +181,23 @@ class AppState: ObservableObject {
             .debounce(for: .seconds(0.3), scheduler: backgroundQueue)
             .removeDuplicates()
             .handleEvents(receiveOutput: { [weak self] sortOptions in
-                os_log("sortOptions changed receiveValue %{Public}@", sortOptions.description)
+                logger.debug("sortOptions changed receiveValue \(sortOptions.description, privacy: .public)")
                 let newID = UUID()
                 self?.listID = newID
-                os_log("Resetting list %{Public}@", newID.description)
+                logger.debug("Resetting list \(newID.description, privacy: .public)")
             })
 
         Publishers.CombineLatest($allSpecies, filters.objectWillChange)
             .combineLatest(cleanSearchTextPublisher, cleanSortOptions, favoritesManager.$favorites) {
                 ($0.0, $1, $2, $3)
             }
-            .handleEvents(receiveOutput: { _ in os_log("groupedBirds input changed") })
+            .handleEvents(receiveOutput: { _ in logger.debug("groupedBirds input changed") })
             .receive(on: backgroundQueue)
             .debounce(for: .seconds(0.1), scheduler: backgroundQueue)
             .map { [weak self] (allSpecies: [Species], searchText: String, sortOptions: SortOptions, favorites: Set<Species.Id>) -> ([SectionGroup: [Species]], [SectionGroup]) in
                 guard let self = self else { return ([:], []) }
 
-                os_log("start filtering bird list: %ld", allSpecies.count)
+                logger.debug("start filtering bird list: \(allSpecies.count)")
 
                 // Filter species
                 let favoriteFilter: (Species) -> Bool
@@ -200,12 +210,12 @@ class AppState: ObservableObject {
                 }
                 let filtered: [Species] = allSpecies
                     .filter({ favoriteFilter($0) && $0.categoryMatches(filters: self.filters.list) && $0.nameMatches(searchText)})
-                os_log("filtering bird list done: %ld", filtered.count)
+                logger.debug("filtering bird list done: \(filtered.count)")
 
                 let groupedBirds: [SectionGroup: [Species]]
                 let sortedGroups: [SectionGroup]
                 let groupOption = sortOptions.column
-                os_log("group according to %{Public}@", groupOption.rawValue)
+                logger.debug("group according to \(groupOption.rawValue, privacy: .public)")
                 if case .filterType(let type) = groupOption {
                     let groupedBirdsByFilter = Dictionary(
                         grouping: filtered,
@@ -230,13 +240,13 @@ class AppState: ObservableObject {
                     )
                     sortedGroups = groupedBirds.keys.sorted()
                 }
-                os_log("grouping done: %ld groups", groupedBirds.keys.count)
+                logger.debug("grouping done: \(groupedBirds.keys.count) groups")
 
                 return (groupedBirds, sortedGroups)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (groupedBirds, groups) in
-                os_log("Storing bird list and triggering redraw")
+                logger.debug("Storing bird list and triggering redraw")
                 self?.groupedBirds = groupedBirds
                 self?.groups = groups
             })
@@ -249,8 +259,10 @@ class AppState: ObservableObject {
 
     func getHeadShot(for bird: Species, at scale: Int = 2) -> AnyPublisher<UIImage?, Never> {
         if let image = headShotsCache[bird.speciesId] {
+            //logger.debug("\(#function): \(bird.speciesId) returning existing image")
             return Just(image).eraseToAnyPublisher()
         }
+        logger.debug("\(#function): \(bird.speciesId) fetching image")
         return VdsAPI
             .getSpecieHeadshot(for: bird.speciesId, scale: max(scale, Int(UIScreen.main.scale)))
             .receive(on: DispatchQueue.main)
@@ -264,12 +276,12 @@ class AppState: ObservableObject {
     }
 
     func checkBirdOfTheDay(showAlways: Bool = false) {
-        os_log("checkBirdOfTheDay(showAlways: %d)", showAlways)
+        logger.debug("\(#function)(showAlways: \(showAlways))")
 
         // No need to refetch the data if we already checked today...
         if let lastCheckDate = birdOfTheDayCheckDate,
            Calendar.current.startOfDay(for: Date()) <= lastCheckDate {
-            os_log("  already checked on %{Public}@", lastCheckDate.description)
+            logger.debug("  already checked on \(lastCheckDate))")
             if showAlways {
                 self.showBirdOfTheDayNow()
             }
@@ -277,6 +289,7 @@ class AppState: ObservableObject {
         }
 
         // Fetch the bird of the day
+        let logger = self.logger
         VdsAPI
             .getBirdOfTheDaySpeciesIDandURL()
             .map {Optional.some($0)}
@@ -285,13 +298,14 @@ class AppState: ObservableObject {
                 receiveCompletion: { [weak self] result in
                     if case .failure(let error) = result {
                         self?.error = error
-                        os_log("getBirdOfTheDaySpeciesIDandURL error: %{Public}@", error.localizedDescription)
+                        logger.error("getBirdOfTheDaySpeciesIDandURL: error \(error.localizedDescription, privacy: .public)")
                         self?.birdOfTheDay = nil
                     }
                 },
                 receiveValue: { [weak self] (birdOfTheDay) in
                     guard let self = self else { return }
 
+                    logger.debug("getBirdOfTheDaySpeciesIDandURL returned \(birdOfTheDay?.speciesID.description ?? "nil"))")
                     self.birdOfTheDay = birdOfTheDay
                     self.birdOfTheDayCheckDate = Date()
                     if let botd = birdOfTheDay {
@@ -314,14 +328,16 @@ class AppState: ObservableObject {
     }
 
     private func refreshWidget() {
-        os_log("refreshWidget")
+        logger.debug(#function)
         WidgetCenter.shared.reloadTimelines(ofKind: "BirdOfTheDayWidget")
     }
 
     func getBirdOfTheDay() {
         guard let (url, speciesId) = birdOfTheDay else {
+            logger.debug("\(#function): bail out, du to unknown bird of the day")
             return
         }
+        logger.debug("\(#function): fetching image for bird of the day (\(speciesId))")
         VdsAPI
             .getBirdOfTheDay(for: speciesId, from: url)
             .map { [weak self] url in
@@ -331,10 +347,10 @@ class AppState: ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .sink(
-                receiveCompletion: { [weak self] (result) in
+                receiveCompletion: { [weak self, logger] (result) in
                     if case .failure(let error) = result {
                         self?.error = error
-                        os_log("getBirdOfTheDay error: %{Public}@", error.localizedDescription)
+                        logger.error("getBirdOfTheDay: error \(error.localizedDescription, privacy: .public)")
                         self?.birdOfTheDayImage = nil
                     }
                 },
@@ -345,6 +361,7 @@ class AppState: ObservableObject {
     }
 
     func showBird(_ species: Species) {
+        logger.debug("\(#function): \(species.speciesId)")
         if isEditingSearchField {
             UIApplication.shared.endEditing()
         }
@@ -355,6 +372,7 @@ class AppState: ObservableObject {
     }
 
     func showFilter() {
+        logger.debug(#function)
         if isEditingSearchField {
             UIApplication.shared.endEditing()
         }
@@ -365,6 +383,7 @@ class AppState: ObservableObject {
     }
 
     func showSortOptions() {
+        logger.debug(#function)
         if isEditingSearchField {
             UIApplication.shared.endEditing()
         }
@@ -375,6 +394,7 @@ class AppState: ObservableObject {
     }
 
     func showBirdOfTheDayNow() {
+        logger.debug(#function)
         if isEditingSearchField {
             UIApplication.shared.endEditing()
         }
@@ -387,6 +407,7 @@ class AppState: ObservableObject {
 
     /// Returns the number of all species which would currently match the active filters
     func countFilterMatches() -> Int {
+        logger.debug(#function)
         let favoriteFilter: (Species) -> Bool
         if self.filters.list.keys.contains(.favorites) {
             favoriteFilter = favoritesManager.isFavorite
@@ -407,7 +428,7 @@ extension AppState: CustomStringConvertible {
 extension AppState {
 
     func restore(from activity: NSUserActivity) {
-        os_log("restore(from: %{public}@%)", activity.activityType)
+        logger.debug("\(#function)(from: \(activity.activityType, privacy: .public))")
         guard activity.activityType == Bundle.main.activityType,
             let stateArray: [String: Any] = activity.userInfo as? [String: Any]
             else { return }
@@ -434,11 +455,11 @@ extension AppState {
 //            self.sortOptions.column = columnOption
 //        }
 
-        os_log("restore(from: %{public}@): %{public}@", activity.activityType, self.description)
+        logger.debug("\(#function)(from: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
     }
 
     func store(in activity: NSUserActivity) {
-        os_log("store(in: %{public}@)", activity.activityType)
+        logger.debug("\(#function)(in: \(activity.activityType, privacy: .public))")
         var storableList = [String: [Filter.Id]]()
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
@@ -453,7 +474,7 @@ extension AppState {
         ]
         activity.addUserInfoEntries(from: stateArray)
 
-        os_log("store(in: %{public}@): %{public}@", activity.activityType, self.description)
+        logger.debug("\(#function)(in: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
     }
 
     private enum Key {
@@ -467,32 +488,32 @@ extension AppState {
 
 extension AppState {
     func handleUserActivity(_ userActivity: NSUserActivity) {
-        print("handleUserActivity(\(userActivity.activityType))")
+        logger.debug("\(#function)(\(userActivity.activityType, privacy: .public)): \(self.description)")
 
         if userActivity.activityType == NSUserActivity.showBirdActivityType {
             guard let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
             else {
-                print("Missing parameter birdID for \(userActivity.activityType)")
+                logger.error("Missing parameter birdID for (\(userActivity.activityType, privacy: .public))")
                 return
             }
 
-            print("handleUserActivity: birdID=\(birdID)")
+            logger.debug("handleUserActivity: birdID=\(birdID)")
             if let bird = Species.species(for: birdID) {
                 self.showBird(bird)
             }
         } else if userActivity.activityType == NSUserActivity.showBirdTheDayActivityType {
-            print("handleUserActivity: showing bird of the day \(birdOfTheDay.debugDescription)")
+            logger.debug("handleUserActivity: showing bird of the day \(self.birdOfTheDay.debugDescription, privacy: .public)")
             self.checkBirdOfTheDay(showAlways: true)
         } else {
-            print("Skipping unsupported \(userActivity.activityType)")
+            logger.debug("handleUserActivity: Skipping unsupported \(userActivity.activityType, privacy: .public)")
             return
         }
-        print("current state: ", self)
+        logger.debug("\(#function)(\(userActivity.activityType, privacy: .public)): current state \(self.description, privacy: .public)")
     }
 
     @discardableResult
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-        os_log("handleShortcutItem(shortcutItem: %{public}@)", shortcutItem.type)
+        logger.debug("\(#function)(\(shortcutItem.type, privacy: .public))")
 
         if shortcutItem.type == "BirdOfTheDay" {
             let appState = AppState.shared
