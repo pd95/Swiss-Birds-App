@@ -26,6 +26,7 @@ class SettingsStore {
     let userDefaults: UserDefaults
 
     private var anyCancellable: AnyCancellable?
+    private let logger = Logger(subsystem: "SettingsStore", category: "general")
 
     init(userDefaults: UserDefaults = .standard) {
 
@@ -39,8 +40,8 @@ class SettingsStore {
 
         anyCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification, object: userDefaults)
             .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
-            .sink { [weak self](x) in
-                os_log("UserDefaults.didChangeNotification %{public}@", x.description)
+            .sink { [weak self](_) in
+                self?.logger.debug("UserDefaults.didChangeNotification received")
                 self?.checkAndSetVersionAndBuildNumber()
             }
         checkAndSetVersionAndBuildNumber()
@@ -76,7 +77,7 @@ class SettingsStore {
     // By updating userDefaults more changes may trigger more calls to this function.
     private var checkRunning = false
     private func checkAndSetVersionAndBuildNumber() {
-        os_log("checkAndSetVersionAndBuildNumber running on %{public}@", Thread.current.description)
+        logger.debug("\(#function) running on \(Thread.current.description, privacy: .public)")
         guard checkRunning == false, Thread.isMainThread == true else {
             return
         }
@@ -91,13 +92,13 @@ class SettingsStore {
 
         // Migrate old favorites to Cloud-syncing favorites key
         if let oldFavorites = userDefaults.array(forKey: Keys.favoriteSpeciesOld) as? [Int] {
-            os_log("Migrating old favorites to cloud-synched favorites %{public}@", oldFavorites)
+            logger.debug("Migrating old favorites to cloud-synched favorites \(oldFavorites.description, privacy: .public)")
             favoriteSpecies = oldFavorites
             userDefaults.removeObject(forKey: Keys.favoriteSpeciesOld)
         }
 
         if appVersion != currentVersion {
-            os_log("checkAndSetVersionAndBuildNumber set appVersion")
+            logger.debug("\(#function) set appVersion")
             appVersion = currentVersion
         }
 
@@ -107,7 +108,7 @@ class SettingsStore {
     /// Remove all stored settings
     /// Ensures "reset == true" during the whole process-
     func removeAllSettings() {
-        os_log("Removing all settings")
+        logger.debug("\(#function)")
         reset = true
         for element in userDefaults.dictionaryRepresentation() {
             if element.key == Keys.reset { continue }
