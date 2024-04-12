@@ -181,11 +181,14 @@ enum VdsAPI {
             .tryMap { (data) -> BirdOfTheDayData in
                 let html = String(data: data, encoding: .isoLatin1)!
                 // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/0750_0_9to4.jpg
-                let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_9to4.jpg")
+                // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/3500_0_9to4.jpg
+                let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_\\dto\\d.jpg")
                 if matches.count == 2, let id = Int(matches[1]) {
-                    let url = base.appendingPathComponent(matches[0])
+                    let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(matches[1])_0_9to4.jpg")
+                    logger.debug("getBirdOfTheDaySpeciesIDandURL: Returning id \(id) and \(url)")
                     return (url, id)
                 }
+                logger.error("getBirdOfTheDaySpeciesIDandURL: Unable to extract bird ID and URL")
                 throw APIError.invalidResponse
             }
             .eraseToAnyPublisher()
@@ -195,8 +198,11 @@ enum VdsAPI {
         let speciesID = String(format: "%04d", id)
         let targetURL = cacheLocation.appendingPathComponent("bod_\(speciesID).jpg", isDirectory: false)
         if FileManager.default.fileExists(atPath: targetURL.path) {
+            logger.debug("getBirdOfTheDay: returning existing file from \(targetURL)")
             return Just(targetURL).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
+        let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(speciesID)_0_9to4.jpg")
+        logger.debug("getBirdOfTheDay: loading from \(url)")
         return downloadData(URLRequest(url: url), to: targetURL)
     }
 }
