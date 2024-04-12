@@ -27,8 +27,8 @@ class AppState: ObservableObject {
 
     var restorableFilters: [String: [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
-    @Published var groupedBirds = [SectionGroup: [Species]]()
-    @Published var groups = [SectionGroup]()
+    var groupedBirds = [SectionGroup: [Species]]()
+    var groups = [SectionGroup]()
     var listID = UUID()
 
     @Published var alertItem: AlertItem?
@@ -247,6 +247,7 @@ class AppState: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] (groupedBirds, groups) in
                 logger.debug("Storing bird list and triggering redraw")
+                self?.objectWillChange.send()
                 self?.groupedBirds = groupedBirds
                 self?.groups = groups
             })
