@@ -51,7 +51,7 @@ class DataFetcher: ObservableObject {
         if let loadingDate = result?.loadingDate {
             let tomorrow = Calendar.current.date(byAdding: DateComponents(day: 1), to: loadingDate) ?? now.addingTimeInterval(24*60*60)
             let reloadDate = Calendar.current.startOfDay(for: tomorrow)
-            logger.log("🔴 reloadDate = \(reloadDate) (tomorrow)")
+            logger.log("🔴 reloadDate = \(reloadDate) (midnight after load date)")
             return reloadDate
         }
         logger.log("🔴 reloadDate = \(now) (now)")
@@ -73,6 +73,7 @@ class DataFetcher: ObservableObject {
             return
         }
 
+        let logger = self.logger
         result = nil
         birdOfTheDaySubscriber = VdsAPI.getBirdOfTheDaySpeciesIDandURL()
             .map { (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
@@ -81,8 +82,8 @@ class DataFetcher: ObservableObject {
                 }
                 return birdOfTheDayData
             }
-            .handleEvents(receiveOutput: { [weak self] (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
-                self?.logger.debug("speciesID: \(birdOfTheDayData.speciesID), url: \(birdOfTheDayData.url)")
+            .handleEvents(receiveOutput: { (birdOfTheDayData: VdsAPI.BirdOfTheDayData) in
+                logger.debug("speciesID: \(birdOfTheDayData.speciesID), url: \(birdOfTheDayData.url)")
             })
             .flatMap({ (birdOfTheDayData: VdsAPI.BirdOfTheDayData) -> AnyPublisher<(speciesID: Int, remoteURL: URL, fileURL: URL), Error> in
                 VdsAPI.getBirdOfTheDay(for: birdOfTheDayData.speciesID, from: birdOfTheDayData.url)
@@ -102,16 +103,15 @@ class DataFetcher: ObservableObject {
             }
             .subscribe(on: RunLoop.main)
             .sink { [weak self] (result) in
-                self?.logger.info("fetchBirdOfTheDay: \(result)")
+                logger.info("fetchBirdOfTheDay: \(result)")
                 if let completionHandlers = self?.getBirdOfTheDayCompletionHandlers {
                     completionHandlers.forEach { self?.getBirdOfTheDay(completion: $0) }
                     self?.getBirdOfTheDayCompletionHandlers.removeAll()
                 }
                 self?.birdOfTheDaySubscriber = nil
             } receiveValue: { [weak self] (result) in
-                guard let self = self else { return }
-                self.result = result
-                self.logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(result.loadingDate)")
+                self?.result = result
+                logger.debug("fetchBirdOfTheDay: finished now, lastLoadingDate=\(result.loadingDate)")
             }
     }
 
