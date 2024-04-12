@@ -22,6 +22,8 @@ enum VdsAPI {
 
     typealias BirdOfTheDayData = (url: URL, speciesID: Int)
 
+    static let logger = Logger(subsystem: "VdsAPI", category: "general")
+
     static var cacheLocation: URL = {
         let fileManager = FileManager.default
         let url = fileManager.urls(for: .cachesDirectory, in: .userDomainMask)[0].appendingPathComponent("Downloaded-Data")
@@ -80,16 +82,16 @@ enum VdsAPI {
         return urlSession
             .dataTaskPublisher(for: request)
             .retry(1)
-            .tryMap { result -> Data in
+            .tryMap { [logger] result -> Data in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
-                    os_log("Invalid HTTP response: %{Public}@", result.response)
+                    logger.error("Invalid HTTP response: \(result.response.description, privacy: .public)")
                     throw APIError.networkError("Invalid HTTP response")
                 }
 
                 let statusCode = httpResponse.statusCode
                 guard 200 ..< 300 ~= statusCode else {
                     let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-                    os_log("HTTP response: %d '%{Public}@' for %{Public}@", statusCode, localizedMessage, httpResponse.url?.path ?? "n/a")
+                    logger.error("HTTP response: \(statusCode) '\(localizedMessage)' for \(httpResponse.url?.path ?? "n/a", privacy: .public)")
                     throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
                 }
                 return result.data
@@ -102,8 +104,8 @@ enum VdsAPI {
             .decode(type: T.self, decoder: decoder)
             .handleEvents(receiveCompletion: { completion in
                 if case .failure(let error) = completion {
-                    os_log("Error: '%{Public}@' for %{Public}@", error.localizedDescription, request.url?.path ?? "n/a")
-                    os_log("%{Public}@", error as NSError)
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)  for \(request.url?.path ?? "n/a", privacy: .public)")
+                    logger.error("\(error as NSError, privacy: .public)")
                 }
             })
             .eraseToAnyPublisher()
@@ -113,21 +115,26 @@ enum VdsAPI {
         return urlSession
             .downloadTaskPublisher(for: request)
             .retry(1)
-            .tryMap { result -> URL in
+            .tryMap { [logger] result -> URL in
                 guard let httpResponse = result.response as? HTTPURLResponse else {
-                    os_log("Invalid HTTP response: %{Public}@", result.response)
+                    logger.error("Invalid HTTP response: \(result.response.description, privacy: .public)")
                     throw APIError.networkError("Invalid HTTP response")
                 }
 
                 let statusCode = httpResponse.statusCode
                 guard 200 ..< 300 ~= statusCode else {
                     let localizedMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-                    os_log("HTTP response: %d '%{Public}@' for %{Public}@", statusCode, localizedMessage, httpResponse.url?.path ?? "n/a")
+                    logger.error("HTTP response: \(statusCode) '\(localizedMessage)' for \(httpResponse.url?.path ?? "n/a", privacy: .public)")
                     throw APIError.httpError(statusCode, "HTTP \(statusCode): \(localizedMessage)")
                 }
 
-                try? FileManager.default.removeItem(at: targetURL)
-                try FileManager.default.moveItem(at: result.url, to: targetURL)
+                do {
+                    try? FileManager.default.removeItem(at: targetURL)
+                    try FileManager.default.moveItem(at: result.url, to: targetURL)
+                } catch {
+                    logger.error("Unable to move item: \(error, privacy: .public)")
+                    throw error
+                }
                 return targetURL
             }
             .eraseToAnyPublisher()
