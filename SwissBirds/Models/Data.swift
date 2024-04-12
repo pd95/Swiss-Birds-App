@@ -61,7 +61,7 @@ func loadFilterData(vdsFilternames: [VdsFilter]) -> [FilterType: [Filter]] {
     FilterType.allCases.forEach { (type) in
         if type.shouldSortForDisplay {
             filterMap[type]?.sort(by: { (lhs, rhs) -> Bool in
-                NSLocalizedString(lhs.name, comment: "") < NSLocalizedString(rhs.name, comment: "")
+                String.localizedStringWithFormat(lhs.name) < String.localizedStringWithFormat(rhs.name)
             })
         }
     }
