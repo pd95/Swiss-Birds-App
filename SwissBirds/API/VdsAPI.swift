@@ -183,12 +183,14 @@ enum VdsAPI {
                 // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/0750_0_9to4.jpg
                 // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/3500_0_9to4.jpg
                 let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_\\dto\\d.jpg")
-                if matches.count == 2, let id = Int(matches[1]) {
-                    let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(matches[1])_0_9to4.jpg")
+                let matchCount = matches.count
+                logger.debug("getBirdOfTheDaySpeciesIDandURL: \(matches.count) regex matches found -> \(matches.debugDescription)")
+                if matchCount >= 2, let id = Int(matches[matchCount-1]) {
+                    let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(id)_0_9to4.jpg")
                     logger.debug("getBirdOfTheDaySpeciesIDandURL: Returning id \(id) and \(url)")
                     return (url, id)
                 }
-                logger.error("getBirdOfTheDaySpeciesIDandURL: Unable to extract bird ID and URL")
+                logger.error("getBirdOfTheDaySpeciesIDandURL: Unable to extract bird ID and URL: \(matches.count) regex matches found -> \(matches.debugDescription)")
                 throw APIError.invalidResponse
             }
             .eraseToAnyPublisher()
