@@ -6,29 +6,38 @@
 //  Copyright © 2020 Philipp. All rights reserved.
 //
 
+import os.log
 import WidgetKit
 import SwiftUI
 import Intents
 
 struct BirdOfTheDayProvider: TimelineProvider {
+    private let logger = Logger(subsystem: String(describing: Self.self), category: "general")
+    private var dataFetcher = DataFetcher(restoreCache: false)
     private var lastFetchedBird: BirdOfTheDay?
 
     func placeholder(in context: Context) -> SimpleEntry {
-        let bird = DataFetcher.shared.result ?? BirdOfTheDay.example
+        let bird = BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
-        return SimpleEntry(bird: bird, image: image)
+        let entry = SimpleEntry(bird: bird, image: image)
+        logger.log("\(#function) returning \(entry)")
+        return entry
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let bird = DataFetcher.shared.result ?? BirdOfTheDay.example
+        logger.log("\(#function) start: \(context)")
+        let bird = BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
-        completion(SimpleEntry(bird: bird, image: image))
+        let entry = SimpleEntry(bird: bird, image: image)
+        completion(entry)
+        logger.log("\(#function) returning \(entry)")
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+        logger.log("\(#function) start: \(context)")
         let displayScale = UIScreen.main.scale
 
-        DataFetcher.shared.getBirdOfTheDay { (bird: BirdOfTheDay) in
+        dataFetcher.getBirdOfTheDay { (bird: BirdOfTheDay) in
 
             let tomorrow = Calendar.current
                 .date(byAdding: DateComponents(day: 1), to: bird.loadingDate) ?? bird.loadingDate.addingTimeInterval(24*60*60)
@@ -36,8 +45,16 @@ struct BirdOfTheDayProvider: TimelineProvider {
             let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize, displayScale: displayScale)
             let entry = SimpleEntry(bird: bird, image: image)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
+            logger.log("\(#function) adding single entry \(entry)")
             completion(timeline)
         }
+        logger.log("\(#function) end")
+    }
+}
+
+extension TimelineProvider.Context: CustomStringConvertible {
+    public var description: String {
+        "Context(family=\(family), displaySize=\(String(describing: displaySize)), isPreview=\(isPreview), displayScale=\(environmentVariants[\.displayScale]?.description ?? "nil"), colorScheme=\(environmentVariants[\.colorScheme]?.description ?? "nil"))"
     }
 }
 
@@ -49,6 +66,12 @@ struct SimpleEntry: TimelineEntry {
     }
 
     let image: UIImage
+}
+
+extension SimpleEntry: CustomStringConvertible {
+    var description: String {
+        "SimpleEntry(bird.speciesID = \(bird.speciesID), image.size = \(String(describing: image.size)))"
+    }
 }
 
 struct BirdOfTheDayWidgetEntryView: View {

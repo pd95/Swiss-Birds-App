@@ -26,7 +26,6 @@ extension UIImage {
         }
 
         let resizedImage = UIImage(cgImage: cgImage, scale: displayScale, orientation: .up)
-        print("generated image", resizedImage.size)
 
         return resizedImage
     }

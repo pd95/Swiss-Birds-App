@@ -19,22 +19,26 @@ class DataFetcher: ObservableObject {
     private var birdOfTheDaySubscriber: AnyCancellable?
     private let defaults: UserDefaults
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = .standard, restoreCache: Bool = true) {
+        logger.log("DataFetcher.\(#function) start")
         self.defaults = defaults
-        if let data = defaults.data(forKey: "BirdOfTheDayData") {
+        if restoreCache, let data = defaults.data(forKey: "BirdOfTheDayData") {
             do {
                 let bod = try JSONDecoder().decode(BirdOfTheDay.self, from: data)
                 if FileManager.default.fileExists(atPath: bod.fileURL.relativePath) {
+                    logger.log("DataFetcher.\(#function) keeping existing bird of the day")
                     result = bod
                 }
             } catch {
                 logger.error("Decoding BirdOfTheDay data: \(error.localizedDescription)")
             }
         }
+        logger.log("DataFetcher.\(#function) end")
     }
 
     var result: BirdOfTheDay? {
         didSet {
+            logger.log("\(#function) set new result")
             if let result {
                 do {
                     let data = try JSONEncoder().encode(result)
@@ -116,16 +120,19 @@ class DataFetcher: ObservableObject {
     }
 
     func getBirdOfTheDay(completion: @escaping (BirdOfTheDay) -> Void) {
+        logger.log("\(#function) start")
         guard let result,
               reloadDate > Date()
         else {
             logger.info("getBirdOfTheDay: fetching new data")
             getBirdOfTheDayCompletionHandlers.append(completion)
             fetchBirdOfTheDay()
+            logger.log("\(#function) end while fetching new data")
             return
         }
         logger.info("getBirdOfTheDay: returning existing data \(result.speciesID)")
         completion(result)
+        logger.log("\(#function) end reusing existing data")
     }
 }
 

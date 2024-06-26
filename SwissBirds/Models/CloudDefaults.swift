@@ -15,6 +15,7 @@ final class CloudDefaults: NSObject {
     static let shared = CloudDefaults()
     static let syncPrefix = "sync_"
 
+    private var setupDone = false
     private var ignoreLocalChanges = false
     private var userDefaults: UserDefaults
     private var ubiquitousKeyValueStore: NSUbiquitousKeyValueStore
@@ -37,8 +38,14 @@ final class CloudDefaults: NSObject {
         }
     }
 
+    private var canSync: Bool {
+        let token = FileManager.default.ubiquityIdentityToken
+        logger.info("\(#function): iCloud syncing \(token == nil ? "disabled" : "enabled")")
+        return token != nil
+    }
+
     /// Called upon application start, to ensure we do not miss any important iCloud update
-    func start() {
+    private func start() {
         logger.debug("\(#function)")
         // register for UserDefault changes of known keys which need syncing
         synchronizedUserDefaultKeys = userDefaults.dictionaryRepresentation().keys.filter({ $0.hasPrefix(Self.syncPrefix)})
@@ -61,22 +68,34 @@ final class CloudDefaults: NSObject {
         )
 
         // Force iCloud sync to ensure a fresh copy
-        if ubiquitousKeyValueStore.synchronize() == false {
+        if canSync && ubiquitousKeyValueStore.synchronize() == false {
             fatalError("App was not built with the proper iCloud entitlement requests?")
         }
+        setupDone = true
         logger.debug("\(#function): synchronized successfully")
     }
 
     /// Called whenever the application enters foreground state, to ensure the store is up-to-date
     func synchronize() {
-        #if DEBUG
-        let bit = ubiquitousKeyValueStore.bool(forKey: "fakeSyncBit")
-        ubiquitousKeyValueStore.set(!bit, forKey: "fakeSyncBit")
-        #endif
-        if ubiquitousKeyValueStore.synchronize() {
-            logger.debug("\(#function): success")
+        logger.debug("\(#function)")
+        guard canSync else {
+            logger.debug("\(#function): cannot sync")
+            return
+        }
+        if !setupDone {
+            logger.debug("\(#function): setup not done")
+            start()
         } else {
-            logger.debug("\(#function): error")
+            logger.debug("\(#function): synching")
+            #if DEBUG
+            let bit = ubiquitousKeyValueStore.bool(forKey: "fakeSyncBit")
+            ubiquitousKeyValueStore.set(!bit, forKey: "fakeSyncBit")
+            #endif
+            if ubiquitousKeyValueStore.synchronize() {
+                logger.debug("\(#function): success")
+            } else {
+                logger.debug("\(#function): error")
+            }
         }
     }
 
@@ -98,6 +117,23 @@ final class CloudDefaults: NSObject {
     /// ensuring (by setting `ignoreLocalChanges`) that those are not synched back to the cloud.
     private func updateLocal(_ notification: Notification) {
         logger.debug("\(#function): \(notification.debugDescription, privacy: .public)")
+        guard let userInfo = notification.userInfo else { return }
+        guard let reasonForChange = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as? Int else { return }
+
+        switch reasonForChange {
+        case NSUbiquitousKeyValueStoreServerChange:
+            logger.info("\(#function): Server change")
+        case NSUbiquitousKeyValueStoreInitialSyncChange:
+            logger.info("\(#function): Initial Sync change")
+        case NSUbiquitousKeyValueStoreQuotaViolationChange:
+            logger.info("\(#function): Quota Violation change")
+        case NSUbiquitousKeyValueStoreAccountChange:
+            logger.info("\(#function): Account change")
+        default:
+            logger.error("Unsupported change iCloud KVS change reason: \(reasonForChange)")
+            return
+        }
+
         ignoreLocalChanges = true
 
         for (key, value) in ubiquitousKeyValueStore.dictionaryRepresentation {

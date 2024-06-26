@@ -22,9 +22,6 @@ struct SwissBirdsApp: App {
             SettingsStore.shared.setupForTesting()
         }
         #endif
-
-        // Enable cloud synched UserDefaults
-        CloudDefaults.shared.start()
     }
 
     var body: some Scene {
