@@ -73,7 +73,7 @@ struct BirdRow: View {
                                             .font(.footnote)
                                     }
                                 } else {
-                                    Text("\(language): ")
+                                    Text("\(language): ", comment: "language identifier in list of bird names")
                                         .font(.footnote.italic())
                                     + Text("\(match.name ?? "") \(match.alternateName ?? "")".trimmingCharacters(in: .whitespaces))
                                         .font(.footnote)

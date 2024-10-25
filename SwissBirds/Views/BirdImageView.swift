@@ -28,7 +28,7 @@ struct BirdImageView: View {
             HStack {
                 Text(description)
                 Spacer()
-                Text("© \(author)")
+                Text("© \(author)", comment: "Copyright notice for photographer")
             }
             .padding([.leading, .bottom, .trailing], 8)
             .font(.caption)

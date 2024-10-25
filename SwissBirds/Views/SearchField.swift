@@ -97,7 +97,7 @@ struct SearchField_Preview_Helper: View {
                     }
                 }
             }) {
-                Text("Toggle Edit")
+                Text(verbatim: "Toggle Edit")
             }
         }
 

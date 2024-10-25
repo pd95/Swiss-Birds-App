@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AlertItem: Identifiable {
     let id = UUID()
-    var title = Text("")
+    var title = Text(verbatim: "")
     var message: Text?
     var dismissButton: Alert.Button?
     var primaryButton: Alert.Button?

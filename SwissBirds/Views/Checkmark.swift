@@ -29,11 +29,11 @@ struct Checkmark_Previews: PreviewProvider {
         List {
             HStack {
                 Checkmark(checked: true)
-                Text("Checked")
+                Text(verbatim: "Checked")
             }
             HStack {
                 Checkmark(checked: false)
-                Text("Unchecked")
+                Text(verbatim: "Unchecked")
             }
         }
     }

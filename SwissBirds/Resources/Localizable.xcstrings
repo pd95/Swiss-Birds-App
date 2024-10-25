@@ -1,14 +1,11 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "" : {
-
-    },
     "%@: " : {
-
+      "comment" : "language identifier in list of bird names"
     },
     "© %@" : {
-
+      "comment" : "Copyright notice for photographer"
     },
     "Alphabetisch (name)" : {
       "extractionState" : "manual",
@@ -132,9 +129,6 @@
           }
         }
       }
-    },
-    "AppState loaded" : {
-
     },
     "Art-Nr." : {
       "extractionState" : "manual",
@@ -571,9 +565,6 @@
         }
       }
     },
-    "Byjq" : {
-
-    },
     "Cancel" : {
       "localizations" : {
         "de" : {
@@ -601,9 +592,6 @@
           }
         }
       }
-    },
-    "Checked" : {
-
     },
     "Clear" : {
       "localizations" : {
@@ -1291,9 +1279,6 @@
         }
       }
     },
-    "L Align" : {
-
-    },
     "Laenge_cm" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1547,9 +1532,6 @@
           }
         }
       }
-    },
-    "Prioritaet_(availablePrioInfo)" : {
-
     },
     "Prioritaet_0" : {
       "extractionState" : "manual",
@@ -1920,12 +1902,6 @@
           }
         }
       }
-    },
-    "Toggle Edit" : {
-
-    },
-    "Unchecked" : {
-
     },
     "Undefiniert" : {
       "extractionState" : "manual",

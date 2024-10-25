@@ -57,9 +57,9 @@ struct SymbolView_Previews: PreviewProvider {
         Group {
             HStack {
                 SymbolView(symbolName: "filterentwicklungatlas-1")
-                Text("L Align")
+                Text(verbatim: "L Align")
                 SymbolView(symbolName: "filterlebensraum-9")
-                Text("Byjq")
+                Text(verbatim: "Byjq")
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
             .font(.title)
@@ -68,9 +68,9 @@ struct SymbolView_Previews: PreviewProvider {
 
             HStack {
                 SymbolView(symbolName: "filterentwicklungatlas-1")
-                Text("L Align")
+                Text(verbatim: "L Align")
                 SymbolView(symbolName: "filterlebensraum-9")
-                Text("Byjq")
+                Text(verbatim: "Byjq")
                 SymbolView(symbolName: "filterlebensraum-5", color: .green)
             }
             .font(.title)
