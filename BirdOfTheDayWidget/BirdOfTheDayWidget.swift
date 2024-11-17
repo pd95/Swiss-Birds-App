@@ -52,7 +52,7 @@ struct BirdOfTheDayProvider: TimelineProvider {
     }
 }
 
-extension TimelineProvider.Context: CustomStringConvertible {
+extension TimelineProvider.Context: @retroactive CustomStringConvertible {
     public var description: String {
         "Context(family=\(family), displaySize=\(String(describing: displaySize)), isPreview=\(isPreview), displayScale=\(environmentVariants[\.displayScale]?.description ?? "nil"), colorScheme=\(environmentVariants[\.colorScheme]?.description ?? "nil"))"
     }

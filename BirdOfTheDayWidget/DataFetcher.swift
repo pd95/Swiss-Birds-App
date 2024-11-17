@@ -136,7 +136,7 @@ class DataFetcher: ObservableObject {
     }
 }
 
-extension Subscribers.Completion: CustomStringConvertible {
+extension Subscribers.Completion: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
             case .finished:

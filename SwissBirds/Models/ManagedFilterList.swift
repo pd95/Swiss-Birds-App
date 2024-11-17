@@ -10,7 +10,7 @@ import Foundation
 
 class ManagedFilterList: ObservableObject, CustomStringConvertible {
 
-    private (set) var list: FilterList
+    private(set) var list: FilterList
 
     init(_ filterList: FilterList = [:]) {
         list = filterList

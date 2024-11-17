@@ -45,7 +45,7 @@ extension String {
     }
 }
 
-extension URLError.NetworkUnavailableReason: CustomStringConvertible {
+extension URLError.NetworkUnavailableReason: @retroactive CustomStringConvertible {
     public var description: String {
         switch self {
             case .cellular:

@@ -33,8 +33,13 @@ struct BirdDetail: View {
         let prioritySpeciesText: String
 
         if let availablePrioInfo = birdDetails.prioritaetsartArtenfoerderung, !availablePrioInfo.isEmpty  {
-            prioritySpeciesSymbol = availablePrioInfo == "1" ? "star.circle" : ""
-            prioritySpeciesText = NSLocalizedString("Prioritaet_\(availablePrioInfo)", comment: "")
+            if availablePrioInfo == "1" {
+                prioritySpeciesSymbol = "star.circle"
+                prioritySpeciesText =  NSLocalizedString("Prioritaet_1", comment: "")
+            } else {
+                prioritySpeciesSymbol = ""
+                prioritySpeciesText =  NSLocalizedString("Prioritaet_0", comment: "")
+            }
         } else {
             prioritySpeciesSymbol = ""
             prioritySpeciesText = "-"
