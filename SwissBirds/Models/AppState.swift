@@ -48,6 +48,7 @@ class AppState: ObservableObject {
     var navigationState = NavigationState()
 
     // Single view model used in BirdDetailView, updated when selected bird changes
+    @MainActor
     let currentBirdDetails = BirdDetailViewModel()
 
     var previousBirdOfTheDay: Int = -1

@@ -12,18 +12,32 @@ struct BirdImageView: View {
     var image: UIImage?
     var author: String
     var description: String
+    var isLoading: Bool
 
     var body: some View {
         VStack {
-            if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else {
+            if isLoading {
                 Color.clear
                     .frame(maxWidth: .infinity)
                     .overlay(ProgressView())
                     .aspectRatio(1.5, contentMode: .fit)
+            } else {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    Color.clear
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .foregroundStyle(.red)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth: 60)
+                        )
+                        .aspectRatio(1.5, contentMode: .fit)
+                }
             }
             HStack {
                 Text(description)
@@ -42,6 +56,6 @@ struct BirdImageView: View {
 
 struct BirdImageView_Previews: PreviewProvider {
     static var previews: some View {
-        BirdImageView(image: UIImage(named: "Logo")!, author: "Donald Duck", description: "Ein Vogel")
+        BirdImageView(image: UIImage(named: "Logo")!, author: "Donald Duck", description: "Ein Vogel", isLoading: false)
     }
 }

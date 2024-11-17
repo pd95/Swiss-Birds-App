@@ -10,9 +10,10 @@ import Combine
 import os.log
 import SwiftUI
 
+@MainActor
 class BirdDetailViewModel: ObservableObject {
 
-    typealias UIImagePublisher = AnyPublisher<(Int, UIImage?), Error>
+    private let logger = Logger(subsystem: "BirdDetailViewModel", category: "general")
 
     var bird: Species = .placeholder
 
@@ -35,6 +36,7 @@ class BirdDetailViewModel: ObservableObject {
         var image: UIImage?
         let author: String
         let description: String
+        var isLoading = true
     }
 
     func setBird(_ bird: Species) {
@@ -42,19 +44,20 @@ class BirdDetailViewModel: ObservableObject {
             self.bird = bird
             details = nil
             imageDetails = []
-            fetchData()
+            fetchSpeciesDetail()
         }
     }
 
     deinit {
-        print("BirdDetailViewModel.\(#function)")
+        logger.info("BirdDetailViewModel.\(#function)")
     }
 
     var getSpecieCancellable: AnyCancellable?
     var getImageDetailsCancellable: AnyCancellable?
     var getVoiceCancellable: AnyCancellable?
 
-    func fetchData() {
+    func fetchSpeciesDetail() {
+        logger.info("BirdDetailViewModel.\(#function)")
         let speciesId = bird.speciesId
         getSpecieCancellable = VdsAPI
             .getSpecie(for: speciesId)
@@ -65,7 +68,7 @@ class BirdDetailViewModel: ObservableObject {
                     guard let self = self else { return }
                     if case .failure(let error) = completion {
                         self.error = error
-                        os_log("getSpecie error: %{Public}@", error.localizedDescription)
+                        logger.error("getSpecie error: \(error.localizedDescription, privacy: .public)")
                     }
                 },
                 receiveValue: { [weak self] details in
@@ -87,80 +90,51 @@ class BirdDetailViewModel: ObservableObject {
                         self.imageDetails = imageDetails
                     }
                 })
-
-        getImageDetailsCancellable = $details
-            .compactMap {$0}
-            .receive(on: DispatchQueue.main)
-            .map { _ = $0 ; return self.imageDetails }
-            .setFailureType(to: Error.self)
-            .flatMap {(imageDetails: [ImageDetails]) -> AnyPublisher<[(Int, UIImage?)], Error> in
-                // Generate publisher for each missing image
-                let publishers = imageDetails
-                    .filter { $0.image == nil }
-                    .map({ imageDetail -> UIImagePublisher in
-                        self.fetchImage(imageDetail: imageDetail)
-                    })
-
-                let sequence = Publishers.Sequence<[UIImagePublisher], Error>(sequence: publishers)
-                return sequence.flatMap { $0 }.collect()
-                    .eraseToAnyPublisher()
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    if case .failure(let error) = completion {
-                        self.error = error
-                        os_log("fetch imageDetails error: %{Public}@", error.localizedDescription)
-                    }
-                },
-                receiveValue: { [weak self] result in
-                    guard let self = self else { return }
-                    var imageDetails = self.imageDetails
-                    result.forEach { element in
-                        let (index, image) = element
-                        if imageDetails[index].image == nil && image != nil {
-                            imageDetails[index].image = image
-                        }
-                    }
-                    self.imageDetails = imageDetails
-                    self.objectWillChange.send()
-                })
-
-        // Fetch voice data 1s after details have been load
-        getVoiceCancellable = $details
-            .filter({$0?.videosBilderStimmen == "1"})
-            .combineLatest($imageDetails)
-            .compactMap({ $0.1.first })
-            .filter({ $0.image != nil })
-            .setFailureType(to: Error.self)
-            .flatMap { _ -> AnyPublisher<Data?, Error> in
-                VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess)
-                    .map { (d: Data) -> Data? in d }
-                    .eraseToAnyPublisher()
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { completion in
-                    if case .failure(let error) = completion {
-                        os_log("fetch voiceData error: %{Public}@", error.localizedDescription)
-                        if let urlError = error as? URLError, let unavailableReason = urlError.networkUnavailableReason {
-                            os_log("fetch voiceData failed due to unavailableReason = %{Public}@", unavailableReason.description)
-                        }
-                    }
-                },
-                receiveValue: { [weak self] data in
-                    guard let self = self else { return }
-                    self.voiceData = data
-            })
     }
 
-    private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
-        VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index+1)
-            .map { UIImage(data: $0) }
-            // .replaceError(with: nil)
-            .map { (image: UIImage?) -> (Int, UIImage?) in
-                return (imageDetail.index, image)
+    func fetchData() async {
+        let logger = self.logger
+        let speciesId = bird.speciesId
+        logger.info("BirdDetailViewModel.\(#function) for \(speciesId)")
+
+        await withTaskGroup(of: (Int, UIImage?, Data?).self) { group in
+            for imageDetail in imageDetails {
+                group.addTask {
+                    do {
+                        for try await data in VdsAPI.getSpecieImage(for: speciesId, number: imageDetail.index+1).values {
+                            if let image = UIImage(data: data) {
+                                return (imageDetail.index, image, nil)
+                            }
+                        }
+                    } catch {
+                        logger.error("Error loading image at index \(imageDetail.index): \(error.localizedDescription, privacy: .public)")
+                    }
+                    return (imageDetail.index, nil, nil)
+                }
             }
-            .eraseToAnyPublisher()
+
+            if details?.videosBilderStimmen == "1" {
+                group.addTask {
+                    do {
+                        for try await data in VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess).values {
+                            return (-1, nil, data)
+                        }
+                    } catch {
+                        logger.error("Error loading voice data: \(error.localizedDescription, privacy: .public)")
+                    }
+                    return (-1, nil, nil)
+                }
+            }
+
+            for await (index, image, data) in group {
+                logger.info("BirdDetailViewModel.\(#function): Received result at index \(index).")
+                if let data {
+                    voiceData = data
+                } else {
+                    imageDetails[index].image = image
+                    imageDetails[index].isLoading = false
+                }
+            }
+        }
     }
 }

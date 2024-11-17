@@ -160,6 +160,9 @@ struct BirdDetail: View {
             favoriteButton
             shareButton
         })
+        .task {
+            await model.fetchData()
+        }
         .onDisappear {
             stopSound()
         }
@@ -170,7 +173,8 @@ struct BirdDetail: View {
             ForEach(model.imageDetails) { imageDetails in
                 BirdImageView(image: imageDetails.image,
                               author: imageDetails.author,
-                              description: imageDetails.description)
+                              description: imageDetails.description,
+                              isLoading: imageDetails.isLoading)
                     .frame(maxWidth: imageDetails.image == nil ? 700 / 1.5 : imageDetails.image!.size.width / 1.5)
                     .accessibility(identifier: "bird_image_\(imageDetails.index+1)")
             }
