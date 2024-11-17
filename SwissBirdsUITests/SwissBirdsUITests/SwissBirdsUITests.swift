@@ -220,7 +220,10 @@ class SwissBirdsUITests: XCTestCase {
 
         // Type Cancel
         let cancelButton = MyUIElements.searchTextCancelButton.element
-        _ = cancelButton.waitForExistence(timeout: wait4existenceTimeout)
+        if !cancelButton.waitForExistence(timeout: wait4existenceTimeout) {
+            searchText.tap()
+            _ = cancelButton.waitForExistence(timeout: wait4existenceTimeout)
+        }
         cancelButton.tap()
 
         // Enter filter criteria
