@@ -16,12 +16,6 @@ extension Bundle {
     }
 }
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
 extension String {
 
     /// Matches string with a regular expression, returning an array of `String`

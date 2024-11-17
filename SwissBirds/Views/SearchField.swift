@@ -12,6 +12,7 @@ struct SearchField: View {
     @Binding public var searchText: String
 
     @Binding public var isEditing: Bool
+    @FocusState private var isFocusd: Bool
 
     var body: some View {
         HStack(spacing: 0) {
@@ -52,10 +53,10 @@ struct SearchField: View {
             if isEditing {
                 Button(action: {
                     withAnimation {
+                        isFocusd = false
                         isEditing = false
                         searchText = ""
                     }
-                    UIApplication.shared.endEditing()
                 }) {
                     Text("Cancel")
                 }
@@ -66,6 +67,14 @@ struct SearchField: View {
                 .transition(.move(edge: .trailing))
             }
 
+        }
+        .focused($isFocusd)
+        .onChange(of: isFocusd) { newValue in
+            if newValue && !isEditing {
+                withAnimation {
+                    isEditing = true
+                }
+            }
         }
         .transition(.move(edge: .trailing))
         .buttonStyle(PlainButtonStyle())
@@ -92,9 +101,6 @@ struct SearchField_Preview_Helper: View {
             Button(action: {
                 withAnimation {
                     edit.toggle()
-                    if !edit {
-                        UIApplication.shared.endEditing()
-                    }
                 }
             }) {
                 Text(verbatim: "Toggle Edit")

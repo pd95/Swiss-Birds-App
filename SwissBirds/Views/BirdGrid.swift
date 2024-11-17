@@ -44,8 +44,7 @@ struct BirdGrid: View {
                 if state.isEditingSearchField {
                     print("Searching was enabled, but drag occurred => endEditing")
                     withAnimation {
-                        state.isEditingSearchField = false
-                        UIApplication.shared.endEditing()
+                        state.stopEditing()
                     }
                 }
             }))

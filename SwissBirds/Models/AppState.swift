@@ -361,11 +361,15 @@ class AppState: ObservableObject {
             .store(in: &cancellables)
     }
 
+    func stopEditing() {
+        if isEditingSearchField {
+            isEditingSearchField = false
+        }
+    }
+
     func showBird(_ species: Species) {
         logger.debug("\(#function): \(species.speciesId)")
-        if isEditingSearchField {
-            UIApplication.shared.endEditing()
-        }
+        stopEditing()
 
         withAnimation {
             navigationState.mainNavigation = .birdDetails(species)
@@ -374,9 +378,7 @@ class AppState: ObservableObject {
 
     func showFilter() {
         logger.debug(#function)
-        if isEditingSearchField {
-            UIApplication.shared.endEditing()
-        }
+        stopEditing()
 
         withAnimation {
             navigationState.mainNavigation = .filterList
@@ -385,9 +387,7 @@ class AppState: ObservableObject {
 
     func showSortOptions() {
         logger.debug(#function)
-        if isEditingSearchField {
-            UIApplication.shared.endEditing()
-        }
+        stopEditing()
 
         withAnimation {
             navigationState.mainNavigation = .sortOptions
@@ -396,9 +396,7 @@ class AppState: ObservableObject {
 
     func showBirdOfTheDayNow() {
         logger.debug(#function)
-        if isEditingSearchField {
-            UIApplication.shared.endEditing()
-        }
+        stopEditing()
 
         withAnimation {
             navigationState.mainNavigation = nil
