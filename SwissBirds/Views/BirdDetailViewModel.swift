@@ -155,7 +155,7 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     private func fetchImage(imageDetail: ImageDetails) -> UIImagePublisher {
-        VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index)
+        VdsAPI.getSpecieImage(for: bird.speciesId, number: imageDetail.index+1)
             .map { UIImage(data: $0) }
             // .replaceError(with: nil)
             .map { (image: UIImage?) -> (Int, UIImage?) in

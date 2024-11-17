@@ -72,13 +72,14 @@ enum VdsAPI {
     static let jsonDataPath = "wp-content/assets/json/bird"
 
     // https://www.vogelwarte.ch/wp-content/assets/images/bird/headshots/80x80/1140@2x.jpg
-    // https://www.vogelwarte.ch/wp-content/assets/images/bird/artbilder/700px/1140_0.jpg
+    // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/1140_1.jpg
     static let imageAssetPath = "wp-content/assets/images/bird"
 
     // https://www.vogelwarte.ch/wp-content/assets/media/voices/1140.mp3
     static let voiceAssetPath = "wp-content/assets/media/voices"
 
     private static func fetchData(_ request: URLRequest) -> AnyPublisher<Data, Error> {
+        logger.info("\(#function): \(request.url!.absoluteString)")
         return urlSession
             .dataTaskPublisher(for: request)
             .retry(1)
@@ -160,8 +161,8 @@ enum VdsAPI {
             .eraseToAnyPublisher()
     }
 
-    static func getSpecieImage(for id: Int, number: Int, size: Int = 700) -> AnyPublisher<Data, Error> {
-        return fetchData(URLRequest(url: base.appendingPathComponent("\(imageAssetPath)/artbilder/\(size)px/\(String(format: "%04d", id))_\(number).jpg")))
+    static func getSpecieImage(for id: Int, number: Int) -> AnyPublisher<Data, Error> {
+        return fetchData(URLRequest(url: base.appendingPathComponent("\(imageAssetPath)/species/\(id)_\(number).jpg")))
     }
 
     static func getSpecieHeadshot(for id: Int, scale: Int = 2) -> AnyPublisher<Data, Error> {
