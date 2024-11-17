@@ -22,7 +22,7 @@ final class CloudDefaults: NSObject {
     private var notificationCenter: NotificationCenter
 
     private var synchronizedUserDefaultKeys = [String]()
-    private let logger = Logger(subsystem: "SettingsStore", category: "general")
+    private let logger = Logger(subsystem: "CloudDefaults", category: "general")
 
     init(userDefaults: UserDefaults = .standard, ubiquitousKeyValueStore: NSUbiquitousKeyValueStore = .default, notificationCenter: NotificationCenter = .default) {
         self.userDefaults = userDefaults
