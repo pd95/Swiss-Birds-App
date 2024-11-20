@@ -9,9 +9,8 @@
 
 xcresult-parser/**
 
-# Ignore Birds and Filter asset catalog data
+# Ignore Birds asset catalog data
 Birds*.xcassets
-Filter*.xcassets
 
 # Ignoring raw data files
 data-scripts/data
