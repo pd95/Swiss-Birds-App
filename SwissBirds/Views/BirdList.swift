@@ -12,6 +12,7 @@ struct BirdList: View {
 
     @EnvironmentObject private var state: AppState
     @EnvironmentObject private var favoritesManager: FavoritesManager
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         VStack(spacing: 0) {
@@ -55,8 +56,9 @@ struct BirdList: View {
     func sectionHeader(for group: SectionGroup) -> some View {
         HStack {
             if group.id.hasPrefix("filter") {
-                SymbolView(symbolName: group.id, pointSize: 24)
-                    .padding(4)
+                SymbolView(symbolName: group.id)
+                    .foregroundStyle(colorScheme == .dark ? .white : .black)
+                    .font(.title3)
             }
             Text(LocalizedStringKey(group.name))
                 .textCase(nil)

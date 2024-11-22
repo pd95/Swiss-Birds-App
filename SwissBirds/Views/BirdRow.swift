@@ -89,12 +89,14 @@ struct BirdRow: View {
 
             if !sizeCategory.isAccessibilityCategory {
                 if sortColumn != .filterType(.entwicklungatlas) && hasEntwicklungsAtlasSymbol() {
-                    SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas), pointSize: 24)
+                    SymbolView(symbolName: bird.filterSymbolName(.entwicklungatlas))
                         .accessibility(hidden: true)
+                        .font(.title3)
                 }
                 if sortColumn != .filterType(.vogelgruppe) {
-                    SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe), pointSize: 24, color: .secondary)
+                    SymbolView(symbolName: bird.filterSymbolName(.vogelgruppe))
                         .accessibility(hidden: true)
+                        .font(.title3)
                 }
             }
 

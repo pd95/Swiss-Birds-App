@@ -31,7 +31,7 @@ struct CharacteristicView: View {
                     Spacer(minLength: 30.0)
                 }
                 if !characteristic.symbol.isEmpty {
-                    SymbolView(symbolName: characteristic.symbol, pointSize: 16)
+                    SymbolView(symbolName: characteristic.symbol)
                         .accessibility(hidden: true)
                 }
                 Text(characteristic.text)

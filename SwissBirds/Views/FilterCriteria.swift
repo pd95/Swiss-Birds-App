@@ -98,6 +98,7 @@ struct FilterCheckButton: View {
                 Checkmark(checked: managedList.contains(filter: filter))
                 if let symbolName = symbolName {
                     SymbolView(symbolName: symbolName)
+                        .tint(.primary)
                 }
                 Text(LocalizedStringKey(text))
             }

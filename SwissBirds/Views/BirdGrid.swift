@@ -54,14 +54,14 @@ struct BirdGrid: View {
     func sectionHeader(for group: SectionGroup) -> some View {
         HStack {
             if group.id.hasPrefix("filter") {
-                SymbolView(symbolName: group.id, pointSize: 24)
+                SymbolView(symbolName: group.id)
                     .padding(4)
             }
             Text(LocalizedStringKey(group.name))
                 .textCase(nil)
             Spacer()
         }
-        .font(.headline)
+        .font(.title3.bold())
         .padding(16)
         .background(
             Color(.tertiarySystemBackground)
