@@ -103,7 +103,7 @@ enum Characteristic: Identifiable {
             .text(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus in ornare quam viverra orci sagittis eu volutpat odio. ")
         ]),
         .header(text: "Eigenschaften", children: [
-            // .text(label: FilterType.vogelgruppe.rawValue, text: Filter.allFilters.first!, symbol: Filter.allFilters.first!),
+            .text(label: FilterType.vogelgruppe.rawValue, text: "Spatzen", symbol: "filtervogelgruppe-52"),
             .text(label: "Laenge_cm", text: "10"),
             .text(label: "Spannweite_cm", text: "20"),
             .text(label: "Gewicht_g", text: "30"),
