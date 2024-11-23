@@ -41,6 +41,7 @@ class BirdDetailViewModel: ObservableObject {
 
     func setBird(_ bird: Species) {
         if self.bird.id != bird.id {
+            cancelRunningFetches()
             self.bird = bird
             details = nil
             imageDetails = []
@@ -52,9 +53,13 @@ class BirdDetailViewModel: ObservableObject {
         logger.info("BirdDetailViewModel.\(#function)")
     }
 
-    var getSpecieCancellable: AnyCancellable?
-    var getImageDetailsCancellable: AnyCancellable?
-    var getVoiceCancellable: AnyCancellable?
+    private var getSpecieCancellable: AnyCancellable?
+    private var dataTaskGroup: TaskGroup<(Int, UIImage?, Data?)>?
+
+    func cancelRunningFetches() {
+        getSpecieCancellable?.cancel()
+        dataTaskGroup?.cancelAll()
+    }
 
     func fetchSpeciesDetail() {
         logger.info("BirdDetailViewModel.\(#function)")
@@ -92,13 +97,18 @@ class BirdDetailViewModel: ObservableObject {
                 })
     }
 
+
     func fetchData() async {
         let logger = self.logger
         let speciesId = bird.speciesId
         logger.info("BirdDetailViewModel.\(#function) for \(speciesId)")
 
+        // Cancel all child tasks of running group
+        dataTaskGroup?.cancelAll()
         await withTaskGroup(of: (Int, UIImage?, Data?).self) { group in
+            self.dataTaskGroup = group
             for imageDetail in imageDetails {
+                logger.info("BirdDetailViewModel.\(#function) adding data task for \(imageDetail.index)")
                 group.addTask {
                     do {
                         for try await data in VdsAPI.getSpecieImage(for: speciesId, number: imageDetail.index+1).values {
@@ -114,6 +124,7 @@ class BirdDetailViewModel: ObservableObject {
             }
 
             if details?.videosBilderStimmen == "1" {
+                logger.info("BirdDetailViewModel.\(#function) adding data task for \(-1)")
                 group.addTask {
                     do {
                         for try await data in VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess).values {
@@ -127,14 +138,18 @@ class BirdDetailViewModel: ObservableObject {
             }
 
             for await (index, image, data) in group {
-                logger.info("BirdDetailViewModel.\(#function): Received result at index \(index).")
-                if let data {
-                    voiceData = data
-                } else {
-                    imageDetails[index].image = image
-                    imageDetails[index].isLoading = false
+                logger.info("BirdDetailViewModel.\(#function): Received result for index \(index) (cancelled = \(Task.isCancelled)).")
+
+                if Task.isCancelled == false {
+                    if let data {
+                        voiceData = data
+                    } else {
+                        imageDetails[index].image = image
+                        imageDetails[index].isLoading = false
+                    }
                 }
             }
+            self.dataTaskGroup = nil
         }
     }
 }
