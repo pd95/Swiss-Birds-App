@@ -15,6 +15,20 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
 
     let logger = Logger(subsystem: "SceneDelegate", category: "general")
 
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
+        logger.info(#function)
+        if let shortcutItem = connectionOptions.shortcutItem {
+            if let url = URL(string: shortcutItem.type) {
+                logger.info("request handling of shortcut item url \(url, privacy: .public)")
+                scene.open(url, options: nil)
+            }
+        }
+    }
+
     func windowScene(
         _ windowScene: UIWindowScene,
         performActionFor shortcutItem: UIApplicationShortcutItem,
