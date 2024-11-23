@@ -21,11 +21,11 @@ final class SceneDelegate: NSObject, UIWindowSceneDelegate {
         completionHandler: @escaping (Bool) -> Void
     ) {
         guard let url = URL(string: shortcutItem.type) else {
-            logger.error("\(#function): invalid shortcut item type: \(shortcutItem.type)")
+            logger.error("\(#function, privacy: .public): invalid shortcut item type: \(shortcutItem.type, privacy: .public)")
             completionHandler(false)
             return
         }
-        logger.info("\(#function): request handling of url \(url)")
+        logger.info("\(#function, privacy: .public): request handling of url \(url, privacy: .public)")
 
         windowScene.open(url, options: nil, completionHandler: completionHandler)
     }

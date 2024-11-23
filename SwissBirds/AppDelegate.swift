@@ -19,7 +19,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // Override point for customization after application launch.
-        logger.debug("\(#function): \(AppState.shared.description)")
+        logger.debug("\(#function, privacy: .public): \(AppState.shared.description, privacy: .public)")
         return true
     }
 
@@ -30,7 +30,7 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         configurationForConnecting connectingSceneSession: UISceneSession,
         options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
-        logger.info("\(#function) configuring a new scene")
+        logger.debug("\(#function, privacy: .public) configuring a new scene")
         let sceneConfiguration = UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
         sceneConfiguration.delegateClass = SceneDelegate.self
 

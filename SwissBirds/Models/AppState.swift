@@ -512,18 +512,11 @@ extension AppState {
     }
 
     func handleOpenURL(_ url: URL) {
-        logger.debug("\(#function)(\(url, privacy: .public))")
-    }
+        logger.debug("\(#function, privacy: .public)(\(url, privacy: .public))")
+        logger.debug("\(url.absoluteString, privacy: .public)")
 
-    @discardableResult
-    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-        logger.debug("\(#function)(\(shortcutItem.type, privacy: .public))")
-
-        if shortcutItem.type == "BirdOfTheDay" {
-            let appState = AppState.shared
-            appState.checkBirdOfTheDay(showAlways: true)
-            return true
+        if url.absoluteString.contains("BirdOfTheDay") {
+            checkBirdOfTheDay(showAlways: true)
         }
-        return false
     }
 }

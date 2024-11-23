@@ -29,7 +29,7 @@
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Vogel des Tages</string>
 			<key>UIApplicationShortcutItemType</key>
-			<string>BirdOfTheDay</string>
+			<string>swissbirds://BirdOfTheDay</string>
 		</dict>
 	</array>
 </dict>
