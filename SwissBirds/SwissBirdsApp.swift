@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct SwissBirdsApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @Environment(\.scenePhase) private var scenePhase
 
     @StateObject private var appState = AppState.shared
