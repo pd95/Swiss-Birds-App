@@ -31,6 +31,7 @@ struct SwissBirdsApp: App {
                 .environmentObject(appState)
                 .environmentObject(favoritesManager)
                 .onContinueUserActivity(NSUserActivity.showBirdTheDayActivityType, perform: appState.handleUserActivity)
+                .onOpenURL(perform: appState.handleOpenURL)
         }
         .onChange(of: scenePhase) { newValue in
             print("scenePhase", newValue)

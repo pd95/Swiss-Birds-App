@@ -511,6 +511,10 @@ extension AppState {
         logger.debug("\(#function)(\(userActivity.activityType, privacy: .public)): current state \(self.description, privacy: .public)")
     }
 
+    func handleOpenURL(_ url: URL) {
+        logger.debug("\(#function)(\(url, privacy: .public))")
+    }
+
     @discardableResult
     func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
         logger.debug("\(#function)(\(shortcutItem.type, privacy: .public))")
