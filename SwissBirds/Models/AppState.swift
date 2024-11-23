@@ -85,10 +85,10 @@ class AppState: ObservableObject {
             .setFailureType(to: Error.self)
             .flatMap({ language in
                 // Fetch for each languages
-                logger.debug("Fetch bird data for \(language)")
+                logger.debug("Fetch bird data for \(language, privacy: .public)")
                 return VdsAPI.getBirds(language: language)
                     .map { birds -> [String: VdsListElement] in
-                        logger.debug("Received bird data in \(language)")
+                        logger.debug("Received bird data in \(language, privacy: .public)")
                         var dictionary = [String: VdsListElement]()
                         birds.forEach { dictionary[$0.artID] = $0 }
                         return dictionary
@@ -97,7 +97,7 @@ class AppState: ObservableObject {
             })
             .collect()
             .map({ (allBirdData: [(language: LanguageIdentifier, birds: [String: VdsListElement])]) -> [Species] in
-                logger.debug("Collected all bird data for \(allBirdData.map(\.language))")
+                logger.debug("Collected all bird data for \(allBirdData.map(\.language), privacy: .public)")
 
                 // Merge for easier mapping
                 var indexedBirdData = [LanguageIdentifier: [String: VdsListElement]]()
@@ -261,10 +261,10 @@ class AppState: ObservableObject {
 
     func getHeadShot(for bird: Species, at scale: Int = 2) -> AnyPublisher<UIImage?, Never> {
         if let image = headShotsCache[bird.speciesId] {
-            //logger.debug("\(#function): \(bird.speciesId) returning existing image")
+            //logger.debug("\(#function, privacy: .public): \(bird.speciesId) returning existing image")
             return Just(image).eraseToAnyPublisher()
         }
-        logger.debug("\(#function): \(bird.speciesId) fetching image")
+        logger.debug("\(#function, privacy: .public): \(bird.speciesId) fetching image")
         return VdsAPI
             .getSpecieHeadshot(for: bird.speciesId, scale: max(scale, Int(UIScreen.main.scale)))
             .receive(on: DispatchQueue.main)
@@ -278,7 +278,7 @@ class AppState: ObservableObject {
     }
 
     func checkBirdOfTheDay(showAlways: Bool = false) {
-        logger.debug("\(#function)(showAlways: \(showAlways))")
+        logger.debug("\(#function, privacy: .public)(showAlways: \(showAlways))")
 
         // No need to refetch the data if we already checked today...
         if let lastCheckDate = birdOfTheDayCheckDate,
@@ -307,7 +307,7 @@ class AppState: ObservableObject {
                 receiveValue: { [weak self] (birdOfTheDay) in
                     guard let self = self else { return }
 
-                    logger.debug("getBirdOfTheDaySpeciesIDandURL returned \(birdOfTheDay?.speciesID.description ?? "nil"))")
+                    logger.debug("getBirdOfTheDaySpeciesIDandURL returned \(birdOfTheDay?.speciesID.description ?? "nil", privacy: .public))")
                     self.birdOfTheDay = birdOfTheDay
                     self.birdOfTheDayCheckDate = Date()
                     if let botd = birdOfTheDay {
@@ -336,10 +336,10 @@ class AppState: ObservableObject {
 
     func getBirdOfTheDay() {
         guard let (url, speciesId) = birdOfTheDay else {
-            logger.debug("\(#function): bail out, du to unknown bird of the day")
+            logger.debug("\(#function, privacy: .public): bail out, du to unknown bird of the day")
             return
         }
-        logger.debug("\(#function): fetching image for bird of the day (\(speciesId))")
+        logger.debug("\(#function, privacy: .public): fetching image for bird of the day (\(speciesId))")
         VdsAPI
             .getBirdOfTheDay(for: speciesId, from: url)
             .map { [weak self] url in
@@ -369,7 +369,7 @@ class AppState: ObservableObject {
     }
 
     func showBird(_ species: Species) {
-        logger.debug("\(#function): \(species.speciesId)")
+        logger.debug("\(#function, privacy: .public): \(species.speciesId)")
         stopEditing()
 
         withAnimation {
@@ -428,7 +428,7 @@ extension AppState: CustomStringConvertible {
 extension AppState {
 
     func restore(from activity: NSUserActivity) {
-        logger.debug("\(#function)(from: \(activity.activityType, privacy: .public))")
+        logger.debug("\(#function, privacy: .public)(from: \(activity.activityType, privacy: .public))")
         guard activity.activityType == Bundle.main.activityType,
             let stateArray: [String: Any] = activity.userInfo as? [String: Any]
             else { return }
@@ -455,11 +455,11 @@ extension AppState {
 //            self.sortOptions.column = columnOption
 //        }
 
-        logger.debug("\(#function)(from: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
+        logger.debug("\(#function, privacy: .public)(from: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
     }
 
     func store(in activity: NSUserActivity) {
-        logger.debug("\(#function)(in: \(activity.activityType, privacy: .public))")
+        logger.debug("\(#function, privacy: .public)(in: \(activity.activityType, privacy: .public))")
         var storableList = [String: [Filter.Id]]()
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
@@ -474,7 +474,7 @@ extension AppState {
         ]
         activity.addUserInfoEntries(from: stateArray)
 
-        logger.debug("\(#function)(in: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
+        logger.debug("\(#function, privacy: .public)(in: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
     }
 
     private enum Key {
@@ -488,7 +488,7 @@ extension AppState {
 
 extension AppState {
     func handleUserActivity(_ userActivity: NSUserActivity) {
-        logger.debug("\(#function)(\(userActivity.activityType, privacy: .public)): \(self.description)")
+        logger.debug("\(#function, privacy: .public)(\(userActivity.activityType, privacy: .public)): \(self.description)")
 
         if userActivity.activityType == NSUserActivity.showBirdActivityType {
             guard let birdID = userActivity.userInfo?[NSUserActivity.ActivityKeys.birdID.rawValue] as? Int
@@ -508,7 +508,7 @@ extension AppState {
             logger.debug("handleUserActivity: Skipping unsupported \(userActivity.activityType, privacy: .public)")
             return
         }
-        logger.debug("\(#function)(\(userActivity.activityType, privacy: .public)): current state \(self.description, privacy: .public)")
+        logger.debug("\(#function, privacy: .public)(\(userActivity.activityType, privacy: .public)): current state \(self.description, privacy: .public)")
     }
 
     func handleOpenURL(_ url: URL) {

@@ -50,7 +50,7 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     deinit {
-        logger.info("BirdDetailViewModel.\(#function)")
+        logger.info("BirdDetailViewModel.\(#function, privacy: .public)")
     }
 
     private var getSpecieCancellable: AnyCancellable?
@@ -62,7 +62,7 @@ class BirdDetailViewModel: ObservableObject {
     }
 
     func fetchSpeciesDetail() {
-        logger.info("BirdDetailViewModel.\(#function)")
+        logger.info("BirdDetailViewModel.\(#function, privacy: .public)")
         let speciesId = bird.speciesId
         getSpecieCancellable = VdsAPI
             .getSpecie(for: speciesId)
@@ -101,14 +101,14 @@ class BirdDetailViewModel: ObservableObject {
     func fetchData() async {
         let logger = self.logger
         let speciesId = bird.speciesId
-        logger.info("BirdDetailViewModel.\(#function) for \(speciesId)")
+        logger.info("BirdDetailViewModel.\(#function, privacy: .public) for \(speciesId)")
 
         // Cancel all child tasks of running group
         dataTaskGroup?.cancelAll()
         await withTaskGroup(of: (Int, UIImage?, Data?).self) { group in
             self.dataTaskGroup = group
             for imageDetail in imageDetails {
-                logger.info("BirdDetailViewModel.\(#function) adding data task for \(imageDetail.index)")
+                logger.info("BirdDetailViewModel.\(#function, privacy: .public) adding data task for \(imageDetail.index)")
                 group.addTask {
                     do {
                         for try await data in VdsAPI.getSpecieImage(for: speciesId, number: imageDetail.index+1).values {
@@ -124,7 +124,7 @@ class BirdDetailViewModel: ObservableObject {
             }
 
             if details?.videosBilderStimmen == "1" {
-                logger.info("BirdDetailViewModel.\(#function) adding data task for \(-1)")
+                logger.info("BirdDetailViewModel.\(#function, privacy: .public) adding data task for \(-1)")
                 group.addTask {
                     do {
                         for try await data in VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess).values {
@@ -138,7 +138,7 @@ class BirdDetailViewModel: ObservableObject {
             }
 
             for await (index, image, data) in group {
-                logger.info("BirdDetailViewModel.\(#function): Received result for index \(index) (cancelled = \(Task.isCancelled)).")
+                logger.info("BirdDetailViewModel.\(#function, privacy: .public): Received result for index \(index) (cancelled = \(Task.isCancelled)).")
 
                 if Task.isCancelled == false {
                     if let data {

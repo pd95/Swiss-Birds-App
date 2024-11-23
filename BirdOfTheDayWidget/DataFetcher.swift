@@ -38,7 +38,7 @@ class DataFetcher: ObservableObject {
 
     var result: BirdOfTheDay? {
         didSet {
-            logger.log("\(#function) set new result")
+            logger.log("\(#function, privacy: .public) set new result")
             if let result {
                 do {
                     let data = try JSONEncoder().encode(result)
@@ -120,19 +120,19 @@ class DataFetcher: ObservableObject {
     }
 
     func getBirdOfTheDay(completion: @escaping (BirdOfTheDay) -> Void) {
-        logger.log("\(#function) start")
+        logger.log("\(#function, privacy: .public) start")
         guard let result,
               reloadDate > Date()
         else {
             logger.info("getBirdOfTheDay: fetching new data")
             getBirdOfTheDayCompletionHandlers.append(completion)
             fetchBirdOfTheDay()
-            logger.log("\(#function) end while fetching new data")
+            logger.log("\(#function, privacy: .public) end while fetching new data")
             return
         }
         logger.info("getBirdOfTheDay: returning existing data \(result.speciesID)")
         completion(result)
-        logger.log("\(#function) end reusing existing data")
+        logger.log("\(#function, privacy: .public) end reusing existing data")
     }
 }
 

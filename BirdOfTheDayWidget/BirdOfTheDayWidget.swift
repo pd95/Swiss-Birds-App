@@ -20,21 +20,21 @@ struct BirdOfTheDayProvider: TimelineProvider {
         let bird = BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
         let entry = SimpleEntry(bird: bird, image: image)
-        logger.log("\(#function) returning \(entry)")
+        logger.log("\(#function, privacy: .public) returning \(entry)")
         return entry
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        logger.log("\(#function) start: \(context)")
+        logger.log("\(#function, privacy: .public) start: \(context)")
         let bird = BirdOfTheDay.example
         let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize)
         let entry = SimpleEntry(bird: bird, image: image)
         completion(entry)
-        logger.log("\(#function) returning \(entry)")
+        logger.log("\(#function, privacy: .public) returning \(entry)")
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        logger.log("\(#function) start: \(context)")
+        logger.log("\(#function, privacy: .public) start: \(context)")
         let displayScale = UIScreen.main.scale
 
         dataFetcher.getBirdOfTheDay { (bird: BirdOfTheDay) in
@@ -45,10 +45,10 @@ struct BirdOfTheDayProvider: TimelineProvider {
             let image = UIImage.resizedImage(from: bird.fileURL, displaySize: context.displaySize, displayScale: displayScale)
             let entry = SimpleEntry(bird: bird, image: image)
             let timeline = Timeline(entries: [entry], policy: .after(reloadDate))
-            logger.log("\(#function) adding single entry \(entry)")
+            logger.log("\(#function, privacy: .public) adding single entry \(entry)")
             completion(timeline)
         }
-        logger.log("\(#function) end")
+        logger.log("\(#function, privacy: .public) end")
     }
 }
 

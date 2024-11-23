@@ -79,7 +79,7 @@ enum VdsAPI {
     static let voiceAssetPath = "wp-content/assets/media/voices"
 
     private static func fetchData(_ request: URLRequest) -> AnyPublisher<Data, Error> {
-        logger.info("\(#function): \(request.url!.absoluteString)")
+        logger.info("\(#function, privacy: .public): \(request.url!.absoluteString, privacy: .public)")
         return urlSession
             .dataTaskPublisher(for: request)
             .retry(1)
@@ -185,13 +185,13 @@ enum VdsAPI {
                 // https://www.vogelwarte.ch/wp-content/assets/images/bird/species/3500_0_9to4.jpg
                 let matches = html.matches(regex: "wp-content/assets/images/bird/species/([0-9]+)_0_\\dto\\d.jpg")
                 let matchCount = matches.count
-                logger.debug("getBirdOfTheDaySpeciesIDandURL: \(matches.count) regex matches found -> \(matches.debugDescription)")
+                logger.debug("getBirdOfTheDaySpeciesIDandURL: \(matches.count) regex matches found -> \(matches.debugDescription, privacy: .public)")
                 if matchCount >= 2, let id = Int(matches[matchCount-1]) {
                     let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(id)_0_9to4.jpg")
-                    logger.debug("getBirdOfTheDaySpeciesIDandURL: Returning id \(id) and \(url)")
+                    logger.debug("getBirdOfTheDaySpeciesIDandURL: Returning id \(id) and \(url, privacy: .public)")
                     return (url, id)
                 }
-                logger.error("getBirdOfTheDaySpeciesIDandURL: Unable to extract bird ID and URL: \(matches.count) regex matches found -> \(matches.debugDescription)")
+                logger.error("getBirdOfTheDaySpeciesIDandURL: Unable to extract bird ID and URL: \(matches.count) regex matches found -> \(matches.debugDescription, privacy: .public)")
                 throw APIError.invalidResponse
             }
             .eraseToAnyPublisher()
@@ -201,11 +201,11 @@ enum VdsAPI {
         let speciesID = String(format: "%04d", id)
         let targetURL = cacheLocation.appendingPathComponent("bod_\(speciesID).jpg", isDirectory: false)
         if FileManager.default.fileExists(atPath: targetURL.path) {
-            logger.debug("getBirdOfTheDay: returning existing file from \(targetURL)")
+            logger.debug("getBirdOfTheDay: returning existing file from \(targetURL, privacy: .public)")
             return Just(targetURL).setFailureType(to: Error.self).eraseToAnyPublisher()
         }
         let url = base.appendingPathComponent("wp-content/assets/images/bird/species/\(speciesID)_0_9to4.jpg")
-        logger.debug("getBirdOfTheDay: loading from \(url)")
+        logger.debug("getBirdOfTheDay: loading from \(url, privacy: .public)")
         return downloadData(URLRequest(url: url), to: targetURL)
     }
 }

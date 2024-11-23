@@ -77,7 +77,7 @@ class SettingsStore {
     // By updating userDefaults more changes may trigger more calls to this function.
     private var checkRunning = false
     private func checkAndSetVersionAndBuildNumber() {
-        logger.debug("\(#function) running on \(Thread.current.description, privacy: .public)")
+        logger.debug("\(#function, privacy: .public) running on \(Thread.current.description, privacy: .public)")
         guard checkRunning == false, Thread.isMainThread == true else {
             return
         }
@@ -98,7 +98,7 @@ class SettingsStore {
         }
 
         if appVersion != currentVersion {
-            logger.debug("\(#function) set appVersion")
+            logger.debug("\(#function, privacy: .public) set appVersion")
             appVersion = currentVersion
         }
 
@@ -108,7 +108,7 @@ class SettingsStore {
     /// Remove all stored settings
     /// Ensures "reset == true" during the whole process-
     func removeAllSettings() {
-        logger.debug("\(#function)")
+        logger.debug("\(#function, privacy: .public)")
         reset = true
         for element in userDefaults.dictionaryRepresentation() {
             if element.key == Keys.reset { continue }
