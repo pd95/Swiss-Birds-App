@@ -18,12 +18,7 @@ class AppState: ObservableObject {
 
     var filters = ManagedFilterList()
 
-    @Published var sortOptions = SortOptions(column: .speciesName) {
-        didSet {
-            // Sync value with UserDefaults
-            settingsStore.groupColumn = sortOptions.column.rawValue
-        }
-    }
+    @Published var sortOptions = SortOptions(column: .speciesName)
 
     var restorableFilters: [String: [Filter.Id]] = [:]
     @Published var allSpecies = [Species]()
@@ -75,10 +70,8 @@ class AppState: ObservableObject {
         let logger = self.logger
         logger.debug(#function)
 
-        // Init sort options with value stored in UserDefaults
-        if let sortColumn = SortOptions.SortColumn(rawValue: settingsStore.groupColumn) {
-            sortOptions = SortOptions(column: sortColumn)
-        }
+        // Restore state from UserDefaults
+        restore()
 
         // Fetch the birds data
         preferredLanguageOrder.publisher
@@ -424,65 +417,35 @@ extension AppState: CustomStringConvertible {
     }
 }
 
-// Save and restore state in UserActivity
+// Save and restore current state using UserDefaults
 extension AppState {
 
-    func restore(from activity: NSUserActivity) {
-        logger.debug("\(#function, privacy: .public)(from: \(activity.activityType, privacy: .public))")
-        guard activity.activityType == Bundle.main.activityType,
-            let stateArray: [String: Any] = activity.userInfo as? [String: Any]
-            else { return }
+    // Restore previous state from UserDefaults
+    func restore() {
+        logger.debug("🟡\(#function, privacy: .public): \(self.description, privacy: .public)")
 
-        if let searchText = stateArray[Key.searchText] as? String {
-            self.searchText = searchText
-        }
-        if let restoredFilters = stateArray[Key.activeFilters] as? [String: [Filter.Id]] {
-            self.restorableFilters = restoredFilters
-        }
-        if let previousBirdOfTheDay = stateArray[Key.previousBirdOfTheDay] as? Int {
-            self.previousBirdOfTheDay = previousBirdOfTheDay
+        if let sortColumn = SortOptions.SortColumn(rawValue: settingsStore.groupColumn) {
+            sortOptions = SortOptions(column: sortColumn)
         }
 
-        // Restore latest navigation
-        if let selectedNavigationLinkData = stateArray[Key.selectedNavigationLink] as? Data,
-           let selectedNavigationLink = try? JSONDecoder().decode(NavigationState.MainNavigationLinkTarget.self, from: selectedNavigationLinkData) {
-            self.navigationState.mainNavigation = selectedNavigationLink
-        }
-
-//        if let sortByColumn = stateArray[Key.sortByColumn] as? SortOptions.SortColumn.RawValue,
-//           let columnOption = SortOptions.SortColumn(rawValue: sortByColumn)
-//        {
-//            self.sortOptions.column = columnOption
-//        }
-
-        logger.debug("\(#function, privacy: .public)(from: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
+        self.restorableFilters = settingsStore.restorableFilters
+        self.previousBirdOfTheDay = settingsStore.previousBirdOfTheDay
+        self.navigationState.restoreState(from: settingsStore.navigationState)
     }
 
-    func store(in activity: NSUserActivity) {
-        logger.debug("\(#function, privacy: .public)(in: \(activity.activityType, privacy: .public))")
+    func store() {
+        logger.debug("🟡\(#function, privacy: .public): \(self.description, privacy: .public)")
+
+        settingsStore.groupColumn = sortOptions.column.rawValue
+
         var storableList = [String: [Filter.Id]]()
         self.filters.list.forEach { (key: FilterType, value: [Filter.Id]) in
             storableList[key.rawValue] = value
         }
-        let selectedNavigationLinkData = (try? JSONEncoder().encode(navigationState.mainNavigation)) ?? Data()
+        settingsStore.restorableFilters = storableList
 
-        let stateArray: [String: Any] = [
-            Key.searchText: searchText,
-            Key.activeFilters: storableList,
-            Key.selectedNavigationLink: selectedNavigationLinkData,
-            Key.previousBirdOfTheDay: previousBirdOfTheDay as Species.Id
-        ]
-        activity.addUserInfoEntries(from: stateArray)
-
-        logger.debug("\(#function, privacy: .public)(in: \(activity.activityType, privacy: .public)): \(self.description, privacy: .public)")
-    }
-
-    private enum Key {
-        static let searchText = "searchText"
-        static let activeFilters = "activeFilters"
-        static let previousBirdOfTheDay = "previousBirdOfTheDay"
-        static let selectedNavigationLink = "selectedNavigationLink"
-        static let sortByColumn = "sortByColumn"
+        settingsStore.previousBirdOfTheDay = previousBirdOfTheDay
+        settingsStore.navigationState = navigationState.stateData
     }
 }
 

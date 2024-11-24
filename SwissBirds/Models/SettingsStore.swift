@@ -19,6 +19,10 @@ class SettingsStore {
         static let appVersion = "appVersion"
         static let favoriteSpeciesOld = "favoriteSpecies"
         static let favoriteSpecies = "sync_favoriteSpecies"
+        static let groupColumn = "groupColumn"
+        static let restorableFilters = "restorableFilters"
+        static let previousBirdOfTheDay = "previousBirdOfTheDay"
+        static let navigationState = "navigationState"
     }
 
     static let shared = SettingsStore()
@@ -59,8 +63,17 @@ class SettingsStore {
     @UserDefault(key: Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
     var voiceDataOverConstrainedNetworkAccess: Bool
 
-    @UserDefault(key: "groupColumn", defaultValue: "")
+    @UserDefault(key: Keys.groupColumn, defaultValue: "")
     var groupColumn: String
+
+    @UserDefault(key: Keys.restorableFilters, defaultValue: [:])
+    var restorableFilters: [String: [Filter.Id]]
+
+    @UserDefault(key: Keys.previousBirdOfTheDay, defaultValue: -1)
+    var previousBirdOfTheDay: Int
+
+    @UserDefault(key: Keys.navigationState, defaultValue: Data())
+    var navigationState: Data
 
     @UserDefault(key: Keys.favoriteSpecies, defaultValue: [])
     var favoriteSpecies: [Int]

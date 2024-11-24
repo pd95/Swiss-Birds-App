@@ -63,4 +63,16 @@ class NavigationState: ObservableObject {
     }
 
     @Published var mainNavigation: MainNavigationLinkTarget?
+
+    var stateData: Data {
+        (try? JSONEncoder().encode(mainNavigation)) ?? Data()
+    }
+
+    func restoreState(from data: Data) {
+        do {
+            self.mainNavigation = try JSONDecoder().decode(NavigationState.MainNavigationLinkTarget.self, from: data)
+        } catch {
+            print("🔴 Unable to restore state: \(error.localizedDescription)")
+        }
+    }
 }

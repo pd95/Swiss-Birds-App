@@ -38,6 +38,8 @@ struct SwissBirdsApp: App {
             switch newValue {
             case .active:
                 CloudDefaults.shared.synchronize()
+            case .inactive:
+                appState.store()
             default:
                 break
             }
