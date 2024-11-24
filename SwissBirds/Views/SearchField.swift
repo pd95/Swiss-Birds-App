@@ -12,7 +12,7 @@ struct SearchField: View {
     @Binding public var searchText: String
 
     @Binding public var isEditing: Bool
-    @FocusState private var isFocusd: Bool
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         HStack(spacing: 0) {
@@ -53,7 +53,7 @@ struct SearchField: View {
             if isEditing {
                 Button(action: {
                     withAnimation {
-                        isFocusd = false
+                        isFocused = false
                         isEditing = false
                         searchText = ""
                     }
@@ -68,13 +68,13 @@ struct SearchField: View {
             }
 
         }
-        .focused($isFocusd)
+        .focused($isFocused)
         .onChange(of: isEditing) { newValue in
-            if !isEditing && isFocusd {
-                isFocusd = false
+            if !isEditing && isFocused {
+                isFocused = false
             }
         }
-        .onChange(of: isFocusd) { newValue in
+        .onChange(of: isFocused) { newValue in
             if newValue && !isEditing {
                 withAnimation {
                     isEditing = true
