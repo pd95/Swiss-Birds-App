@@ -35,7 +35,7 @@ struct SearchField: View {
                         isEditing = true
                     }
 
-                if isEditing && !searchText.isEmpty {
+                if !searchText.isEmpty {
                     Button(action: { withAnimation { searchText = "" }}) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
