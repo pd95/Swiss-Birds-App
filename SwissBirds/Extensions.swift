@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-extension Bundle {
-    /// Activity type used in state restoration
-    var activityType: String {
-        return Bundle.main.infoDictionary?["NSUserActivityTypes"].flatMap { ($0 as? [String])?.first } ?? ""
-    }
-}
-
 extension String {
 
     /// Matches string with a regular expression, returning an array of `String`
