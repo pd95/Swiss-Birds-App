@@ -69,6 +69,11 @@ struct SearchField: View {
 
         }
         .focused($isFocusd)
+        .onChange(of: isEditing) { newValue in
+            if !isEditing && isFocusd {
+                isFocusd = false
+            }
+        }
         .onChange(of: isFocusd) { newValue in
             if newValue && !isEditing {
                 withAnimation {
