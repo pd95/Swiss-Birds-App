@@ -54,8 +54,6 @@ struct BirdImageView: View {
     }
 }
 
-struct BirdImageView_Previews: PreviewProvider {
-    static var previews: some View {
-        BirdImageView(image: UIImage(named: "Logo")!, author: "Donald Duck", description: "Ein Vogel", isLoading: false)
-    }
+#Preview {
+    BirdImageView(image: UIImage(named: "Logo")!, author: "Donald Duck", description: "Ein Vogel", isLoading: false)
 }

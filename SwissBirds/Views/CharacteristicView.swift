@@ -63,13 +63,11 @@ struct CharacteristicsView: View {
     }
 }
 
-struct CharacteristicsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                CharacteristicsView(characteristics: Characteristic.example)
-            }
-            .padding()
+#Preview {
+    ScrollView {
+        VStack(alignment: .leading) {
+            CharacteristicsView(characteristics: Characteristic.example)
         }
+        .padding()
     }
 }

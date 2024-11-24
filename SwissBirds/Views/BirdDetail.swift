@@ -268,18 +268,20 @@ struct BirdDetailContainer: View {
     }
 }
 
-struct BirdDetail_Previews: PreviewProvider {
-    static let appState = AppState.shared
-    static var bird = {
-        AppState.shared.allSpecies[14]
-    }()
-    static var previews: some View {
-        AppState_PreviewWrapper {
-            BirdDetailContainer(model: appState.currentBirdDetails, bird: bird)
+#Preview {
+    let appState = AppState.shared
+    AppState_PreviewWrapper {
+        Group {
+            if appState.allSpecies.count > 14 {
+                let bird = appState.allSpecies[14]
+                BirdDetailContainer(model: appState.currentBirdDetails, bird: bird)
+                    .navigationBarTitle(Text(bird.name), displayMode: .inline)
+            }
         }
-        .environmentObject(appState)
-        .environmentObject(FavoritesManager.shared)
+        .id(appState.allSpecies.count)
     }
+    .environmentObject(appState)
+    .environmentObject(FavoritesManager.shared)
 }
 
 /// Audio player routines

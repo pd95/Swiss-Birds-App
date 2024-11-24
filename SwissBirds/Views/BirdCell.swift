@@ -88,19 +88,18 @@ struct BirdCell: View {
     }
 }
 
-struct BirdCell_Previews: PreviewProvider {
-    static var previews: some View {
-        AppState_PreviewWrapper {
-            HStack {
-                ForEach(Array(AppState.shared.allSpecies[0..<4].enumerated()), id: \.offset) { (index, bird) in
-                    BirdCell(bird: bird, isFavorite: index >= 2, searchText: "")
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 150)
-                }
+#Preview {
+    AppState_PreviewWrapper {
+        HStack {
+            ForEach(Array(AppState.shared.allSpecies[0..<4].enumerated()), id: \.offset) { (index, bird) in
+                BirdCell(bird: bird, isFavorite: index >= 2, searchText: "")
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 150)
             }
         }
-        .environmentObject(AppState.shared)
-        .environmentObject(FavoritesManager.shared)
-        .previewLayout(.fixed(width: 700, height: 280))
     }
+    .environmentObject(AppState.shared)
+    .environmentObject(FavoritesManager.shared)
+    .frame(width: 700, height: 280)
+    //.previewLayout(.fixed(width: 700, height: 280))
 }

@@ -67,16 +67,19 @@ struct BirdList: View {
     }
 }
 
-struct BirdList_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            NavigationView {
-                BirdList()
-            }
-            ContentView()
-                .environment(\.colorScheme, .dark)
-        }
-        .environmentObject(AppState.shared)
-        .environmentObject(FavoritesManager.shared)
+#Preview("BirdList") {
+    NavigationView {
+        BirdList()
     }
+    .environmentObject(AppState.shared)
+    .environmentObject(FavoritesManager.shared)
+}
+
+#Preview("BirdList with Dark Mode") {
+    NavigationView {
+        BirdList()
+    }
+    .environment(\.colorScheme, .dark)
+    .environmentObject(AppState.shared)
+    .environmentObject(FavoritesManager.shared)
 }

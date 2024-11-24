@@ -114,14 +114,12 @@ struct BirdRow: View {
     }
 }
 
-struct BirdRow_Previews: PreviewProvider {
-    static var previews: some View {
-        AppState_PreviewWrapper {
-            List(Array(AppState.shared.allSpecies[0..<3].enumerated()), id: \.offset) { (index, bird) in
-                BirdRow(bird: bird, isFavorite: index >= 2, searchText: "", sortColumn: .speciesName)
-            }
+#Preview {
+    AppState_PreviewWrapper {
+        List(Array(AppState.shared.allSpecies[0..<3].enumerated()), id: \.offset) { (index, bird) in
+            BirdRow(bird: bird, isFavorite: index >= 2, searchText: "", sortColumn: .speciesName)
         }
-        .environmentObject(AppState.shared)
-        .environmentObject(FavoritesManager.shared)
     }
+    .environmentObject(AppState.shared)
+    .environmentObject(FavoritesManager.shared)
 }

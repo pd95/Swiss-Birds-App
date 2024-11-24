@@ -24,17 +24,15 @@ struct Checkmark: View {
     }
 }
 
-struct Checkmark_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            HStack {
-                Checkmark(checked: true)
-                Text(verbatim: "Checked")
-            }
-            HStack {
-                Checkmark(checked: false)
-                Text(verbatim: "Unchecked")
-            }
+#Preview {
+    List {
+        HStack {
+            Checkmark(checked: true)
+            Text(verbatim: "Checked")
+        }
+        HStack {
+            Checkmark(checked: false)
+            Text(verbatim: "Unchecked")
         }
     }
 }

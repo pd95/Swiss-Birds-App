@@ -32,9 +32,6 @@ struct SelectSortOptions: View {
     }
 }
 
-struct SortOptions_Previews: PreviewProvider {
-    @State static var sortOption = SortOptions()
-    static var previews: some View {
-        SelectSortOptions(sorting: $sortOption)
-    }
+#Preview {
+    SelectSortOptions(sorting: .constant(SortOptions(column: .filterType(.vogelgruppe))))
 }

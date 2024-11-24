@@ -115,17 +115,12 @@ struct SearchField_Preview_Helper: View {
     }
 }
 
-struct SearchField_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            SearchField_Preview_Helper(query: "", edit: false)
-                .previewLayout(.fixed(width: 400, height: 120))
-            Divider()
-            SearchField_Preview_Helper(query: "Amsel Drossel", edit: false)
-                .previewLayout(.fixed(width: 400, height: 120))
-            Divider()
-            SearchField_Preview_Helper(query: "Amsel Drossel", edit: true)
-                .previewLayout(.fixed(width: 400, height: 120))
-        }
+#Preview {
+    VStack {
+        SearchField_Preview_Helper(query: "", edit: false)
+        Divider()
+        SearchField_Preview_Helper(query: "Amsel Drossel", edit: false)
+        Divider()
+        SearchField_Preview_Helper(query: "Amsel Drossel", edit: true)
     }
 }

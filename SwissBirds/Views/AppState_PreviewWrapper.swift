@@ -26,11 +26,9 @@ struct AppState_PreviewWrapper<Content: View>: View {
     }
 }
 
-struct AppState_PreviewWrapper_Previews: PreviewProvider {
-    static var previews: some View {
-        AppState_PreviewWrapper {
-            Text(verbatim: "AppState loaded")
-        }
-        .environmentObject(AppState.shared)
+#Preview {
+    AppState_PreviewWrapper {
+        Text(verbatim: "AppState loaded")
     }
+    .environmentObject(AppState.shared)
 }

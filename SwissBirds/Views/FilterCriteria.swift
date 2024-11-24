@@ -39,15 +39,6 @@ struct FilterCriteria: View {
     }
 }
 
-struct FilterCriteria_Previews: PreviewProvider {
-    static var previews: some View {
-        AppState_PreviewWrapper {
-            FilterCriteria(managedList: ManagedFilterList())
-        }
-        .environmentObject(AppState.shared)
-    }
-}
-
 struct NoFilterCheckButton: View {
     @EnvironmentObject var managedList: ManagedFilterList
 
@@ -106,4 +97,11 @@ struct FilterCheckButton: View {
         .accessibility(identifier: identifier)
         .accessibility(addTraits: accessibilityTraits)
     }
+}
+
+#Preview {
+    AppState_PreviewWrapper {
+        FilterCriteria(managedList: ManagedFilterList())
+    }
+    .environmentObject(AppState.shared)
 }

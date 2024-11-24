@@ -77,18 +77,18 @@ struct BirdOfTheDay: View {
     }
 }
 
-struct BirdOfTheDay_Previews: PreviewProvider {
-    static var state = AppState.shared
+#Preview {
+    let state = AppState.shared
 
-    static var previews: some View {
+    ZStack {
+        ProgressView()
+            .onAppear {
+                state.checkBirdOfTheDay(showAlways: true)
+            }
+
         if let species = Species.species(for: 3640) {
             BirdOfTheDay(isPresented: .constant(true), image: UIImage(named: "Logo")!, species: species)
                 .environmentObject(state)
-        } else {
-            ProgressView()
-                .onAppear {
-                    state.checkBirdOfTheDay(showAlways: true)
-                }
         }
     }
 }

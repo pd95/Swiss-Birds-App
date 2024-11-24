@@ -35,17 +35,16 @@ struct SymbolView: View {
     }
 }
 
-struct SymbolView_Previews: PreviewProvider {
-    static var previews: some View {
+#Preview {
+    VStack {
         HStack {
             SymbolView(symbolName: "filterentwicklungatlas-1")
-            Text(verbatim: "L Align")
+            Text(verbatim: "Bg")
             SymbolView(symbolName: "filterlebensraum-9")
-            Text(verbatim: "Byjq")
+            Text(verbatim: "By")
             SymbolView(symbolName: "filterlebensraum-10")
-            Text(verbatim: "Hiera")
+            Text(verbatim: "Hy")
         }
-        .font(.title)
         .padding()
 
         Button(action: {}) {
@@ -55,19 +54,22 @@ struct SymbolView_Previews: PreviewProvider {
                 SymbolView(symbolName: "filterlebensraum-9")
             }
         }
+        .buttonStyle(.bordered)
+        .padding()
 
         HStack {
             SymbolView(symbolName: "filterentwicklungatlas-1")
-            Text(verbatim: "L Align")
+            Text(verbatim: "Bg")
             SymbolView(symbolName: "filterlebensraum-9")
-            Text(verbatim: "Byjq")
+            Text(verbatim: "By")
             SymbolView(symbolName: "filterlebensraum-10")
                 .symbolRenderingMode(.hierarchical)
-            Text(verbatim: "Hiera")
+            Text(verbatim: "Hy")
         }
-        .font(.title)
         .padding()
         .background(Color(.systemBackground))
         .environment(\.colorScheme, .dark)
     }
+    .font(.largeTitle)
+    .imageScale(.large)
 }

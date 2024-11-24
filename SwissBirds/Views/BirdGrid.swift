@@ -73,10 +73,8 @@ struct BirdGrid: View {
     }
 }
 
-struct BirdGrid_Previews: PreviewProvider {
-    static var previews: some View {
-        BirdGrid()
-            .environmentObject(AppState.shared)
-            .environmentObject(FavoritesManager.shared)
-    }
+#Preview {
+    BirdGrid()
+        .environmentObject(AppState.shared)
+        .environmentObject(FavoritesManager.shared)
 }
