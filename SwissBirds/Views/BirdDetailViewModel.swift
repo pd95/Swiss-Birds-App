@@ -124,16 +124,20 @@ class BirdDetailViewModel: ObservableObject {
             }
 
             if details?.videosBilderStimmen == "1" {
-                logger.info("BirdDetailViewModel.\(#function, privacy: .public) adding data task for \(-1)")
-                group.addTask {
-                    do {
-                        for try await data in VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess).values {
-                            return (-1, nil, data)
+                if SettingsStore.shared.voiceDataOverConstrainedNetworkAccess {
+                    logger.info("BirdDetailViewModel.\(#function, privacy: .public) adding data task for \(-1)")
+                    group.addTask {
+                        do {
+                            for try await data in VdsAPI.getVoice(for: speciesId, allowsConstrainedNetworkAccess: SettingsStore.shared.voiceDataOverConstrainedNetworkAccess).values {
+                                return (-1, nil, data)
+                            }
+                        } catch {
+                            logger.error("Error loading voice data: \(error.localizedDescription, privacy: .public)")
                         }
-                    } catch {
-                        logger.error("Error loading voice data: \(error.localizedDescription, privacy: .public)")
+                        return (-1, nil, nil)
                     }
-                    return (-1, nil, nil)
+                } else {
+                    logger.info("BirdDetailViewModel.\(#function, privacy: .public) skipping voice data due to preferences")
                 }
             }
 
@@ -141,9 +145,9 @@ class BirdDetailViewModel: ObservableObject {
                 logger.info("BirdDetailViewModel.\(#function, privacy: .public): Received result for index \(index) (cancelled = \(Task.isCancelled)).")
 
                 if Task.isCancelled == false {
-                    if let data {
+                    if index == -1 {
                         voiceData = data
-                    } else {
+                    } else if imageDetails.indices.contains(index) {
                         imageDetails[index].image = image
                         imageDetails[index].isLoading = false
                     }
