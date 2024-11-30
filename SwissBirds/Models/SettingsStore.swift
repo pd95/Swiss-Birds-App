@@ -63,7 +63,7 @@ class SettingsStore {
     @UserDefault(key: Keys.startupCheckBirdOfTheDay, defaultValue: true)
     var startupCheckBirdOfTheDay: Bool
 
-    @UserDefault(key: Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: false)
+    @UserDefault(key: Keys.voiceDataOverConstrainedNetworkAccess, defaultValue: true)
     var voiceDataOverConstrainedNetworkAccess: Bool
 
     @UserDefault(key: Keys.groupColumn, defaultValue: "")
