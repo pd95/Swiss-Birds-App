@@ -40,6 +40,9 @@ class SettingsStore {
         self._startupCheckBirdOfTheDay.storage = userDefaults
         self._voiceDataOverConstrainedNetworkAccess.storage = userDefaults
         self._groupColumn.storage = userDefaults
+        self._restorableFilters.storage = userDefaults
+        self._previousBirdOfTheDay.storage = userDefaults
+        self._navigationState.storage = userDefaults
         self._favoriteSpecies.storage = userDefaults
 
         anyCancellable = NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification, object: userDefaults)
